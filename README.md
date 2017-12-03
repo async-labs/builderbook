@@ -112,7 +112,7 @@ Check out the [Introduction](https://builderbook.org/book/book-1/introduction) a
 
 ## Contributing
 
-Please see our [contributing guidelines](https://github.com/builderbook/books/blob/master/CONTRIBUTING.md) for submitting issues or pull requests.
+Submit an [issue](https://github.com/builderbook/books/issues/new) to report bugs or suggest improvements to the code. You can submit a [pull request](https://github.com/builderbook/builder-book-app/compare?expand=1) to suggest an edit to the code of our final app, but we do not accept pull requests to change the code of our book chapters.
 
 ## Code of Conduct
 
