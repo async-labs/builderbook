@@ -8,8 +8,13 @@ Made with React, Javascript, NextJS, Material-UI, Express, MongoDB, and more.
 
 ## Contents
 - [Features](#features)
-- [Installation](#installation)
-- Our Book: learn to build this web app from scratch
+- [Getting Started](#getting-started)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Deployment](#deployment)
+- [Built With](#built-with)
+- [Build this app from scratch](#build-this-app-from-scratch)
+  - [Our Book](#our-book)
   - [Table of Contents](#table-of-contents)
   - [Who is the book for?](#who-is-the-book-for)
 - [Contributing](#contributing)
@@ -28,21 +33,68 @@ Explain how it works, how it can be used, and list features
 - Sell books with Stripe
 - Newsletters
 
-## Installation
+## Getting Started
 
-How to install and start using the app
+Follow these instructions to run a copy of the app on your local machine and then deploy the app to a live site.
 
-## Our Book: learn to build this web app from scratch
+### Requirements
 
-We used this web app to create our own book that teaches you how to build the web app from scratch.
-Check out the book on our website: https://builderbook.org
+Which packages does the user need?
+
+### Installation
+
+How to run on local machine.
+
+### Deployment
+
+How to deploy to live.
+
+## Built with
+>hyperlink to each one
+
+- React
+- Next
+- Express
+- NextJS
+- Material UI
+- MongoDB
+- Mongoose
+- Mlab
+- Google OAuth
+- Jest
+- Winston
+- AWS SES
+- Github API
+- Stripe API
+- Now
+
+## Build this app from scratch
+
+### Our Book
+
+[Build a production-ready web app from scratch: React, NextJS, Material-UI, JavaScript, Express, MongoDB and more](https://builderbook.org/book/book-1)
+
+We used this web app to create our own book that teaches you how to **build the app from scratch**. Our book is not just a step-by-step recipe. We provide in-depth explanations of **how the code works**, line by line.
+
+You'll learn how to set up your development environment, servers, and databases; set up **Google login** for your readers; send emails with **AWS SES**; build your book interface and publish books via **Github API**; create a newsletter for your readers; and finally **sell books with Stripe**.
+
+Check out the [Introduction](https://builderbook.org/book/book-1/introduction) and preview each chapter for free. The [complete book](https://builderbook.org/book/book-1) is sold on our website for $49.
 
 ### Table of Contents
-- Introduction
+- [Introduction](https://builderbook.org/book/book-1/introduction)
 - Chapter 1: React. Next. Material-UI. Server-side Rendering.
 - Chapter 2: Express Server. Mongoose, MongoDB. Cookie and Session.
 - Chapter 3: Authentication Logic. Google OAuth 2.0 API.
 - Chapter 4: Transactional Emails. In-app Notifications.
+  - Testing and Debugging
+    - Unit-testing with Jest
+    - Debugging with Winston
+  - Transactional emails with AWS SES
+    - Set up, keys, env variables
+    - sendEmail() function
+    - Default Export
+    - Templates, Handlebars
+    - Send welcome email to new users
 - Chapter 5: Books. Chapters. Table of Contents.  Github API.
 - Chapter 6: Search by Keyword. Bookmark.
 - Chapter 7: Book Preview. Book Purchase. Stripe API. 
@@ -51,7 +103,12 @@ Check out the book on our website: https://builderbook.org
 
 ### Who is the book for?
 > Our books are ideal for junior to mid-career developers.
-> skills required + list of technologies
+
+> Senior developers will find our explanations too detailed
+
+> skills required
+
+> Perfect solution if you want to build a personal website to share free documentation, tutorials, and blog posts, as well as publish and sell your own books.
 
 ## Contributing
 
@@ -67,9 +124,9 @@ If you have trouble running the code or want to make a suggestion, fill out an [
 
 ## Team
 
-- [Timur Zhiyentayev](https://github.com/tima101), author
-- [Kelly Burke](https://github.com/klyburke), editor
-- [Delgermurun Purevkhuu](https://github.com/delgermurun), contributor
+- [Timur Zhiyentayev](https://github.com/tima101)
+- [Kelly Burke](https://github.com/klyburke)
+- [Delgermurun Purevkhuu](https://github.com/delgermurun)
 
 ## Acknowledgments
 
