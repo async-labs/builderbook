@@ -101,6 +101,8 @@ Check out the [Introduction](https://builderbook.org/book/book-1/introduction) a
 - Chapter 8: Tutorials. Newsletters.
 - Chapter 9: Homepage. Deploy.
 
+> Make sure this is correct and add a hyperlink to each chapter, as it becomes available.
+
 ### Who is the book for?
 > Our books are ideal for junior to mid-career developers.
 
