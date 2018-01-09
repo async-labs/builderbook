@@ -68,7 +68,7 @@ How to deploy to live.
 - Stripe API
 - Now
 
-#### Our Book
+### Our Book
 
 ## Contributing
 
