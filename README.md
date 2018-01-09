@@ -14,7 +14,7 @@ Made with React, NextJS, Express, MongoDB, Material UI, and more.
   - [Installation](#installation)
   - [Deployment](#deployment)
 - [Contributing](#contributing)
-- [Support](#support)
+- [Support This Project](#support)
 - [License](#license)
 
 ## Who is it for?
@@ -67,6 +67,8 @@ How to deploy to live.
 - Github API
 - Stripe API
 - Now
+
+#### Our Book
 
 ## Contributing
 
