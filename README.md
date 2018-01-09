@@ -1,4 +1,4 @@
-# Builder Book
+# [Builder Book](https://builderbook.org)
 
 A web app to publish and sell your own technical books, as well as publish open-source documentation, tutorials, and blog posts.
 
