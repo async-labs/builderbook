@@ -83,9 +83,9 @@ You'll learn ...
 
 ## Contributing
 
-Submit an [issue](https://github.com/builderbook/books/issues/new) to report bugs or suggest improvements to this web app. You can also ask questions, report bugs, or suggest improvements to our book. Please follow the issue template.
+Submit an [issue](https://github.com/builderbook/builderbook-app/issues/new) to report bugs or suggest improvements to this web app. You can also ask questions, report bugs, or suggest improvements to our book. Please follow the issue template.
 
-By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/books/blob/master/CODE_OF_CONDUCT.md). Please report unacceptable behavior to team@builderbook.org.
+By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook-app/blob/master/CODE-OF-CONDUCT.md). Please report unacceptable behavior to team@builderbook.org.
 
 ## Support This Project
 
