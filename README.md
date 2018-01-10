@@ -1,11 +1,14 @@
 # [Builder Book](https://builderbook.org)
 
-A web app to publish and sell your own technical books, as well as publish open-source documentation, tutorials, and blog posts.
+Production-ready web app to sell technical books and publish open-source documentation, tutorials, and blog posts. Check out the [live product](https://builderbook.org/books)).
 
-Made with React, NextJS, Express, MongoDB, Material UI, and more.
+We built this app for developers who want to:
+
+- Write and sell technical books about programming or web/app development
+- Create an open source project website to publish documentation, tutorials, and blog posts
+- Learn how to code and build web their own web apps (see our [book](https://builderbook.org))
 
 ## Contents
-- [Who is it for?](#who-is-it-for)
 - [Features](#features)
 - [Built With](#built-with)
   - [Our Book](#our-book)
@@ -17,17 +20,9 @@ Made with React, NextJS, Express, MongoDB, Material UI, and more.
 - [Support This Project](#support)
 - [License](#license)
 
-## Who is it for?
-
-We built this project for developers who want to:
-
-(1) Write and sell their own technical books
-(2) Build their own website to publish open-source documentation, technical tutorials, and blog posts
-(3) Learn how to code and build web apps
-
 ## Features
 
-Explain how it works, how it can be used, and list features
+Builder Book 
 
 - Log in with Google
 - Publish from Github
@@ -53,13 +48,12 @@ How to deploy to live.
 ## Built with
 
 - React
-- Next
+- Next.js
 - Express
-- NextJS
-- Material UI
 - MongoDB
 - Mongoose
 - Mlab
+- Material UI
 - Google OAuth
 - Jest
 - Winston
@@ -70,14 +64,20 @@ How to deploy to live.
 
 ### Our Book
 
+If you're new to these technologies and want to learn how they work and how to implement them, check out [our book](https://github.com/builderbook/builderbook-app/blob/master/book-details.md). We show you step-by-step how to build this web app from scratch. And we wrote it using our Builder Book app!
+
+You'll learn ...
+
 ## Contributing
 
-Submit an [issue](https://github.com/builderbook/books/issues/new) to report bugs or suggest improvements to the code. You can submit a [pull request](https://github.com/builderbook/builder-book-app/compare?expand=1) to suggest an edit to the code of our final app, but we do not accept pull requests to change the code of our book chapters.
+Submit an [issue](https://github.com/builderbook/books/issues/new) to report bugs or suggest improvements to this web app. You can also ask questions, report bugs, or suggest improvements to our book. Please follow the issue template.
 
-This project and everyone participating in it are governed by Builder Book's [Code of Conduct](https://github.com/builderbook/books/blob/master/CODE_OF_CONDUCT.md). By participating in Builder Book, you are expected to uphold our code of conduct. Please report unacceptable behavior to team@builderbook.org.
+By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/books/blob/master/CODE_OF_CONDUCT.md). Please report unacceptable behavior to team@builderbook.org.
 
-## Support
+## Support This Project
+
+You can support this project by giving it a star, providing feedback or suggestions, sharing it with your friends, or purchasing [our book](https://github.com/builderbook/builderbook-app/blob/master/book-details.md). Thanks!
 
 ## License
 
-All code in this repository is provided under the [MIT License](https://github.com/builderbook/books/blob/master/LICENSE). The information in our book is copyrighted.
+All code in this repository is provided under the [MIT License](https://github.com/builderbook/books/blob/master/LICENSE). The information in our book is copyrighted (Builder Book 2018). 
