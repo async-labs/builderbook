@@ -1,12 +1,14 @@
 # [Builder Book](https://builderbook.org)
 
-Production-ready web app to sell technical books and publish open-source documentation, tutorials, and blog posts. Check out the [live product](https://builderbook.org/books)).
+Production-ready web app to sell technical books and publish open-source documentation, tutorials, and blog posts.
 
 We built this app for developers who want to:
 
 - Write and sell technical books about programming or web/app development
 - Create an open source project website to publish documentation, tutorials, and blog posts
 - Learn how to code and build web their own web apps (see our [book](https://builderbook.org))
+
+Here's the [live product](https://builderbook.org/books).
 
 ## Contents
 - [Features](#features)
@@ -22,12 +24,23 @@ We built this app for developers who want to:
 
 ## Features
 
-Builder Book 
+- **Publish from Github**</br>
+Write books, documentation, etc, in Markdown and store it all in a Github repository. Builder Book connects with your repo to publish the docs to your website.
 
-- Log in with Google
-- Publish from Github
-- Sell books with Stripe
-- Newsletters
+- **Search and Bookmark**</br>
+Built-in search bar and bookmark feature for readers to find keywords in your docs and keep track of where they left off.
+
+- **Sell with Stripe**</br>
+Integrated with Stripe API so you can sell books with your own Stripe account.
+
+- **Google Login**</br>
+Readers can easily sign up with their Google account to purchase books.
+
+- **Automated Transactional Emails**</br>
+Integrated with AWS SES to send customized emails to new users and customers.
+
+- **Deploy to your Domain**</br>
+
 
 ## Getting Started
 
