@@ -8,7 +8,7 @@ We built this app for developers who want to:
 - Create an open source project website to publish documentation, tutorials, and blog posts
 - Learn how to code and build web their own web apps (see our [book](https://builderbook.org))
 
-Here's the [live product](https://builderbook.org/books).
+Check out the [live product](https://builderbook.org/books).
 
 ## Contents
 - [Features](#features)
@@ -25,13 +25,13 @@ Here's the [live product](https://builderbook.org/books).
 ## Features
 
 - **Publish from Github**</br>
-Write books, documentation, etc, in Markdown and store it all in a Github repository. Builder Book connects with your repo to publish the docs to your website.
+Write your books, documentation, tutorials, and blog posts in Markdown, and store them all in a Github repository. Builder Book connects with your Github repo to publish documents to your website.
 
 - **Search and Bookmark**</br>
 Built-in search bar and bookmark feature for readers to find keywords in your docs and keep track of where they left off.
 
 - **Sell with Stripe**</br>
-Integrated with Stripe API so you can sell books with your own Stripe account.
+Integrated with Stripe API, so you can sell books with your own Stripe account.
 
 - **Google Login**</br>
 Readers can easily sign up with their Google account to purchase books.
@@ -44,7 +44,7 @@ Integrated with AWS SES to send customized emails to new users and customers.
 
 ## Getting Started
 
-Follow these instructions to run a copy of the app on your local machine and then deploy the app to a live site.
+Follow these instructions to run a copy of the app on your local machine and then deploy the app to a your own domain.
 
 ### Requirements
 
@@ -65,7 +65,6 @@ How to deploy to live.
 - Express
 - MongoDB
 - Mongoose
-- Mlab
 - Material UI
 - Google OAuth
 - Jest
@@ -74,6 +73,8 @@ How to deploy to live.
 - Github API
 - Stripe API
 - Now
+
+See a list of all packages [here](https://github.com/builderbook/builderbook/blob/master/package.json).
 
 ### Our Book
 
@@ -89,7 +90,7 @@ By participating in this project, you are expected to uphold Builder Book's [Cod
 
 ## Support This Project
 
-You can support this project by giving it a star, providing feedback or suggestions, sharing it with your friends, or purchasing [our book](https://github.com/builderbook/builderbook-app/blob/master/book-details.md). Thanks!
+You can support this project by simply using it, giving it a star, providing [feedback or suggestions](https://github.com/builderbook/builderbook-app/issues/new), sharing it with your friends, or purchasing [our book](https://github.com/builderbook/builderbook-app/blob/master/book-details.md). Thanks!
 
 ## License
 
