@@ -78,9 +78,9 @@ See a list of all packages [here](https://github.com/builderbook/builderbook/blo
 
 ### Our Book
 
-If you're new to these technologies and want to learn how they work and how to implement them, check out [our book](https://github.com/builderbook/builderbook-app/blob/master/book-details.md). We show you step-by-step how to build this web app from scratch. And we wrote it using our Builder Book app!
+If you're new to these technologies and want to learn how to implement them, check out [our book](https://github.com/builderbook/builderbook-app/blob/master/book-details.md), where we show you step-by-step how to build this web app from scratch. And we wrote it using our Builder Book app!
 
-Unlike most coding tutorials and books, which focus on the fundamentals of a programming language, our book teaches you the entire process of building a production-ready web app. You'll learn how to develop with React, set up custom servers, integrate third-party libraries and services, build and integrate APIs, deploy to a live site, and more.
+Unlike most coding tutorials and books, which focus on the fundamentals of a programming language, our book teaches you the process of building a web app. You'll learn how to develop with React, set up custom servers, choose and integrate third-party libraries and services, build and integrate APIs, deploy to a live site, and more.
 
 ## Contributing
 
