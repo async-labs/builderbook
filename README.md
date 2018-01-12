@@ -34,13 +34,13 @@ Built-in search bar and bookmark feature for readers to find keywords in your do
 Integrated with Stripe API, so you can sell books with your own Stripe account.
 
 - **Google Login**</br>
-Readers can easily sign up with their Google account to purchase books.
+Your readers can easily sign up with their Google account to purchase books.
 
 - **Automated Transactional Emails**</br>
 Integrated with AWS SES to send customized emails to new users and customers.
 
-- **Deploy to your Domain**</br>
-
+- **Customize and Deploy to your Domain**</br>
+Builder Book has key pages for you to get started - including homepage, books and documentation pages, blog, user dashboard, and admin dashboard. All pages are customizable, and you can easily deploy (using [Zeit Now](https://zeit.co/now)) to your own domain to make a site that is completely yours.
 
 ## Getting Started
 
@@ -80,17 +80,17 @@ See a list of all packages [here](https://github.com/builderbook/builderbook/blo
 
 If you're new to these technologies and want to learn how they work and how to implement them, check out [our book](https://github.com/builderbook/builderbook-app/blob/master/book-details.md). We show you step-by-step how to build this web app from scratch. And we wrote it using our Builder Book app!
 
-You'll learn ...
+Unlike most coding tutorials and books, which focus on the fundamentals of a programming language, our book teaches you the entire process of building a production-ready web app. You'll learn how to develop with React, set up custom servers, integrate third-party libraries and services, build and integrate APIs, deploy to a live site, and more.
 
 ## Contributing
 
-Submit an [issue](https://github.com/builderbook/builderbook-app/issues/new) to report bugs or suggest improvements to this web app. You can also ask questions, report bugs, or suggest improvements to our book. Please follow the issue template.
+Submit an [issue](https://github.com/builderbook/builderbook-app/issues/new) to report bugs or suggest improvements to the Builder Book web app. You can also ask questions, report bugs, or suggest improvements to our book. Please follow the issue template.
 
 By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook-app/blob/master/CODE-OF-CONDUCT.md). Please report unacceptable behavior to team@builderbook.org.
 
 ## Support This Project
 
-You can support this project by simply using it, giving it a star, providing [feedback or suggestions](https://github.com/builderbook/builderbook-app/issues/new), sharing it with your friends, or purchasing [our book](https://github.com/builderbook/builderbook-app/blob/master/book-details.md). Thanks!
+You can support this project by simply using it, giving it a star, providing [feedback or suggestions](https://github.com/builderbook/builderbook-app/issues/new), sharing it with your friends, or purchasing [our book](https://github.com/builderbook/builderbook-app/blob/master/book-details.md). Thanks a bunch!
 
 ## License
 
