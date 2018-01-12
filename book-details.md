@@ -1,6 +1,6 @@
 
 # Build a Web App from Scratch: React, Next, Express, MongoDB, and more.
-short description
+With this book, you'll build a web app ([Builder Book](https://github.com/builderbook/builderbook-app)) to sell technical books and publish open-source documentation, tutorials, and blog posts. You'll start completely from scratch and end up with your own production-ready web app.
 
 ## Table of Contents
 - [Introduction](https://builderbook.org/book/book-1/introduction)
