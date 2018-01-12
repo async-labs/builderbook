@@ -36,9 +36,9 @@ this could be a list
 ## FAQ
 **How can I get the book?**</br>
 
-The book is currently available to [preorder for $29](https://builderbook.org). You'll instantly get all content from the Introduction through Chapter 6, and we'll notify you as each new chapter is added.
+The book is currently available to [pre-order for $29](https://builderbook.org). You'll instantly get all content from the Introduction through Chapter 6, and we'll notify you as each new chapter is added.
 
-After the preorder period, the book will be availalbe for $49.
+After the pre-order period, the book will be availalbe for $49.
 
 **How long is the book?**</br>
 
