@@ -42,22 +42,6 @@ Builder Book comes with all key pages - including homepage, books and documentat
 - **Deploy to your Domain**</br>
 Easily deploy (using [Zeit Now](https://zeit.co/now)) to your own domain to make a personal website or an open-source project website.
 
-## Getting Started
-
-Follow these instructions to run a copy of the app on your local machine and then deploy the app to a your own domain.
-
-### Requirements
-
-Which packages does the user need?
-
-### Installation
-
-How to run on local machine.
-
-### Deployment
-
-How to deploy to live.
-
 ## Built with
 
 - React
@@ -76,9 +60,25 @@ How to deploy to live.
 
 See a list of all packages [here](https://github.com/builderbook/builderbook/blob/master/package.json).
 
+## Getting Started
+
+Follow these instructions to run a copy of the app on your local machine and then deploy the app to a your own domain.
+
+### Requirements
+
+Which packages does the user need?
+
+### Installation
+
+How to run on local machine.
+
+### Deployment
+
+How to deploy to live.
+
 ### Our Book
 
-If you're new to these technologies and want to learn how to implement them, check out [our book](https://github.com/builderbook/builderbook-app/blob/master/book-details.md), where we show you step-by-step how to build this web app from scratch. And we wrote it using our Builder Book app!
+If you're new to these technologies and want to learn how to implement them, check out [our book](https://github.com/builderbook/builderbook-app/blob/master/book-details.md), where we show you step-by-step how to build this web app from scratch. We wrote it using our Builder Book app!
 
 Unlike most coding tutorials and books, which focus on the fundamentals of a programming language, our book teaches you the process of building a web app. You'll learn how to develop with React, set up custom servers, choose and integrate third-party libraries and services, build and integrate APIs, deploy to a live site, and more.
 
