@@ -5,7 +5,7 @@ Production-ready web app to sell technical books and publish open-source documen
 We built this app for developers who want to:
 
 - Write and sell technical books about programming or web/app development
-- Create an open source project website to publish documentation, tutorials, and blog posts
+- Create a personal website or open-source project website to publish documentation, tutorials, and blog posts
 - Learn how to code and build web their own web apps (see our [book](https://builderbook.org))
 
 Check out the [live product](https://builderbook.org/books).
@@ -28,19 +28,19 @@ Check out the [live product](https://builderbook.org/books).
 Write your books, documentation, tutorials, and blog posts in Markdown, and store them all in a Github repository. Builder Book connects with your Github repo to publish documents to your website.
 
 - **Sell with Stripe**</br>
-Integrated with Stripe API, so you can sell books with your own Stripe account.
+Integrated with Stripe API, so you can sell books using your own Stripe account.
 
 - **Google Login**</br>
 Your readers can easily sign up with their Google account to purchase books.
 
 - **Automated Transactional Emails**</br>
-Integrated with AWS SES to send customized emails to new users and customers.
+Integrated with AWS SES to send customized transactional emails to new users and customers.
 
-- **Customize**</br>
-Builder Book has all key pages - including homepage, books and documentation pages, blog, user dashboard, and admin dashboard - which you can completely customize.
+- **Customizable**</br>
+Builder Book comes with all key pages - including homepage, books and documentation pages, blog, user dashboard, and admin dashboard - which you can completely customize.
 
 - **Deploy to your Domain**</br>
-Easily deploy (using [Zeit Now](https://zeit.co/now)) to your own domain to make a personal website a site for an open source project.
+Easily deploy (using [Zeit Now](https://zeit.co/now)) to your own domain to make a personal website or an open-source project website.
 
 ## Getting Started
 
