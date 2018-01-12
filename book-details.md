@@ -1,5 +1,6 @@
 
 # Build a Web App from Scratch: React, Next, Express, MongoDB, and more.
+short description
 
 ## Table of Contents
 - [Introduction](https://builderbook.org/book/book-1/introduction)
