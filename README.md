@@ -8,7 +8,7 @@ We built this app for developers who want to:
 - Create a personal website or open-source project website to publish documentation, tutorials, and blog posts
 - Learn how to code and build web their own web apps (see our [book](https://builderbook.org))
 
-Check out the [live product](https://builderbook.org/books).
+Check out the [live app](https://builderbook.org/books).
 
 ## Contents
 - [Features](#features)
