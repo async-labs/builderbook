@@ -27,9 +27,6 @@ Check out the [live product](https://builderbook.org/books).
 - **Publish from Github**</br>
 Write your books, documentation, tutorials, and blog posts in Markdown, and store them all in a Github repository. Builder Book connects with your Github repo to publish documents to your website.
 
-- **Search and Bookmark**</br>
-Built-in search bar and bookmark feature for readers to find keywords in your docs and keep track of where they left off.
-
 - **Sell with Stripe**</br>
 Integrated with Stripe API, so you can sell books with your own Stripe account.
 
@@ -39,8 +36,11 @@ Your readers can easily sign up with their Google account to purchase books.
 - **Automated Transactional Emails**</br>
 Integrated with AWS SES to send customized emails to new users and customers.
 
-- **Customize and Deploy to your Domain**</br>
-Builder Book has key pages for you to get started - including homepage, books and documentation pages, blog, user dashboard, and admin dashboard. All pages are customizable, and you can easily deploy (using [Zeit Now](https://zeit.co/now)) to your own domain to make a site that is completely yours.
+- **Customize**</br>
+Builder Book has all key pages - including homepage, books and documentation pages, blog, user dashboard, and admin dashboard - which you can completely customize.
+
+- **Deploy to your Domain**</br>
+Easily deploy (using [Zeit Now](https://zeit.co/now)) to your own domain to make a personal website a site for an open source project.
 
 ## Getting Started
 
