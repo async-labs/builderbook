@@ -29,9 +29,16 @@ Why we wrote the book, how it differs from other books and classes to learn web 
 Junior developers. How much experience?
 
 ## What will I learn from this book?
+this could be a list
+- How to build a web app with React
+- How to set up your own servers
 
 ## FAQ
 **How can I get the book?**</br>
+
+The book is currently available to [preorder for $29](https://builderbook.org). You'll instantly get all content from the Introduction through Chapter 6, and we'll notify you as each new chapter is added.
+
+After the preorder period, the book will be availalbe for $49.
 
 **How long is the book?**</br>
 
@@ -39,10 +46,12 @@ Number of chapters, lines of code, approx how long to read
 
 **Is your book and code up-to-date?**</br>
 
-Yes, we use the latest versions of all frameworks, libraries, and services. We regularly update our codebases and book to keep up with new releases, all for free.
+Yes, we use the latest versions of all frameworks, libraries, and services that are used in the app you'll build. We regularly update our code and book to keep up with new releases, all for free.
 
 **Do you provide a free book sample?**</br>
 
-**Do you provide sample code?**</br>
+The [introduction](https://builderbook.org) and the beginning of every chapter is available for free. The entire code is [fully open-sourced](https://github.com/builderbook/builderbook-app) in this repository, and we've broken it down into [starting and ending codebases](https://github.com/builderbook/builderbook-app) for each chapter of the book.
 
 **What if I get stuck or have questions?**</br>
+
+Submit an [issue](https://github.com/builderbook/builderbook-app/issues/new) to ask questions, report bugs, or suggest improvements to our book. Please follow the issue template.
