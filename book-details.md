@@ -30,18 +30,18 @@ Junior developers. How much experience?
 ## What will I learn from this book?
 
 ## FAQ
-- **How can I get the book?**</br>
+**How can I get the book?**</br>
 
-- **How long is the book?**</br>
+**How long is the book?**</br>
 
 Number of chapters, lines of code, approx how long to read
 
-- **Is your book and code up-to-date?**</br>
+**Is your book and code up-to-date?**</br>
 
 Yes, we use the latest versions of all frameworks, libraries, and services. We regularly update our codebases and book to keep up with new releases, all for free.
 
-- **Do you provide a free book sample?**</br>
+**Do you provide a free book sample?**</br>
 
-- **Do you provide sample code?**</br>
+**Do you provide sample code?**</br>
 
-- **What if I get stuck or have questions?**</br>
+**What if I get stuck or have questions?**</br>
