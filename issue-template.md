@@ -1,4 +1,4 @@
-**(1) Is your issue related to the Builder Book project/web app or our book?**
+**(1) Is your issue related to the Builder Book web app or our book?**
 
 **(1) Bug, suggestion, or question?**
 
