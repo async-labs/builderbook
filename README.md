@@ -1,14 +1,14 @@
 # [Builder Book](https://builderbook.org)
 
-Production-ready web app to sell technical books and publish open-source documentation, tutorials, and blog posts.
+Open-source web app to write blogs, documentation, and books.
 
 We built this app for developers who want to:
 
-- Write and sell technical books about programming or web/app development
-- Create a personal website or open-source project website to publish documentation, tutorials, and blog posts
-- Learn how to code and build web their own web apps (see our [book](https://builderbook.org))
+- Create a personal website and blog
+- Publish documentation
+- Write and sell their own books
 
-Check out the [live app](https://builderbook.org/books).
+Check out the [live app](https://builderbook.org/books/book-1/introduction).
 
 ## Contents
 - [Features](#features)
