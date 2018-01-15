@@ -1,21 +1,18 @@
 # [Builder Book](https://builderbook.org)
 
-Open-source web app to write blogs, documentation, and books. Check out the [live app](https://builderbook.org/books/book-1/introduction).
-
+Open-source web app to write a blog, publish documentation, or write and sell a book. Check out the [live app](https://builderbook.org/books/book-1/introduction).
 
 We built this app for developers who want to:
 
 - Create a personal website and blog
 - Publish documentation
-- Write and sell their own books
+- Write and sell a book
 
 ## Contents
 - [Features](#features)
 - [Built With](#built-with)
-- [Getting Started](#getting-started)
-  - [Requirements](#requirements)
-  - [Installation](#installation)
-  - [Deployment](#deployment)
+- [Installation](#installation)
+- [Deployment](#deployment)
 - [Contributing](#contributing)
 - [Support This Project](#support-this-project)
   - [Our Book](#our-book)
@@ -27,19 +24,19 @@ We built this app for developers who want to:
 Write blogs, documentation, and books with Markdown. Write directly on Github or your favorite code editor.
 
 - **Deploy in under 5 min**</br>
-Easily deploy to your own domain to make a personal website or an open-source project website.
+Quickly deploy to your own domain using [Zeit Now](https://zeit.co/now).
 
 - **MIT License**</br>
-This web app is completely free and open-source under the MIT License.
+This web app is free and open-source under the MIT License.
 
 - **Transactional Emails**</br>
-Integrated with AWS SES to send customized transactional emails to your users and customers.
+Integrated with AWS SES to send customized transactional emails to subscribers and customers.
 
 - **Newsletters via MailChimp**</br>
-Integrated with MailChimp to create unique mailing lists for different types of subscribers and or customers.
+Integrated with MailChimp to create mailing lists for different types of subscribers and customers.
 
 - **Option to Sell Books with Stripe**</br>
-Integrated with Stripe to create a seamless checkout experience for your book customers.
+Integrated with Stripe to create a simple checkout for book customers.
 
 ## Built with
 
@@ -60,39 +57,35 @@ Integrated with Stripe to create a seamless checkout experience for your book cu
 
 See [package.json](https://github.com/builderbook/builderbook/blob/master/package.json).
 
-## Getting Started
+## Installation
 
-Follow these instructions to run a copy of the app on your local machine and then deploy the app to a your own domain.
+Follow these instructions to download all packages and run a copy of the app on your local machine.
 
-### Requirements
+## Deployment
 
-Which packages does the user need?
-
-### Installation
-
-How to run on local machine.
-
-### Deployment
-
-How to deploy to live.
+Follow these instructions to deploy the app to a live site.
 
 ## Contributing
 
 Submit an [issue](https://github.com/builderbook/builderbook-app/issues/new) to report bugs or suggest improvements to this web app. You can also ask questions, report bugs, or suggest improvements to our book. Please follow the issue template.
 
-By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook-app/blob/master/CODE-OF-CONDUCT.md). Please report unacceptable behavior to team@builderbook.org.
+By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook-app/blob/master/CODE-OF-CONDUCT.md).
 
 ## Support This Project
 
-Our project is completely free and open-source. You can support it by giving it a star, providing [feedback or suggestions](https://github.com/builderbook/builderbook-app/issues/new), sharing it with your friends, or purchasing [our book](https://builderbook.org/books/book-1/introduction). Thanks a bunch!
+Our project is free and open-source. If you want to support it and learn how we built this app, check out [our book](https://builderbook.org/books/book-1/introduction). 
 
 ### Our Book
 
-In our book, we teach you how to build this web app from scratch - with [complete codebases](https://github.com/builderbook/book-1-code) for every chapter. We wrote the book using this web app! See the introduction and table of contents [here](https://builderbook.org/books/book-1/introduction).
+In our book, we teach you how to build this web app from scratch - with [individual codebases](https://github.com/builderbook/book-1-code) for every chapter. We wrote the book using this web app.
+
+The introduction and table of contents are [here](https://builderbook.org/books/book-1/introduction).
 
 #### Who this book is for
 
-Our book is ideal for junior developers who want to learn the process of building a web app from start to finish. You should have a basic understanding of Javascript.
+Our book is ideal for junior developers who want to learn how to build a web app from scratch. 
+
+You should know fundamentals of HTML, CSS, and JavaScript. Experience with React is helpful but not a must-have.
 
 #### Pre-order
 
@@ -100,7 +93,7 @@ Our book is currently available to [pre-order for $29](https://builderbook.org/b
 
 #### Free for Techstars Founders
 
-As Techstars founders (Atlanta '16), we want to give back by offering a free copy of our book to other Techstars founders. Email your name, company, and Techstars batch to team@builderbook.org, and we'll give you access.
+As Techstars founders (Atlanta '16), we're giving back by offering a free book copy to other Techstars founders. Email your name, company, and Techstars batch to team@builderbook.org, and we'll give you access to the book.
 
 ## License
 
