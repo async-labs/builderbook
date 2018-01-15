@@ -1,8 +1,8 @@
-**(1) Is your issue related to the Builder Book web app or our book?**
+**(1) Is your issue related to the web app or our book?**
 
 **(1) Bug, suggestion, or question?**
 
-Please add the appropriate label
+Please add the appropriate label to your issue.
 
 **(2) Explain**
 
