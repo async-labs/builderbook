@@ -16,6 +16,7 @@ We built this app for developers who want to:
 - [Contributing](#contributing)
 - [Support This Project](#support-this-project)
   - [Our Book](#our-book)
+- [Team](#team)
 - [License](#license)
 
 ## Features
@@ -94,6 +95,12 @@ Our book is currently available to [pre-order for $29](https://builderbook.org/b
 #### Free for Techstars Founders
 
 As Techstars founders (Atlanta '16), we're giving back by offering a free book copy to other Techstars founders. Email your name, company, and Techstars batch to team@builderbook.org, and we'll give you access to the book.
+
+## Team
+
+- [Timur Zhiyentayev](https://github.com/tima101), full-stack web developer
+- [Kelly Burke](https://github.com/klyburke), designer and front-end developer
+- [Delgermurun Purevkhuu](https://github.com/delgermurun), back-end developer
 
 ## License
 
