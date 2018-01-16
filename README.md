@@ -11,7 +11,6 @@ Open-source web app to write and sell technical books and publish documentation.
 - [Deployment](#deployment)
 - [Contributing](#contributing)
 - [Support This Project](#support-this-project)
-  - [Our Book](#our-book)
 - [Team](#team)
 - [License](#license)
 
@@ -70,11 +69,9 @@ By participating in this project, you are expected to uphold Builder Book's [Cod
 
 ## Support This Project
 
-Our project is free and open-source. If you want to support it and learn how we built this app, check out [our book](https://builderbook.org/books/book-1/introduction). 
+Our project is free and open-source. If you want to support it and learn how we built this app, check out [our book](https://builderbook.org/books/book-1/introduction).
 
-### [Our Book](https://builderbook.org/books/book-1/introduction)
-
-In our book, we teach you how to build this web app from scratch - with [individual codebases](https://github.com/builderbook/book-1-code) for every chapter. We wrote our book using this web app.
+In the book, we teach you how to build this web app from scratch - with [individual codebases](https://github.com/builderbook/book-1-code) for every chapter. We wrote our book using this web app.
 
 Our book is ideal for junior developers who want to learn how to build their own web apps. You should know fundamentals of HTML, CSS, and JavaScript. Experience with React is helpful but not a must-have.
 
