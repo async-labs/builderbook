@@ -2,7 +2,7 @@
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
-Open-source web app to write and sell technical books and publish documentation. Check out the [live app](https://builderbook.org/books/book-1/introduction).
+Open-source web app to write and sell technical books or publish documentation. Check out the [live app](https://builderbook.org/books/book-1/introduction).
 
 ## Contents
 - [Built With](#built-with)
