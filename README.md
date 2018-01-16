@@ -1,8 +1,6 @@
 # [Builder Book](https://builderbook.org)
 
-[![apm](https://img.shields.io/apm/l/vim-mode.svg)]() 
-[![Libraries.io for GitHub](https://img.shields.io/librariesio/github/phoenixframework/phoenix.svg)]()
-[![GitHub contributors](https://img.shields.io/github/contributors/cdnjs/cdnjs.svg)]()
+[![apm](https://img.shields.io/apm/l/vim-mode.svg)]()
 
 Open source web app to write and sell technical books or publish documentation. Check out the [live app](https://builderbook.org/books/book-1/introduction).
 
