@@ -2,7 +2,7 @@
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
-Open-source web app to write and sell technical books or publish documentation. Check out the [live app](https://builderbook.org/books/book-1/introduction).
+Open source web app to write and sell technical books or publish documentation. Check out the [live app](https://builderbook.org/books/book-1/introduction).
 
 ## Contents
 - [Built With](#built-with)
@@ -42,7 +42,7 @@ Write blog posts, documentation, and books with Markdown. Write directly on Gith
 Quickly deploy to your own domain using [Zeit Now](https://zeit.co/now).
 
 - **MIT License**</br>
-This web app is free and open-source under the MIT License.
+This web app is free and open source under the MIT License.
 
 - **Transactional Emails**</br>
 Integrated with AWS SES to send customized transactional emails to subscribers and customers.
@@ -69,7 +69,7 @@ By participating in this project, you are expected to uphold Builder Book's [Cod
 
 ## Support This Project
 
-Our project is free and open-source. If you want to support it and learn how we built this app, check out [our book](https://builderbook.org/books/book-1/introduction).
+Our project is free and open source. If you want to support it and learn how we built this app, check out [our book](https://builderbook.org/books/book-1/introduction).
 
 In the book, we teach you how to build this web app from scratch - with [individual codebases](https://github.com/builderbook/book-1-code) for every chapter. We wrote our book using this web app.
 
