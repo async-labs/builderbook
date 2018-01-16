@@ -1,6 +1,6 @@
 # [Builder Book](https://builderbook.org)
 
-> ADD MIT LICENSE TAG
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
 Open-source web app to write and sell technical books and publish documentation. Check out the [live app](https://builderbook.org/books/book-1/introduction).
 
@@ -37,7 +37,7 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 ## Features
 
 - **Use Github as your CMS**</br>
-Write blogs, documentation, and books with Markdown. Write directly on Github or your favorite code editor.
+Write blog posts, documentation, and books with Markdown. Write directly on Github or your favorite code editor.
 
 - **Deploy in under 5 min**</br>
 Quickly deploy to your own domain using [Zeit Now](https://zeit.co/now).
@@ -72,17 +72,11 @@ By participating in this project, you are expected to uphold Builder Book's [Cod
 
 Our project is free and open-source. If you want to support it and learn how we built this app, check out [our book](https://builderbook.org/books/book-1/introduction). 
 
-### Our Book
+### [Our Book](https://builderbook.org/books/book-1/introduction)
 
-In our book, we teach you how to build this web app from scratch - with [individual codebases](https://github.com/builderbook/book-1-code) for every chapter. We wrote the book using this web app.
+In our book, we teach you how to build this web app from scratch - with [individual codebases](https://github.com/builderbook/book-1-code) for every chapter. We wrote our book using this web app.
 
-The introduction and table of contents are [here](https://builderbook.org/books/book-1/introduction).
-
-#### Who this book is for
-
-Our book is ideal for junior developers who want to learn how to build a web app from scratch. 
-
-You should know fundamentals of HTML, CSS, and JavaScript. Experience with React is helpful but not a must-have.
+Our book is ideal for junior developers who want to learn how to build their own web apps. You should know fundamentals of HTML, CSS, and JavaScript. Experience with React is helpful but not a must-have.
 
 ## Team
 
