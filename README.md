@@ -1,16 +1,12 @@
 # [Builder Book](https://builderbook.org)
 
-Open-source web app to write a blog, publish documentation, or write and sell a book. Check out the [live app](https://builderbook.org/books/book-1/introduction).
+> ADD MIT LICENSE TAG
 
-We built this app for developers who want to:
-
-- Create a personal website and blog
-- Publish documentation
-- Write and sell a book
+Open-source web app to write and sell technical books and publish documentation. Check out the [live app](https://builderbook.org/books/book-1/introduction).
 
 ## Contents
-- [Features](#features)
 - [Built With](#built-with)
+- [Features](#features)
 - [Installation](#installation)
 - [Deployment](#deployment)
 - [Contributing](#contributing)
@@ -18,6 +14,25 @@ We built this app for developers who want to:
   - [Our Book](#our-book)
 - [Team](#team)
 - [License](#license)
+
+## Built with
+
+### Tech stack
+- React
+- Material-UI
+- Next.js
+- Express (Node.js)
+- Mongoose
+- MongoDB
+
+### Third party APIs
+- AWS SES
+- Github
+- Google OAuth (Passport.js)
+- Stripe
+- MailChimp
+
+Check out [package.json](https://github.com/builderbook/builderbook/blob/master/package.json).
 
 ## Features
 
@@ -38,25 +53,6 @@ Integrated with MailChimp to create mailing lists for different types of subscri
 
 - **Option to Sell Books with Stripe**</br>
 Integrated with Stripe to create a simple checkout for book customers.
-
-## Built with
-
-### Frameworks, packages, databases
-- React
-- Material UI
-- Next.js
-- Express (Node.js)
-- MongoDB
-- Mongoose
-
-### 3rd party APIs
-- AWS SES
-- Github
-- Google OAuth (Passport.js)
-- Stripe
-- MailChimp
-
-See [package.json](https://github.com/builderbook/builderbook/blob/master/package.json).
 
 ## Installation
 
@@ -88,20 +84,12 @@ Our book is ideal for junior developers who want to learn how to build a web app
 
 You should know fundamentals of HTML, CSS, and JavaScript. Experience with React is helpful but not a must-have.
 
-#### Pre-order
-
-Our book is currently available to [pre-order for $29](https://builderbook.org/books/book-1/introduction). You'll instantly get chapters 1-6 (out of 9 total), and we'll notify you as new chapters are released. After pre-order (mid Feburary), the book will cost $49.
-
-#### Free for Techstars Founders
-
-As Techstars founders (Atlanta '16), we're giving back by offering a free book copy to other Techstars founders. Email your name, company, and Techstars batch to team@builderbook.org, and we'll give you access to the book.
-
 ## Team
 
-- [Timur Zhiyentayev](https://github.com/tima101), full-stack web developer
-- [Kelly Burke](https://github.com/klyburke), designer and front-end developer
-- [Delgermurun Purevkhuu](https://github.com/delgermurun), back-end developer
+- [Timur Zhiyentayev](https://github.com/tima101)
+- [Kelly Burke](https://github.com/klyburke)
+- [Delgermurun Purevkhuu](https://github.com/delgermurun)
 
 ## License
 
-All code in this repository is provided under the [MIT License](https://github.com/builderbook/books/blob/master/LICENSE). The information in our book is copyrighted (Builder Book 2018). 
+All code in this repository is provided under the [MIT License](https://github.com/builderbook/books/blob/master/LICENSE).
