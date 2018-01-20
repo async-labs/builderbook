@@ -1,22 +1,23 @@
-# [Builder Book](https://builderbook.org)
+# Builder Book
 
 [![apm](https://img.shields.io/apm/l/vim-mode.svg)]()
 
-Open source web app to write and sell technical books or publish documentation. Check out the [live app](https://builderbook.org/books/book-1/introduction).
+Open source web app to write and sell technical books or publish documentation.
 
 ## Contents
 - [Built With](#built-with)
+  - [Tech Stack](#tech-stack)
+  - [Third Party APIs](#third-party-apis)
 - [Features](#features)
 - [Installation](#installation)
 - [Deployment](#deployment)
 - [Contributing](#contributing)
-- [Support This Project](#support-this-project)
 - [Team](#team)
 - [License](#license)
 
-## Built with
+## Built With
 
-### Tech stack
+### Tech Stack
 - React
 - Material-UI
 - Next.js
@@ -24,7 +25,7 @@ Open source web app to write and sell technical books or publish documentation. 
 - Mongoose
 - MongoDB
 
-### Third party APIs
+### Third Party APIs
 - AWS SES
 - Github
 - Google OAuth (Passport.js)
@@ -41,9 +42,6 @@ Write blog posts, documentation, and books with Markdown. Write directly on Gith
 - **Deploy in under 5 min**</br>
 Quickly deploy to your own domain using [Zeit Now](https://zeit.co/now).
 
-- **MIT License**</br>
-This web app is free and open source under the MIT License.
-
 - **Transactional Emails**</br>
 Integrated with AWS SES to send customized transactional emails to subscribers and customers.
 
@@ -52,6 +50,9 @@ Integrated with MailChimp to create mailing lists for different types of subscri
 
 - **Option to Sell Books with Stripe**</br>
 Integrated with Stripe to create a simple checkout for book customers.
+
+- **MIT License**</br>
+This web app is free and open source under the MIT License.
 
 ## Installation
 
@@ -63,17 +64,9 @@ Follow these instructions to deploy the app to a live site.
 
 ## Contributing
 
-Submit an [issue](https://github.com/builderbook/builderbook-app/issues/new) to report bugs or suggest improvements to this web app. You can also ask questions, report bugs, or suggest improvements to our book. Please follow the issue template.
+Submit an [issue](https://github.com/builderbook/builderbook-app/issues/new) to report bugs or suggest improvements to this web app. Please follow the issue template.
 
 By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook-app/blob/master/CODE-OF-CONDUCT.md).
-
-## Support This Project
-
-Our project is free and open source. If you want to support it and learn how we built this app, check out [our book](https://builderbook.org/books/book-1/introduction).
-
-In the book, we teach you how to build this web app from scratch - with [individual codebases](https://github.com/builderbook/book-1-code) for every chapter. We wrote our book using this web app.
-
-Our book is ideal for junior developers who want to learn how to build their own web apps. You should know fundamentals of HTML, CSS, and JavaScript. Experience with React is helpful but not a must-have.
 
 ## Team
 
@@ -83,4 +76,4 @@ Our book is ideal for junior developers who want to learn how to build their own
 
 ## License
 
-All code in this repository is provided under the [MIT License](https://github.com/builderbook/books/blob/master/LICENSE).
+All code in this repository is provided under the [MIT License](https://github.com/builderbook/builderbook-app/blob/master/LICENSE.md).
