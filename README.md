@@ -55,17 +55,17 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 │   ├── Notifier.js             # In-app notifications to users
 │   ├── SharedStyles.js         # List of styles reused in the app
 │   ├── TOC.js                  # Table of Contents for books
-├── lib                         # 
-│   ├── api                     # 
-│   │   ├── admin.js            # 
-│   │   ├── customer.js	        # 
+├── lib                         # Reusable code available on both client and server
+│   ├── api                     # Client-side API methods
+│   │   ├── admin.js            # Admin user API endpoints
+│   │   ├── customer.js	        # Customer user API endpoints
 │   │   ├── getRootURL.js	      # 
-│   │   ├── public.js	          # 
-│   │   ├── sendRequest.js      # 
-│   ├── context.js              # 
-│   ├── notifier.js             # 
-│   ├── withAuth.js             # 
-│   ├── withLayout.js           # 
+│   │   ├── public.js	          # Public/Guest user API endpoints
+│   │   ├── sendRequest.js      # Send request and extract data from URLs
+│   ├── context.js              # Create app context
+│   ├── notifier.js             # Functions for Notifier component
+│   ├── withAuth.js             # Higher-order component to show pages according to login status
+│   ├── withLayout.js           # Higher-order component wrapping Index page
 ├── pages                       # All web pages in this app
 │   ├── admin                   # Pages accessible to Admin user only
 │   │   ├── add-book.js         # Page to add a new book
@@ -82,10 +82,10 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 │   ├── index.js                # Homepage
 ├── server                      # Server code
 │   ├── api                     # Internal APIs
-│   │   ├── admin.js            # 
-│   │   ├── customer.js         # 
-│   │   ├── index.js            # 
-│   │   ├── public.js           # 
+│   │   ├── admin.js            # Admin user API endpoints
+│   │   ├── customer.js         # Customer user API endpoints
+│   │   ├── index.js            # Express base routes
+│   │   ├── public.js           # Public/Guest user API endpoints
 │   ├── models                  # Mongoose models
 │   │   ├── Book.js             # Model to create and modify books
 │   │   ├── Chapter.js	        # Model to create and modify chapters inside books
