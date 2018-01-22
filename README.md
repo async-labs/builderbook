@@ -8,6 +8,7 @@ Open source web app to write and sell technical books or publish documentation.
 - [Built With](#built-with)
   - [Tech Stack](#tech-stack)
   - [Third Party APIs](#third-party-apis)
+- [Project Structure](#project-structure)
 - [Features](#features)
 - [Installation](#installation)
 - [Deployment](#deployment)
@@ -33,6 +34,55 @@ Open source web app to write and sell technical books or publish documentation.
 - MailChimp
 
 Check out [package.json](https://github.com/builderbook/builderbook/blob/master/package.json).
+
+## Project Structure
+
+```
+.
+├── components                  # Application source code
+│   ├── admin                   # Front-end source code
+│   │   ├── EditBook.js         # Common front-end application code
+│   │   ├── GiveFreeBook.js     # Common front-end application code
+│   │   ├── TutorialForm.js     # Common front-end application code
+│   │   ├── TutorialRepo.js     # Common front-end application code
+│   ├── customer                # Common code, redux store and logging
+│   │   ├── Bookmark.js         # Common front-end application code
+│   │   ├── BuyButton.js        # Common front-end application code
+│   ├── HomeFooter.js           # Entry point to mobile front-end wtih live code reload
+│   ├── MenuDrop.js             # Entry point to mobile front-end wtih live code reload
+│   ├── Notifier.js             # Entry point to mobile front-end wtih live code reload
+│   ├── SharedStyles.js         # Entry point to mobile front-end wtih live code reload
+│   ├── SubscribeForm.js        # Entry point to mobile front-end wtih live code reload
+│   ├── TOC.js                  # Entry point to mobile front-end wtih live code reload
+├── lib                         # Application source code
+├── pages                       # Application source code
+│   ├── admin                   # Front-end source code
+│   │   ├── add-book.js         # Common front-end application code
+│   │   ├── add-tutorial.js     # Common front-end application code
+│   │   ├── book-detail.js      # Common front-end application code
+│   │   ├── edit-book.js        # Common front-end application code
+│   │   ├── index.js            # Common front-end application code
+│   ├── customer                # Front-end source code
+│   │   ├── my-books.js         # Common front-end application code
+│   ├── public                  # Front-end source code
+│   │   ├── login.js            # Common front-end application code
+│   │   ├── read-chapter.js     # Common front-end application code
+│   │   ├── read-tutorial.js    # Common front-end application code
+│   │   ├── terms.js            # Common front-end application code
+│   │   ├── tutorials.js        # Common front-end application code
+│   ├── _document.js            # Front-end source code
+│   ├── index.js                # Front-end source code
+├── server                      # Application source code
+├── static                      # Application source code
+├── test/server/utils           # Application source code
+├── .babelrc                    # Application source code
+├── .eslintrc.js
+├── .gitignore
+├── env-config.js
+├── now.json
+├── package.json
+├── tos.md
+├── yarn.lock
 
 ## Features
 
