@@ -39,43 +39,78 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 
 ```
 .
-├── components                  # Application source code
-│   ├── admin                   # Front-end source code
-│   │   ├── EditBook.js         # Common front-end application code
-│   │   ├── GiveFreeBook.js     # Common front-end application code
-│   │   ├── TutorialForm.js     # Common front-end application code
-│   │   ├── TutorialRepo.js     # Common front-end application code
-│   ├── customer                # Common code, redux store and logging
-│   │   ├── Bookmark.js         # Common front-end application code
-│   │   ├── BuyButton.js        # Common front-end application code
-│   ├── HomeFooter.js           # Entry point to mobile front-end wtih live code reload
-│   ├── MenuDrop.js             # Entry point to mobile front-end wtih live code reload
-│   ├── Notifier.js             # Entry point to mobile front-end wtih live code reload
-│   ├── SharedStyles.js         # Entry point to mobile front-end wtih live code reload
-│   ├── SubscribeForm.js        # Entry point to mobile front-end wtih live code reload
-│   ├── TOC.js                  # Entry point to mobile front-end wtih live code reload
-├── lib                         # Application source code
-├── pages                       # Application source code
-│   ├── admin                   # Front-end source code
-│   │   ├── add-book.js         # Common front-end application code
-│   │   ├── add-tutorial.js     # Common front-end application code
-│   │   ├── book-detail.js      # Common front-end application code
-│   │   ├── edit-book.js        # Common front-end application code
-│   │   ├── index.js            # Common front-end application code
-│   ├── customer                # Front-end source code
-│   │   ├── my-books.js         # Common front-end application code
-│   ├── public                  # Front-end source code
-│   │   ├── login.js            # Common front-end application code
-│   │   ├── read-chapter.js     # Common front-end application code
-│   │   ├── read-tutorial.js    # Common front-end application code
-│   │   ├── terms.js            # Common front-end application code
-│   │   ├── tutorials.js        # Common front-end application code
-│   ├── _document.js            # Front-end source code
-│   ├── index.js                # Front-end source code
-├── server                      # Application source code
-├── static                      # Application source code
-├── test/server/utils           # Application source code
-├── .babelrc                    # Application source code
+├── components                  # Reusable React components
+│   ├── admin                   # Components accessible to Admin user only
+│   │   ├── EditBook.js         # Edit name, price, and repo of books
+│   │   ├── GiveFreeBook.js     # Give free book via email
+│   │   ├── TutorialForm.js     # Collect subscribers for tutorials
+│   │   ├── TutorialRepo.js     # Connect tutorials to github repo
+│   ├── customer                # Components accesible to Customer user only
+│   │   ├── Bookmark.js         # Bookmark a section within a book chapter
+│   │   ├── BuyButton.js        # Buy book after login
+│   ├── HomeFooter.js           
+│   ├── MenuDrop.js            
+│   ├── Notifier.js            
+│   ├── SharedStyles.js         
+│   ├── SubscribeForm.js        
+│   ├── TOC.js                  
+├── lib                        
+│   ├── api
+│   │   ├── admin.js
+│   │   ├── customer.js	
+│   │   ├── getRootURL.js	
+│   │   ├── public.js	
+│   │   ├── sendRequest.js
+│   ├── context.js
+│   ├── notifier.js
+│   ├── withAuth.js	
+│   ├── withLayout.js
+├── pages                       
+│   ├── admin                  
+│   │   ├── add-book.js         
+│   │   ├── add-tutorial.js     
+│   │   ├── book-detail.js      
+│   │   ├── edit-book.js        
+│   │   ├── index.js            
+│   ├── customer                
+│   │   ├── my-books.js         
+│   ├── public                  
+│   │   ├── login.js            
+│   │   ├── read-chapter.js     
+│   │   ├── read-tutorial.js    
+│   │   ├── terms.js            
+│   │   ├── tutorials.js        
+│   ├── _document.js           
+│   ├── index.js                
+├── server                      
+│   ├── api                     
+│   │   ├── admin.js            
+│   │   ├── customer.js         
+│   │   ├── index.js            
+│   │   ├── public.js           
+│   ├── models                  
+│   │   ├── Book.js	
+│   │   ├── Chapter.js	
+│   │   ├── EmailTemplate.js	
+│   │   ├── Purchase.js	
+│   │   ├── Tutorial.js
+│   │   ├── User.js
+│   ├── utils                  
+│   │   ├──sanitizeHtml.js
+│   │   ├──slugify.js
+│   ├── app.js                   
+│   ├── aws.js                  
+│   ├── github.js                
+│   ├── google.js                   
+│   ├── logs.js                   
+│   ├── mailchimp.js                 
+│   ├── routesWithSlug.js              
+│   ├── stripe.js                 
+├── static                      
+│   ├── nprogress.css
+├── test/server/utils           
+│   ├── slugify.test.js
+├── .babelrc                    
 ├── .eslintrc.js
 ├── .gitignore
 ├── env-config.js
@@ -83,6 +118,8 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 ├── package.json
 ├── tos.md
 ├── yarn.lock
+
+```
 
 ## Features
 
