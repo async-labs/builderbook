@@ -93,7 +93,7 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 │   │   ├── Purchase.js	        # 
 │   │   ├── User.js             # Model to create and modify users
 │   ├── utils                   # Sever utilities
-│   │   ├──sanitizeHtml.js      # Select desired HTML tags and attributes
+│   │   ├──sanitizeHtml.js      # Clean up HTML, permit only certain tags and attributes
 │   │   ├──slugify.js           # Create slugs
 │   ├── app.js                  # Create Express server
 │   ├── aws.js                  # Integration with AWS SES API
@@ -148,9 +148,9 @@ Follow these instructions to deploy the app to a live site.
 
 ## Contributing
 
-Submit an [issue](https://github.com/builderbook/builderbook-app/issues/new) to report bugs or suggest improvements to this web app. Please follow the issue template.
+Submit an [issue](https://github.com/builderbook/builderbook/issues/new) to report bugs or suggest improvements to this web app. Please follow the issue template.
 
-By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook-app/blob/master/CODE-OF-CONDUCT.md).
+By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook/blob/master/CODE-OF-CONDUCT.md).
 
 ## Team
 
@@ -160,4 +160,4 @@ By participating in this project, you are expected to uphold Builder Book's [Cod
 
 ## License
 
-All code in this repository is provided under the [MIT License](https://github.com/builderbook/builderbook-app/blob/master/LICENSE.md).
+All code in this repository is provided under the [MIT License](https://github.com/builderbook/builderbook/blob/master/LICENSE.md).
