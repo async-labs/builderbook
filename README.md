@@ -48,76 +48,73 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 │   ├── customer                # Components accesible to Customer user only
 │   │   ├── Bookmark.js         # Bookmark a section within a book chapter
 │   │   ├── BuyButton.js        # Buy book after login
-│   ├── HomeFooter.js           
-│   ├── MenuDrop.js            
-│   ├── Notifier.js            
-│   ├── SharedStyles.js         
-│   ├── SubscribeForm.js        
-│   ├── TOC.js                  
-├── lib                        
-│   ├── api
-│   │   ├── admin.js
-│   │   ├── customer.js	
-│   │   ├── getRootURL.js	
-│   │   ├── public.js	
-│   │   ├── sendRequest.js
-│   ├── context.js
-│   ├── notifier.js
-│   ├── withAuth.js	
-│   ├── withLayout.js
-├── pages                       
-│   ├── admin                  
-│   │   ├── add-book.js         
-│   │   ├── add-tutorial.js     
-│   │   ├── book-detail.js      
-│   │   ├── edit-book.js        
-│   │   ├── index.js            
-│   ├── customer                
-│   │   ├── my-books.js         
-│   ├── public                  
-│   │   ├── login.js            
-│   │   ├── read-chapter.js     
-│   │   ├── read-tutorial.js    
-│   │   ├── terms.js            
-│   │   ├── tutorials.js        
-│   ├── _document.js           
-│   ├── index.js                
-├── server                      
-│   ├── api                     
-│   │   ├── admin.js            
-│   │   ├── customer.js         
-│   │   ├── index.js            
-│   │   ├── public.js           
-│   ├── models                  
-│   │   ├── Book.js	
-│   │   ├── Chapter.js	
-│   │   ├── EmailTemplate.js	
-│   │   ├── Purchase.js	
-│   │   ├── Tutorial.js
-│   │   ├── User.js
-│   ├── utils                  
-│   │   ├──sanitizeHtml.js
-│   │   ├──slugify.js
-│   ├── app.js                   
-│   ├── aws.js                  
-│   ├── github.js                
-│   ├── google.js                   
-│   ├── logs.js                   
-│   ├── mailchimp.js                 
-│   ├── routesWithSlug.js              
-│   ├── stripe.js                 
-├── static                      
-│   ├── nprogress.css
-├── test/server/utils           
-│   ├── slugify.test.js
-├── .babelrc                    
-├── .eslintrc.js
-├── .gitignore
-├── env-config.js
-├── now.json
-├── package.json
-├── tos.md
-├── yarn.lock
+│   ├── Header.js               # Header component
+│   ├── HomeFooter.js           # Footer component on homepage
+│   ├── HomeHeader.js           # Header component on homepage
+│   ├── MenuDrop.js             # Login/Logout menu in header
+│   ├── Notifier.js             # In-app notifications to users
+│   ├── SharedStyles.js         # List of styles reused in the app
+│   ├── TOC.js                  # Table of Contents for books
+├── lib                         # 
+│   ├── api                     # 
+│   │   ├── admin.js            # 
+│   │   ├── customer.js	        # 
+│   │   ├── getRootURL.js	      # 
+│   │   ├── public.js	          # 
+│   │   ├── sendRequest.js      # 
+│   ├── context.js              # 
+│   ├── notifier.js             # 
+│   ├── withAuth.js             # 
+│   ├── withLayout.js           # 
+├── pages                       # All web pages in this app
+│   ├── admin                   # Pages accessible to Admin user only
+│   │   ├── add-book.js         # Page to add a new book
+│   │   ├── book-detail.js      # Page to view book chapters and sync with Github
+│   │   ├── edit-book.js        # Page to update price, title, and repo of book
+│   │   ├── index.js            # 
+│   ├── customer                # Pages accessible to Customer user only
+│   │   ├── my-books.js         # Dashboard to view all purchased and available books
+│   ├── public                  # Pages accessible to logged-out Guest users
+│   │   ├── login.js            # Login page
+│   │   ├── read-chapter.js     # Pages to view chapter content (preview for Guest; full content for Customer)
+│   │   ├── terms.js            # Terms of Service page
+│   ├── _document.js            # Override some default features of Next.js
+│   ├── index.js                # Homepage
+├── server                      # Server code
+│   ├── api                     # Internal APIs
+│   │   ├── admin.js            # 
+│   │   ├── customer.js         # 
+│   │   ├── index.js            # 
+│   │   ├── public.js           # 
+│   ├── models                  # Mongoose models
+│   │   ├── Book.js	            # Model to create and modify books
+│   │   ├── Chapter.js	        # Model to create and modify chapters inside books
+│   │   ├── EmailTemplate.js	  # Model to create and modify transactional email templates
+│   │   ├── Purchase.js	        # 
+│   │   ├── User.js             # Model to create and modify users
+│   ├── utils                   # Sever utilities
+│   │   ├──sanitizeHtml.js      # Select desired HTML tags and attributes
+│   │   ├──slugify.js           # Create slugs
+│   ├── app.js                  # Create Express server
+│   ├── aws.js                  # Integration with AWS SES API
+│   ├── github.js               # Integration with Github API
+│   ├── google.js               # Integration with Google API
+│   ├── logs.js                 # Debugging and logging with Winston
+│   ├── mailchimp.js            # Integration with MailChimp API
+│   ├── routesWithSlug.js       # routesWithSlug.js
+│   ├── stripe.js               # Integration with Stripe API
+├── static                      # Static methods
+│   ├── nprogress.css           # Page loading bar
+├── test/server/utils           # Tests for server code
+│   ├── slugify.test.js         # Test proper slug creation
+├── .babelrc                    # Transpiler for JavaScript
+├── .eslintrc.js                # Linting utility for JavaScript
+├── .gitignore                  # Files to ignore
+├── env-config.js               # Set environment variables
+├── now.json                    # Configure deployment with Now
+├── package.json                # All packages in this app
+├── tos.md                      # Text for Terms of Service
+├── yarn.lock                   # Versions of each dependency installed
 
 ```
 
