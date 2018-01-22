@@ -59,8 +59,8 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 │   ├── api                     # Client-side API methods
 │   │   ├── admin.js            # Admin user API endpoints
 │   │   ├── customer.js	        # Customer user API endpoints
-│   │   ├── getRootURL.js	      # 
-│   │   ├── public.js	          # Public/Guest user API endpoints
+│   │   ├── getRootURL.js       # 
+│   │   ├── public.js           # Public/Guest user API endpoints
 │   │   ├── sendRequest.js      # Send request and extract data from URLs
 │   ├── context.js              # Create app context
 │   ├── notifier.js             # Functions for Notifier component
