@@ -87,9 +87,9 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 │   │   ├── index.js            # 
 │   │   ├── public.js           # 
 │   ├── models                  # Mongoose models
-│   │   ├── Book.js	            # Model to create and modify books
+│   │   ├── Book.js             # Model to create and modify books
 │   │   ├── Chapter.js	        # Model to create and modify chapters inside books
-│   │   ├── EmailTemplate.js	  # Model to create and modify transactional email templates
+│   │   ├── EmailTemplate.js    # Model to create and modify transactional email templates
 │   │   ├── Purchase.js	        # 
 │   │   ├── User.js             # Model to create and modify users
 │   ├── utils                   # Sever utilities
