@@ -14,23 +14,28 @@ Chapter-1 _with_ Buy button: [link](https://demo1.builderbook.org/books/test/con
 
 After logging in, you can connect Github and create a book:
 - click `Add book` button,
-- create book, select Github repo with at non-empty `introduction.md` file at the root
-- on dashboard, click on book's title
-- you are on book's details page, click `Sync with Github` button
-- refresh page and click on `Introduction` link to see chapter's content
-
+- create book, select Github repo with a non-empty `introduction.md` file at the root
+- on dashboard, click book's title
+- you are now on book's detail page, click `Sync with Github` button
+- refresh page and click `Introduction` link to see the chapter's content
 
 ## Contents
+- [Installation](#installation)
+- [Deployment](#deployment)
 - [Built With](#built-with)
   - [Tech Stack](#tech-stack)
   - [Third Party APIs](#third-party-apis)
-- [Project Structure](#project-structure)
 - [Features](#features)
-<!---[Installation](#installation)
-- [Deployment](#deployment)--->
+- [Project Structure](#project-structure)
 - [Contributing](#contributing)
 - [Team](#team)
 - [License](#license)
+
+## Installation
+Follow these instructions to download all packages and run a copy of the app on your local machine.
+
+## Deployment
+Follow these instructions to deploy the app to a live site.
 
 ## Built With
 
@@ -50,6 +55,26 @@ After logging in, you can connect Github and create a book:
 - MailChimp
 
 Check out [package.json](https://github.com/builderbook/builderbook/blob/master/package.json).
+
+## Features
+
+- **Use Github as your CMS**</br>
+Write blog posts, documentation, and books with Markdown. Write directly on Github or your favorite code editor.
+
+- **Deploy in under 5 min**</br>
+Quickly deploy to your own domain using [Zeit Now](https://zeit.co/now).
+
+- **Transactional Emails**</br>
+Integrated with AWS SES to send customized transactional emails to subscribers and customers.
+
+- **Newsletters via MailChimp**</br>
+Integrated with MailChimp to create mailing lists for different types of subscribers and customers.
+
+- **Option to Sell Books with Stripe**</br>
+Integrated with Stripe to create a simple checkout for book customers.
+
+- **MIT License**</br>
+This web app is free and open source under the MIT License.
 
 ## Project Structure
 
@@ -133,31 +158,6 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 ├── yarn.lock                   # exact versions of packages
 
 ```
-
-## Features
-
-- **Use Github as your CMS**</br>
-Write blog posts, documentation, and books with Markdown. Write directly on Github or your favorite code editor.
-
-- **Deploy in under 5 min**</br>
-Quickly deploy to your own domain using [Zeit Now](https://zeit.co/now).
-
-- **Transactional Emails**</br>
-Integrated with AWS SES to send customized transactional emails to subscribers and customers.
-
-- **Newsletters via MailChimp**</br>
-Integrated with MailChimp to create mailing lists for different types of subscribers and customers.
-
-- **Option to Sell Books with Stripe**</br>
-Integrated with Stripe to create a simple checkout for book customers.
-
-- **MIT License**</br>
-This web app is free and open source under the MIT License.
-
-<!---## Installation
-Follow these instructions to download all packages and run a copy of the app on your local machine.
-## Deployment
-Follow these instructions to deploy the app to a live site.--->
 
 ## Contributing
 

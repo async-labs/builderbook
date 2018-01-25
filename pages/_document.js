@@ -32,7 +32,7 @@ class MyDocument extends Document {
           <link
             rel="shortcut icon"
             type="image/png"
-            href="https://storage.googleapis.com/builderbook-homepage/bb-logo-blue.png?v=1"
+            href="https://storage.googleapis.com/builderbook-homepage/bb-logo-blue.svg?v=1"
           />
           <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
 

@@ -47,14 +47,14 @@ function Header({ user, hideHeader }) {
     <div style={{ display: hideHeader ? 'none' : 'block' }}>
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justify="space-around" alignItems="center">
-          <Grid item sm={9} xs={8} style={{ textAlign: 'left' }}>
+          <Grid item sm={8} xs={7} style={{ textAlign: 'left' }}>
             {user ? (
               <div />
             ) : (
               <Link prefetch href="/">
                 <a>
                   <Avatar
-                    src="https://storage.googleapis.com/builderbook-homepage/bb-logo-blue.png?v=1"
+                    src="https://storage.googleapis.com/builderbook-homepage/bb-logo-blue.svg?v=1"
                     alt="Builder Book logo"
                     style={{ margin: '0px auto 0px 20px' }}
                   />
@@ -73,7 +73,7 @@ function Header({ user, hideHeader }) {
               </Hidden>
             ) : null}
           </Grid>
-          <Grid item sm={1} xs={2} style={{ textAlign: 'center' }}>
+          <Grid item sm={2} xs={3} style={{ textAlign: 'right' }}>
             {user ? (
               <div style={{ whiteSpace: ' nowrap' }}>
                 {!user.isAdmin ? (
