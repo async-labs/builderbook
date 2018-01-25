@@ -2,7 +2,9 @@
 
 [![apm](https://img.shields.io/apm/l/vim-mode.svg)]()
 
-Open source web app to write and sell technical books or publish documentation.
+Open source web app to write and sell books or publish free content, for example, documentation.
+
+Check out [demo](https://demo1.builderbook.org).
 
 ## Contents
 - [Built With](#built-with)
@@ -39,82 +41,82 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 
 ```
 .
-├── components                  # Reusable React components
-│   ├── admin                   # Components accessible to Admin user only
-│   │   ├── EditBook.js         # Edit name, price, and repo of books
-│   │   ├── GiveFreeBook.js     # Give free book via email
-│   │   ├── TutorialForm.js     # Collect subscribers for tutorials
-│   │   ├── TutorialRepo.js     # Connect tutorials to github repo
-│   ├── customer                # Components accesible to Customer user only
+├── components                  # React components
+│   ├── admin                   # Components used on Admin pages
+│   │   ├── EditBook.js         # Edit name, price, and repo of book
+│   │   ├── GiveFreeBook.js     # Give free book to user
+│   │   ├── TutorialForm.js     # Subscribe to newsletter form
+│   │   ├── TutorialRepo.js     # Select Github repo for Tutorials
+│   ├── customer                # Components used on Customer pages
 │   │   ├── Bookmark.js         # Bookmark a section within a book chapter
-│   │   ├── BuyButton.js        # Buy book after login
+│   │   ├── BuyButton.js        # Buy book
 │   ├── Header.js               # Header component
-│   ├── HomeFooter.js           # Footer component on homepage
+│   ├── HomeFooter.js           # Footer component for Homepage
 │   ├── HomeHeader.js           # Header component on homepage
-│   ├── MenuDrop.js             # Login/Logout menu in header
-│   ├── Notifier.js             # In-app notifications to users
-│   ├── SharedStyles.js         # List of styles reused in the app
-│   ├── TOC.js                  # Table of Contents for books
-├── lib                         # Reusable code available on both client and server
+│   ├── MenuDrop.js             # Dropdown menu
+│   ├── Notifier.js             # In-app notifications for app's users
+│   ├── SharedStyles.js         # List of _reusable_ styles
+│   ├── TOC.js                  # Table of Contents
+├── lib                         # Code available on both client and server
 │   ├── api                     # Client-side API methods
-│   │   ├── admin.js            # Admin user API endpoints
-│   │   ├── customer.js	        # Customer user API endpoints
-│   │   ├── getRootURL.js       # 
-│   │   ├── public.js           # Public/Guest user API endpoints
-│   │   ├── sendRequest.js      # Send request and extract data from URLs
-│   ├── context.js              # Create app context
-│   ├── notifier.js             # Functions for Notifier component
-│   ├── withAuth.js             # Higher-order component to show pages according to login status
-│   ├── withLayout.js           # Higher-order component wrapping Index page
-├── pages                       # All web pages in this app
-│   ├── admin                   # Pages accessible to Admin user only
+│   │   ├── admin.js            # Admin user methods
+│   │   ├── customer.js	        # Customer user methods
+│   │   ├── getRootURL.js       # Returns ROOT_URL
+│   │   ├── public.js           # Public user methods
+│   │   ├── sendRequest.js      # Reusable code for all GET and POST requests
+│   ├── context.js              # Context for Material-UI integration
+│   ├── notifier.js             # Contains notify() function that loads Notifier component
+│   ├── withAuth.js             # HOC, passes user to pages and more
+│   ├── withLayout.js           # HOC for SSR with Material-UI and more
+├── pages                       # Pages
+│   ├── admin                   # Admin pages
 │   │   ├── add-book.js         # Page to add a new book
-│   │   ├── book-detail.js      # Page to view book chapters and sync with Github
+│   │   ├── book-detail.js      # Page to view book details and sync content with Github
 │   │   ├── edit-book.js        # Page to update price, title, and repo of book
-│   │   ├── index.js            # 
-│   ├── customer                # Pages accessible to Customer user only
-│   │   ├── my-books.js         # Dashboard to view all purchased and available books
-│   ├── public                  # Pages accessible to logged-out Guest users
+│   │   ├── index.js            # Main Admin's page that has all books and more
+│   ├── customer                # Customer pages
+│   │   ├── my-books.js         # Customer's dashboard
+│   ├── public                  # Public pages (accessible to logged out users)
 │   │   ├── login.js            # Login page
-│   │   ├── read-chapter.js     # Pages to view chapter content (preview for Guest; full content for Customer)
+│   │   ├── read-chapter.js     # Page with chapter's content
 │   │   ├── terms.js            # Terms of Service page
-│   ├── _document.js            # Override some default features of Next.js
+│   ├── _document.js            # Allows to customize pages (feature of Next.js)
 │   ├── index.js                # Homepage
 ├── server                      # Server code
-│   ├── api                     # Internal APIs
-│   │   ├── admin.js            # Admin user API endpoints
-│   │   ├── customer.js         # Customer user API endpoints
-│   │   ├── index.js            # Express base routes
-│   │   ├── public.js           # Public/Guest user API endpoints
+│   ├── api                     # Express routes, route-level middleware
+│   │   ├── admin.js            # Admin routes
+│   │   ├── customer.js         # Customer routes
+│   │   ├── index.js            # Mounts all Express routes on server
+│   │   ├── public.js           # Public routes
 │   ├── models                  # Mongoose models
-│   │   ├── Book.js             # Model to create and modify books
-│   │   ├── Chapter.js	        # Model to create and modify chapters inside books
-│   │   ├── EmailTemplate.js    # Model to create and modify transactional email templates
-│   │   ├── Purchase.js	        # 
-│   │   ├── User.js             # Model to create and modify users
-│   ├── utils                   # Sever utilities
-│   │   ├──sanitizeHtml.js      # Clean up HTML, permit only certain tags and attributes
-│   │   ├──slugify.js           # Create slugs
-│   ├── app.js                  # Create Express server
-│   ├── aws.js                  # Integration with AWS SES API
-│   ├── github.js               # Integration with Github API
-│   ├── google.js               # Integration with Google API
-│   ├── logs.js                 # Debugging and logging with Winston
-│   ├── mailchimp.js            # Integration with MailChimp API
-│   ├── routesWithSlug.js       # routesWithSlug.js
-│   ├── stripe.js               # Integration with Stripe API
-├── static                      # Static methods
-│   ├── nprogress.css           # Page loading bar
-├── test/server/utils           # Tests for server code
-│   ├── slugify.test.js         # Test proper slug creation
-├── .babelrc                    # Transpiler for JavaScript
-├── .eslintrc.js                # Linting utility for JavaScript
-├── .gitignore                  # Files to ignore
-├── env-config.js               # Set environment variables
-├── now.json                    # Configure deployment with Now
-├── package.json                # All packages in this app
-├── tos.md                      # Text for Terms of Service
-├── yarn.lock                   # Versions of each dependency installed
+│   │   ├── Book.js             # Book model
+│   │   ├── Chapter.js	        # Chapter model
+│   │   ├── EmailTemplate.js    # Email Template model
+│   │   ├── Purchase.js	        # Purchase model
+│   │   ├── User.js             # User model
+│   ├── utils                   # Server-side util
+│   │   ├──sanitizeHtml.js      # Sanitizes HTML
+│   │   ├──slugify.js           # Generates slug for any Model
+│   ├── app.js                  # Custom Express/Next server
+│   ├── aws.js                  # AWS SES API
+│   ├── github.js               # Github API
+│   ├── google.js               # Google OAuth API
+│   ├── logs.js                 # Logger
+│   ├── mailchimp.js            # MailChimp API
+│   ├── routesWithSlug.js       # Express routes that contain slug
+│   ├── stripe.js               # Stripe API
+├── static                      # Static resources
+│   ├── nprogress.css           # Styles for Nprogress
+├── test/server/utils           # Tests
+│   ├── slugify.test.js         # Unit test for generateSlug() function
+├── .babelrc                    # Config for Babel
+├── .eslintrc.js                # Config for Eslint
+├── .gitignore                  # List of ignored files and directories
+├── env-config.js               # Make Stripe's public keys available on client
+├── now.json                    # Settings for now from Zeit
+├── package.json                # List of packages and scripts
+├── tos.md                      # Content from Terms of Service
+├── yarn.lock                   # exact versions of packages
 
 ```
 
