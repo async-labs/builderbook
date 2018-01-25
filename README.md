@@ -6,13 +6,13 @@ Open source web app to write and sell books or publish free content, for example
 
 ### Demo
 
-Log in as Admin (book's author): [link](https://demo1.builderbook.org/login).
+Log in as Admin (book author): [link](https://demo1.builderbook.org/login).
 
 Introduction chapter _without_ Buy button: [link](https://demo1.builderbook.org/books/test/introduction).
 
 Chapter-1 _with_ Buy button: [link](https://demo1.builderbook.org/books/test/connecting-to-database).
 
-After logging in, you can connect Github and create book:
+After logging in, you can connect Github and create a book:
 - click `Add book` button,
 - create book, select Github repo with at non-empty `introduction.md` file at the root
 - on dashboard, click on book's title
@@ -26,8 +26,8 @@ After logging in, you can connect Github and create book:
   - [Third Party APIs](#third-party-apis)
 - [Project Structure](#project-structure)
 - [Features](#features)
-- [Installation](#installation)
-- [Deployment](#deployment)
+<!---[Installation](#installation)
+- [Deployment](#deployment)--->
 - [Contributing](#contributing)
 - [Team](#team)
 - [License](#license)
@@ -154,13 +154,10 @@ Integrated with Stripe to create a simple checkout for book customers.
 - **MIT License**</br>
 This web app is free and open source under the MIT License.
 
-## Installation
-
+<!---## Installation
 Follow these instructions to download all packages and run a copy of the app on your local machine.
-
 ## Deployment
-
-Follow these instructions to deploy the app to a live site.
+Follow these instructions to deploy the app to a live site.--->
 
 ## Contributing
 
