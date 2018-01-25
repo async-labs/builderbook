@@ -4,7 +4,19 @@
 
 Open source web app to write and sell books or publish free content, for example, documentation.
 
-Check out [demo](https://demo1.builderbook.org).
+### Demo
+
+Log in as Admin (book's author): [link](https://demo1.builderbook.org/login).
+Introduction chapter _without_ Buy button: [link](https://demo1.builderbook.org/books/test/introduction).
+Chapter-1 _with_ Buy button: [link](https://demo1.builderbook.org/books/test/connecting-to-database).
+
+After logging in, you can connect Github and create book:
+- click `Add book` button,
+- create book, select Github repo with at non-empty `introduction.md` file at the root
+- on dashboard, click on book's title
+- you are on book's details page, click `Sync with Github` button
+- refresh page and click on `Introduction` link to see chapter's content
+
 
 ## Contents
 - [Built With](#built-with)
