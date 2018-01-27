@@ -10,13 +10,8 @@ const AUTHORIZE_URI = 'https://github.com/login/oauth/authorize';
 export function setupGithub({ server }) {
   const dev = process.env.NODE_ENV !== 'production';
 
-  let CLIENT_ID = dev ? process.env.Github_Test_ClientID : process.env.Github_Live_ClientID;
-  let API_KEY = dev ? process.env.Github_Test_SecretKey : process.env.Github_Live_SecretKey;
-
-  if (process.env.DEMO) {
-    CLIENT_ID = process.env.Github_Demo_ClientID;
-    API_KEY = process.env.Github_Demo_SecretKey;
-  }
+  const CLIENT_ID = dev ? process.env.Github_Test_ClientID : process.env.Github_Live_ClientID;
+  const API_KEY = dev ? process.env.Github_Test_SecretKey : process.env.Github_Live_SecretKey;
 
   server.get('/auth/github', (req, res) => {
     if (!req.user || !req.user.isAdmin) {

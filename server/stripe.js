@@ -6,11 +6,7 @@ export function charge({
   amount, token, bookName, buyerEmail,
 }) {
   const dev = process.env.NODE_ENV !== 'production';
-  const demo = !!process.env.DEMO;
-
-  const API_KEY =
-    dev || demo ? process.env.Stripe_Test_SecretKey : process.env.Stripe_Live_SecretKey;
-  const client = stripe(API_KEY);
+  const API_KEY = dev ? process.env.Stripe_Test_SecretKey : process.env.Stripe_Live_SecretKey;
 
   return client.charges.create({
     amount,

@@ -113,18 +113,10 @@ GoogleStrategy.prototype.loadUserProfile = function loadUserProfile(done) {
 };
 
 export default function auth({ ROOT_URL, server }) {
-  const clientID = process.env.DEMO
-    ? process.env.Google_Demo_clientID
-    : process.env.Google_clientID;
-
-  const clientSecret = process.env.DEMO
-    ? process.env.Google_Demo_clientSecret
-    : process.env.Google_clientSecret;
-
   passport.use(new GoogleStrategy(
     {
-      clientID,
-      clientSecret,
+      clientID: process.env.Google_clientID,
+      clientSecret: process.env.Google_clientSecret,
       callbackURL: `${ROOT_URL}/oauth2callback`,
     },
     async (googleToken, profile, done) => {

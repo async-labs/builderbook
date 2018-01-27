@@ -16,12 +16,8 @@ require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
 
-let MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
-if (process.env.DEMO) {
-  MONGO_URL = process.env.MONGO_URL_DEMO;
-}
+const MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
 
-mongoose.Promise = global.Promise;
 mongoose.connect(MONGO_URL);
 
 const port = process.env.PORT || 8000;

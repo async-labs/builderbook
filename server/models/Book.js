@@ -64,18 +64,6 @@ class BookClass {
     let books = [];
     const otherBooks = [];
 
-    if (process.env.DEMO) {
-      allBooks.forEach((b) => {
-        if (b.userId && b.userId.equals(userId)) {
-          books.push(b);
-        } else {
-          otherBooks.push(b);
-        }
-      });
-    } else {
-      books = allBooks;
-    }
-
     return { books, otherBooks };
   }
 
@@ -137,12 +125,6 @@ class BookClass {
     isInPreorder = null,
     preorderPrice = null,
   }) {
-    if (process.env.DEMO) {
-      const bookCount = await this.find({ userId }).count();
-      if (bookCount > 0) {
-        throw new Error('Demo account can create only one book');
-      }
-    }
 
     const slug = await generateSlug(this, name);
 
@@ -175,10 +157,6 @@ class BookClass {
       throw new Error('Not found');
     }
 
-    if (process.env.DEMO && (!book.userId || !book.userId.equals(userId))) {
-      throw new Error('Permission denied');
-    }
-
     const modifier = {
       price,
       supportURL,
@@ -200,10 +178,6 @@ class BookClass {
 
     if (!book) {
       throw new Error('Not found');
-    }
-
-    if (process.env.DEMO && (!book.userId || !book.userId.equals(userId))) {
-      throw new Error('Permission denied');
     }
 
     const lastCommit = await getCommits({
@@ -300,15 +274,13 @@ class BookClass {
         logger.error('Email sending error:', error);
       });
 
-    if (!process.env.DEMO) {
       subscribe({
         email: user.email,
         listName: isPreorder ? 'preordered' : 'ordered',
         book: book.slug,
       }).catch((error) => {
         logger.error('Mailchimp subscribing error:', error);
-      });
-    }
+      });  
 
     return Purchase.create({
       userId: user._id,
