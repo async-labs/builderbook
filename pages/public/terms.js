@@ -12,8 +12,8 @@ const Terms = ({ user, content }) => (
     <Header user={user} />
     <div style={{ padding: '10px 45px' }}>
       <div dangerouslySetInnerHTML={{ __html: marked(content) }} />
-      <Footer user={user} />
     </div>
+    <Footer />
   </div>
 );
 
@@ -33,7 +33,6 @@ Terms.getInitialProps = async () => {
     const { content = '' } = await getTOS();
     return { content };
   } catch (err) {
-    console.error(err);
     return { content: 'error' };
   }
 };

@@ -31,7 +31,7 @@ router.post('/sync-tos', async (req, res) => {
   try {
     const { data } = await getContent({
       accessToken: user.githubAccessToken,
-      repoName: 'builderbook/builderbook',
+      repoName: 'builderbook/builderbook-private',
       path: 'tos.md',
     });
 

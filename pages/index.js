@@ -35,7 +35,7 @@ const Index = ({ user, toc }) => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button raised color="default" style={styleRaisedButton}>
+              <Button raised color="secondary" style={styleRaisedButton}>
                 See Code
               </Button>
             </a>
@@ -98,7 +98,7 @@ const Index = ({ user, toc }) => (
           <p>
             Write and host books on Github, then sell them directly from your website.
           </p>
-          <p style={{ display: 'none' }}>
+          <div style={{ display: 'none' }}>
             <a
               href="https://builderbook.org/books/builder-book/introduction"
               target="_blank"
@@ -108,7 +108,7 @@ const Index = ({ user, toc }) => (
               Our book
             </a>{' '}
             is built with this app.
-          </p>
+          </div>
         </Grid>
       </Grid>
 
@@ -140,7 +140,7 @@ const Index = ({ user, toc }) => (
           </p>
           <p>
             <a
-              href="https://github.com/builderbook/builderbook#installation"
+              href="https://github.com/builderbook/builderbook#run-locally"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -193,7 +193,7 @@ const Index = ({ user, toc }) => (
       </Grid>
 
       <br />
-      <p style={{ display: 'none' }}>
+      <div style={{ display: 'none' }}>
         <h1
           style={{
           textAlign: 'center',
@@ -202,7 +202,7 @@ const Index = ({ user, toc }) => (
           lineHeight: '45px',
         }}
         >
-        The Book
+          The Book
         </h1>
         <p style={{ textAlign: 'center' }}>
         Our project is free and open source. If you want to support it and learn how we built this
@@ -274,7 +274,7 @@ const Index = ({ user, toc }) => (
         </Hidden>
 
         <br />
-      </p>
+      </div>
 
       <h1
         style={{
@@ -286,7 +286,7 @@ const Index = ({ user, toc }) => (
       >
         The Team
       </h1>
-      <p style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center' }}>
         Together, we've built production-ready web apps and reached thousands of users:
         <a href="https://getdrizzle.com" target="_blank" rel="noopener noreferrer">
           {' '}
@@ -300,7 +300,7 @@ const Index = ({ user, toc }) => (
           {' '}
           Builder Book
         </a>.
-      </p>
+      </div>
       <br />
       <Grid
         style={{ styleGrid }}
@@ -314,7 +314,6 @@ const Index = ({ user, toc }) => (
             src="https://storage.googleapis.com/builderbook-homepage/timur-picture.png"
             style={styleBigAvatar}
             alt="Timur Zhiyentayev"
-            id="av1"
           />
           <p>
             <a href="https://github.com/tima101" target="_blank" rel="noopener noreferrer">
@@ -333,7 +332,6 @@ const Index = ({ user, toc }) => (
             src="https://storage.googleapis.com/builderbook-homepage/kelly-picture.png"
             style={styleBigAvatar}
             alt="Kelly Burke"
-            id="av2"
           />
           <p>
             <a href="https://github.com/klyburke" target="_blank" rel="noopener noreferrer">
@@ -351,7 +349,6 @@ const Index = ({ user, toc }) => (
             src="https://storage.googleapis.com/builderbook-homepage/delgermurun-picture.png"
             style={styleBigAvatar}
             alt="Delgermurun Purevkhuu"
-            id="av3"
           />
           <p>
             <a href="https://github.com/delgermurun" target="_blank" rel="noopener noreferrer">
@@ -392,7 +389,7 @@ const Index = ({ user, toc }) => (
           <p>
             See
             <a
-              href="https://github.com/builderbook/builderbook#installation"
+              href="https://github.com/builderbook/builderbook#run-locally"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -473,7 +470,6 @@ const Index = ({ user, toc }) => (
           </p>
         </Grid>
       </Grid>
-
       <br />
     </div>
     <Footer />

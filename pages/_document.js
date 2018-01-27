@@ -26,13 +26,12 @@ class MyDocument extends Document {
           />
           <meta name="google" content="notranslate" />
           <meta httpEquiv="Content-Language" content="en_US" />
-          {/* PWA primary color */}
-          <meta name="theme-color" content={context.theme.palette.primary[900]} />
+          <meta name="theme-color" content="#1976D2" />
 
           <link
             rel="shortcut icon"
-            type="image/png"
-            href="https://storage.googleapis.com/builderbook-homepage/bb-logo-blue.svg?v=1"
+            type="image/svg"
+            href="https://storage.googleapis.com/builderbook-homepage/bb-favicon-blue.svg?v=1"
           />
           <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
 

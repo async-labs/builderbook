@@ -16,9 +16,9 @@ Chapter-1 _with_ Buy button: [link](https://demo1.builderbook.org/books/test/con
 After logging in, you can connect Github and create a book:
 - click `Add book` button,
 - create book, select Github repo with a non-empty `introduction.md` file at the root
-- on dashboard, click book's title
-- you are now on book's detail page, click `Sync with Github` button
-- refresh page and click `Introduction` link to see the chapter's content
+- on dashboard, click the book's title
+- you are now on the book's detail page, click `Sync with Github` button
+- refresh the page and click `Introduction` link to see the chapter's content
 
 
 ## Contents
@@ -35,8 +35,8 @@ After logging in, you can connect Github and create a book:
 
 
 ## Run locally
-- Clone project and run `yarn` to add packages.
-- Before you start app, create `.env` file at app's root. This file must have _at least three env variable_, `MONGO_URL_TEST`, `Google_clientID`, `Google_clientSecret`. We recommend free MongoDB at mLab.
+- Clone the project and run `yarn` to add packages.
+- Before you start the app, create a `.env` file at the app's root. This file must have _at least three env variables_: `MONGO_URL_TEST`, `Google_clientID`, `Google_clientSecret`. We recommend free MongoDB at mLab.
 
   To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp and etc), add values to all env variables in `.env` file:
   `.env` :
@@ -67,7 +67,7 @@ After logging in, you can connect Github and create a book:
   MAILCHIMP_ORDERED_LIST_ID="XXXXXX"
   ```
 
-- Before you start app, create `env-config.js` file at app' root. It's purpose is to make Stripe's public keys (keys that start with `pk`) available on client. Content of this file:
+- Before you start the app, create a `env-config.js` file at the app's root. This file makes Stripe's public keys (keys that start with `pk`) available on client. Content of this file:
   `env-config.js` :
   ```
   const dev = process.env.NODE_ENV !== 'production';
@@ -78,9 +78,9 @@ After logging in, you can connect Github and create a book:
       : 'pk_live_XXXXXX',
   };
   ```
-- Start app with `yarn dev`.
+- Start the app with `yarn dev`.
 
-- _First registered user_ in the app becomes Admin user (`"isAdmin": true`).
+- The _first registered user_ in the app becomes an Admin user (`"isAdmin": true`).
 
 
 ## Deploy
@@ -90,11 +90,11 @@ Follow below steps to deploy Builder Book app with Zeit's [now](https://zeit.co/
 
 2. Point your domain to Zeit world nameservers: [three steps](https://zeit.co/world#get-started)
 
-3. Check up `now.json` file. If you are using `dotenv` and `.env` for env variables, no need to change `now.json` file. If you changes to app, check up how to [configure now](https://zeit.co/docs/features/configuration).
+3. Check the `now.json` file. If you are using `dotenv` and `.env` for env variables, no need to change `now.json`. If you make changes to the app, check up how to [configure now](https://zeit.co/docs/features/configuration).
 
 4. Make sure you updated `ROOT_URL` in `package.json` and `lib/getRootURL.js` files.
 
-5. Check that you have all production-level env variable in `.env`. In your terminal, deploy app by running `now`.
+5. Check that you have all production-level env variable in `.env`. In your terminal, deploy the app by running `now`.
 
 5. Now outputs your deployment's URL, for example: `builderbook-zomcvzgtvc.now.sh`.
 
@@ -142,6 +142,7 @@ Integrated with Stripe to create a simple checkout for book customers.
 
 - **MIT License**</br>
 This web app is free and open source under the MIT License.
+
 
 ## Project structure
 
@@ -226,17 +227,20 @@ This web app is free and open source under the MIT License.
 
 ```
 
+
 ## Contributing
 
 Submit an [issue](https://github.com/builderbook/builderbook/issues/new) to report bugs or suggest improvements to this web app. Please follow the issue template.
 
 By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook/blob/master/CODE-OF-CONDUCT.md).
 
+
 ## Team
 
 - [Timur Zhiyentayev](https://github.com/tima101)
 - [Kelly Burke](https://github.com/klyburke)
 - [Delgermurun Purevkhuu](https://github.com/delgermurun)
+
 
 ## License
 
