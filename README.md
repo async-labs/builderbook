@@ -4,6 +4,7 @@
 
 Open source web app to write and sell books or publish free content, for example, documentation.
 
+
 ### Demo
 
 Log in as Admin (book author): [link](https://demo1.builderbook.org/login).
@@ -19,42 +20,108 @@ After logging in, you can connect Github and create a book:
 - you are now on book's detail page, click `Sync with Github` button
 - refresh page and click `Introduction` link to see the chapter's content
 
+
 ## Contents
-- [Installation](#installation)
-- [Deployment](#deployment)
-- [Built With](#built-with)
-  - [Tech Stack](#tech-stack)
-  - [Third Party APIs](#third-party-apis)
+- [Run locally](#run-locally)
+- [Deploy](#deploy)
+- [Built with](#built-with)
+  - [Tech stack](#tech-stack)
+  - [Third party APIs](#third-party-apis)
 - [Features](#features)
-- [Project Structure](#project-structure)
+- [Project structure](#project-structure)
 - [Contributing](#contributing)
 - [Team](#team)
 - [License](#license)
 
-## Installation
-Follow these instructions to download all packages and run a copy of the app on your local machine.
 
-## Deployment
-Follow these instructions to deploy the app to a live site.
+## Run locally
+- Clone project and run `yarn` to add packages.
+- Before you start app, create `.env` file at app's root. This file must have _at least three env variable_, `MONGO_URL_TEST`, `Google_clientID`, `Google_clientSecret`. We recommend free MongoDB at mLab.
 
-## Built With
+  To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp and etc), add values to all env variables in `.env` file:
+  `.env` :
+  ```
+  MONGO_URL="XXXXXX"
+  MONGO_URL_TEST="XXXXXX"
 
-### Tech Stack
+  Google_clientID="XXXXXX"
+  Google_clientSecret="XXXXXX"
+
+  Amazon_accessKeyId="XXXXXX"
+  Amazon_secretAccessKey="XXXXXX"
+
+  EMAIL_SUPPORT_FROM_ADDRESS="XXXXXX"
+
+  Github_Test_ClientID="XXXXXX"
+  Github_Test_SecretKey="XXXXXX"
+  Github_Live_ClientID="XXXXXX"
+  Github_Live_SecretKey="XXXXXX"
+
+
+  Stripe_Test_SecretKey="XXXXXX"
+  Stripe_Live_SecretKey="XXXXXX"
+
+  MAILCHIMP_API_KEY="XXXXXX"
+  MAILCHIMP_REGION="XXXXXX"
+  MAILCHIMP_PREORDERED_LIST_ID="XXXXXX"
+  MAILCHIMP_ORDERED_LIST_ID="XXXXXX"
+  ```
+
+- Before you start app, create `env-config.js` file at app' root. It's purpose is to make Stripe's public keys (keys that start with `pk`) available on client. Content of this file:
+  `env-config.js` :
+  ```
+  const dev = process.env.NODE_ENV !== 'production';
+
+  module.exports = {
+    StripePublishableKey: dev
+      ? 'pk_test_XXXXXX'
+      : 'pk_live_XXXXXX',
+  };
+  ```
+- Start app with `yarn dev`.
+
+- _First registered user_ in the app becomes Admin user (`"isAdmin": true`).
+
+
+## Deploy
+Follow below steps to deploy Builder Book app with Zeit's [now](https://zeit.co/now).
+
+1. Install now: `npm install -g now`
+
+2. Point your domain to Zeit world nameservers: [three steps](https://zeit.co/world#get-started)
+
+3. Check up `now.json` file. If you are using `dotenv` and `.env` for env variables, no need to change `now.json` file. If you changes to app, check up how to [configure now](https://zeit.co/docs/features/configuration).
+
+4. Make sure you updated `ROOT_URL` in `package.json` and `lib/getRootURL.js` files.
+
+5. Check that you have all production-level env variable in `.env`. In your terminal, deploy app by running `now`.
+
+5. Now outputs your deployment's URL, for example: `builderbook-zomcvzgtvc.now.sh`.
+
+6. Point successful deployment to your domain, for example: `now ln builderbook-demo-zomcvzgtvc.now.sh builderbook.org`.
+
+You are done.
+
+
+## Built with
+
+### Core stack
 - React
 - Material-UI
-- Next.js
-- Express (Node.js)
+- Next
+- Express
 - Mongoose
 - MongoDB
 
-### Third Party APIs
+### Third party APIs
 - AWS SES
 - Github
-- Google OAuth (Passport.js)
+- Google OAuth
 - Stripe
 - MailChimp
 
 Check out [package.json](https://github.com/builderbook/builderbook/blob/master/package.json).
+
 
 ## Features
 
@@ -76,7 +143,7 @@ Integrated with Stripe to create a simple checkout for book customers.
 - **MIT License**</br>
 This web app is free and open source under the MIT License.
 
-## Project Structure
+## Project structure
 
 ```
 .
