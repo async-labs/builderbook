@@ -1,30 +1,25 @@
 ## Builder Book
-
 [![apm](https://img.shields.io/apm/l/vim-mode.svg)]()
+[![apm](https://img.shields.io/badge/PRs-welcome-green.svg)]()
 
 Builder Book is an open source web app built with React/Material-UI/Next/Express/Mongoose/MongoDB.
 
 
 ## How can you use this app?
-- as boilerplate for React/Material-UI/Next/Express/Mongoose/MongoDB stack;
-- as learning material for third-party APIs such as Google, Github, AWS SES, Mailchimp, Stripe APIs;
-- as production-ready web app;
-  - write content, say documentation, on Github but display content on web app;
-  - write book with markdown and sell it online on your own website;
-- use this app as starting point and build something completely different.
-
-
-## Screenshots
-coming...
-
+- as a boilerplate for React/Material-UI/Next/Express/Mongoose/MongoDB stack;
+- as learning material for third-party APIs such as Google, Github, AWS SES, Mailchimp, Stripe;
+- as a production-ready web app;
+  - write content, e.g. documentation, on Github but display the content on a web app;
+  - write a book with markdown and sell it on your own website;
 
 
 ## Contents
+- [Screenshots](#screenshots)
 - [Live demo](#live-demo)
 - [Run locally](#run-locally)
 - [Deploy](#deploy)
 - [Built with](#built-with)
-  - [Tech stack](#tech-stack)
+  - [Core stack](#core-stack)
   - [Third party APIs](#third-party-apis)
 - [Features](#features)
 - [Project structure](#project-structure)
@@ -33,28 +28,40 @@ coming...
 - [License](#license)
 
 
+## Screenshots
+Chapter excerpt with Buy Button for Pubilc/Guest visitor:
+![builderbook-public-readchapter](https://user-images.githubusercontent.com/26158226/35484937-d9595078-040c-11e8-97d9-d5ff47f5ac58.png)
+
+Chapter content for book Customer:
+![builderbook-customer-readchapter](https://user-images.githubusercontent.com/26158226/35484940-db47cdb0-040c-11e8-9f8b-029eb536a74d.png)
+
+Add-book/Edit-book page for Admin user:
+![builderbook-admin-editbook](https://user-images.githubusercontent.com/26158226/35486364-d64300d6-0421-11e8-8bcd-088c73fabcf7.png)
+
+Book-detail page for Admin user:
+![builderbook-admin-bookdetails](https://user-images.githubusercontent.com/26158226/35486362-d3f25390-0421-11e8-9e26-7bdaee573e1d.png)
+
 
 ## Live demo
-
-Log in as Admin (book author): [link](https://demo1.builderbook.org/login).
+Log in with Google. You'll be logged in as an Admin (book author): [link](https://demo1.builderbook.org/login).
 
 Introduction chapter _without_ Buy button: [link](https://demo1.builderbook.org/books/test/introduction).
 
 Chapter-1 _with_ Buy button: [link](https://demo1.builderbook.org/books/test/connecting-to-database).
 
 After logging in, you can connect Github and create a book:
-- click `Add book` button,
-- create book, select Github repo with a non-empty `introduction.md` file at the root
-- on dashboard, click the book's title
-- you are now on the book's detail page, click `Sync with Github` button
-- refresh the page and click `Introduction` link to see the chapter's content
+- click the `Add book` button
+- enter book details and select a Github repo with a non-empty `introduction.md` file at the root
+- click `Save`, then click the book's title in your dashboard
+- you are now on the book's detail page, click the `Sync with Github` button
+- refresh the page and click `Introduction` to see the chapter's content
 
 
 ## Run locally
 - Clone the project and run `yarn` to add packages.
 - Before you start the app, create a `.env` file at the app's root. This file must have _at least three env variables_: `MONGO_URL_TEST`, `Google_clientID`, `Google_clientSecret`. We recommend free MongoDB at mLab.
 
-  To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp and etc), add values to all env variables in `.env` file:
+  To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values to all env variables in `.env` file:
   `.env` :
   ```
   MONGO_URL="XXXXXX"
@@ -100,34 +107,32 @@ After logging in, you can connect Github and create a book:
 
 
 ## Deploy
-Follow below steps to deploy Builder Book app with Zeit's [now](https://zeit.co/now).
+- Install now: `npm install -g now`
 
-1. Install now: `npm install -g now`
+- Point your domain to Zeit world nameservers: [three steps](https://zeit.co/world#get-started)
 
-2. Point your domain to Zeit world nameservers: [three steps](https://zeit.co/world#get-started)
+- Check the `now.json` file. If you are using `dotenv` and `.env` for env variables, no need to change `now.json`. If you make changes to the app, check up how to [configure now](https://zeit.co/docs/features/configuration).
 
-3. Check the `now.json` file. If you are using `dotenv` and `.env` for env variables, no need to change `now.json`. If you make changes to the app, check up how to [configure now](https://zeit.co/docs/features/configuration).
+- Make sure you updated `ROOT_URL` in `package.json` and `lib/getRootURL.js`.
 
-4. Make sure you updated `ROOT_URL` in `package.json` and `lib/getRootURL.js` files.
+- Check that you have all production-level env variables in `.env`. 
 
-5. Check that you have all production-level env variable in `.env`. In your terminal, deploy the app by running `now`.
+- In your terminal, deploy the app by running `now`.
 
-5. Now outputs your deployment's URL, for example: `builderbook-zomcvzgtvc.now.sh`.
+- Now outputs your deployment's URL, for example: `builderbook-zomcvzgtvc.now.sh`.
 
-6. Point successful deployment to your domain, for example: `now ln builderbook-demo-zomcvzgtvc.now.sh builderbook.org`.
-
-You are done.
+- Point successful deployment to your domain, for example: `now ln builderbook-demo-zomcvzgtvc.now.sh builderbook.org`.
 
 
 ## Built with
 
 ### Core stack
-- React
-- Material-UI
-- Next
-- Express
-- Mongoose
-- MongoDB
+- [React](https://github.com/facebook/react)
+- [Material-UI](https://github.com/mui-org/material-ui)
+- [Next](https://github.com/zeit/next.js)
+- [Express](https://github.com/expressjs/express)
+- [Mongoose](https://github.com/Automattic/mongoose)
+- [MongoDB](https://github.com/mongodb/mongo)
 
 ### Third party APIs
 - AWS SES
@@ -140,7 +145,6 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 
 
 ## Features
-
 - **Use Github as your CMS**</br>
 Write blog posts, documentation, and books with Markdown. Write directly on Github or your favorite code editor.
 
@@ -166,15 +170,13 @@ This web app is free and open source under the MIT License.
 .
 ├── components                  # React components
 │   ├── admin                   # Components used on Admin pages
-│   │   ├── EditBook.js         # Edit name, price, and repo of book
+│   │   ├── EditBook.js         # Edit title, price, and repo of book
 │   │   ├── GiveFreeBook.js     # Give free book to user
-│   │   ├── TutorialForm.js     # Subscribe to newsletter form
-│   │   ├── TutorialRepo.js     # Select Github repo for Tutorials
 │   ├── customer                # Components used on Customer pages
 │   │   ├── Bookmark.js         # Bookmark a section within a book chapter
 │   │   ├── BuyButton.js        # Buy book
 │   ├── Header.js               # Header component
-│   ├── HomeFooter.js           # Footer component for Homepage
+│   ├── HomeFooter.js           # Footer component on homepage
 │   ├── HomeHeader.js           # Header component on homepage
 │   ├── MenuDrop.js             # Dropdown menu
 │   ├── Notifier.js             # In-app notifications for app's users
@@ -189,14 +191,14 @@ This web app is free and open source under the MIT License.
 │   │   ├── sendRequest.js      # Reusable code for all GET and POST requests
 │   ├── context.js              # Context for Material-UI integration
 │   ├── notifier.js             # Contains notify() function that loads Notifier component
-│   ├── withAuth.js             # HOC, passes user to pages and more
+│   ├── withAuth.js             # HOC that passes user to pages and more
 │   ├── withLayout.js           # HOC for SSR with Material-UI and more
 ├── pages                       # Pages
 │   ├── admin                   # Admin pages
 │   │   ├── add-book.js         # Page to add a new book
 │   │   ├── book-detail.js      # Page to view book details and sync content with Github
-│   │   ├── edit-book.js        # Page to update price, title, and repo of book
-│   │   ├── index.js            # Main Admin's page that has all books and more
+│   │   ├── edit-book.js        # Page to update title, price, and repo of book
+│   │   ├── index.js            # Main Admin page that has all books and more
 │   ├── customer                # Customer pages
 │   │   ├── my-books.js         # Customer's dashboard
 │   ├── public                  # Public pages (accessible to logged out users)
@@ -239,25 +241,24 @@ This web app is free and open source under the MIT License.
 ├── now.json                    # Settings for now from Zeit
 ├── package.json                # List of packages and scripts
 ├── tos.md                      # Content from Terms of Service
-├── yarn.lock                   # exact versions of packages
+├── yarn.lock                   # Exact versions of packages
 
 ```
 
 
 ## Contributing
+We welcome pull requests, especially for [issues](https://github.com/builderbook/builderbook/issues) labeled as "discussion" and "contributions welcome".
 
-Submit an [issue](https://github.com/builderbook/builderbook/issues/new) to report bugs or suggest improvements to this web app. Please follow the issue template.
+Please add either the label "bug" or "discussion" (for suggestions) when you [submit an issue](https://github.com/builderbook/builderbook/issues/new).
 
 By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook/blob/master/CODE-OF-CONDUCT.md).
 
 
 ## Team
-
 - [Timur Zhiyentayev](https://github.com/tima101)
 - [Kelly Burke](https://github.com/klyburke)
 - [Delgermurun Purevkhuu](https://github.com/delgermurun)
 
 
 ## License
-
 All code in this repository is provided under the [MIT License](https://github.com/builderbook/builderbook/blob/master/LICENSE.md).
