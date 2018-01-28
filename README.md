@@ -1,11 +1,40 @@
-# Builder Book
+## Builder Book
 
 [![apm](https://img.shields.io/apm/l/vim-mode.svg)]()
 
-Open source web app to write and sell books or publish free content, for example, documentation.
+Builder Book is an open source web app built with React/Material-UI/Next/Express/Mongoose/MongoDB.
 
 
-### Demo
+## How can you use this app?
+- as boilerplate for React/Material-UI/Next/Express/Mongoose/MongoDB stack;
+- as learning material for third-party APIs such as Google, Github, AWS SES, Mailchimp, Stripe APIs;
+- as production-ready web app;
+  - write content, say documentation, on Github but display content on web app;
+  - write book with markdown and sell it online on your own website;
+- use this app as starting point and build something completely different.
+
+
+## Screenshots
+coming...
+
+
+
+## Contents
+- [Live demo](#live-demo)
+- [Run locally](#run-locally)
+- [Deploy](#deploy)
+- [Built with](#built-with)
+  - [Tech stack](#tech-stack)
+  - [Third party APIs](#third-party-apis)
+- [Features](#features)
+- [Project structure](#project-structure)
+- [Contributing](#contributing)
+- [Team](#team)
+- [License](#license)
+
+
+
+## Live demo
 
 Log in as Admin (book author): [link](https://demo1.builderbook.org/login).
 
@@ -19,19 +48,6 @@ After logging in, you can connect Github and create a book:
 - on dashboard, click the book's title
 - you are now on the book's detail page, click `Sync with Github` button
 - refresh the page and click `Introduction` link to see the chapter's content
-
-
-## Contents
-- [Run locally](#run-locally)
-- [Deploy](#deploy)
-- [Built with](#built-with)
-  - [Tech stack](#tech-stack)
-  - [Third party APIs](#third-party-apis)
-- [Features](#features)
-- [Project structure](#project-structure)
-- [Contributing](#contributing)
-- [Team](#team)
-- [License](#license)
 
 
 ## Run locally
