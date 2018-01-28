@@ -16,24 +16,24 @@ const slugify = text =>
     .replace(/-$/, '')
     .replace(/^-/, '');
 
-function createUniqueSlug(Model, slug, count) {
-  return Model.findOne({ slug: `${slug}-${count}` }, 'id').then((user) => {
-    if (!user) {
-      return Promise.resolve(`${slug}-${count}`);
-    }
+async function createUniqueSlug(Model, slug, count) {
+  const obj = await Model.findOne({ slug: `${slug}-${count}` }, 'id');
 
-    return createUniqueSlug(Model, slug, count + 1);
-  });
+  if (!obj) {
+    return `${slug}-${count}`;
+  }
+
+  return createUniqueSlug(Model, slug, count + 1);
 }
 
-export default function generateSlug(Model, name, filter = {}) {
+export default async function generateSlug(Model, name, filter = {}) {
   const origSlug = slugify(name);
 
-  return Model.findOne(Object.assign({ slug: origSlug }, filter), 'id').then((user) => {
-    if (!user) {
-      return Promise.resolve(origSlug);
-    }
+  const obj = await Model.findOne(Object.assign({ slug: origSlug }, filter), 'id');
 
-    return createUniqueSlug(Model, origSlug, 1);
-  });
+  if (!obj) {
+    return origSlug;
+  }
+
+  return createUniqueSlug(Model, origSlug, 1);
 }
