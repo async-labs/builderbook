@@ -1,6 +1,6 @@
 ## Builder Book
-[![apm](https://img.shields.io/apm/l/vim-mode.svg)]()
-[![apm](https://img.shields.io/badge/PRs-welcome-green.svg)]()
+[![apm](https://img.shields.io/apm/l/vim-mode.svg)](https://github.com/builderbook/builderbook/blob/master/LICENSE.md)
+[![apm](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/builderbook/builderbook#contributing)
 
 Builder Book is an open source web app built with React/Material-UI/Next/Express/Mongoose/MongoDB.
 
