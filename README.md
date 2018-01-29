@@ -21,7 +21,6 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 - [Built with](#built-with)
   - [Core stack](#core-stack)
   - [Third party APIs](#third-party-apis)
-- [Features](#features)
 - [Project structure](#project-structure)
 - [Contributing](#contributing)
 - [Team](#team)
@@ -144,26 +143,6 @@ After logging in, you can connect Github and create a book:
 Check out [package.json](https://github.com/builderbook/builderbook/blob/master/package.json).
 
 
-## Features
-- **Use Github as your CMS**</br>
-Write blog posts, documentation, and books with Markdown. Write directly on Github or your favorite code editor.
-
-- **Deploy in under 5 min**</br>
-Quickly deploy to your own domain using [Zeit Now](https://zeit.co/now).
-
-- **Transactional Emails**</br>
-Integrated with AWS SES to send customized transactional emails to subscribers and customers.
-
-- **Newsletters via MailChimp**</br>
-Integrated with MailChimp to create mailing lists for different types of subscribers and customers.
-
-- **Option to Sell Books with Stripe**</br>
-Integrated with Stripe to create a simple checkout for book customers.
-
-- **MIT License**</br>
-This web app is free and open source under the MIT License.
-
-
 ## Project structure
 
 ```
@@ -247,17 +226,15 @@ This web app is free and open source under the MIT License.
 
 
 ## Contributing
-We welcome pull requests, especially for [issues](https://github.com/builderbook/builderbook/issues) labeled as "discussion" and "contributions welcome".
-
-Please add either the label "bug" or "discussion" (for suggestions) when you [submit an issue](https://github.com/builderbook/builderbook/issues/new).
+We welcome suggestions and pull requests, especially for [issues](https://github.com/builderbook/builderbook/issues) labeled as "discussion" and "contributions welcome".
 
 By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook/blob/master/CODE-OF-CONDUCT.md).
 
 
 ## Team
-- [Timur Zhiyentayev](https://github.com/tima101)
 - [Kelly Burke](https://github.com/klyburke)
 - [Delgermurun Purevkhuu](https://github.com/delgermurun)
+- [Timur Zhiyentayev](https://github.com/tima101)
 
 
 ## License
