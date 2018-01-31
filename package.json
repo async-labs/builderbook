@@ -38,7 +38,7 @@
     "next": "^4.3.0-canary.1",
     "nprogress": "^0.2.0",
     "passport": "^0.4.0",
-    "passport-strategy": "^1.0.0",
+    "passport-google-oauth": "^1.0.0",
     "prop-types": "^15.6.0",
     "qs": "^6.5.1",
     "react": "^16.2.0",
