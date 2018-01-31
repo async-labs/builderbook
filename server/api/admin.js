@@ -47,7 +47,7 @@ router.post('/sync-tos', async (req, res) => {
 
 router.get('/books', async (req, res) => {
   try {
-    const books = await Book.list({ userId: req.user.id });
+    const books = await Book.list();
     res.json(books);
   } catch (err) {
     res.json({ error: err.message || err.toString() });
@@ -56,7 +56,7 @@ router.get('/books', async (req, res) => {
 
 router.post('/books/add', async (req, res) => {
   try {
-    await Book.add(Object.assign({ userId: req.user.id }, req.body));
+    await Book.add(req.body);
     res.json({ done: 1 });
   } catch (err) {
     logger.error(err);
@@ -66,7 +66,7 @@ router.post('/books/add', async (req, res) => {
 
 router.post('/books/edit', async (req, res) => {
   try {
-    await Book.edit(Object.assign({ userId: req.user.id }, req.body));
+    await Book.edit(req.body);
     res.json({ done: 1 });
   } catch (err) {
     logger.error(err);
@@ -94,11 +94,7 @@ router.post('/books/sync-content', async (req, res) => {
   }
 
   try {
-    await Book.syncContent({
-      id: bookId,
-      githubAccessToken: user.githubAccessToken,
-      userId: req.user.id,
-    });
+    await Book.syncContent({ id: bookId, githubAccessToken: user.githubAccessToken });
     res.json({ done: 1 });
   } catch (err) {
     logger.error(err);

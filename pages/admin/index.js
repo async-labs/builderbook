@@ -12,7 +12,9 @@ import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 import { syncTOS as syncTOSfn, getBookList } from '../../lib/api/admin';
 
-const Index = ({ books, otherBooks, syncTOS }) => (
+const Index = ({
+  books, syncTOS,
+}) => (
   <div style={{ padding: '10px 45px' }}>
     <Head>
       <title>Admin</title>
@@ -26,7 +28,6 @@ const Index = ({ books, otherBooks, syncTOS }) => (
             {books.map(b => (
               <li key={b._id}>
                 <Link
-                  prefetch
                   as={`/admin/book-detail/${b.slug}`}
                   href={`/admin/book-detail?slug=${b.slug}`}
                 >
@@ -41,23 +42,6 @@ const Index = ({ books, otherBooks, syncTOS }) => (
           </Link>
         </div>
         <br />
-
-        {otherBooks.length > 0 && (
-          <div>
-            <h2>Other books</h2>
-            <ul>
-              {otherBooks.map(b => (
-                <li key={b._id}>
-                  <a href={`/books/${b.slug}/introduction`} target="_blank">
-                    {b.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <br />
-          </div>
-        )}
-
         <h2>Sync TOS</h2>
         <p>
           <Button raised onClick={syncTOS}>
@@ -78,23 +62,19 @@ Index.propTypes = {
   books: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
   })).isRequired,
-  otherBooks: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  })).isRequired,
   syncTOS: PropTypes.func.isRequired,
 };
 
 class IndexWithData extends React.Component {
   state = {
     books: [],
-    otherBooks: [],
   };
 
   async componentDidMount() {
     try {
-      const { books, otherBooks } = await getBookList();
+      const { books } = await getBookList();
 
-      this.setState({ books, otherBooks }); // eslint-disable-line
+      this.setState({ books }); // eslint-disable-line
     } catch (err) {
       notify(err);
     }

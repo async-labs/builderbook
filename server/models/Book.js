@@ -27,11 +27,6 @@ const mongoSchema = new Schema({
     unique: true,
   },
 
-  userId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
-
   githubRepo: {
     type: String,
     required: true,
@@ -58,25 +53,12 @@ const mongoSchema = new Schema({
 });
 
 class BookClass {
-  static async list({ userId }) {
-    const allBooks = await this.find().sort({ createdAt: -1 });
-
-    let books = [];
-    const otherBooks = [];
-
-    if (process.env.DEMO) {
-      allBooks.forEach((b) => {
-        if (b.userId && b.userId.equals(userId)) {
-          books.push(b);
-        } else {
-          otherBooks.push(b);
-        }
-      });
-    } else {
-      books = allBooks;
-    }
-
-    return { books, otherBooks };
+  static async list({ offset = 0, limit = 10 } = {}) {
+    const books = await this.find({})
+      .sort({ createdAt: -1 })
+      .skip(offset)
+      .limit(limit);
+    return { books };
   }
 
   static async getPurchasedBooks({ purchasedBookIds, freeBookIds }) {
@@ -130,7 +112,6 @@ class BookClass {
 
   static async add({
     name,
-    userId,
     price,
     githubRepo,
     supportURL = '',
@@ -141,7 +122,6 @@ class BookClass {
 
     return this.create({
       name,
-      userId,
       slug,
       price,
       githubRepo,
@@ -154,7 +134,6 @@ class BookClass {
 
   static async edit({
     id,
-    userId,
     name,
     price,
     githubRepo,
@@ -162,7 +141,7 @@ class BookClass {
     isInPreorder = null,
     preorderPrice = null,
   }) {
-    const book = await this.findById(id, 'slug name userId');
+    const book = await this.findById(id, 'slug name');
 
     if (!book) {
       throw new Error('Not found');
@@ -184,8 +163,8 @@ class BookClass {
     return this.updateOne({ _id: id }, { $set: modifier });
   }
 
-  static async syncContent({ id, userId, githubAccessToken }) {
-    const book = await this.findById(id, 'userId githubRepo githubLastCommitSha');
+  static async syncContent({ id, githubAccessToken }) {
+    const book = await this.findById(id, 'githubRepo githubLastCommitSha');
 
     if (!book) {
       throw new Error('Not found');
