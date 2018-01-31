@@ -64,6 +64,18 @@ class BookClass {
     let books = [];
     const otherBooks = [];
 
+    if (process.env.DEMO) {
+      allBooks.forEach((b) => {
+        if (b.userId && b.userId.equals(userId)) {
+          books.push(b);
+        } else {
+          otherBooks.push(b);
+        }
+      });
+    } else {
+      books = allBooks;
+    }
+
     return { books, otherBooks };
   }
 
@@ -125,7 +137,6 @@ class BookClass {
     isInPreorder = null,
     preorderPrice = null,
   }) {
-
     const slug = await generateSlug(this, name);
 
     return this.create({
@@ -274,13 +285,13 @@ class BookClass {
         logger.error('Email sending error:', error);
       });
 
-      subscribe({
-        email: user.email,
-        listName: isPreorder ? 'preordered' : 'ordered',
-        book: book.slug,
-      }).catch((error) => {
-        logger.error('Mailchimp subscribing error:', error);
-      });  
+    subscribe({
+      email: user.email,
+      listName: isPreorder ? 'preordered' : 'ordered',
+      book: book.slug,
+    }).catch((error) => {
+      logger.error('Mailchimp subscribing error:', error);
+    });
 
     return Purchase.create({
       userId: user._id,
