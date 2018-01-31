@@ -89,6 +89,10 @@ After logging in, you can connect Github and create a book:
   MAILCHIMP_ORDERED_LIST_ID="XXXXXX"
   ```
 
+  For Google OAuth app, callback URL is: http://localhost:8000/auth/oauth2callback
+  For Github OAuth app, callback URL is: http://localhsot:8000/auth/github/callback
+
+
 - Before you start the app, create a `env-config.js` file at the app's root. This file makes Stripe's public keys (keys that start with `pk`) available on client. Content of this file:
   `env-config.js` :
   ```
