@@ -17,6 +17,7 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 - [Screenshots](#screenshots)
 - [Live demo](#live-demo)
 - [Run locally](#run-locally)
+- [Create first book](#create-first-book)
 - [Deploy](#deploy)
 - [Built with](#built-with)
   - [Core stack](#core-stack)
@@ -50,7 +51,8 @@ Chapter-1 _with_ Buy button: [link](https://demo1.builderbook.org/books/test/con
 
 After logging in, you can connect Github and create a book:
 - click the `Add book` button
-- enter book details and select a Github repo with a non-empty `introduction.md` file at the root
+- enter book details and select a Github repo with an `introduction.md` file at the root. 
+  - Your `introduction.md` file must have metadata. You can copy this file as an example: https://github.com/builderbook/demo-book/blob/master/introduction.md.
 - click `Save`, then click the book's title in your dashboard
 - you are now on the book's detail page, click the `Sync with Github` button
 - refresh the page and click `Introduction` to see the chapter's content
@@ -107,6 +109,13 @@ After logging in, you can connect Github and create a book:
 - Start the app with `yarn dev`.
 
 - The _first registered user_ in the app becomes an Admin user (`"isAdmin": true`).
+
+## Create first book
+- Create a new Github repo (public or private)
+- In that repo, create an `introduction.md` file.
+- Your `introduction.md` file must have metadata. You can copy this file as an example: https://github.com/builderbook/demo-book/blob/master/introduction.md.
+- Go to the app, click "Connect Github"
+- Click "Add Book"
 
 
 ## Deploy
