@@ -37,23 +37,21 @@ renderer.link = (href, title, text) => {
 renderer.image = href => `<img src="${href}" width="100%" alt="Builder Book">`;
 
 renderer.heading = (text, level) => {
-  if (level !== 2) {
-    return `<h${level}>${text}</h${level}>`;
-  }
-
   const escapedText = text
     .trim()
     .toLowerCase()
     .replace(/[^\w]+/g, '-');
 
-  return `<a name="${escapedText}" class="section-anchor"
-      style="color: black;"
-      href="#${escapedText}"
-    >
+  if (level === 2) {
+    return `<a name="${escapedText}" class="section-anchor" href="#${escapedText}">
       <h${level} class="chapter-section">
         ${text}
       </h${level}>
-  </a>`;
+    </a>`;
+  }
+
+
+  return `<h${level}>${text}</h${level}>`;
 };
 
 marked.setOptions({
