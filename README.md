@@ -231,7 +231,6 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 │   ├── routesWithSlug.js       # Express routes that contain slug
 │   ├── stripe.js               # Stripe API
 ├── static                      # Static resources
-│   ├── nprogress.css           # Styles for Nprogress
 ├── test/server/utils           # Tests
 │   ├── slugify.test.js         # Unit test for generateSlug() function
 ├── .babelrc                    # Config for Babel
