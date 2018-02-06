@@ -45,9 +45,9 @@ Book-detail page for Admin user:
 ## Live demo
 Log in with Google. You'll be logged in as an Admin (book author): [link](https://demo1.builderbook.org/login).
 
-Introduction chapter _without_ Buy button: [link](https://demo1.builderbook.org/books/test/introduction).
+Introduction chapter _without_ Buy button: [link](https://demo1.builderbook.org/books/test-book/introduction).
 
-Chapter-1 _with_ Buy button: [link](https://demo1.builderbook.org/books/test/connecting-to-database).
+Chapter-1 _with_ Buy button: [link](https://demo1.builderbook.org/books/test-book/connecting-to-database).
 
 After logging in, you can connect Github and create a book:
 - Click the `Add book` button
