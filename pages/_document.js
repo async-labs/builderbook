@@ -7,14 +7,10 @@ import getContext from '../lib/context';
 
 class MyDocument extends Document {
   render() {
-    const context = getContext();
+    // const context = getContext();
     return (
       <html lang="en">
         <Head>
-          <link
-            href="https://fonts.googleapis.com/css?family=Muli:300,400,600:latin"
-            rel="stylesheet"
-          />
           <meta charSet="utf-8" />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
           <meta
@@ -24,21 +20,27 @@ class MyDocument extends Document {
               'minimum-scale=1, width=device-width, height=device-height'
             }
           />
-          <meta name="google" content="notranslate" />
           <meta httpEquiv="Content-Language" content="en_US" />
+          <meta name="google" content="notranslate" />
           <meta name="theme-color" content="#1976D2" />
 
           <link
             rel="shortcut icon"
-            type="image/svg"
-            href="https://storage.googleapis.com/builderbook-homepage/bb-favicon-blue.svg?v=1"
+            href="https://storage.googleapis.com/builderbook/favicon32.png"
           />
-          <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
 
           <link
             rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css"
+            href="https://fonts.googleapis.com/css?family=Muli:300,400:latin"
           />
+
+          <link
+            rel="stylesheet"
+            href="https://storage.googleapis.com/builderbook/nprogress.min.css"
+          />
+
+          <link rel="stylesheet" href="https://storage.googleapis.com/builderbook/vs.min.css" />
+
           <style>
             {`
               a, a:focus {

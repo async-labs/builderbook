@@ -12,9 +12,7 @@ const Login = () => (
       <meta name="description" content="Login page for builderbook.org" />
     </Head>
     <br />
-    <br />
-    <br />
-    <h1>Log in</h1>
+    <p style={{ margin: '45px auto', fontSize: '44px', fontWeight: '400' }}>Log in</p>
     <p>You’ll be logged in for 14 days unless you log out manually.</p>
     <br />
     <Button style={styleLoginButton} className="classLoginButton" raised href="/auth/google">

@@ -24,10 +24,11 @@ const Index = ({ user, toc }) => (
       />
     </Head>
     <Header user={user} />
-    <div style={{ padding: '10px 45px' }}>
+    <div style={{ padding: '10px 8%' }}>
       <Grid style={styleGrid} container direction="row" justify="space-around" align="flex-start">
         <Grid item sm={12} xs={12} style={{ textAlign: 'center' }}>
-          <h1 style={{ margin: '45px auto', fontSize: '44px', fontWeight: '400' }}>Builder Book</h1>
+          <br />
+          <p style={{ margin: '45px auto', fontSize: '44px', fontWeight: '400' }}>Builder Book</p>
           <p>Open source web app to write a blog, publish documentation, or sell a book.</p>
           <p style={{ textAlign: 'center' }}>
             <a
@@ -295,10 +296,6 @@ const Index = ({ user, toc }) => (
         <a href="https://findharbor.com" target="_blank" rel="noopener noreferrer">
           {' '}
           Harbor
-        </a>,
-        <a href="https://builderbook.org" target="_blank" rel="noopener noreferrer">
-          {' '}
-          Builder Book
         </a>.
       </div>
       <br />
@@ -311,7 +308,7 @@ const Index = ({ user, toc }) => (
       >
         <Grid item sm={4} xs={12} style={{ textAlign: 'center', padding: '10px 45px' }}>
           <Avatar
-            src="https://storage.googleapis.com/builderbook-homepage/timur-picture.png"
+            src="https://storage.googleapis.com/builderbook/timur-picture.png"
             style={styleBigAvatar}
             alt="Timur Zhiyentayev"
           />
@@ -329,7 +326,7 @@ const Index = ({ user, toc }) => (
         </Grid>
         <Grid item sm={4} xs={12} style={{ textAlign: 'center', padding: '10px 45px' }}>
           <Avatar
-            src="https://storage.googleapis.com/builderbook-homepage/kelly-picture.png"
+            src="https://storage.googleapis.com/builderbook/kelly-picture.png"
             style={styleBigAvatar}
             alt="Kelly Burke"
           />
@@ -346,7 +343,7 @@ const Index = ({ user, toc }) => (
         </Grid>
         <Grid item sm={4} xs={12} style={{ textAlign: 'center', padding: '10px 45px' }}>
           <Avatar
-            src="https://storage.googleapis.com/builderbook-homepage/delgermurun-picture.png"
+            src="https://storage.googleapis.com/builderbook/delgermurun-picture.png"
             style={styleBigAvatar}
             alt="Delgermurun Purevkhuu"
           />
