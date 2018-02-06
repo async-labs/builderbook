@@ -10,10 +10,10 @@ import GiveFreeBook from '../../components/admin/GiveFreeBook';
 
 import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
-import { syncTOS as syncTOSfn, getBookList } from '../../lib/api/admin';
+import { getBookList } from '../../lib/api/admin';
 
 const Index = ({
-  books, syncTOS,
+  books,
 }) => (
   <div style={{ padding: '10px 45px' }}>
     <Head>
@@ -42,13 +42,6 @@ const Index = ({
           </Link>
         </div>
         <br />
-        <h2>Sync TOS</h2>
-        <p>
-          <Button raised onClick={syncTOS}>
-            Sync TOS
-          </Button>
-        </p>
-        <br />
       </Grid>
 
       <Grid item xs={12} sm={8}>
@@ -62,7 +55,6 @@ Index.propTypes = {
   books: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
   })).isRequired,
-  syncTOS: PropTypes.func.isRequired,
 };
 
 class IndexWithData extends React.Component {
@@ -80,17 +72,8 @@ class IndexWithData extends React.Component {
     }
   }
 
-  syncTOS = async () => {
-    try {
-      await syncTOSfn();
-      notify('Synced!');
-    } catch (err) {
-      notify(err);
-    }
-  };
-
   render() {
-    return <Index {...this.props} {...this.state} syncTOS={this.syncTOS} />;
+    return <Index {...this.props} {...this.state} />;
   }
 }
 

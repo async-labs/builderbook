@@ -17,9 +17,4 @@ export default function routesWithSlug({ server, app }) {
   server.get('/books/:slug', (req, res) => {
     res.redirect(`/books/${req.params.slug}/introduction`);
   });
-
-  server.get('/tutorials/:slug', (req, res) => {
-    const { slug } = req.params;
-    app.render(req, res, '/public/read-tutorial', { slug });
-  });
 }

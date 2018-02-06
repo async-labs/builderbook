@@ -26,7 +26,6 @@ const ROOT_URL = process.env.ROOT_URL || `http://localhost:${port}`;
 const URL_MAP = {
   '/login': '/public/login',
   '/my-books': '/customer/my-books',
-  '/terms': '/public/terms',
 };
 
 const app = next({ dev });

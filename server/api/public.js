@@ -39,18 +39,6 @@ router.get('/get-chapter-detail', async (req, res) => {
   }
 });
 
-router.get('/get-tos', async (req, res) => {
-  try {
-    const user = await User.findOne({ isAdmin: true, tos: { $exists: true } }, 'tos');
-    if (!user) {
-      throw new Error('Not found');
-    }
-    res.json({ content: user.tos });
-  } catch (err) {
-    res.json({ error: err.message || err.toString() });
-  }
-});
-
 router.get('/get-table-of-contents', async (req, res) => {
   try {
     const book = await Book.findOne({ slug: req.query.slug }, 'id');

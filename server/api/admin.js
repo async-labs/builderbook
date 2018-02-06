@@ -16,35 +16,6 @@ router.use((req, res, next) => {
   next();
 });
 
-router.post('/sync-tos', async (req, res) => {
-  if (!req.user.isGithubConnected) {
-    res.json({ error: 'Github is not connected' });
-    return;
-  }
-
-  const user = await User.findById(req.user.id, 'githubAccessToken');
-  if (!user || !user.githubAccessToken) {
-    res.json({ error: 'Github is not connected' });
-    return;
-  }
-
-  try {
-    const { data } = await getContent({
-      accessToken: user.githubAccessToken,
-      repoName: 'builderbook/builderbook-private',
-      path: 'tos.md',
-    });
-
-    const content = Buffer.from(data.content, 'base64').toString('utf8');
-
-    const firstAdminUser = await User.findOne({ isAdmin: true }, 'id').sort({ createdAt: 1 });
-    await firstAdminUser.update({ tos: content });
-    res.json({ done: 1 });
-  } catch (err) {
-    res.json({ error: err.message || err.toString() });
-  }
-});
-
 router.get('/books', async (req, res) => {
   try {
     const books = await Book.list();
