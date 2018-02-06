@@ -37,7 +37,7 @@ renderer.link = (href, title, text) => {
 renderer.image = href => `<img src="${href}" width="100%" alt="Builder Book">`;
 
 renderer.heading = (text, level) => {
-  if (level !== 2 && level !== 4) {
+  if (level !== 2) {
     return `<h${level}>${text}</h${level}>`;
   }
 
@@ -46,19 +46,11 @@ renderer.heading = (text, level) => {
     .toLowerCase()
     .replace(/[^\w]+/g, '-');
 
-  if (level === 2) {
-    return `<a name="${escapedText}" class="section-anchor"
+  return `<a name="${escapedText}" class="section-anchor"
       style="color: black;"
       href="#${escapedText}"
     >
       <h${level} class="chapter-section">
-        ${text}
-      </h${level}>
-  </a>`;
-  }
-
-  return `<a name="${escapedText}" style="color: black;" href="#${escapedText}">
-      <h${level}>
         ${text}
       </h${level}>
   </a>`;
