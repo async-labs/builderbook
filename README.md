@@ -8,15 +8,16 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 ## How can you use this app?
 - as a boilerplate for React/Material-UI/Next/Express/Mongoose/MongoDB stack;
 - as learning material for third-party APIs such as Google, Github, AWS SES, Mailchimp, Stripe;
-- as a production-ready web app;
+- as a production-ready web app:
   - write content, e.g. documentation, on Github but display the content on a web app;
-  - write a book with markdown and sell it on your own website;
+  - write a book with markdown and sell it on your own website
 
 
 ## Contents
 - [Screenshots](#screenshots)
 - [Live demo](#live-demo)
 - [Run locally](#run-locally)
+- [Create first book](#create-first-book)
 - [Deploy](#deploy)
 - [Built with](#built-with)
   - [Core stack](#core-stack)
@@ -49,11 +50,16 @@ Introduction chapter _without_ Buy button: [link](https://demo1.builderbook.org/
 Chapter-1 _with_ Buy button: [link](https://demo1.builderbook.org/books/test/connecting-to-database).
 
 After logging in, you can connect Github and create a book:
-- click the `Add book` button
-- enter book details and select a Github repo with a non-empty `introduction.md` file at the root
-- click `Save`, then click the book's title in your dashboard
-- you are now on the book's detail page, click the `Sync with Github` button
-- refresh the page and click `Introduction` to see the chapter's content
+- Click the `Add book` button
+
+- Enter book details and select a Github repo with an `introduction.md` file at the root. 
+  - Your `introduction.md` file must have metadata. Copy [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
+  
+- Click `Save`, then click the book's title in your dashboard.
+
+- You are now on the book's detail page, click the `Sync with Github` button.
+
+- Refresh the page and click `Introduction` to see the chapter's content.
 
 
 ## Run locally
@@ -90,7 +96,8 @@ After logging in, you can connect Github and create a book:
   ```
 
   For Google OAuth app, callback URL is: http://localhost:8000/auth/oauth2callback
-  For Github OAuth app, callback URL is: http://localhsot:8000/auth/github/callback
+  
+  For Github OAuth app, callback URL is: http://localhost:8000/auth/github/callback
 
 
 - Before you start the app, create a `env-config.js` file at the app's root. This file makes Stripe's public keys (keys that start with `pk`) available on client. Content of this file:
@@ -107,6 +114,17 @@ After logging in, you can connect Github and create a book:
 - Start the app with `yarn dev`.
 
 - The _first registered user_ in the app becomes an Admin user (`"isAdmin": true`).
+
+## Create first book
+- Create a new Github repo (public or private)
+
+- In that repo, create an `introduction.md` file.
+
+- Your `introduction.md` file must have metadata. Copy [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
+
+- Go to the app, click "Connect Github".
+
+- Click "Add Book".
 
 
 ## Deploy
