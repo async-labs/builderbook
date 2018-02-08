@@ -58,6 +58,7 @@ app.prepare().then(() => {
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
+      maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
     },
   };
 

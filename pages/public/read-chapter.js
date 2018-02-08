@@ -42,11 +42,16 @@ renderer.heading = (text, level) => {
     .toLowerCase()
     .replace(/[^\w]+/g, '-');
 
-  if (level === 2) {
-    return `<a name="${escapedText}" class="section-anchor" href="#${escapedText}">
-      <h${level} class="chapter-section">
-        ${text}
-      </h${level}>
+  if (level === 2 || level === 4) {
+    return `<a
+      style="color: #222"
+      class="section-anchor"
+      name="${escapedText}"
+      href="#${escapedText}"
+      >
+        <h${level} class="chapter-section">
+          ${text}
+        </h${level}>
     </a>`;
   }
 
