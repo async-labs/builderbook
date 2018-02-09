@@ -15,7 +15,7 @@ const Login = () => (
     <p style={{ margin: '45px auto', fontSize: '44px', fontWeight: '400' }}>Log in</p>
     <p>You’ll be logged in for 14 days unless you log out manually.</p>
     <br />
-    <Button style={styleLoginButton} className="classLoginButton" raised href="/auth/google">
+    <Button variant="raised" style={styleLoginButton} href="/auth/google">
       <img src="https://storage.googleapis.com/nice-future-2156/G.svg" alt="Log in with Google" />
       &nbsp;&nbsp;&nbsp; Log in with Google
     </Button>

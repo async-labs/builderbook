@@ -80,8 +80,8 @@ class BuyButton extends React.Component {
       return (
         <div>
           <Button
+            variant="raised"
             style={{ margin: '25px 0px 0px 0px' }}
-            raised
             color="primary"
             onClick={this.onLoginClicked}
           >

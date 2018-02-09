@@ -12,9 +12,7 @@ import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 import { getBookList } from '../../lib/api/admin';
 
-const Index = ({
-  books,
-}) => (
+const Index = ({ books }) => (
   <div style={{ padding: '10px 45px' }}>
     <Head>
       <title>Admin</title>
@@ -28,6 +26,7 @@ const Index = ({
             {books.map(b => (
               <li key={b._id}>
                 <Link
+                  prefetch
                   as={`/admin/book-detail/${b.slug}`}
                   href={`/admin/book-detail?slug=${b.slug}`}
                 >
@@ -38,7 +37,7 @@ const Index = ({
           </ul>
 
           <Link href="/admin/add-book">
-            <Button raised>Add book</Button>
+            <Button variant="raised">Add book</Button>
           </Link>
         </div>
         <br />

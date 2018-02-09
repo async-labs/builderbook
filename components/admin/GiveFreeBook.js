@@ -75,6 +75,7 @@ class GiveFreeBook extends Component {
         <br />
         <br />
         <Button
+          variant="raised"
           onClick={(event) => {
             event.preventDefault();
 
@@ -87,7 +88,6 @@ class GiveFreeBook extends Component {
                 notify(err);
               });
           }}
-          raised
         >
           Give free book
         </Button>

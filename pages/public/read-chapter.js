@@ -213,10 +213,10 @@ class ReadChapter extends React.Component {
         }}
         id="chapter-content"
       >
-        <h3>
+        <h2>
           {chapter.order > 1 ? `Chapter ${chapter.order - 1}: ` : null}
           {chapter.title}
-        </h3>
+        </h2>
         <div
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: htmlContent }}
