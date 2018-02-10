@@ -1,5 +1,3 @@
-// shared style
-
 const styleBigAvatar = {
   width: '80px',
   height: '80px',

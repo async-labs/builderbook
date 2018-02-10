@@ -6,20 +6,14 @@ import getContext from '../lib/context';
 
 class MyDocument extends Document {
   render() {
-    // const context = getContext();
     return (
-      <html lang="en">
+      <html
+        lang="en"
+        style={{ WebkitFontSmoothing: 'antialiased', MozOsxFontSmoothing: 'grayscale' }}
+      >
         <Head>
           <meta charSet="utf-8" />
-          {/* Use minimum-scale=1 to enable GPU rasterization */}
-          <meta
-            name="viewport"
-            content={
-              'user-scalable=0, initial-scale=1, maximum-scale=1, ' +
-              'minimum-scale=1, width=device-width, height=device-height'
-            }
-          />
-          <meta httpEquiv="Content-Language" content="en_US" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta name="google" content="notranslate" />
           <meta name="theme-color" content="#1976D2" />
 
@@ -27,24 +21,21 @@ class MyDocument extends Document {
             rel="shortcut icon"
             href="https://storage.googleapis.com/builderbook/favicon32.png"
           />
-
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Muli:300,400:latin"
           />
-
           <link
             rel="stylesheet"
             href="https://storage.googleapis.com/builderbook/nprogress.min.css"
           />
-
           <link rel="stylesheet" href="https://storage.googleapis.com/builderbook/vs.min.css" />
 
           <style>
             {`
               a, a:focus {
                 font-weight: 400;
-                color: #1565C0;                ;
+                color: #1565C0;
                 text-decoration: none;
                 outline: none
               }
@@ -71,7 +62,16 @@ class MyDocument extends Document {
             `}
           </style>
         </Head>
-        <body>
+        <body
+          style={{
+            font: '16px Muli',
+            color: '#222',
+            margin: '0px auto',
+            fontWeight: '300',
+            lineHeight: '1.5em',
+            backgroundColor: '#F7F9FC',
+          }}
+        >
           <Main />
           <NextScript />
         </body>

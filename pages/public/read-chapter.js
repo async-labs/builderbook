@@ -38,11 +38,11 @@ renderer.image = href => `<img src="${href}" width="100%" alt="Builder Book">`;
 
 renderer.heading = (text, level) => {
   const escapedText = text
-    .trim()
+    // .trim()
     .toLowerCase()
     .replace(/[^\w]+/g, '-');
 
-  if (level === 2 || level === 4) {
+  if (level === 2) {
     return `<a
       style="color: #222"
       class="section-anchor"
@@ -55,6 +55,18 @@ renderer.heading = (text, level) => {
     </a>`;
   }
 
+  if (level === 4) {
+    return `<a
+      style="color: #222"
+      class="section-anchor"
+      name="${escapedText}"
+      href="#${escapedText}"
+      >
+        <h${level} class="chapter-section">
+          ${text}
+        </h${level}>
+      </a>`;
+  }
 
   return `<h${level}>${text}</h${level}>`;
 };
