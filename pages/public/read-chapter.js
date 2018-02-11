@@ -58,11 +58,10 @@ renderer.heading = (text, level) => {
   if (level === 4) {
     return `<a
       style="color: #222"
-      class="section-anchor"
       name="${escapedText}"
       href="#${escapedText}"
       >
-        <h${level} class="chapter-section">
+        <h${level}>
           ${text}
         </h${level}>
       </a>`;
