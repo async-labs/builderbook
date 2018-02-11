@@ -1,10 +1,70 @@
 import mongoose, { Schema } from 'mongoose';
 import marked from 'marked';
 import he from 'he';
+import hljs from 'highlight.js';
 
 import generateSlug from '../utils/slugify';
 import Book from './Book';
 import Purchase from './Purchase';
+
+function markdownToHtml(content) {
+  const renderer = new marked.Renderer();
+
+  renderer.link = (href, title, text) => {
+    const t = title ? ` title="${title}"` : '';
+    return `<a target="_blank" href="${href}" rel="noopener noreferrer"${t}>${text}</a>`;
+  };
+
+  renderer.image = href => `<img src="${href}" width="100%" alt="Builder Book">`;
+
+  renderer.heading = (text, level) => {
+    const escapedText = text
+      .trim()
+      .toLowerCase()
+      .replace(/[^\w]+/g, '-');
+
+    if (level === 2) {
+      return `<a
+    style="color: #222"
+    class="section-anchor"
+    name="${escapedText}"
+    href="#${escapedText}"
+    >
+      <h${level} class="chapter-section">
+        ${text}
+      </h${level}>
+  </a>`;
+    }
+
+    if (level === 4) {
+      return `<a
+    style="color: #222"
+    name="${escapedText}"
+    href="#${escapedText}"
+    >
+      <h${level}>
+        ${text}
+      </h${level}>
+  </a>`;
+    }
+
+    return `<h${level}>${text}</h${level}>`;
+  };
+
+  marked.setOptions({
+    renderer,
+    breaks: true,
+    highlight(code, lang) {
+      if (!lang) {
+        return hljs.highlightAuto(code).value;
+      }
+
+      return hljs.highlight(lang, code).value;
+    },
+  });
+
+  return marked(he.decode(content));
+}
 
 function getSections(content) {
   const renderer = new marked.Renderer();
@@ -58,6 +118,11 @@ const mongoSchema = new Schema({
     default: '',
   },
   content: {
+    type: String,
+    default: '',
+    required: true,
+  },
+  htmlContent: {
     type: String,
     default: '',
     required: true,
@@ -177,6 +242,7 @@ class ChapterClass {
     }
 
     const content = body;
+    const htmlContent = markdownToHtml(content);
     const sections = getSections(content);
 
     if (!chapter) {
@@ -189,8 +255,9 @@ class ChapterClass {
         slug,
         isFree,
         content,
+        htmlContent,
         sections,
-        excerpt,
+        excerpt: marked(he.decode(excerpt)),
         order,
         seoTitle,
         seoDescription,
@@ -200,8 +267,9 @@ class ChapterClass {
 
     const modifier = {
       content,
+      htmlContent,
       sections,
-      excerpt,
+      excerpt: marked(he.decode(excerpt)),
       isFree,
       order,
       seoTitle,

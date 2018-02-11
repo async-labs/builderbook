@@ -7,9 +7,7 @@ import FormatListBulleted from 'material-ui-icons/FormatListBulleted';
 import throttle from 'lodash/throttle';
 
 import Link from 'next/link';
-import marked from 'marked';
 import he from 'he';
-import hljs from 'highlight.js';
 
 import BuyButton from '../../components/customer/BuyButton';
 import Bookmark from '../../components/customer/Bookmark';
@@ -27,60 +25,6 @@ const styleIcon = {
   fontSize: '24',
   cursor: 'pointer',
 };
-
-const renderer = new marked.Renderer();
-renderer.link = (href, title, text) => {
-  const t = title ? ` title="${title}"` : '';
-  return `<a target="_blank" href="${href}" rel="noopener noreferrer"${t}>${text}</a>`;
-};
-
-renderer.image = href => `<img src="${href}" width="100%" alt="Builder Book">`;
-
-renderer.heading = (text, level) => {
-  const escapedText = text
-    // .trim()
-    .toLowerCase()
-    .replace(/[^\w]+/g, '-');
-
-  if (level === 2) {
-    return `<a
-      style="color: #222"
-      class="section-anchor"
-      name="${escapedText}"
-      href="#${escapedText}"
-      >
-        <h${level} class="chapter-section">
-          ${text}
-        </h${level}>
-    </a>`;
-  }
-
-  if (level === 4) {
-    return `<a
-      style="color: #222"
-      name="${escapedText}"
-      href="#${escapedText}"
-      >
-        <h${level}>
-          ${text}
-        </h${level}>
-      </a>`;
-  }
-
-  return `<h${level}>${text}</h${level}>`;
-};
-
-marked.setOptions({
-  renderer,
-  breaks: true,
-  highlight(code, lang) {
-    if (!lang) {
-      return hljs.highlightAuto(code).value;
-    }
-
-    return hljs.highlight(lang, code).value;
-  },
-});
 
 class ReadChapter extends React.Component {
   static propTypes = {
@@ -121,9 +65,9 @@ class ReadChapter extends React.Component {
     const { chapter } = props;
     let htmlContent = '';
     if (chapter && (chapter.isPurchased || chapter.isFree)) {
-      htmlContent = marked(he.decode(chapter.content));
+      htmlContent = chapter.htmlContent;
     } else {
-      htmlContent = marked(he.decode(chapter.excerpt));
+      htmlContent = chapter.excerpt;
     }
 
     this.state = {
@@ -146,9 +90,9 @@ class ReadChapter extends React.Component {
       let htmlContent;
 
       if (chapter.isPurchased || chapter.isFree) {
-        htmlContent = marked(he.decode(chapter.content));
+        htmlContent = chapter.htmlContent;
       } else {
-        htmlContent = marked(he.decode(chapter.excerpt));
+        htmlContent = chapter.excerpt;
       }
 
       this.setState({ chapter: nextProps.chapter, htmlContent });
