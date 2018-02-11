@@ -3,7 +3,6 @@ import marked from 'marked';
 import he from 'he';
 
 import generateSlug from '../utils/slugify';
-import sanitizeHtml from '../utils/sanitizeHtml';
 import Book from './Book';
 import Purchase from './Purchase';
 
@@ -177,7 +176,7 @@ class ChapterClass {
       order = parseInt(path.match(/[0-9]+/), 10) + 1;
     }
 
-    const content = sanitizeHtml(body);
+    const content = body;
     const sections = getSections(content);
 
     if (!chapter) {
@@ -191,7 +190,7 @@ class ChapterClass {
         isFree,
         content,
         sections,
-        excerpt: sanitizeHtml(excerpt),
+        excerpt,
         order,
         seoTitle,
         seoDescription,
@@ -202,7 +201,7 @@ class ChapterClass {
     const modifier = {
       content,
       sections,
-      excerpt: sanitizeHtml(excerpt),
+      excerpt,
       isFree,
       order,
       seoTitle,

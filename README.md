@@ -220,7 +220,6 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 │   │   ├── Purchase.js	        # Purchase model
 │   │   ├── User.js             # User model
 │   ├── utils                   # Server-side util
-│   │   ├──sanitizeHtml.js      # Sanitizes HTML
 │   │   ├──slugify.js           # Generates slug for any Model
 │   ├── app.js                  # Custom Express/Next server
 │   ├── aws.js                  # AWS SES API
