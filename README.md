@@ -1,9 +1,11 @@
 ## Builder Book
-[![apm](https://img.shields.io/apm/l/vim-mode.svg)](https://github.com/builderbook/builderbook/blob/master/LICENSE.md)
+[![apm](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/builderbook/builderbook/blob/master/LICENSE.md)
 [![apm](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/builderbook/builderbook#contributing)
 
 Builder Book is an open source web app built with React/Material-UI/Next/Express/Mongoose/MongoDB.
 
+- To see a book deployed with this app, go to: https://builderbook.org/books/builder-book/introduction
+- To create your own book, login at: https://demo1.builderbook.org/login
 
 ## How can you use this app?
 - as a boilerplate for React/Material-UI/Next/Express/Mongoose/MongoDB stack;
@@ -14,10 +16,10 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
 
 ## Contents
-- [Screenshots](#screenshots)
 - [Live demo](#live-demo)
+- [Screenshots](#screenshots)
 - [Run locally](#run-locally)
-- [Create first book](#create-first-book)
+- [Create your first book](#create-your-first-book)
 - [Deploy](#deploy)
 - [Built with](#built-with)
   - [Core stack](#core-stack)
@@ -26,6 +28,27 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 - [Contributing](#contributing)
 - [Team](#team)
 - [License](#license)
+
+
+## Live demo
+- Log in with Google. You'll be logged in as an Admin (book author): [link](https://demo1.builderbook.org/login).
+
+  - View the introduction chapter _without_ Buy button: [link](https://demo1.builderbook.org/books/test-book/introduction).
+
+  - View Chapter-1 _with_ Buy button: [link](https://demo1.builderbook.org/books/test-book/connecting-to-database).
+
+- After logging in, you can connect Github and create a book:
+  
+  - Click the `Add book` button
+
+  - Enter book details and select a Github repo with an `introduction.md` file at the root. 
+  Your `introduction.md` file must have metadata. Copy [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
+  
+  - Click `Save`, then click the book's title in your dashboard.
+
+  - You are now on the book's detail page, click the `Sync with Github` button.
+
+  - Refresh the page and click `Introduction` to see the chapter's content.
 
 
 ## Screenshots
@@ -40,26 +63,6 @@ Add-book/Edit-book page for Admin user:
 
 Book-detail page for Admin user:
 ![builderbook-admin-bookdetails](https://user-images.githubusercontent.com/26158226/35486362-d3f25390-0421-11e8-9e26-7bdaee573e1d.png)
-
-
-## Live demo
-Log in with Google. You'll be logged in as an Admin (book author): [link](https://demo1.builderbook.org/login).
-
-Introduction chapter _without_ Buy button: [link](https://demo1.builderbook.org/books/test-book/introduction).
-
-Chapter-1 _with_ Buy button: [link](https://demo1.builderbook.org/books/test-book/connecting-to-database).
-
-After logging in, you can connect Github and create a book:
-- Click the `Add book` button
-
-- Enter book details and select a Github repo with an `introduction.md` file at the root. 
-  - Your `introduction.md` file must have metadata. Copy [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
-  
-- Click `Save`, then click the book's title in your dashboard.
-
-- You are now on the book's detail page, click the `Sync with Github` button.
-
-- Refresh the page and click `Introduction` to see the chapter's content.
 
 
 ## Run locally
@@ -115,7 +118,7 @@ After logging in, you can connect Github and create a book:
 
 - The _first registered user_ in the app becomes an Admin user (`"isAdmin": true`).
 
-## Create first book
+## Create your first book
 - Create a new Github repo (public or private)
 
 - In that repo, create an `introduction.md` file.
