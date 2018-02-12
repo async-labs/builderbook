@@ -4,8 +4,9 @@
 
 Builder Book is an open source web app built with React/Material-UI/Next/Express/Mongoose/MongoDB.
 
-- To see a book deployed with this app, go to: https://builderbook.org/books/builder-book/introduction
-- To create your own book, login at: https://demo1.builderbook.org/login
+- To see a book hosted with this app: https://builderbook.org/books/builder-book/introduction
+- To create your own book (Admin demo): https://demo1.builderbook.org/login
+
 
 ## How can you use this app?
 - as a boilerplate for React/Material-UI/Next/Express/Mongoose/MongoDB stack;
@@ -16,7 +17,7 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
 
 ## Contents
-- [Live demo](#live-demo)
+- [Admin demo](#admin-demo)
 - [Screenshots](#screenshots)
 - [Run locally](#run-locally)
 - [Create your first book](#create-your-first-book)
@@ -30,7 +31,7 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 - [License](#license)
 
 
-## Live demo
+## Admin demo
 - Log in with Google. You'll be logged in as an Admin (book author): [link](https://demo1.builderbook.org/login).
 
   - View the introduction chapter _without_ Buy button: [link](https://demo1.builderbook.org/books/test-book/introduction).
@@ -50,19 +51,6 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
   - Refresh the page and click `Introduction` to see the chapter's content.
 
-
-## Screenshots
-Chapter excerpt with Buy Button for Pubilc/Guest visitor:
-![builderbook-public-readchapter](https://user-images.githubusercontent.com/26158226/35484937-d9595078-040c-11e8-97d9-d5ff47f5ac58.png)
-
-Chapter content for book Customer:
-![builderbook-customer-readchapter](https://user-images.githubusercontent.com/26158226/35484940-db47cdb0-040c-11e8-9f8b-029eb536a74d.png)
-
-Add-book/Edit-book page for Admin user:
-![builderbook-admin-editbook](https://user-images.githubusercontent.com/26158226/35486364-d64300d6-0421-11e8-8bcd-088c73fabcf7.png)
-
-Book-detail page for Admin user:
-![builderbook-admin-bookdetails](https://user-images.githubusercontent.com/26158226/35486362-d3f25390-0421-11e8-9e26-7bdaee573e1d.png)
 
 
 ## Run locally
@@ -118,6 +106,7 @@ Book-detail page for Admin user:
 
 - The _first registered user_ in the app becomes an Admin user (`"isAdmin": true`).
 
+
 ## Create your first book
 - Create a new Github repo (public or private)
 
@@ -148,9 +137,23 @@ Book-detail page for Admin user:
 - Point successful deployment to your domain, for example: `now ln builderbook-demo-zomcvzgtvc.now.sh builderbook.org`.
 
 
+## Screenshots
+Chapter excerpt with Buy Button for Pubilc/Guest visitor:
+![builderbook-public-readchapter](https://user-images.githubusercontent.com/26158226/35484937-d9595078-040c-11e8-97d9-d5ff47f5ac58.png)
+
+Chapter content for book Customer:
+![builderbook-customer-readchapter](https://user-images.githubusercontent.com/26158226/35484940-db47cdb0-040c-11e8-9f8b-029eb536a74d.png)
+
+Add-book/Edit-book page for Admin user:
+![builderbook-admin-editbook](https://user-images.githubusercontent.com/26158226/35486364-d64300d6-0421-11e8-8bcd-088c73fabcf7.png)
+
+Book-detail page for Admin user:
+![builderbook-admin-bookdetails](https://user-images.githubusercontent.com/26158226/35486362-d3f25390-0421-11e8-9e26-7bdaee573e1d.png)
+
+
 ## Built with
 
-### Core stack
+#### Core stack
 - [React](https://github.com/facebook/react)
 - [Material-UI](https://github.com/mui-org/material-ui)
 - [Next](https://github.com/zeit/next.js)
@@ -158,7 +161,7 @@ Book-detail page for Admin user:
 - [Mongoose](https://github.com/Automattic/mongoose)
 - [MongoDB](https://github.com/mongodb/mongo)
 
-### Third party APIs
+#### Third party APIs
 - AWS SES
 - Github
 - Google OAuth
