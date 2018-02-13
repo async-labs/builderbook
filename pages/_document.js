@@ -64,7 +64,7 @@ class MyDocument extends Document {
             font: '16px Muli',
             color: '#222',
             margin: '0px auto',
-            fontWeight: '300',
+            fontWeight: '400',
             lineHeight: '1.5em',
             backgroundColor: '#F7F9FC',
           }}
