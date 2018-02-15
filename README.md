@@ -87,6 +87,7 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
   ```
 
   For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback
+  You have to enable Google+ API in your Google Cloud Platform account.
   
   For Github OAuth app, callback URL is: http://localhost:8000/auth/github/callback
 
