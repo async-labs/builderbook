@@ -82,11 +82,13 @@ class UserClass {
 
     if (user) {
       const modifier = {};
-      Object.keys(googleToken || {}).forEach((k) => {
-        if (googleToken[k]) {
-          modifier[`googleToken.${k}`] = googleToken[k];
-        }
-      });
+      if (googleToken.accessToken) {
+        modifier.access_token = googleToken.accessToken;
+      }
+
+      if (googleToken.refreshToken) {
+        modifier.refresh_token = googleToken.refreshToken;
+      }
 
       if (_.isEmpty(modifier)) {
         return user;
