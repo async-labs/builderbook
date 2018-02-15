@@ -18,10 +18,10 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
 ## Contents
 - [Admin demo](#admin-demo)
-- [Screenshots](#screenshots)
 - [Run locally](#run-locally)
 - [Create your first book](#create-your-first-book)
 - [Deploy](#deploy)
+- [Screenshots](#screenshots)
 - [Built with](#built-with)
   - [Core stack](#core-stack)
   - [Third party APIs](#third-party-apis)
@@ -43,7 +43,16 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
   - Click the `Add book` button
 
   - Enter book details and select a Github repo with an `introduction.md` file at the root. 
-  Your `introduction.md` file must have metadata. Copy [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
+  Your `introduction.md` file must have metadata in the format shown below. See [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
+  
+  ```
+  ---
+  title: Introduction
+  seoTitle: title for search engines
+  seoDescription: description for search engines
+  isFree: true
+  ---
+  ```
   
   - Click `Save`, then click the book's title in your dashboard.
 
@@ -113,7 +122,16 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
 - In that repo, create an `introduction.md` file.
 
-- Your `introduction.md` file must have metadata. Copy [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
+-   Your `introduction.md` file must have metadata in the format shown below. See [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
+  
+  ```
+  ---
+  title: Introduction
+  seoTitle: title for search engines
+  seoDescription: description for search engines
+  isFree: true
+  ---
+  ```
 
 - Go to the app, click "Connect Github".
 
