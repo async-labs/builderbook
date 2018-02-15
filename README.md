@@ -86,7 +86,7 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
   MAILCHIMP_ORDERED_LIST_ID="XXXXXX"
   ```
 
-  For Google OAuth app, callback URL is: http://localhost:8000/auth/oauth2callback
+  For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback
   
   For Github OAuth app, callback URL is: http://localhost:8000/auth/github/callback
 
