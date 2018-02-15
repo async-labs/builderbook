@@ -25,30 +25,28 @@ function markdownToHtml(content) {
 
     if (level === 2) {
       return `<a
-    style="color: #222"
-    class="section-anchor"
-    name="${escapedText}"
-    href="#${escapedText}"
-    >
-      <h${level} class="chapter-section">
-        ${text}
-      </h${level}>
-  </a>`;
+        class="section-anchor"
+        name="${escapedText}"
+        href="#${escapedText}"
+        >
+        <h${level} class="chapter-section" style="color: #222; font-weight: 400;">
+          ${text}
+        </h${level}>
+      </a>`;
     }
 
     if (level === 4) {
       return `<a
-    style="color: #222"
-    name="${escapedText}"
-    href="#${escapedText}"
-    >
-      <h${level}>
-        ${text}
-      </h${level}>
-  </a>`;
+        name="${escapedText}"
+        href="#${escapedText}"
+        >
+        <h${level} style="color: #222;">
+          ${text}
+        </h${level}>
+      </a>`;
     }
 
-    return `<h${level}>${text}</h${level}>`;
+    return `<h${level} style="color: #222; font-weight: 400;">${text}</h${level}>`;
   };
 
   marked.setOptions({

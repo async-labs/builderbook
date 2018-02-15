@@ -7,7 +7,6 @@ import FormatListBulleted from 'material-ui-icons/FormatListBulleted';
 import throttle from 'lodash/throttle';
 
 import Link from 'next/link';
-import he from 'he';
 
 import BuyButton from '../../components/customer/BuyButton';
 import Bookmark from '../../components/customer/Bookmark';
@@ -39,8 +38,8 @@ class ReadChapter extends React.Component {
   };
 
   static defaultProps = {
-    user: null,
     chapter: null,
+    user: null,
     hideHeader: false,
   };
 
@@ -168,7 +167,7 @@ class ReadChapter extends React.Component {
         }}
         id="chapter-content"
       >
-        <h2>
+        <h2 style={{ fontWeight: '400' }}>
           {chapter.order > 1 ? `Chapter ${chapter.order - 1}: ` : null}
           {chapter.title}
         </h2>
@@ -197,11 +196,11 @@ class ReadChapter extends React.Component {
           <li key={s.escapedText} style={{ paddingTop: '10px' }}>
             <a
               style={{
-                color: activeSection && activeSection.hash === s.escapedText ? 'blue' : 'black',
+                color: activeSection && activeSection.hash === s.escapedText ? '#1565C0' : '#222',
               }}
               href={`#${s.escapedText}`}
             >
-              {he.decode(s.text)}
+              {s.text}
             </a>
           </li>
         ))}
@@ -246,7 +245,7 @@ class ReadChapter extends React.Component {
                 as={`/books/${book.slug}/${ch.slug}`}
                 href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
               >
-                <a style={{ color: chapter._id === ch._id ? 'blue' : 'black' }}>{ch.title}</a>
+                <a style={{ color: chapter._id === ch._id ? '#1565C0' : '#222' }}>{ch.title}</a>
               </Link>
               {chapter._id === ch._id ? this.renderSections() : null}
             </li>
@@ -273,7 +272,9 @@ class ReadChapter extends React.Component {
     return (
       <div style={{ padding: '10px 45px' }}>
         <Head>
-          <title>{chapter.seoTitle || chapter.title}</title>
+          <title>
+            { chapter.title === 'Introduction' ? 'Introduction' : `Chapter ${chapter.order - 1}. ${chapter.title}` }
+          </title>
           {chapter.seoDescription ? (
             <meta name="description" content={chapter.seoDescription} />
           ) : null}
