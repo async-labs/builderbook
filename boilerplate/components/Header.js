@@ -20,7 +20,7 @@ Router.onRouteChangeError = () => NProgress.done();
 const optionsMenu = [
   {
     text: 'Got question?',
-    href: 'https://github.com/builderbook/books',
+    href: 'https://github.com/builderbook/builderbook/issues',
   },
   {
     text: 'Log out',
