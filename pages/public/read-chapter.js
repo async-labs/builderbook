@@ -66,7 +66,7 @@ class ReadChapter extends React.Component {
     if (chapter && (chapter.isPurchased || chapter.isFree)) {
       htmlContent = chapter.htmlContent;
     } else {
-      htmlContent = chapter.excerpt;
+      htmlContent = chapter.htmlExcerpt;
     }
 
     this.state = {
@@ -91,7 +91,7 @@ class ReadChapter extends React.Component {
       if (chapter.isPurchased || chapter.isFree) {
         htmlContent = chapter.htmlContent;
       } else {
-        htmlContent = chapter.excerpt;
+        htmlContent = chapter.htmlExcerpt;
       }
 
       this.setState({ chapter: nextProps.chapter, htmlContent });

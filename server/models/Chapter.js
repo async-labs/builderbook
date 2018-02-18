@@ -111,10 +111,6 @@ const mongoSchema = new Schema({
     type: String,
     required: true,
   },
-  excerpt: {
-    type: String,
-    default: '',
-  },
   content: {
     type: String,
     default: '',
@@ -124,6 +120,14 @@ const mongoSchema = new Schema({
     type: String,
     default: '',
     required: true,
+  },
+  excerpt: {
+    type: String,
+    default: '',
+  },
+  htmlExcerpt: {
+    type: String,
+    default: '',
   },
   createdAt: {
     type: Date,
@@ -241,6 +245,7 @@ class ChapterClass {
 
     const content = body;
     const htmlContent = markdownToHtml(content);
+    const htmlExcerpt = markdownToHtml(excerpt);
     const sections = getSections(content);
 
     if (!chapter) {
@@ -255,7 +260,8 @@ class ChapterClass {
         content,
         htmlContent,
         sections,
-        excerpt: marked(he.decode(excerpt)),
+        excerpt,
+        htmlExcerpt,
         order,
         seoTitle,
         seoDescription,
@@ -267,7 +273,8 @@ class ChapterClass {
       content,
       htmlContent,
       sections,
-      excerpt: marked(he.decode(excerpt)),
+      excerpt,
+      htmlExcerpt,
       isFree,
       order,
       seoTitle,
