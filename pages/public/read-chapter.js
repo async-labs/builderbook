@@ -176,9 +176,16 @@ class ReadChapter extends React.Component {
       showChapters,
     } = this.state;
 
+    let padding = '20px 20%';
+    if (!isMobile && showChapters) {
+      padding = '20px 10%';
+    } else if (isMobile) {
+      padding = '0px 10px';
+    }
+
     return (
       <div
-        style={{ padding: '0px 8% 20px 6%' }}
+        style={{ padding }}
         ref={(c) => {
           this.mainContent = c;
         }}
