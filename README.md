@@ -32,18 +32,33 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
 
 ## Admin demo
-- Log in with Google. You'll be logged in as an Admin (book author): [link](https://demo1.builderbook.org/login).
 
-  - View the introduction chapter _without_ Buy button: [link](https://demo1.builderbook.org/books/test-book/introduction).
+- To save time from writing your own content, Fork our [demo book repository](https://github.com/builderbook/demo-book) and use it for the demo.
 
-  - View Chapter-1 _with_ Buy button: [link](https://demo1.builderbook.org/books/test-book/connecting-to-database).
+- Log in with Google. You'll be logged in as an Admin: [link](https://demo1.builderbook.org/login).
 
-- After logging in, you can connect Github and create a book:
+- After logging in:
+
+  - Click `Connect Github`.
   
-  - Click the `Add book` button
+  - Click `Add book`.
 
-  - Enter book details and select a Github repo with an `introduction.md` file at the root. 
-  Your `introduction.md` file must have metadata in the format shown below. See [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
+  - Enter details and select the `/demo-book` Github repo that you forked earlier.
+  
+  - Click `Save`, then click the book's title in your dashboard.
+    
+  - You are now on the book's detail page. Click `Sync with Github`.
+  
+  - Refresh the page and you'll see links to the Introduction and Chapter 1.
+    
+    - Example of Introduction _without_ Buy button: [link](https://demo1.builderbook.org/books/demo-book/introduction)
+    - Example of Chapter 1 _with_ Buy button: [link](https://demo1.builderbook.org/books/demo-book/example)
+  
+- Important notes:
+
+  - Any Github repo you use must have a non-empty `introduction.md` file at the root.
+  
+  - The `introduction.md` and any other `.md` files with conent must have metadata in the format shown below:
   
   ```
   ---
@@ -54,12 +69,7 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
   ---
   ```
   
-  - Click `Save`, then click the book's title in your dashboard.
-
-  - You are now on the book's detail page, click the `Sync with Github` button.
-
-  - Refresh the page and click `Introduction` to see the chapter's content.
-
+  - To make the content of a `.md` file _private_ (meaning a person must buy a book to see the content), change `isFree:true` to `excerpt:""`. Add some sample content between the quotes - this content is free and public.
 
 
 ## Run locally
