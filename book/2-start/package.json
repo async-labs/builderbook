@@ -19,7 +19,6 @@
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "material-ui": "^1.0.0-beta.32",
-    "material-ui-icons": "^1.0.0-alpha.19",
     "mongoose": "^5.0.0-rc0",
     "next": "^4.3.0-canary.1",
     "passport": "^0.4.0",

@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 
-import Paper from 'material-ui/Paper';
-import InfoOutline from 'material-ui-icons/InfoOutline';
-
 import withAuth from '../lib/withAuth';
 import withLayout from '../lib/withLayout';
 import notify from '../lib/notifier';
@@ -40,19 +37,8 @@ class Index extends React.Component {
             content="List of purchased books."
           />
         </Head>
-        <p>
-          List of purchased books
-        </p>
-
-        <Paper style={stylePaper}>
-          <p>Email: {user.email}</p>
-        </Paper>
-
-        <InfoOutline
-          style={styleExternalLinkIcon}
-          onClick={() => notify('some useful informational message')}
-        />
-
+        <p>List of purchased books</p>
+        <p>Email: {user.email}</p>
       </div>
     );
   }
