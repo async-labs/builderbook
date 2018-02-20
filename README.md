@@ -45,15 +45,18 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
   - Enter details and select the `/demo-book` Github repo that you forked earlier.
   
-  - Click `Save`, then click the book's title in your dashboard.
+  - Click `Save`.
     
-  - You are now on the book's detail page. Click `Sync with Github`.
-  
-  - Refresh the page and you'll see links to the Introduction and Chapter 1.
+  - You are now on the `book-detail` page, where you see links to the Introduction and Chapter 1.
     
     - Example of Introduction _without_ Buy button: [link](https://demo1.builderbook.org/books/demo-book/introduction)
     - Example of Chapter 1 _with_ Buy button: [link](https://demo1.builderbook.org/books/demo-book/example)
   
+- Edit some content in the `introduction.md` and `chapter-1.md` files in your `/demo-book` repo. 
+
+- Go back to the `book-detail` page and click `Sync with Github` to update your book.
+
+
 - Important notes:
 
   - Any Github repo you use must have a non-empty `introduction.md` file at the root.
@@ -69,7 +72,7 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
   ---
   ```
   
-  - To make the content of a `.md` file _private_ (meaning a person must buy a book to see the content), change `isFree:true` to `excerpt:""`. Add some sample content between the quotes - this content is free and public.
+  - To make the content of a `.md` file _private_ (meaning a person must buy a book to see the content), change `isFree:true` to `excerpt:""`. Add some sample content between the quotes - this content is public and serves as a free preview.
 
 
 ## Run locally
