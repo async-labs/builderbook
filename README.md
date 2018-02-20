@@ -2,17 +2,17 @@
 [![apm](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/builderbook/builderbook/blob/master/LICENSE.md)
 [![apm](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/builderbook/builderbook#contributing)
 
-Builder Book is an open source web app built with React/Material-UI/Next/Express/Mongoose/MongoDB.
+Builder Book is an open source web app built with React/Material-UI/Next/Express/Mongoose/MongoDB. If you are interested in using this app as a boilerplate, see [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate).
 
 - To see a book hosted with this app: https://builderbook.org/books/builder-book/introduction
 - To create your own book (Admin demo): https://demo1.builderbook.org/login
 
 
 ## How can you use this app?
-- as a boilerplate for React/Material-UI/Next/Express/Mongoose/MongoDB stack;
+- as a [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate) for React/Material-UI/Next/Express/Mongoose/MongoDB stack;
 - as learning material for third-party APIs such as Google, Github, AWS SES, Mailchimp, Stripe;
 - as a production-ready web app:
-  - write content, e.g. documentation, on Github but display the content on a web app;
+  - write documention, or similar content, with markdown and display the content on a web app;
   - write a book with markdown and sell it on your own website
 
 
@@ -26,6 +26,7 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
   - [Core stack](#core-stack)
   - [Third party APIs](#third-party-apis)
 - [Project structure](#project-structure)
+- [Learn how to build this app from scratch](#learn-how-to-build-this-app-from-scratch)
 - [Contributing](#contributing)
 - [Team](#team)
 - [License](#license)
@@ -77,6 +78,7 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
 ## Run locally
 - Clone the project and run `yarn` to add packages.
+
 - Before you start the app, create a `.env` file at the app's root. This file must have _at least three env variables_: `MONGO_URL_TEST`, `Google_clientID`, `Google_clientSecret`. We recommend free MongoDB at mLab.
 
   To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values to all env variables in `.env` file:
@@ -131,11 +133,11 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
 
 ## Create your first book
-- Create a new Github repo (public or private)
+- Create a new Github repo (public or private).
 
-- In that repo, create an `introduction.md` file.
+- In that repo, create an `introduction.md` file and write some content.
 
--   Your `introduction.md` file must have metadata in the format shown below. See [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
+- At the top of your `introduction.md` file, add metadata in the format shown below. See [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
   
   ```
   ---
@@ -148,13 +150,15 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
 - Go to the app, click "Connect Github".
 
-- Click "Add Book".
+- Click "Add Book". Enter details and select the Github repo you created.
+
+- Click "Save".
 
 
 ## Deploy
-- Install now: `npm install -g now`
+- Install now: `npm install -g now`.
 
-- Point your domain to Zeit world nameservers: [three steps](https://zeit.co/world#get-started)
+- Point your domain to Zeit world nameservers: [three steps](https://zeit.co/world#get-started).
 
 - Check the `now.json` file. If you are using `dotenv` and `.env` for env variables, no need to change `now.json`. If you make changes to the app, check up how to [configure now](https://zeit.co/docs/features/configuration).
 
@@ -280,6 +284,11 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 
 ```
 
+
+## Learn how to build this app from scratch
+We wrote [this book](https://builderbook.org/books/builder-book/introduction) that teaches you how to build the Builder Book web app from scratch. We sell the book using this web app.
+
+In the book, you'll start from 0 lines of code in Chapter 1 and end up with over 12,000 lines of code by Chapter 9.
 
 ## Contributing
 We welcome suggestions and pull requests, especially for [issues](https://github.com/builderbook/builderbook/issues) labeled as "discussion" and "contributions welcome".
