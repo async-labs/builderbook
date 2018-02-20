@@ -21,15 +21,11 @@ class ReadChapter extends React.Component {
     chapter: PropTypes.shape({
       _id: PropTypes.string.isRequired,
     }),
-    user: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-    }),
     hideHeader: PropTypes.bool,
   };
 
   static defaultProps = {
     chapter: null,
-    user: null,
     hideHeader: false,
   };
 
@@ -148,7 +144,6 @@ class ReadChapter extends React.Component {
   };
 
   renderMainContent() {
-    const { user } = this.props;
     const {
       chapter,
       htmlContent,

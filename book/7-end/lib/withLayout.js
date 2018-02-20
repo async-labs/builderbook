@@ -8,7 +8,7 @@ import getContext from '../lib/context';
 import Notifier from '../components/Notifier';
 import Header from '../components/Header';
 
-function withLayout(BaseComponent, { noHeader = false } = {}) {
+function withLayout(BaseComponent) {
   class App extends React.Component {
     constructor(props, ...args) {
       super(props, ...args);
@@ -61,7 +61,7 @@ function withLayout(BaseComponent, { noHeader = false } = {}) {
         >
           <Reboot />
           <div>
-            {noHeader ? null : <Header hideHeader={hideHeader} {...this.props} />}
+            <Header hideHeader={hideHeader} {...this.props} />
             <BaseComponent hideHeader={hideHeader} {...this.props} />
             <Notifier />
           </div>
