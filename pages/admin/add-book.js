@@ -19,8 +19,8 @@ class AddBook extends React.Component {
         const bookId = book._id;
         await syncBookContent({ bookId });
         notify('Synced');
-        Router.push(`/admin/book-detail?slug=${book.slug}`, `/admin/book-detail/${book.slug}`);
         NProgress.done();
+        Router.push(`/admin/book-detail?slug=${book.slug}`, `/admin/book-detail/${book.slug}`);
       } catch (err) {
         notify(err);
         NProgress.done();
