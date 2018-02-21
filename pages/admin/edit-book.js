@@ -1,4 +1,5 @@
 import React from 'react';
+import Router from 'next/router';
 import NProgress from 'nprogress';
 import PropTypes from 'prop-types';
 import Error from 'next/error';
@@ -44,6 +45,7 @@ class EditBook extends React.Component {
       await editBook({ ...data, id: book._id });
       notify('Saved');
       NProgress.done();
+      Router.push(`/admin/book-detail?slug=${book.slug}`, `/admin/book-detail/${book.slug}`);
     } catch (err) {
       notify(err);
       NProgress.done();
