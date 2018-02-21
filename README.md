@@ -5,7 +5,7 @@
 Builder Book is an open source web app built with React/Material-UI/Next/Express/Mongoose/MongoDB. If you are interested in using this app as a boilerplate, see [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate).
 
 - To see a book hosted with this app: https://builderbook.org/books/builder-book/introduction
-- To create your own book (Admin demo): https://demo1.builderbook.org/login
+- To create your own book (Admin demo): https://demo.builderbook.org/login
 
 
 ## How can you use this app?
@@ -36,7 +36,7 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
 - To save time from writing your own content, Fork our [demo book repository](https://github.com/builderbook/demo-book) and use it for the demo.
 
-- Log in with Google. You'll be logged in as an Admin: [link](https://demo1.builderbook.org/login).
+- Log in with Google. You'll be logged in as an Admin: [link](https://demo.builderbook.org/login).
 
 - After logging in:
 
@@ -50,8 +50,8 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
     
   - You are now on the `book-detail` page, where you see links to the Introduction and Chapter 1.
     
-    - Example of Introduction _without_ Buy button: [link](https://demo1.builderbook.org/books/demo-book/introduction)
-    - Example of Chapter 1 _with_ Buy button: [link](https://demo1.builderbook.org/books/demo-book/example)
+    - Example of Introduction _without_ Buy button: [link](https://demo.builderbook.org/books/demo-book/introduction)
+    - Example of Chapter 1 _with_ Buy button: [link](https://demo.builderbook.org/books/demo-book/example)
   
 - Edit some content in the `introduction.md` and `chapter-1.md` files in your `/demo-book` repo. 
 
