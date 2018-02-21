@@ -111,7 +111,7 @@ class ReadChapter extends React.Component {
   }
 
   onScroll = throttle(() => {
-    const sectionElms = document.querySelectorAll('a.section-anchor');
+    const sectionElms = document.querySelectorAll('span.section-anchor');
     let activeSection;
 
     let preBound;
@@ -353,7 +353,7 @@ class ReadChapter extends React.Component {
                 </div>
               ) : null}
 
-              {chapter.isPurchased ? (
+              {chapter.isPurchased && !chapter.isFree ? (
                 <Bookmark
                   chapter={chapter}
                   bookmark={bookmark}

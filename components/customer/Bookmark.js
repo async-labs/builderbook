@@ -51,7 +51,9 @@ export default class Bookmark extends React.Component {
     addBookmark(Object.assign({ chapterId: chapter._id }, activeSection))
       .then(() => {
         NProgress.done();
-        notify(`Success. You created a bookmark for Chapter ${chapter.order - 1}, Section "${activeSection.text}"`);
+        notify(`Success. You created a bookmark for Chapter ${chapter.order - 1}, Section "${
+          activeSection.text
+        }"`);
 
         this.props.changeBookmark(activeSection);
       })
@@ -71,7 +73,7 @@ export default class Bookmark extends React.Component {
 
   render() {
     const { anchorEl } = this.state;
-    const { bookmark } = this.props;
+    const { bookmark, activeSection } = this.props;
 
     return (
       <div>
@@ -94,10 +96,24 @@ export default class Bookmark extends React.Component {
         >
           {bookmark ? (
             <a href={`#${bookmark.hash}`}>
-              <MenuItem onClick={this.handleClose}>Go to section &quot;{bookmark.text}&quot;</MenuItem>
+              <MenuItem onClick={this.handleClose}>
+                Go to section &quot;{bookmark.text}&quot;
+              </MenuItem>
             </a>
           ) : null}
-          <MenuItem onClick={this.addBookmark}>Create new bookmark</MenuItem>
+          {!bookmark ? (
+            <MenuItem onClick={this.addBookmark}>
+              {!activeSection
+                ? 'To bookmark a new section, scroll to that section'
+                : `Bookmark section "${activeSection.text}"`}
+            </MenuItem>
+          ) : (
+            <MenuItem onClick={this.addBookmark}>
+              {!activeSection
+                ? 'To bookmark a new section, scroll to that section'
+                : `Bookmark section "${activeSection.text}"`}
+            </MenuItem>
+          )}
         </Menu>
       </div>
     );

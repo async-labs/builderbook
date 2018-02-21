@@ -24,26 +24,31 @@ function markdownToHtml(content) {
       .replace(/[^\w]+/g, '-');
 
     if (level === 2) {
-      return `<a
-        class="section-anchor"
-        name="${escapedText}"
-        href="#${escapedText}"
-        >
-        <h${level} class="chapter-section" style="color: #222; font-weight: 400;">
+      return `<h${level} class="chapter-section" style="color: #222; font-weight: 400;">
+        <a
+          name="${escapedText}"
+          href="#${escapedText}"
+          style="color: #222;"
+        > 
+          <i class="material-icons" style="vertical-align: middle; opacity: 0.5; cursor: pointer;">link</i>
+        </a>
+        <span class="section-anchor" name="${escapedText}">
           ${text}
-        </h${level}>
-      </a>`;
+        </span>
+      </h${level}>`;
     }
 
     if (level === 4) {
-      return `<a
-        name="${escapedText}"
-        href="#${escapedText}"
+      return `<h${level} style="color: #222;">
+        <a
+          name="${escapedText}"
+          href="#${escapedText}"
+          style="color: #222;"
         >
-        <h${level} style="color: #222;">
-          ${text}
-        </h${level}>
-      </a>`;
+          <i class="material-icons" style="vertical-align: middle; opacity: 0.5; cursor: pointer;">link</i>
+        </a>
+        ${text}
+      </h${level}>`;
     }
 
     return `<h${level} style="color: #222; font-weight: 400;">${text}</h${level}>`;
