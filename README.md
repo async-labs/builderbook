@@ -33,35 +33,20 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
 
 ## Admin demo
-
 - To save time from writing your own content, Fork our [demo book repository](https://github.com/builderbook/demo-book) and use it for the demo.
-
 - Log in with Google. You'll be logged in as an Admin: [link](https://demo.builderbook.org/login).
-
 - After logging in:
-
   - Click `Connect Github`.
-  
   - Click `Add book`.
-
   - Enter details and select the `/demo-book` Github repo that you forked earlier.
-  
   - Click `Save`.
-    
   - You are now on the `book-detail` page, where you see links to the Introduction and Chapter 1.
-    
     - Example of Introduction _without_ Buy button: [link](https://demo.builderbook.org/books/demo-book/introduction)
     - Example of Chapter 1 _with_ Buy button: [link](https://demo.builderbook.org/books/demo-book/example)
-  
 - Edit some content in the `introduction.md` and `chapter-1.md` files in your `/demo-book` repo. 
-
 - Go back to the `book-detail` page and click `Sync with Github` to update your book.
-
-
 - Important notes:
-
   - Any Github repo you use must have a non-empty `introduction.md` file at the root.
-  
   - The `introduction.md` and any other `.md` files with conent must have metadata in the format shown below:
   
   ```
@@ -78,7 +63,6 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 
 ## Run locally
 - Clone the project and run `yarn` to add packages.
-
 - Before you start the app, create a `.env` file at the app's root. This file must have _at least three env variables_: `MONGO_URL_TEST`, `Google_clientID`, `Google_clientSecret`. We recommend free MongoDB at mLab.
 
   To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values to all env variables in `.env` file:
@@ -115,7 +99,6 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
   
   For Github OAuth app, callback URL is: http://localhost:8000/auth/github/callback
 
-
 - Before you start the app, create a `env-config.js` file at the app's root. This file makes Stripe's public keys (keys that start with `pk`) available on client. Content of this file:
   `env-config.js` :
   ```
@@ -128,15 +111,12 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
   };
   ```
 - Start the app with `yarn dev`.
-
 - The _first registered user_ in the app becomes an Admin user (`"isAdmin": true`).
 
 
-## Create your first book
+## Sync content from Github
 - Create a new Github repo (public or private).
-
 - In that repo, create an `introduction.md` file and write some content.
-
 - At the top of your `introduction.md` file, add metadata in the format shown below. See [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
   
   ```
@@ -149,27 +129,20 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
   ```
 
 - Go to the app, click "Connect Github".
-
 - Click "Add Book". Enter details and select the Github repo you created.
-
 - Click "Save".
+
+When you add new .md files or update content, go to the `book-detail` page on your app and click `Sync with Github`. Note that all .md files in your Github repo _must_ have metadata in the format shown above.
 
 
 ## Deploy
 - Install now: `npm install -g now`.
-
 - Point your domain to Zeit world nameservers: [three steps](https://zeit.co/world#get-started).
-
 - Check the `now.json` file. If you are using `dotenv` and `.env` for env variables, no need to change `now.json`. If you make changes to the app, check up how to [configure now](https://zeit.co/docs/features/configuration).
-
 - Make sure you updated `ROOT_URL` in `package.json` and `lib/getRootURL.js`.
-
 - Check that you have all production-level env variables in `.env`. 
-
 - In your terminal, deploy the app by running `now`.
-
 - Now outputs your deployment's URL, for example: `builderbook-zomcvzgtvc.now.sh`.
-
 - Point successful deployment to your domain, for example: `now ln builderbook-demo-zomcvzgtvc.now.sh builderbook.org`.
 
 
