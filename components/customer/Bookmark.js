@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BookmarkIcon from 'material-ui-icons/Bookmark';
 import NProgress from 'nprogress';
 import Menu, { MenuItem } from 'material-ui/Menu';
 
@@ -42,7 +41,7 @@ export default class Bookmark extends React.Component {
     const { chapter, activeSection } = this.props;
 
     if (!activeSection) {
-      notify('Make sure the section you want to bookmark is highlighted.');
+      notify('To bookmark a new section, scroll to that section.');
       return;
     }
 
@@ -51,7 +50,7 @@ export default class Bookmark extends React.Component {
     addBookmark(Object.assign({ chapterId: chapter._id }, activeSection))
       .then(() => {
         NProgress.done();
-        notify(`Success. You created a bookmark for Chapter ${chapter.order - 1}, Section "${
+        notify(`You successfully bookmarked Chapter ${chapter.order - 1}, Section "${
           activeSection.text
         }"`);
 
@@ -77,9 +76,10 @@ export default class Bookmark extends React.Component {
 
     return (
       <div>
-        <BookmarkIcon
+        <i //eslint-disable-line
+          className="material-icons"
           onClick={this.handleClick}
-          color="action"
+          onKeyPress={this.handleClick}
           aria-owns={anchorEl ? 'simple-menu' : null}
           aria-haspopup="true"
           style={{
@@ -87,7 +87,10 @@ export default class Bookmark extends React.Component {
             fontSize: '24',
             cursor: 'pointer',
           }}
-        />
+          role="button"
+        >
+          bookmark_border
+        </i>
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}

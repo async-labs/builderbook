@@ -59,6 +59,8 @@ class MyDocument extends Document {
               }
               code {
                 font-size: 14px;
+                background: #FFF;
+                padding: 3px 5px;
               }
             `}
           </style>
