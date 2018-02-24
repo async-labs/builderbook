@@ -46,15 +46,11 @@ class ReadChapter extends React.Component {
     super(props, ...args);
 
     const { chapter } = props;
-    let htmlContent = '';
-    if (chapter && (chapter.isPurchased || chapter.isFree)) {
-      htmlContent = chapter.htmlContent;
-    } else {
-      htmlContent = chapter.htmlExcerpt;
-    }
+
+    const htmlContent = '' || chapter.htmlContent;
 
     this.state = {
-      showChapters: false,
+      showTOC: false,
       chapter,
       htmlContent,
       isMobile: false,
@@ -78,13 +74,7 @@ class ReadChapter extends React.Component {
     if (chapter && chapter._id !== this.props.chapter._id) {
       this.mainContent.scrollIntoView();
 
-      let htmlContent;
-
-      if (chapter.isPurchased || chapter.isFree) {
-        htmlContent = chapter.htmlContent;
-      } else {
-        htmlContent = chapter.htmlExcerpt;
-      }
+      const htmlContent = '' || chapter.htmlContent;
 
       this.setState({ chapter: nextProps.chapter, htmlContent });
     }
@@ -136,11 +126,11 @@ class ReadChapter extends React.Component {
   }, 500);
 
   toggleChapterList = () => {
-    this.setState({ showChapters: !this.state.showChapters });
+    this.setState({ showTOC: !this.state.showTOC });
   };
 
   closeTocWhenMobile = () => {
-    this.setState({ showChapters: !this.state.isMobile });
+    this.setState({ showTOC: !this.state.isMobile });
   };
 
   renderMainContent() {
@@ -148,11 +138,11 @@ class ReadChapter extends React.Component {
       chapter,
       htmlContent,
       isMobile,
-      showChapters,
+      showTOC,
     } = this.state;
 
     let padding = '20px 20%';
-    if (!isMobile && showChapters) {
+    if (!isMobile && showTOC) {
       padding = '20px 10%';
     } else if (isMobile) {
       padding = '0px 10px';
@@ -206,10 +196,10 @@ class ReadChapter extends React.Component {
   }
 
   renderSidebar() {
-    const { showChapters, chapter, isMobile } = this.state;
+    const { showTOC, chapter, isMobile } = this.state;
     const { hideHeader } = this.props;
 
-    if (!showChapters) {
+    if (!showTOC) {
       return null;
     }
 
@@ -255,7 +245,7 @@ class ReadChapter extends React.Component {
   }
 
   render() {
-    const { chapter, showChapters, isMobile } = this.state;
+    const { chapter, showTOC, isMobile } = this.state;
     const { hideHeader } = this.props;
 
     if (!chapter) {
@@ -265,7 +255,7 @@ class ReadChapter extends React.Component {
     const { book } = chapter;
 
     let left = 20;
-    if (showChapters) {
+    if (showTOC) {
       left = isMobile ? '100%' : '320px';
     }
 
