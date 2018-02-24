@@ -38,11 +38,11 @@ const MyBook = ({ book, error }) => {
         Repo on Github
       </a>
       <p />
-      <Button raised onClick={handleSyncContent(book._id)}>
+      <Button variant="raised" onClick={handleSyncContent(book._id)}>
         Sync with Github
       </Button>{' '}
       <Link as={`/admin/edit-book/${book.slug}`} href={`/admin/edit-book?slug=${book.slug}`}>
-        <Button raised>Edit book</Button>
+        <Button variant="raised">Edit book</Button>
       </Link>
       <ul>
         {chapters.map(ch => (

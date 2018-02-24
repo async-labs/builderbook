@@ -27,12 +27,11 @@ router.get('/books/:slug', async (req, res) => {
 router.get('/get-chapter-detail', async (req, res) => {
   try {
     const { bookSlug, chapterSlug } = req.query;
-    const book = await Chapter.getBySlug({
+    const chapter = await Chapter.getBySlug({
       bookSlug,
       chapterSlug,
-      userId: req.user && req.user.id,
     });
-    res.json(book);
+    res.json(chapter);
   } catch (err) {
     res.json({ error: err.message || err.toString() });
   }

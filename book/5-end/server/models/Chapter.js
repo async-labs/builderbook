@@ -50,8 +50,8 @@ const mongoSchema = new Schema({
 });
 
 class ChapterClass {
-  static async getBySlug({ bookSlug, chapterSlug, userId }) {
-    const book = await Book.getBySlug({ slug: bookSlug, userId });
+  static async getBySlug({ bookSlug, chapterSlug }) {
+    const book = await Book.getBySlug({ slug: bookSlug });
     if (!book) {
       throw new Error('Book not found');
     }
