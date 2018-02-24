@@ -1,65 +1,79 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Menu from 'material-ui/Menu';
+import Toolbar from 'material-ui/Toolbar';
+import Grid from 'material-ui/Grid';
+import Hidden from 'material-ui/Hidden';
 import Avatar from 'material-ui/Avatar';
 
-class MenuDrop extends React.Component {
-  static propTypes = {
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-    options: PropTypes.arrayOf(String).isRequired,
-  };
+import MenuDrop from './MenuDrop';
 
-  state = {
-    open: false,
-    anchorEl: undefined,
-  };
+import { styleToolbar } from './SharedStyles';
 
-  button = undefined;
+const optionsMenu = [
+  {
+    text: 'Got question?',
+    href: 'https://github.com/builderbook/builderbook/issues',
+  },
+  {
+    text: 'Log out',
+    href: '/logout',
+  },
+];
 
-  handleClick = (event) => {
-    this.setState({ open: true, anchorEl: event.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
-  render() {
-    const { options, src, alt } = this.props;
-
-    return (
-      <div>
-        <Avatar
-          role="presentation"
-          aria-owns="simple-menu"
-          aria-haspopup="true"
-          onClick={this.handleClick}
-          onKeyPress={this.handleClick}
-          src={src}
-          alt={alt}
-          style={{ margin: '0px 20px 0px auto', cursor: 'pointer' }}
-        />
-        <Menu
-          id="simple-menu"
-          anchorEl={this.state.anchorEl}
-          open={this.state.open}
-          onClose={this.handleClose}
-        >
-          <p />
-          {options.map(option => (
-            <div id="wrappingLink" key={option.text}>
-              <Link prefetch href={option.href} as={option.as || option.href}>
-                <a style={{ padding: '0px 20px' }}>{option.text}</a>
+function Header({ user }) {
+  return (
+    <div>
+      <Toolbar style={styleToolbar}>
+        <Grid container direction="row" justify="space-around" alignItems="center">
+          <Grid item sm={10} xs={9} style={{ textAlign: 'left' }}>
+            {user ? (
+              <div>
+                <Hidden smDown>
+                  <Link prefetch href="/">
+                    <a style={{ marginRight: '20px' }}>Settings</a>
+                  </Link>
+                </Hidden>
+              </div>
+            ) : (
+              <Link prefetch href="/">
+                <a>
+                  <Avatar
+                    src="https://storage.googleapis.com/builderbook-homepage/bb-logo-blue.png"
+                    alt="Builder Book logo"
+                    style={{ margin: '0px auto 0px 20px' }}
+                  />
+                </a>
               </Link>
-              <p />
-            </div>
-          ))}
-        </Menu>
-      </div>
-    );
-  }
+            )}
+          </Grid>
+          <Grid item sm={1} xs={3} style={{ textAlign: 'right' }}>
+            {user ? (
+              <div style={{ whiteSpace: ' nowrap' }}>
+                {user.avatarUrl ? (
+                  <MenuDrop options={optionsMenu} src={user.avatarUrl} alt={user.displayName} />
+                ) : null}
+              </div>
+            ) : (
+              <Link prefetch href="/login">
+                <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
+              </Link>
+            )}
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </div>
+  );
 }
 
-export default MenuDrop;
+Header.propTypes = {
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    displayName: PropTypes.string,
+  }),
+};
+
+Header.defaultProps = {
+  user: null,
+};
+
+export default Header;
