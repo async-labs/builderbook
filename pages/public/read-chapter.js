@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Error from 'next/error';
 import Head from 'next/head';
-import HelpOutline from 'material-ui-icons/HelpOutline';
-import FormatListBulleted from 'material-ui-icons/FormatListBulleted';
 import throttle from 'lodash/throttle';
 
 import Link from 'next/link';
@@ -14,10 +12,6 @@ import Bookmark from '../../components/customer/Bookmark';
 import { getChapterDetail } from '../../lib/api/public';
 import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
-
-const styleHyperlinkedIcon = {
-  opacity: '1',
-};
 
 const styleIcon = {
   opacity: '0.5',
@@ -170,10 +164,7 @@ class ReadChapter extends React.Component {
   renderMainContent() {
     const { user, showStripeModal } = this.props;
     const {
-      chapter,
-      htmlContent,
-      isMobile,
-      showChapters,
+      chapter, htmlContent, isMobile, showChapters,
     } = this.state;
 
     let padding = '20px 20%';
@@ -191,7 +182,7 @@ class ReadChapter extends React.Component {
         }}
         id="chapter-content"
       >
-        <h2 style={{ fontWeight: '400' }}>
+        <h2 style={{ fontWeight: '400', lineHeight: '1.5em' }}>
           {chapter.order > 1 ? `Chapter ${chapter.order - 1}: ` : null}
           {chapter.title}
         </h2>
@@ -234,7 +225,7 @@ class ReadChapter extends React.Component {
   }
 
   renderSidebar() {
-    const { showChapters, chapter } = this.state;
+    const { showChapters, chapter, isMobile } = this.state;
     const { hideHeader } = this.props;
 
     if (!showChapters) {
@@ -249,11 +240,12 @@ class ReadChapter extends React.Component {
           textAlign: 'left',
           position: 'absolute',
           bottom: 0,
-          top: hideHeader ? 0 : '65px',
+          top: hideHeader ? 0 : '64px',
+          transition: 'top 0.5s ease-in',
           left: 0,
           overflowY: 'auto',
           overflowX: 'hidden',
-          width: window.innerWidth < 820 ? '100%' : '300px',
+          width: isMobile ? '100%' : '300px',
           padding: '0px 25px',
         }}
       >
@@ -282,7 +274,7 @@ class ReadChapter extends React.Component {
   }
 
   render() {
-    const { chapter, showChapters } = this.state;
+    const { chapter, showChapters, isMobile } = this.state;
     const { hideHeader } = this.props;
 
     if (!chapter) {
@@ -290,81 +282,97 @@ class ReadChapter extends React.Component {
     }
 
     const { book, bookmark } = chapter;
+
     let left = 20;
     if (showChapters) {
-      left = window.innerWidth < 600 ? '100%' : '320px';
+      left = isMobile ? '100%' : '320px';
     }
 
     return (
       <div style={{ padding: '10px 45px' }}>
         <Head>
           <title>
-            { chapter.title === 'Introduction' ? 'Introduction' : `Chapter ${chapter.order - 1}. ${chapter.title}` }
+            {chapter.title === 'Introduction'
+              ? 'Introduction'
+              : `Chapter ${chapter.order - 1}. ${chapter.title}`}
           </title>
           {chapter.seoDescription ? (
             <meta name="description" content={chapter.seoDescription} />
           ) : null}
         </Head>
 
-        <div>
-          {this.renderSidebar()}
+        {this.renderSidebar()}
 
+        <div
+          style={{
+            textAlign: 'left',
+            padding: '0px 10px 20px 30px',
+            position: 'fixed',
+            right: 0,
+            bottom: 0,
+            top: hideHeader ? 0 : '64px',
+            transition: 'top 0.5s ease-in',
+            left,
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            zIndex: '1000',
+          }}
+          ref={(elm) => {
+            this.mainContentElm = elm;
+          }}
+          id="main-content"
+        >
           <div
             style={{
-              textAlign: 'left',
-              padding: '0px 10px 20px 30px',
               position: 'fixed',
-              right: 0,
-              bottom: 0,
-              top: hideHeader ? 0 : '65px',
-              left,
-              overflowY: 'auto',
-              overflowX: 'hidden',
-              zIndex: '1000',
+              top: hideHeader ? '20px' : '80px',
+              transition: 'top 0.5s ease-in',
+              left: '15px',
             }}
-            ref={(elm) => {
-              this.mainContentElm = elm;
-            }}
-            id="main-content"
           >
-            <div
-              style={{
-                position: 'fixed',
-                top: hideHeader ? '20px' : '80px',
-                left: '15px',
-              }}
+            <i //eslint-disable-line
+              className="material-icons"
+              style={styleIcon}
+              onClick={this.toggleChapterList}
+              onKeyPress={this.toggleChapterList}
+              role="button"
             >
-              <FormatListBulleted
-                color="action"
-                style={styleIcon}
-                onClick={this.toggleChapterList}
-              />
+              format_list_bulleted
+            </i>
 
-              {book.supportURL ? (
-                <div>
-                  <a
-                    href={book.supportURL}
-                    style={styleHyperlinkedIcon}
-                    target="_blank"
-                    rel="noopener noreferrer"
+            {book.supportURL ? (
+              <div>
+                <a
+                  href={book.supportURL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: '#222', opacity: '1' }}
+                >
+                  <i
+                    className="material-icons"
+                    style={{
+                      opacity: '0.5',
+                      fontSize: '24',
+                      cursor: 'pointer',
+                    }}
                   >
-                    <HelpOutline color="action" style={styleIcon} />
-                  </a>
-                </div>
-              ) : null}
+                    help_outline
+                  </i>
+                </a>
+              </div>
+            ) : null}
 
-              {chapter.isPurchased && !chapter.isFree ? (
-                <Bookmark
-                  chapter={chapter}
-                  bookmark={bookmark}
-                  changeBookmark={this.changeBookmark}
-                  activeSection={this.state.activeSection}
-                />
-              ) : null}
-            </div>
-
-            {this.renderMainContent()}
+            {chapter.isPurchased && !chapter.isFree ? (
+              <Bookmark
+                chapter={chapter}
+                bookmark={bookmark}
+                changeBookmark={this.changeBookmark}
+                activeSection={this.state.activeSection}
+              />
+            ) : null}
           </div>
+
+          {this.renderMainContent()}
         </div>
       </div>
     );
