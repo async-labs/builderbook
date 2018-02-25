@@ -40,8 +40,6 @@ const mongoSchema = new Schema({
   githubAccessToken: {
     type: String,
   },
-  purchasedBookIds: [String],
-  freeBookIds: [String],
 });
 
 const User = mongoose.model('User', mongoSchema);

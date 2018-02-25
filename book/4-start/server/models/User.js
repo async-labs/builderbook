@@ -3,7 +3,7 @@ import mongoose, { Schema } from 'mongoose';
 
 import generateSlug from '../utils/slugify';
 
-const schema = new Schema({
+const mongoSchema = new Schema({
   googleId: {
     type: String,
     required: true,
@@ -47,9 +47,7 @@ const schema = new Schema({
 
 class UserClass {
   static publicFields() {
-    return [
-      'id', 'displayName', 'email', 'avatarUrl', 'slug', 'isAdmin', 'isGithubConnected',
-    ];
+    return ['id', 'displayName', 'email', 'avatarUrl', 'slug', 'isAdmin', 'isGithubConnected'];
   }
 
   static async signInOrSignUp({
@@ -78,6 +76,7 @@ class UserClass {
     }
 
     const slug = await generateSlug(this, displayName);
+    const userCount = await this.find().count();
 
     const newUser = await this.create({
       createdAt: new Date(),
@@ -87,15 +86,16 @@ class UserClass {
       displayName,
       avatarUrl,
       slug,
+      isAdmin: userCount === 0,
     });
 
     return _.pick(newUser, UserClass.publicFields());
   }
 }
 
-schema.loadClass(UserClass);
+mongoSchema.loadClass(UserClass);
 
-const User = mongoose.model('User', schema);
+const User = mongoose.model('User', mongoSchema);
 
 export default User;
 
