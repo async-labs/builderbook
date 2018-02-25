@@ -38,7 +38,7 @@ function Header({ user }) {
               <Link prefetch href="/">
                 <a>
                   <Avatar
-                    src="https://storage.googleapis.com/builderbook-homepage/bb-logo-blue.png"
+                    src="https://storage.googleapis.com/builderbook/logo.svg"
                     alt="Builder Book logo"
                     style={{ margin: '0px auto 0px 20px' }}
                   />

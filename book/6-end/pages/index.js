@@ -31,7 +31,7 @@ class Index extends React.Component {
     return (
       <div style={{ padding: '10px 45px' }}>
         <Head>
-          <title>Settings on Harbor</title>
+          <title>Settings</title>
           <meta
             name="description"
             content="List of purchased books."

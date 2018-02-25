@@ -19,6 +19,7 @@ Index.getInitialProps = async ({ query }) => ({ user: query.user });
 
 Index.propTypes = {
   user: PropTypes.shape({
+    displayName: PropTypes.string,
     email: PropTypes.string.isRequired,
   }),
 };
