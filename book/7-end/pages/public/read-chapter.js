@@ -92,12 +92,10 @@ class ReadChapter extends React.Component {
     for (let i = 0; i < sectionElms.length; i += 1) {
       const s = sectionElms[i];
       const b = s.getBoundingClientRect();
-      const anchorTop = b.top;
       const anchorBottom = b.bottom;
 
-      if (anchorTop >= 0 && anchorBottom <= window.innerHeight) {
+      if (anchorBottom >= 0 && anchorBottom <= window.innerHeight) {
         activeSection = {
-          text: s.textContent.replace(/\n/g, '').trim(),
           hash: s.attributes.getNamedItem('name').value,
         };
 
@@ -105,9 +103,8 @@ class ReadChapter extends React.Component {
       }
 
       if (anchorBottom > window.innerHeight && i > 0) {
-        if (preBound.top <= 0) {
+        if (preBound.bottom <= 0) {
           activeSection = {
-            text: sectionElms[i - 1].textContent.replace(/\n/g, '').trim(),
             hash: sectionElms[i - 1].attributes.getNamedItem('name').value,
           };
           break;
@@ -285,9 +282,7 @@ class ReadChapter extends React.Component {
             overflowY: 'auto',
             overflowX: 'hidden',
           }}
-          ref={(elm) => {
-            this.mainContentElm = elm;
-          }}
+          ref={(elm) => { this.mainContentElm = elm; }}
           id="main-content"
         >
           <div

@@ -180,9 +180,7 @@ class ReadChapter extends React.Component {
             overflowY: 'auto',
             overflowX: 'hidden',
           }}
-          ref={(elm) => {
-            this.mainContentElm = elm;
-          }}
+          ref={(elm) => { this.mainContentElm = elm; }}
           id="main-content"
         >
           <div
