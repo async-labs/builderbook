@@ -6,6 +6,8 @@ import throttle from 'lodash/throttle';
 
 import Link from 'next/link';
 
+import Header from '../../components/Header';
+
 import { getChapterDetail } from '../../lib/api/public';
 import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
@@ -21,12 +23,14 @@ class ReadChapter extends React.Component {
     chapter: PropTypes.shape({
       _id: PropTypes.string.isRequired,
     }),
-    hideHeader: PropTypes.bool,
+    user: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+    }),
   };
 
   static defaultProps = {
     chapter: null,
-    hideHeader: false,
+    user: null,
   };
 
   static async getInitialProps({ req, query }) {
@@ -39,26 +43,36 @@ class ReadChapter extends React.Component {
 
     const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
 
-    return { chapter };
+    const showStripeModal = req ? !!req.query.buy : window.location.search.includes('buy=1');
+
+    return { chapter, showStripeModal };
   }
 
   constructor(props, ...args) {
     super(props, ...args);
 
     const { chapter } = props;
-
-    const htmlContent = '' || chapter.htmlContent;
+    let htmlContent = '';
+    if (chapter && (chapter.isPurchased || chapter.isFree)) {
+      htmlContent = chapter.htmlContent;
+    } else {
+      htmlContent = chapter.htmlExcerpt;
+    }
 
     this.state = {
       showTOC: false,
       chapter,
       htmlContent,
       isMobile: false,
+      hideHeader: false,
     };
   }
 
   componentDidMount() {
-    this.mainContentElm.addEventListener('scroll', this.onScroll);
+    document.getElementById('main-content').addEventListener('scroll', throttle(() => {
+      this.onScrollActiveSection();
+      this.onScrollHideHeader();
+    }, 500));
 
     let isMobile = false;
     if (window.innerWidth < 768) {
@@ -72,19 +86,28 @@ class ReadChapter extends React.Component {
     const { chapter } = nextProps;
 
     if (chapter && chapter._id !== this.props.chapter._id) {
-      this.mainContent.scrollIntoView();
+      document.getElementById('main-content').scrollIntoView();
 
-      const htmlContent = '' || chapter.htmlContent;
+      let htmlContent;
+
+      if (chapter.isPurchased || chapter.isFree) {
+        htmlContent = chapter.htmlContent;
+      } else {
+        htmlContent = chapter.htmlExcerpt;
+      }
 
       this.setState({ chapter: nextProps.chapter, htmlContent });
     }
   }
 
   componentWillUnmount() {
-    this.mainContentElm.removeEventListener('scroll', this.onScroll);
+    document.getElementById('main-content').removeEventListener('scroll', () => {
+      this.onScrollActiveSection();
+      this.onScrollHideHeader();
+    });
   }
 
-  onScroll = throttle(() => {
+  onScrollActiveSection = () => {
     const sectionElms = document.querySelectorAll('span.section-anchor');
     let activeSection;
 
@@ -96,6 +119,7 @@ class ReadChapter extends React.Component {
 
       if (anchorBottom >= 0 && anchorBottom <= window.innerHeight) {
         activeSection = {
+          text: s.textContent.replace(/\n/g, '').trim(),
           hash: s.attributes.getNamedItem('name').value,
         };
 
@@ -105,6 +129,7 @@ class ReadChapter extends React.Component {
       if (anchorBottom > window.innerHeight && i > 0) {
         if (preBound.bottom <= 0) {
           activeSection = {
+            text: sectionElms[i - 1].textContent.replace(/\n/g, '').trim(),
             hash: sectionElms[i - 1].attributes.getNamedItem('name').value,
           };
           break;
@@ -119,11 +144,31 @@ class ReadChapter extends React.Component {
       preBound = b;
     }
 
-    this.setState({ activeSection });
-  }, 500);
+    if (this.state.activeSection !== activeSection) {
+      this.setState({ activeSection });
+    }
+  };
+
+  onScrollHideHeader = () => {
+    const elem = document.getElementById('main-content');
+    const distanceFromTop = elem.scrollTop;
+    const hideHeader = distanceFromTop > 500;
+
+    if (this.state.hideHeader !== hideHeader) {
+      this.setState({ hideHeader });
+    }
+  };
 
   toggleChapterList = () => {
     this.setState({ showTOC: !this.state.showTOC });
+  };
+
+  changeBookmark = (bookmark) => {
+    const { chapter } = this.state;
+
+    this.setState({
+      chapter: Object.assign({}, chapter, { bookmark }),
+    });
   };
 
   closeTocWhenMobile = () => {
@@ -132,10 +177,7 @@ class ReadChapter extends React.Component {
 
   renderMainContent() {
     const {
-      chapter,
-      htmlContent,
-      isMobile,
-      showTOC,
+      chapter, htmlContent, isMobile, showTOC,
     } = this.state;
 
     let padding = '20px 20%';
@@ -169,8 +211,6 @@ class ReadChapter extends React.Component {
     const { sections } = this.state.chapter;
     const { activeSection } = this.state;
 
-    console.log(activeSection);
-
     if (!sections || !sections.length === 0) {
       return null;
     }
@@ -195,22 +235,24 @@ class ReadChapter extends React.Component {
   }
 
   renderSidebar() {
-    const { showTOC, chapter, isMobile } = this.state;
-    const { hideHeader } = this.props;
+    const {
+      showTOC, chapter, isMobile, hideHeader,
+    } = this.state;
 
     if (!showTOC) {
       return null;
     }
 
-    const { book, book: { chapters } } = chapter;
+    const { book } = chapter;
+    const { chapters } = book;
 
     return (
       <div
         style={{
           textAlign: 'left',
-          position: 'fixed',
+          position: 'absolute',
           bottom: 0,
-          top: hideHeader ? '0px' : '64px',
+          top: hideHeader ? 0 : '64px',
           transition: 'top 0.5s ease-in',
           left: 0,
           overflowY: 'auto',
@@ -244,8 +286,12 @@ class ReadChapter extends React.Component {
   }
 
   render() {
-    const { chapter, showTOC, isMobile } = this.state;
-    const { hideHeader } = this.props;
+    const { user } = this.props;
+
+    const {
+      chapter, showTOC, isMobile, hideHeader,
+    } = this.state;
+
 
     if (!chapter) {
       return <Error statusCode={404} />;
@@ -269,6 +315,8 @@ class ReadChapter extends React.Component {
           ) : null}
         </Head>
 
+        <Header user={user} hideHeader={hideHeader} />
+
         {this.renderSidebar()}
 
         <div
@@ -278,13 +326,13 @@ class ReadChapter extends React.Component {
             position: 'fixed',
             right: 0,
             bottom: 0,
-            top: hideHeader ? '0px' : '64px',
+            top: hideHeader ? 0 : '64px',
             transition: 'top 0.5s ease-in',
             left,
             overflowY: 'auto',
             overflowX: 'hidden',
+            zIndex: '1000',
           }}
-          ref={(elm) => { this.mainContentElm = elm; }}
           id="main-content"
         >
           <div
@@ -295,7 +343,7 @@ class ReadChapter extends React.Component {
               left: '15px',
             }}
           >
-            <i // eslint-disable-line
+            <i //eslint-disable-line
               className="material-icons"
               style={styleIcon}
               onClick={this.toggleChapterList}
@@ -313,4 +361,4 @@ class ReadChapter extends React.Component {
   }
 }
 
-export default withAuth(withLayout(ReadChapter), { loginRequired: false });
+export default withAuth(withLayout(ReadChapter, { noHeader: true }), { loginRequired: false });
