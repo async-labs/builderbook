@@ -2,24 +2,26 @@
 [![apm](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/builderbook/builderbook/blob/master/LICENSE.md)
 [![apm](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/builderbook/builderbook#contributing)
 
-Builder Book is an open source web app built with React/Material-UI/Next/Express/Mongoose/MongoDB. If you are interested in using this app as a boilerplate, see [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate).
+Builder Book is an open source web app to publish documentation or books. The app is built with React/Material-UI/Next/Express/Mongoose/MongoDB. 
 
-- To see a book hosted with this app: https://builderbook.org/books/builder-book/introduction
-- To create your own book (Admin demo): https://demo.builderbook.org/login
-
+If you are interested in using this app as a boilerplate, see [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate).
 
 ## How can you use this app?
 - as a [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate) for React/Material-UI/Next/Express/Mongoose/MongoDB stack;
 - as learning material for third-party APIs such as Google, Github, AWS SES, Mailchimp, Stripe;
 - as a production-ready web app:
-  - write documention, or similar content, with markdown and display the content on a web app;
+  - write documention, or similar content, with Markdown and display the content on a web app;
   - write a book with markdown and sell it on your own website
+
+
+This book is written with Markdown, synced with Github, and sold - all done with the app in this repository: https://builderbook.org/books/builder-book/introduction
+
+To create your own book from a Github repo, see [Admin demo](https://github.com/builderbook/builderbook#admin-demo).
 
 
 ## Contents
 - [Admin demo](#admin-demo)
 - [Run locally](#run-locally)
-- [Create your first book](#create-your-first-book)
 - [Deploy](#deploy)
 - [Screenshots](#screenshots)
 - [Built with](#built-with)
@@ -58,7 +60,7 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
   ---
   ```
   
-  - To make the content of a `.md` file _private_ (meaning a person must buy a book to see the content), change `isFree:true` to `excerpt:""`. Add some sample content between the quotes - this content is public and serves as a free preview.
+  - To make the content of a `.md` file _private_ (meaning a person must buy the book to see its content), change `isFree:true` to `excerpt:""`. Add some sample content between the quotes - this content is public and serves as a free preview.
 
 
 ## Run locally
@@ -132,7 +134,9 @@ Builder Book is an open source web app built with React/Material-UI/Next/Express
 - Click "Add Book". Enter details and select the Github repo you created.
 - Click "Save".
 
-When you add new .md files or update content, go to the `book-detail` page on your app and click `Sync with Github`. Note that all .md files in your Github repo _must_ have metadata in the format shown above.
+When you add new .md files or update content, go to the `book-detail` page on your app and click `Sync with Github`. Note that all `.md` files in your Github repo _must_ have metadata in the format shown above.
+
+To make the content of a `.md` file _private_ (meaning a person must purchase the content to see it), change `isFree:true` to `excerpt:""`. Add some sample content between the quotes - this content is public and serves as a free preview.
 
 
 ## Deploy
@@ -259,12 +263,12 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 
 
 ## Learn how to build this app from scratch
-We wrote [this book](https://builderbook.org/books/builder-book/introduction) that teaches you how to build the Builder Book web app from scratch. We sell the book using this web app.
+We wrote [this book](https://builderbook.org/books/builder-book/introduction) that teaches you how to build the web app in this repository from scratch. We wrote the book with Markdown, sync it with Github, and sell it - all done with this web app.
 
 In the book, you'll start from 0 lines of code in Chapter 1 and end up with over 12,000 lines of code by Chapter 9.
 
 ## Contributing
-We welcome suggestions and pull requests, especially for [issues](https://github.com/builderbook/builderbook/issues) labeled as "discussion" and "contributions welcome".
+We welcome suggestions and pull requests, especially for [issues](https://github.com/builderbook/builderbook/issues) labeled as `discussion` and `contributions welcome`.
 
 By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook/blob/master/CODE-OF-CONDUCT.md).
 
