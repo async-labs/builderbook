@@ -82,7 +82,9 @@ class ReadChapter extends React.Component {
       isMobile = true;
     }
 
-    this.setState({ isMobile }); // eslint-disable-line
+    if (this.state.isMobile !== isMobile) {
+      this.setState({ isMobile }); // eslint-disable-line
+    }
   }
 
   componentWillReceiveProps(nextProps) {
