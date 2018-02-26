@@ -8,6 +8,7 @@ import withLayout from '../lib/withLayout';
 class Index extends React.Component {
   static propTypes = {
     user: PropTypes.shape({
+      displayName: PropTypes.string,
       email: PropTypes.string.isRequired,
     }),
   }
