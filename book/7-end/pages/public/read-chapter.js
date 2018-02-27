@@ -52,19 +52,15 @@ class ReadChapter extends React.Component {
     super(props, ...args);
 
     const { chapter } = props;
-    let htmlContent = '';
-    if (chapter && (chapter.isPurchased || chapter.isFree)) {
-      htmlContent = chapter.htmlContent;
-    } else {
-      htmlContent = chapter.htmlExcerpt;
-    }
+
+    const htmlContent = '' || chapter.htmlContent;
 
     this.state = {
       showTOC: false,
       chapter,
       htmlContent,
-      isMobile: false,
       hideHeader: false,
+      isMobile: false,
     };
   }
 
@@ -74,10 +70,7 @@ class ReadChapter extends React.Component {
       this.onScrollHideHeader();
     }, 500));
 
-    let isMobile = false;
-    if (window.innerWidth < 768) {
-      isMobile = true;
-    }
+    const isMobile = window.innerWidth < 768;
 
     if (this.state.isMobile !== isMobile) {
       this.setState({ isMobile }); // eslint-disable-line
@@ -87,19 +80,13 @@ class ReadChapter extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { chapter } = nextProps;
 
-    if (chapter && chapter._id !== this.props.chapter._id) {
-      document.getElementById('main-content').scrollIntoView();
-
-      let htmlContent;
-
-      if (chapter.isPurchased || chapter.isFree) {
-        htmlContent = chapter.htmlContent;
-      } else {
-        htmlContent = chapter.htmlExcerpt;
-      }
-
-      this.setState({ chapter: nextProps.chapter, htmlContent });
+    if (!chapter) {
+      return;
     }
+    document.getElementById('chapter-content').scrollIntoView();
+
+    const htmlContent = '' || chapter.htmlContent;
+    this.setState({ chapter: nextProps.chapter, htmlContent });
   }
 
   componentWillUnmount() {
@@ -121,7 +108,6 @@ class ReadChapter extends React.Component {
 
       if (anchorBottom >= 0 && anchorBottom <= window.innerHeight) {
         activeSection = {
-          text: s.textContent.replace(/\n/g, '').trim(),
           hash: s.attributes.getNamedItem('name').value,
         };
 
@@ -131,14 +117,12 @@ class ReadChapter extends React.Component {
       if (anchorBottom > window.innerHeight && i > 0) {
         if (preBound.bottom <= 0) {
           activeSection = {
-            text: sectionElms[i - 1].textContent.replace(/\n/g, '').trim(),
             hash: sectionElms[i - 1].attributes.getNamedItem('name').value,
           };
           break;
         }
       } else if (i + 1 === sectionElms.length) {
         activeSection = {
-          text: s.textContent.replace(/\n/g, '').trim(),
           hash: s.attributes.getNamedItem('name').value,
         };
       }
@@ -152,8 +136,7 @@ class ReadChapter extends React.Component {
   };
 
   onScrollHideHeader = () => {
-    const elem = document.getElementById('main-content');
-    const distanceFromTop = elem.scrollTop;
+    const distanceFromTop = document.getElementById('main-content').scrollTop;
     const hideHeader = distanceFromTop > 500;
 
     if (this.state.hideHeader !== hideHeader) {
@@ -179,7 +162,7 @@ class ReadChapter extends React.Component {
 
   renderMainContent() {
     const {
-      chapter, htmlContent, isMobile, showTOC,
+      chapter, htmlContent, showTOC, isMobile,
     } = this.state;
 
     let padding = '20px 20%';
@@ -190,13 +173,7 @@ class ReadChapter extends React.Component {
     }
 
     return (
-      <div
-        style={{ padding }}
-        ref={(c) => {
-          this.mainContent = c;
-        }}
-        id="chapter-content"
-      >
+      <div style={{ padding }} id="chapter-content">
         <h2 style={{ fontWeight: '400', lineHeight: '1.5em' }}>
           {chapter.order > 1 ? `Chapter ${chapter.order - 1}: ` : null}
           {chapter.title}
@@ -270,14 +247,18 @@ class ReadChapter extends React.Component {
               key={ch._id}
               role="presentation"
               style={{ listStyle: i === 0 ? 'none' : 'decimal', paddingBottom: '10px' }}
-              onClick={this.closeTocWhenMobile}
             >
               <Link
                 prefetch
                 as={`/books/${book.slug}/${ch.slug}`}
                 href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
               >
-                <a style={{ color: chapter._id === ch._id ? '#1565C0' : '#222' }}>{ch.title}</a>
+                <a // eslint-disable-line
+                  style={{ color: chapter._id === ch._id ? '#1565C0' : '#222' }}
+                  onClick={this.closeTocWhenMobile}
+                >
+                  {ch.title}
+                </a>
               </Link>
               {chapter._id === ch._id ? this.renderSections() : null}
             </li>
@@ -291,7 +272,7 @@ class ReadChapter extends React.Component {
     const { user } = this.props;
 
     const {
-      chapter, showTOC, isMobile, hideHeader,
+      chapter, showTOC, hideHeader, isMobile,
     } = this.state;
 
 

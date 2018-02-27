@@ -91,7 +91,7 @@ class ReadChapter extends React.Component {
     const { chapter } = nextProps;
 
     if (chapter && chapter._id !== this.props.chapter._id) {
-      document.getElementById('main-content').scrollIntoView();
+      document.getElementById('chapter-content').scrollIntoView();
 
       let htmlContent;
 
@@ -155,8 +155,7 @@ class ReadChapter extends React.Component {
   };
 
   onScrollHideHeader = () => {
-    const elem = document.getElementById('main-content');
-    const distanceFromTop = elem.scrollTop;
+    const distanceFromTop = document.getElementById('main-content').scrollTop;
     const hideHeader = distanceFromTop > 500;
 
     if (this.state.hideHeader !== hideHeader) {
@@ -196,9 +195,6 @@ class ReadChapter extends React.Component {
     return (
       <div
         style={{ padding }}
-        ref={(c) => {
-          this.mainContent = c;
-        }}
         id="chapter-content"
       >
         <h2 style={{ fontWeight: '400', lineHeight: '1.5em' }}>
@@ -245,7 +241,7 @@ class ReadChapter extends React.Component {
 
   renderSidebar() {
     const {
-      showTOC, chapter, isMobile, hideHeader,
+      showTOC, chapter, hideHeader, isMobile,
     } = this.state;
 
     if (!showTOC) {

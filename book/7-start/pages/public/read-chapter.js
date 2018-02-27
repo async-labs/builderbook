@@ -54,12 +54,11 @@ class ReadChapter extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { chapter } = nextProps;
+
     if (!chapter) {
       return;
     }
-
     const htmlContent = '' || chapter.htmlContent;
-
     this.setState({ chapter: nextProps.chapter, htmlContent });
   }
 
@@ -72,7 +71,7 @@ class ReadChapter extends React.Component {
 
     return (
       <div>
-        <h3>Chapter: {chapter.title}</h3>
+        <h2>Chapter: {chapter.title}</h2>
 
         <div className="main-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
       </div>
@@ -180,8 +179,6 @@ class ReadChapter extends React.Component {
             overflowY: 'auto',
             overflowX: 'hidden',
           }}
-          ref={(elm) => { this.mainContentElm = elm; }}
-          id="main-content"
         >
           <div
             style={{
