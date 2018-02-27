@@ -40,24 +40,20 @@ class BuyButton extends React.Component {
     };
   }
 
-  onToken = (token) => {
+  onToken = async (token) => {
     NProgress.start();
     const { book } = this.props;
     this.setState({ showModal: false });
 
-    buyBook({
-      stripeToken: token,
-      id: book._id,
-    })
-      .then(() => {
-        notify('Success!');
-        setTimeout(() => window.location.reload(), 300);
-        NProgress.done();
-      })
-      .catch((err) => {
-        notify(err);
-        NProgress.done();
-      });
+    try {
+      await buyBook({ stripeToken: token, id: book._id });
+      notify('Success!');
+      setTimeout(() => window.location.reload(), 300);
+      NProgress.done();
+    } catch (err) {
+      NProgress.done();
+      notify(err);
+    }
   };
 
   onLoginClicked = (e) => {

@@ -185,28 +185,19 @@ class BookClass {
 
     User.findByIdAndUpdate(user.id, { $addToSet: { purchasedBookIds: book.id } }).exec();
 
-    getEmailTemplate(isPreorder ? 'preorder' : 'purchase', {
+    const template = await getEmailTemplate(isPreorder ? 'preorder' : 'purchase', {
       userName: user.displayName,
       bookTitle: book.name,
       bookUrl: `${ROOT_URL}/books/${book.slug}/introduction`,
-    })
-      .then(template =>
-        sendEmail({
-          from: `Kelly from builderbook.org <${process.env.EMAIL_SUPPORT_FROM_ADDRESS}>`,
-          to: [user.email],
-          subject: template.subject,
-          body: template.message,
-        }))
-      .catch((error) => {
-        logger.error('Email sending error:', error);
-      });
+    });
 
-    subscribe({
-      email: user.email,
-      listName: isPreorder ? 'preordered' : 'ordered',
-      book: book.slug,
+    sendEmail({
+      from: `Kelly from builderbook.org <${process.env.EMAIL_SUPPORT_FROM_ADDRESS}>`,
+      to: [user.email],
+      subject: template.subject,
+      body: template.message,
     }).catch((error) => {
-      logger.error('Mailchimp subscribing error:', error);
+      logger.error('Email sending error:', error);
     });
 
     return Purchase.create({

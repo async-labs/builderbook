@@ -35,7 +35,7 @@ export default class Bookmark extends React.Component {
     };
   }
 
-  addBookmark = () => {
+  addBookmark = async () => {
     this.setState({ anchorEl: null });
 
     const { chapter, activeSection } = this.props;
@@ -47,19 +47,17 @@ export default class Bookmark extends React.Component {
 
     NProgress.start();
 
-    addBookmark(Object.assign({ chapterId: chapter._id }, activeSection))
-      .then(() => {
-        NProgress.done();
-        notify(`You successfully bookmarked Chapter ${chapter.order - 1}, Section "${
-          activeSection.text
-        }"`);
-
-        this.props.changeBookmark(activeSection);
-      })
-      .catch((err) => {
-        NProgress.done();
-        notify(err);
-      });
+    try {
+      await addBookmark(Object.assign({ chapterId: chapter._id }, activeSection));
+      NProgress.done();
+      notify(`You successfully bookmarked Chapter ${chapter.order - 1}, Section "${
+        activeSection.text
+      }".`);
+      this.props.changeBookmark(activeSection);
+    } catch (err) {
+      NProgress.done();
+      notify(err);
+    }
   };
 
   handleClick = (event) => {

@@ -112,24 +112,22 @@ class MyBooksWithData extends React.Component {
     otherBooks: null,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     NProgress.start();
 
-    getMyBookList()
-      .then(({ purchasedBooks, freeBooks, otherBooks }) => {
-        this.setState({
-          purchasedBooks,
-          freeBooks,
-          otherBooks,
-          loading: false,
-        });
-
-        NProgress.done();
-      })
-      .catch((err) => {
-        this.setState({ loading: false, error: err.message || err.toString() });
-        NProgress.done();
+    try {
+      const { purchasedBooks, freeBooks, otherBooks } = await getMyBookList();
+      this.setState({ // eslint-disable-line
+        purchasedBooks,
+        freeBooks,
+        otherBooks,
+        loading: false,
       });
+      NProgress.done();
+    } catch (err) {
+      this.setState({ loading: false, error: err.message || err.toString() }); // eslint-disable-line
+      NProgress.done();
+    }
   }
 
   render() {
