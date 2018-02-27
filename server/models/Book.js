@@ -255,7 +255,7 @@ class BookClass {
     })
       .then(template =>
         sendEmail({
-          from: `Builder Book <${process.env.EMAIL_SUPPORT_FROM_ADDRESS}>`,
+          from: `Kelly from builderbook.org <${process.env.EMAIL_SUPPORT_FROM_ADDRESS}>`,
           to: [user.email],
           subject: template.subject,
           body: template.message,
