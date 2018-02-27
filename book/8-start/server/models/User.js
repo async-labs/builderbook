@@ -2,7 +2,7 @@ import _ from 'lodash';
 import mongoose, { Schema } from 'mongoose';
 
 import generateSlug from '../utils/slugify';
-import sendEmail from '../sendEmail';
+import sendEmail from '../aws';
 import getEmailTemplate from './EmailTemplate';
 import logger from '../logs';
 

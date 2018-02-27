@@ -1,18 +1,18 @@
 import mongoose, { Schema } from 'mongoose';
-import _ from 'lodash';
 import frontmatter from 'front-matter';
-
-import { getCommits, getContent } from '../github';
-import { charge as stripeCharge } from '../stripe';
-import sendEmail from '../aws';
-import logger from '../logs';
-import generateSlug from '../utils/slugify';
-import { subscribe } from '../mailchimp';
 
 import Chapter from './Chapter';
 import User from './User';
 import Purchase from './Purchase';
 import getEmailTemplate from './EmailTemplate';
+
+import { charge as stripeCharge } from '../stripe';
+import { getCommits, getContent } from '../github';
+import sendEmail from '../aws';
+import { subscribe } from '../mailchimp';
+
+import generateSlug from '../utils/slugify';
+import logger from '../logs';
 
 const ROOT_URL = process.env.ROOT_URL || `http://localhost:${process.env.PORT || 8000}`;
 
@@ -26,7 +26,6 @@ const mongoSchema = new Schema({
     required: true,
     unique: true,
   },
-
   githubRepo: {
     type: String,
     required: true,
@@ -37,20 +36,12 @@ const mongoSchema = new Schema({
     type: Date,
     required: true,
   },
-  // price in dollars
   price: {
     type: Number,
     required: true,
   },
-
-  isInPreorder: {
-    type: Boolean,
-    defaultValue: false,
-  },
-  preorderPrice: Number,
-
-  supportURL: String,
 });
+
 
 class BookClass {
   static async list({ offset = 0, limit = 10 } = {}) {
@@ -61,27 +52,7 @@ class BookClass {
     return { books };
   }
 
-  static async getPurchasedBooks({ purchasedBookIds, freeBookIds }) {
-    const allBooks = await this.find().sort({ createdAt: -1 });
-
-    const purchasedBooks = [];
-    const freeBooks = [];
-    const otherBooks = [];
-
-    allBooks.forEach((b) => {
-      if (purchasedBookIds.includes(b.id)) {
-        purchasedBooks.push(b);
-      } else if (freeBookIds.includes(b.id)) {
-        freeBooks.push(b);
-      } else {
-        otherBooks.push(b);
-      }
-    });
-
-    return { purchasedBooks, freeBooks, otherBooks };
-  }
-
-  static async getBySlug({ slug, userId }) {
+  static async getBySlug({ slug }) {
     const bookDoc = await this.findOne({ slug });
     if (!bookDoc) {
       throw new Error('Book not found');
@@ -89,71 +60,36 @@ class BookClass {
 
     const book = bookDoc.toObject();
 
-    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug').sort({
-      order: 1,
-    })).map(ch => ch.toObject());
-
-    if (userId) {
-      const purchase = await Purchase.findOne({ userId, bookId: book._id }, 'doneChapterIds');
-
-      book.isPurchased = !!purchase;
-
-      if (purchase && purchase.doneChapterIds) {
-        book.chapters.forEach((ch) => {
-          Object.assign(ch, {
-            isFinished: _.some(purchase.doneChapterIds, id => id.equals(ch._id)),
-          });
-        });
-      }
-    }
-
+    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug')
+      .sort({ order: 1 }))
+      .map(chapter => chapter.toObject());
     return book;
   }
 
-  static async add({
-    name,
-    price,
-    githubRepo,
-    supportURL = '',
-    isInPreorder = null,
-    preorderPrice = null,
-  }) {
+  static async add({ name, price, githubRepo }) {
     const slug = await generateSlug(this, name);
-
+    if (!slug) {
+      throw new Error('Error with slug generation');
+    }
     return this.create({
       name,
       slug,
       price,
       githubRepo,
-      supportURL,
-      isInPreorder,
-      preorderPrice,
       createdAt: new Date(),
     });
   }
 
   static async edit({
-    id,
-    name,
-    price,
-    githubRepo,
-    supportURL = '',
-    isInPreorder = null,
-    preorderPrice = null,
+    id, name, price, githubRepo,
   }) {
     const book = await this.findById(id, 'slug name');
 
     if (!book) {
-      throw new Error('Not found');
+      throw new Error('Book is not found by id');
     }
 
-    const modifier = {
-      price,
-      supportURL,
-      githubRepo,
-      isInPreorder,
-      preorderPrice,
-    };
+    const modifier = { price, githubRepo };
 
     if (name !== book.name) {
       modifier.name = name;
@@ -163,11 +99,12 @@ class BookClass {
     return this.updateOne({ _id: id }, { $set: modifier });
   }
 
+
   static async syncContent({ id, githubAccessToken }) {
     const book = await this.findById(id, 'githubRepo githubLastCommitSha');
 
     if (!book) {
-      throw new Error('Not found');
+      throw new Error('Book not found');
     }
 
     const lastCommit = await getCommits({
@@ -177,12 +114,12 @@ class BookClass {
     });
 
     if (!lastCommit || !lastCommit.data || !lastCommit.data[0]) {
-      throw new Error('No change!');
+      throw new Error('No change in content!');
     }
 
     const lastCommitSha = lastCommit.data[0].sha;
     if (lastCommitSha === book.githubLastCommitSha) {
-      throw new Error('No change!');
+      throw new Error('No change in content!');
     }
 
     const mainFolder = await getContent({
@@ -196,8 +133,7 @@ class BookClass {
         return;
       }
 
-      if (f.path !== 'introduction.md' && !/chapter-(\d+)\.md/.test(f.path)) {
-        // not chapter content, skip
+      if (f.path !== 'introduction.md' && !/chapter-([0-9]+)\.md/.test(f.path)) {
         return;
       }
 
@@ -208,6 +144,7 @@ class BookClass {
       });
 
       const data = frontmatter(Buffer.from(chapter.data.content, 'base64').toString('utf8'));
+
       data.path = f.path;
 
       try {
@@ -280,32 +217,6 @@ class BookClass {
       stripeCharge: chargeObj,
 
       isPreorder,
-    });
-  }
-
-  static async giveFree({ id, userId }) {
-    const book = await this.findById(id, 'id');
-    if (!book) {
-      throw new Error('Book not found');
-    }
-
-    if (!userId) {
-      throw new Error('User ID required');
-    }
-
-    const isPurchased = (await Purchase.find({ userId, bookId: id }).count()) > 0;
-    if (isPurchased) {
-      throw new Error('Already bought this book');
-    }
-
-    User.findByIdAndUpdate(userId, { $addToSet: { freeBookIds: book.id } }).exec();
-
-    return Purchase.create({
-      userId,
-      bookId: book._id,
-      amount: 0,
-      createdAt: new Date(),
-      isFree: true,
     });
   }
 }

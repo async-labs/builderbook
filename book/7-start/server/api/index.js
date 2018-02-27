@@ -1,5 +1,5 @@
 import publicApi from './public';
-import userApi from './user';
+import userApi from './customer';
 import adminApi from './admin';
 
 export default function api(server) {

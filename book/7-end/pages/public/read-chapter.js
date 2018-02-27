@@ -43,9 +43,7 @@ class ReadChapter extends React.Component {
 
     const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
 
-    const showStripeModal = req ? !!req.query.buy : window.location.search.includes('buy=1');
-
-    return { chapter, showStripeModal };
+    return { chapter };
   }
 
   constructor(props, ...args) {
@@ -146,14 +144,6 @@ class ReadChapter extends React.Component {
 
   toggleChapterList = () => {
     this.setState({ showTOC: !this.state.showTOC });
-  };
-
-  changeBookmark = (bookmark) => {
-    const { chapter } = this.state;
-
-    this.setState({
-      chapter: Object.assign({}, chapter, { bookmark }),
-    });
   };
 
   closeTocWhenMobile = () => {

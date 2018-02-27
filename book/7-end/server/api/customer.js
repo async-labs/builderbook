@@ -12,8 +12,7 @@ router.use((req, res, next) => {
 });
 
 // List of API:
-// 1. /my-books
-// 2. /buy-book
-// 3. /chapters/add-bookmark
+// 1. /buy-book
+// 2. /my-books
 
 export default router;

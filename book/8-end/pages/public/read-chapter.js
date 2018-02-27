@@ -8,7 +8,6 @@ import Link from 'next/link';
 
 import Header from '../../components/Header';
 import BuyButton from '../../components/customer/BuyButton';
-import Bookmark from '../../components/customer/Bookmark';
 
 import { getChapterDetail } from '../../lib/api/public';
 import withLayout from '../../lib/withLayout';
@@ -55,6 +54,7 @@ class ReadChapter extends React.Component {
     super(props, ...args);
 
     const { chapter } = props;
+
     let htmlContent = '';
     if (chapter && (chapter.isPurchased || chapter.isFree)) {
       htmlContent = chapter.htmlContent;
@@ -66,16 +66,19 @@ class ReadChapter extends React.Component {
       showTOC: false,
       chapter,
       htmlContent,
-      isMobile: false,
       hideHeader: false,
+      isMobile: false,
     };
   }
 
   componentDidMount() {
-    document.getElementById('main-content').addEventListener('scroll', throttle(() => {
-      this.onScrollActiveSection();
-      this.onScrollHideHeader();
-    }, 500));
+    document.getElementById('main-content').addEventListener(
+      'scroll',
+      throttle(() => {
+        this.onScrollActiveSection();
+        this.onScrollHideHeader();
+      }, 500),
+    );
 
     const isMobile = window.innerWidth < 768;
 
@@ -87,19 +90,19 @@ class ReadChapter extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { chapter } = nextProps;
 
-    if (chapter && chapter._id !== this.props.chapter._id) {
-      document.getElementById('chapter-content').scrollIntoView();
-
-      let htmlContent;
-
-      if (chapter.isPurchased || chapter.isFree) {
-        htmlContent = chapter.htmlContent;
-      } else {
-        htmlContent = chapter.htmlExcerpt;
-      }
-
-      this.setState({ chapter: nextProps.chapter, htmlContent });
+    if (!chapter) {
+      return;
     }
+    document.getElementById('chapter-content').scrollIntoView();
+
+    let htmlContent = '';
+    if (chapter && (chapter.isPurchased || chapter.isFree)) {
+      htmlContent = chapter.htmlContent;
+    } else {
+      htmlContent = chapter.htmlExcerpt;
+    }
+
+    this.setState({ chapter: nextProps.chapter, htmlContent });
   }
 
   componentWillUnmount() {
@@ -121,7 +124,6 @@ class ReadChapter extends React.Component {
 
       if (anchorBottom >= 0 && anchorBottom <= window.innerHeight) {
         activeSection = {
-          text: s.textContent.replace(/\n/g, '').trim(),
           hash: s.attributes.getNamedItem('name').value,
         };
 
@@ -131,14 +133,12 @@ class ReadChapter extends React.Component {
       if (anchorBottom > window.innerHeight && i > 0) {
         if (preBound.bottom <= 0) {
           activeSection = {
-            text: sectionElms[i - 1].textContent.replace(/\n/g, '').trim(),
             hash: sectionElms[i - 1].attributes.getNamedItem('name').value,
           };
           break;
         }
       } else if (i + 1 === sectionElms.length) {
         activeSection = {
-          text: s.textContent.replace(/\n/g, '').trim(),
           hash: s.attributes.getNamedItem('name').value,
         };
       }
@@ -164,22 +164,15 @@ class ReadChapter extends React.Component {
     this.setState({ showTOC: !this.state.showTOC });
   };
 
-  changeBookmark = (bookmark) => {
-    const { chapter } = this.state;
-
-    this.setState({
-      chapter: Object.assign({}, chapter, { bookmark }),
-    });
-  };
-
   closeTocWhenMobile = () => {
     this.setState({ showTOC: !this.state.isMobile });
   };
 
   renderMainContent() {
     const { user, showStripeModal } = this.props;
+
     const {
-      chapter, htmlContent, isMobile, showTOC,
+      chapter, htmlContent, showTOC, isMobile,
     } = this.state;
 
     let padding = '20px 20%';
@@ -190,10 +183,7 @@ class ReadChapter extends React.Component {
     }
 
     return (
-      <div
-        style={{ padding }}
-        id="chapter-content"
-      >
+      <div style={{ padding }} id="chapter-content">
         <h2 style={{ fontWeight: '400', lineHeight: '1.5em' }}>
           {chapter.order > 1 ? `Chapter ${chapter.order - 1}: ` : null}
           {chapter.title}
@@ -238,7 +228,7 @@ class ReadChapter extends React.Component {
 
   renderSidebar() {
     const {
-      showTOC, chapter, hideHeader, isMobile,
+      showTOC, chapter, isMobile, hideHeader,
     } = this.state;
 
     if (!showTOC) {
@@ -270,14 +260,18 @@ class ReadChapter extends React.Component {
               key={ch._id}
               role="presentation"
               style={{ listStyle: i === 0 ? 'none' : 'decimal', paddingBottom: '10px' }}
-              onClick={this.closeTocWhenMobile}
             >
               <Link
                 prefetch
                 as={`/books/${book.slug}/${ch.slug}`}
                 href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
               >
-                <a style={{ color: chapter._id === ch._id ? '#1565C0' : '#222' }}>{ch.title}</a>
+                <a // eslint-disable-line
+                  style={{ color: chapter._id === ch._id ? '#1565C0' : '#222' }}
+                  onClick={this.closeTocWhenMobile}
+                >
+                  {ch.title}
+                </a>
               </Link>
               {chapter._id === ch._id ? this.renderSections() : null}
             </li>
@@ -291,15 +285,12 @@ class ReadChapter extends React.Component {
     const { user } = this.props;
 
     const {
-      chapter, showTOC, isMobile, hideHeader,
+      chapter, showTOC, hideHeader, isMobile,
     } = this.state;
-
 
     if (!chapter) {
       return <Error statusCode={404} />;
     }
-
-    const { book, bookmark } = chapter;
 
     let left = 20;
     if (showTOC) {
@@ -356,37 +347,6 @@ class ReadChapter extends React.Component {
             >
               format_list_bulleted
             </i>
-
-            {book.supportURL ? (
-              <div>
-                <a
-                  href={book.supportURL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: '#222', opacity: '1' }}
-                >
-                  <i
-                    className="material-icons"
-                    style={{
-                      opacity: '0.5',
-                      fontSize: '24',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    help_outline
-                  </i>
-                </a>
-              </div>
-            ) : null}
-
-            {chapter.isPurchased && !chapter.isFree ? (
-              <Bookmark
-                chapter={chapter}
-                bookmark={bookmark}
-                changeBookmark={this.changeBookmark}
-                activeSection={this.state.activeSection}
-              />
-            ) : null}
           </div>
 
           {this.renderMainContent()}
