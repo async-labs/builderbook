@@ -42,7 +42,6 @@ const mongoSchema = new Schema({
   },
 });
 
-
 class BookClass {
   static async list({ offset = 0, limit = 10 } = {}) {
     const books = await this.find({})
@@ -60,9 +59,7 @@ class BookClass {
 
     const book = bookDoc.toObject();
 
-    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug')
-      .sort({ order: 1 }))
-      .map(chapter => chapter.toObject());
+    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug').sort({ order: 1 })).map(chapter => chapter.toObject());
     return book;
   }
 
@@ -98,7 +95,6 @@ class BookClass {
 
     return this.updateOne({ _id: id }, { $set: modifier });
   }
-
 
   static async syncContent({ id, githubAccessToken }) {
     const book = await this.findById(id, 'githubRepo githubLastCommitSha');
@@ -198,6 +194,14 @@ class BookClass {
       body: template.message,
     }).catch((error) => {
       logger.error('Email sending error:', error);
+    });
+
+    subscribe({
+      email: user.email,
+      listName: isPreorder ? 'preordered' : 'ordered',
+      book: book.slug,
+    }).catch((error) => {
+      logger.error('Mailchimp subscribing error:', error);
     });
 
     return Purchase.create({

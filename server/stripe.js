@@ -7,6 +7,7 @@ export function charge({
 }) {
   const dev = process.env.NODE_ENV !== 'production';
   const API_KEY = dev ? process.env.Stripe_Test_SecretKey : process.env.Stripe_Live_SecretKey;
+  const client = stripe(API_KEY);
 
   return client.charges.create({
     amount,

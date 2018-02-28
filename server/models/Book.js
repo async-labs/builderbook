@@ -263,6 +263,14 @@ class BookClass {
       logger.error('Email sending error:', error);
     });
 
+    subscribe({
+      email: user.email,
+      listName: isPreorder ? 'preordered' : 'ordered',
+      book: book.slug,
+    }).catch((error) => {
+      logger.error('Mailchimp subscribing error:', error);
+    });
+
     return Purchase.create({
       userId: user._id,
       bookId: book._id,
