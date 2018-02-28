@@ -90,19 +90,16 @@ class ReadChapter extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { chapter } = nextProps;
 
-    if (!chapter) {
-      return;
+    if (chapter && chapter._id !== this.props.chapter._id) {
+      document.getElementById('chapter-content').scrollIntoView();
+      let htmlContent = '';
+      if (chapter && (chapter.isPurchased || chapter.isFree)) {
+        htmlContent = chapter.htmlContent;
+      } else {
+        htmlContent = chapter.htmlExcerpt;
+      }
+      this.setState({ chapter, htmlContent });
     }
-    document.getElementById('chapter-content').scrollIntoView();
-
-    let htmlContent = '';
-    if (chapter && (chapter.isPurchased || chapter.isFree)) {
-      htmlContent = chapter.htmlContent;
-    } else {
-      htmlContent = chapter.htmlExcerpt;
-    }
-
-    this.setState({ chapter: nextProps.chapter, htmlContent });
   }
 
   componentWillUnmount() {

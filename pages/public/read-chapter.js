@@ -98,7 +98,7 @@ class ReadChapter extends React.Component {
         htmlContent = chapter.htmlExcerpt;
       }
 
-      this.setState({ chapter: nextProps.chapter, htmlContent });
+      this.setState({ chapter, htmlContent });
     }
   }
 

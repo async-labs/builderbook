@@ -78,13 +78,11 @@ class ReadChapter extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { chapter } = nextProps;
 
-    if (!chapter) {
-      return;
+    if (chapter && chapter._id !== this.props.chapter._id) {
+      document.getElementById('chapter-content').scrollIntoView();
+      const { htmlContent } = chapter;
+      this.setState({ chapter, htmlContent });
     }
-    document.getElementById('chapter-content').scrollIntoView();
-
-    const htmlContent = '' || chapter.htmlContent;
-    this.setState({ chapter: nextProps.chapter, htmlContent });
   }
 
   componentWillUnmount() {

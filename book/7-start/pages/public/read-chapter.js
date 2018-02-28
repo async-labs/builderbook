@@ -55,11 +55,10 @@ class ReadChapter extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { chapter } = nextProps;
 
-    if (!chapter) {
-      return;
+    if (chapter && chapter._id !== this.props.chapter._id) {
+      const { htmlContent } = chapter;
+      this.setState({ chapter, htmlContent });
     }
-    const htmlContent = '' || chapter.htmlContent;
-    this.setState({ chapter: nextProps.chapter, htmlContent });
   }
 
   toggleChapterList = () => {
