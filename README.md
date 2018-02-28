@@ -2,21 +2,16 @@
 [![apm](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/builderbook/builderbook/blob/master/LICENSE.md)
 [![apm](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/builderbook/builderbook#contributing)
 
-Builder Book is an open source web app to publish documentation or books. The app is built with React/Material-UI/Next/Express/Mongoose/MongoDB. 
+Builder Book is an open source web app to publish documentation or books. The app is built with React/Material-UI/Next/Express/Mongoose/MongoDB and includes these third party APIs: Google, Github, AWS SES, Mailchimp, Stripe.
 
-If you are interested in using this app as a boilerplate, see [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate).
+We built this app to write and sell our own book: https://builderbook.org/books/builder-book/introduction.
+
+Check our [Admin demo](https://github.com/builderbook/builderbook#admin-demo) to see how this app works.
+
 
 ## How can you use this app?
-- as a [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate) for React/Material-UI/Next/Express/Mongoose/MongoDB stack;
-- as learning material for third-party APIs such as Google, Github, AWS SES, Mailchimp, Stripe;
-- as a production-ready web app:
-  - write documention, or similar content, with Markdown and display the content on a web app;
-  - write a book with markdown and sell it on your own website
-
-
-This book is written with Markdown, synced with Github, and sold - all done with the app in this repository: https://builderbook.org/books/builder-book/introduction
-
-To create your own book from a Github repo, see [Admin demo](https://github.com/builderbook/builderbook#admin-demo).
+- As learning material for React/Material-UI/Next/Express/Mongoose/MongoDB stack and Google/Github/AWS SES/Mailchimp/Stripe APIs. You can start from our [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate) or modify the final app into your own project.
+- As a production-ready web app to publish documentation or sell books on your own website.
 
 
 ## Contents
@@ -35,8 +30,23 @@ To create your own book from a Github repo, see [Admin demo](https://github.com/
 
 
 ## Admin demo
-- To save time from writing your own content, Fork our [demo book repository](https://github.com/builderbook/demo-book) and use it for the demo.
-- Log in with Google. You'll be logged in as an Admin: [link](https://demo.builderbook.org/login).
+- Fork our [demo book repository](https://github.com/builderbook/demo-book) to use as sample content for the demo.
+  
+  _Important note_: Content in the demo-book repo has the proper format to create a book. If you use another repo but don't follow this format, then book creation will not work.
+   - Any Github repo you use must have a non-empty `introduction.md` file at the root.
+   - The `introduction.md` and any other `.md` files with conent must have metadata in the format shown below:
+
+  ```
+  ---
+  title: Introduction
+  seoTitle: title for search engines
+  seoDescription: description for search engines
+  isFree: true
+  ---
+  ```
+
+  - To make the content of a `.md` file _private_ (meaning a person must buy the book to see its content), change `isFree:true` to `excerpt:""`. Add some sample content between the quotes - this content is public and serves as a free preview.
+- Log in to [our demo app](https://demo.builderbook.org/login) with Google. You'll be logged in as an Admin.
 - After logging in:
   - Click `Connect Github`.
   - Click `Add book`.
@@ -47,25 +57,13 @@ To create your own book from a Github repo, see [Admin demo](https://github.com/
     - Example of Chapter 1 _with_ Buy button: [link](https://demo.builderbook.org/books/demo-book/example)
 - Edit some content in the `introduction.md` and `chapter-1.md` files in your `/demo-book` repo. 
 - Go back to the `book-detail` page and click `Sync with Github` to update your book.
-- Important notes:
-  - Any Github repo you use must have a non-empty `introduction.md` file at the root.
-  - The `introduction.md` and any other `.md` files with conent must have metadata in the format shown below:
-  
-  ```
-  ---
-  title: Introduction
-  seoTitle: title for search engines
-  seoDescription: description for search engines
-  isFree: true
-  ---
-  ```
-  
-  - To make the content of a `.md` file _private_ (meaning a person must buy the book to see its content), change `isFree:true` to `excerpt:""`. Add some sample content between the quotes - this content is public and serves as a free preview.
 
 
 ## Run locally
 - Clone the project and run `yarn` to add packages.
-- Before you start the app, create a `.env` file at the app's root. This file must have _at least three env variables_: `MONGO_URL_TEST`, `Google_clientID`, `Google_clientSecret`. We recommend free MongoDB at mLab.
+- Before you start the app, create a `.env` file at the app's root. This file must have _at least three env variables_: `MONGO_URL_TEST`, `Google_clientID`, `Google_clientSecret`.
+  - For `MONGO_URL_TEST`, we recommend a [free MongoDB at mLab](http://docs.mlab.com/).
+  - For Google API keys, see the [official OAuth tutorial](https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin).
 
   To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values to all env variables in `.env` file:
   `.env` :
@@ -134,7 +132,7 @@ To create your own book from a Github repo, see [Admin demo](https://github.com/
 - Click "Add Book". Enter details and select the Github repo you created.
 - Click "Save".
 
-When you add new .md files or update content, go to the `book-detail` page on your app and click `Sync with Github`. Note that all `.md` files in your Github repo _must_ have metadata in the format shown above.
+When you add new `.md` files or update content, go to the `book-detail` page of your app and click `Sync with Github`. Note that all `.md` files in your Github repo _must_ have metadata in the format shown above.
 
 To make the content of a `.md` file _private_ (meaning a person must purchase the content to see it), change `isFree:true` to `excerpt:""`. Add some sample content between the quotes - this content is public and serves as a free preview.
 
@@ -175,9 +173,9 @@ Book-detail page for Admin user:
 - [MongoDB](https://github.com/mongodb/mongo)
 
 #### Third party APIs
-- AWS SES
-- Github
 - Google OAuth
+- Github
+- AWS SES
 - Stripe
 - MailChimp
 
@@ -263,7 +261,7 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 
 
 ## Learn how to build this app from scratch
-We wrote [this book](https://builderbook.org/books/builder-book/introduction) that teaches you how to build the web app in this repository from scratch. We wrote the book with Markdown, sync it with Github, and sell it - all done with this web app.
+We wrote [this book](https://builderbook.org/books/builder-book/introduction) that teaches you how to build the web app in this repository from scratch.
 
 In the book, you'll start from 0 lines of code in Chapter 1 and end up with over 12,000 lines of code by Chapter 9.
 
