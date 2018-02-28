@@ -46,9 +46,6 @@ const mongoSchema = new Schema({
   githubAccessToken: {
     type: String,
   },
-  tos: {
-    type: String,
-  },
 });
 
 class UserClass {
