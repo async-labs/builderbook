@@ -96,7 +96,7 @@ class ReadChapter extends React.Component {
     const sectionElms = document.querySelectorAll('span.section-anchor');
     let activeSection;
 
-    let preBound;
+    let sectionAbove;
     for (let i = 0; i < sectionElms.length; i += 1) {
       const s = sectionElms[i];
       const b = s.getBoundingClientRect();
@@ -111,7 +111,7 @@ class ReadChapter extends React.Component {
       }
 
       if (anchorBottom > window.innerHeight && i > 0) {
-        if (preBound.bottom <= 0) {
+        if (sectionAbove.bottom <= 0) {
           activeSection = {
             hash: sectionElms[i - 1].attributes.getNamedItem('name').value,
           };
@@ -123,7 +123,7 @@ class ReadChapter extends React.Component {
         };
       }
 
-      preBound = b;
+      sectionAbove = b;
     }
 
     if (this.state.activeSection !== activeSection) {

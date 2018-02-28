@@ -107,7 +107,7 @@ class BuyButton extends React.Component {
         email={user.email}
         desktopShowModal={showModal || null}
       >
-        <Button style={styleBuyButton} raised color="primary">
+        <Button variant="raised" style={styleBuyButton} color="primary">
           {preorderPrice ? 'Pre-order' : 'Buy'} for ${price}
         </Button>
 

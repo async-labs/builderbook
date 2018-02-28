@@ -61,26 +61,6 @@ class BookClass {
     return { books };
   }
 
-  static async getPurchasedBooks({ purchasedBookIds, freeBookIds }) {
-    const allBooks = await this.find().sort({ createdAt: -1 });
-
-    const purchasedBooks = [];
-    const freeBooks = [];
-    const otherBooks = [];
-
-    allBooks.forEach((b) => {
-      if (purchasedBookIds.includes(b.id)) {
-        purchasedBooks.push(b);
-      } else if (freeBookIds.includes(b.id)) {
-        freeBooks.push(b);
-      } else {
-        otherBooks.push(b);
-      }
-    });
-
-    return { purchasedBooks, freeBooks, otherBooks };
-  }
-
   static async getBySlug({ slug, userId }) {
     const bookDoc = await this.findOne({ slug });
     if (!bookDoc) {
@@ -280,6 +260,26 @@ class BookClass {
 
       isPreorder,
     });
+  }
+
+  static async getPurchasedBooks({ purchasedBookIds, freeBookIds }) {
+    const allBooks = await this.find().sort({ createdAt: -1 });
+
+    const purchasedBooks = [];
+    const freeBooks = [];
+    const otherBooks = [];
+
+    allBooks.forEach((b) => {
+      if (purchasedBookIds.includes(b.id)) {
+        purchasedBooks.push(b);
+      } else if (freeBookIds.includes(b.id)) {
+        freeBooks.push(b);
+      } else {
+        otherBooks.push(b);
+      }
+    });
+
+    return { purchasedBooks, freeBooks, otherBooks };
   }
 
   static async giveFree({ id, userId }) {
