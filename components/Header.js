@@ -41,7 +41,7 @@ const optionsMenuAdmin = [
   },
 ];
 
-function Header({ user, hideHeader }) {
+function Header({ user, hideHeader, next }) {
   return (
     <div
       style={{
@@ -95,7 +95,7 @@ function Header({ user, hideHeader }) {
                 ) : null}
               </div>
             ) : (
-              <Link prefetch href="/public/login" as="/login">
+              <Link prefetch href={{ pathname: '/public/login', asPath: '/login', query: { next } }}>
                 <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
               </Link>
             )}
@@ -112,11 +112,13 @@ Header.propTypes = {
     email: PropTypes.string.isRequired,
   }),
   hideHeader: PropTypes.bool,
+  next: PropTypes.string,
 };
 
 Header.defaultProps = {
   user: null,
   hideHeader: false,
+  next: '',
 };
 
 export default Header;

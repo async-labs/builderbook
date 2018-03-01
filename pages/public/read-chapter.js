@@ -29,6 +29,9 @@ class ReadChapter extends React.Component {
       _id: PropTypes.string.isRequired,
     }),
     showStripeModal: PropTypes.bool.isRequired,
+    url: PropTypes.shape({
+      asPath: PropTypes.string.isRequired,
+    }).isRequired,
   };
 
   static defaultProps = {
@@ -287,7 +290,7 @@ class ReadChapter extends React.Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, url } = this.props;
 
     const {
       chapter, showTOC, isMobile, hideHeader,
@@ -318,7 +321,7 @@ class ReadChapter extends React.Component {
           ) : null}
         </Head>
 
-        <Header user={user} hideHeader={hideHeader} />
+        <Header user={user} hideHeader={hideHeader} next={url.asPath} />
 
         {this.renderSidebar()}
 
