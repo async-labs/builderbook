@@ -4,9 +4,9 @@
 
 Builder Book is an open source web app to publish documentation or books. The app is built with React/Material-UI/Next/Express/Mongoose/MongoDB and includes these third party APIs: Google, Github, AWS SES, Mailchimp, Stripe.
 
-We built this app to write and sell our own book: https://builderbook.org/books/builder-book/introduction.
+Live app: https://builderbook.org/books/builder-book/introduction.
 
-Check our [Admin demo](https://github.com/builderbook/builderbook#admin-demo) to see how this app works.
+Check our [Admin demo](https://github.com/builderbook/builderbook#admin-demo) to create book from Github repo.
 
 
 ## How can you use this app?
