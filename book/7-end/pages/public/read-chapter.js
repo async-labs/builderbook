@@ -51,7 +51,10 @@ class ReadChapter extends React.Component {
 
     const { chapter } = props;
 
-    const htmlContent = '' || chapter.htmlContent;
+    let htmlContent = '';
+    if (chapter) {
+      htmlContent = chapter.htmlContent;
+    }
 
     this.state = {
       showTOC: false,
