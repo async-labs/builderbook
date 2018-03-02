@@ -23,7 +23,7 @@ Check our [Admin demo](https://github.com/builderbook/builderbook#admin-demo) to
   - [Core stack](#core-stack)
   - [Third party APIs](#third-party-apis)
 - [Project structure](#project-structure)
-- [Learn how to build this app from scratch](#learn-how-to-build-this-app-from-scratch)
+- [Book](#book)
 - [Contributing](#contributing)
 - [Team](#team)
 - [License](#license)
@@ -260,10 +260,8 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 ```
 
 
-## Learn how to build this app from scratch
-We wrote [this book](https://builderbook.org/books/builder-book/introduction) that teaches you how to build the web app in this repository from scratch.
-
-In the book, you'll start from 0 lines of code in Chapter 1 and end up with over 12,000 lines of code by Chapter 9.
+## Book
+We wrote [this book](https://builderbook.org/books/builder-book/introduction) that teaches you how to build the web app in this repository from scratch. In the book, you'll start from 0 lines of code in Chapter 1 and end up with over 12,000 lines of code by Chapter 8.
 
 ## Contributing
 We welcome suggestions and pull requests, especially for [issues](https://github.com/builderbook/builderbook/issues) labeled as `discussion` and `contributions welcome`.
