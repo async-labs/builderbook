@@ -48,7 +48,7 @@ class BuyButton extends React.Component {
     try {
       await buyBook({ stripeToken: token, id: book._id });
       notify('Success!');
-      setTimeout(() => window.location.reload(), 300);
+      window.location.reload();
       NProgress.done();
     } catch (err) {
       NProgress.done();
