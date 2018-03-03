@@ -56,11 +56,10 @@ class BuyButton extends React.Component {
     }
   };
 
-  onLoginClicked = (e) => {
+  onLoginClicked = () => {
     const { user } = this.props;
 
     if (!user) {
-      e.stopPropagation();
       const next = `${window.location.pathname}?buy=1`;
       window.location.href = `/auth/google?next=${next}`;
     }
@@ -69,9 +68,6 @@ class BuyButton extends React.Component {
   render() {
     const { book, user } = this.props;
     const { showModal } = this.state;
-
-    const preorderPrice = book.isInPreorder && book.preorderPrice;
-    const price = preorderPrice || book.price;
 
     if (!book) {
       return null;
@@ -86,14 +82,8 @@ class BuyButton extends React.Component {
             color="primary"
             onClick={this.onLoginClicked}
           >
-            {preorderPrice ? 'Pre-order' : 'Buy'} for ${price}
+            Buy book for ${book.price}
           </Button>
-
-          {preorderPrice ? (
-            <span style={{ verticalAlign: 'middle', fontSize: '15px' }}>
-              On March 15th, price becomes ${book.price}.
-            </span>
-          ) : null}
         </div>
       );
     }
@@ -103,19 +93,13 @@ class BuyButton extends React.Component {
         stripeKey={StripePublishableKey}
         token={this.onToken}
         name={book.name}
-        amount={price * 100}
+        amount={book.price * 100}
         email={user.email}
         desktopShowModal={showModal || null}
       >
         <Button variant="raised" style={styleBuyButton} color="primary">
-          {preorderPrice ? 'Pre-order' : 'Buy'} for ${price}
+          Buy book for ${book.price}
         </Button>
-
-        {preorderPrice ? (
-          <span style={{ verticalAlign: 'middle', fontSize: '15px' }}>
-            On March 15th, price becomes ${book.price}.
-          </span>
-        ) : null}
       </StripeCheckout>
     );
   }
