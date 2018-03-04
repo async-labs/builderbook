@@ -2,11 +2,10 @@ import mongoose, { Schema } from 'mongoose';
 import frontmatter from 'front-matter';
 
 import Chapter from './Chapter';
-import User from './User';
 import Purchase from './Purchase';
 import getEmailTemplate from './EmailTemplate';
 
-import { charge as stripeCharge } from '../stripe';
+import stripeCharge from '../stripe';
 import { getCommits, getContent } from '../github';
 import sendEmail from '../aws';
 import { subscribe } from '../mailchimp';
@@ -157,13 +156,14 @@ class BookClass {
   }
 
   static async buy({ id, user, stripeToken }) {
-    const book = await this.findById(id, 'name slug price isInPreorder preorderPrice');
-    if (!book) {
-      throw new Error('Book not found');
-    }
-
     if (!user) {
       throw new Error('User required');
+    }
+
+    const book = await this.findById(id, 'name slug price');
+
+    if (!book) {
+      throw new Error('Book not found');
     }
 
     const isPurchased = (await Purchase.find({ userId: user._id, bookId: id }).count()) > 0;

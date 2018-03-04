@@ -1,8 +1,6 @@
 import stripe from 'stripe';
 
-const SIMULATE_CHARGE_FAILED = !!process.env.SIMULATE_CHARGE_FAILED;
-
-export function charge({
+export function stripeCharge({
   amount, token, buyerEmail,
 }) {
   const dev = process.env.NODE_ENV !== 'production';
@@ -12,7 +10,7 @@ export function charge({
   return client.charges.create({
     amount,
     currency: 'usd',
-    source: SIMULATE_CHARGE_FAILED ? 'tok_chargeDeclined' : token,
+    source: token,
     receipt_email: buyerEmail,
     description: 'Payment for the book at builderbook.org',
   });
