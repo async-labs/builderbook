@@ -176,21 +176,13 @@ class ChapterClass {
     chapterObj.book = book;
 
     if (userId) {
-      const purchase = await Purchase.findOne({ userId, bookId: book._id }, 'bookmarks');
+      const purchase = await Purchase.findOne({ userId, bookId: book._id });
 
       chapterObj.isPurchased = !!purchase || isAdmin;
-
-      ((purchase && purchase.bookmarks) || []).forEach((b) => {
-        if (chapter._id.equals(b.chapterId)) {
-          chapterObj.bookmark = b;
-        }
-      });
     }
 
-    const isPurchased = chapter.isFree || chapterObj.isPurchased;
-
-    if (!isPurchased) {
-      delete chapterObj.content;
+    if (!chapterObj.isPurchased) {
+      delete chapterObj.htmlContent;
     }
 
     return chapterObj;

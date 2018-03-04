@@ -4,8 +4,7 @@ import crypto from 'crypto';
 require('dotenv').config();
 
 const LIST_IDS = {
-  preordered: process.env.MAILCHIMP_PREORDERED_LIST_ID,
-  ordered: process.env.MAILCHIMP_ORDERED_LIST_ID,
+  purchased: process.env.MAILCHIMP_PURCHASED_LIST_ID,
 };
 
 function callAPI({ path, method, data }) {
@@ -46,44 +45,27 @@ async function getMemberDetail({ email, listName }) {
   return res;
 }
 
-export async function subscribe({ email, listName, book }) {
+export async function subscribe({ email, listName }) {
   const data = {
     email_address: email,
     status: 'subscribed',
   };
 
-  if (book) {
-    data.merge_fields = {
-      BOOK: book,
-    };
-  }
-
   const path = `/lists/${LIST_IDS[listName]}/members/`;
 
   let res = await callAPI({ path, method: 'POST', data });
-  if (res.id || !book) {
+  if (res.id) {
     return;
   }
 
   res = await getMemberDetail({ email, listName });
-  const { merge_fields: { BOOK = '' } } = res;
-
-  if (BOOK.includes(book)) {
-    return;
-  }
-
-  const books = BOOK.split(',')
-    .map(b => b.trim())
-    .filter(b => !!b);
-
-  books.push(book);
 
   const hash = crypto.createHash('md5');
 
   await callAPI({
     path: `${path}${hash.update(email).digest('hex')}`,
     method: 'PUT',
-    data: { merge_fields: { BOOK: books.join(', ') } },
+    data,
   });
 }
 
