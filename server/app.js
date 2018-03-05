@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session';
+import path from 'path';
 import mongoSessionStore from 'connect-mongo';
 import bodyParser from 'body-parser';
 import next from 'next';
@@ -73,6 +74,11 @@ app.prepare().then(() => {
   github({ server });
   api(server);
   routesWithSlug({ server, app });
+
+  // for indexing bots
+  server.get('/robots.txt', (req, res) => {
+    res.sendFile(path.join(__dirname, '../static', 'robots.txt'));
+  });
 
   server.get('*', (req, res) => {
     const url = URL_MAP[req.path];
