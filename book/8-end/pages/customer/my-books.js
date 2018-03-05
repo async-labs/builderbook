@@ -8,7 +8,7 @@ import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 
 
-class MyBooksWithData extends React.Component {
+class MyBooks extends React.Component {
   static propTypes = {
     purchasedBooks: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -67,4 +67,4 @@ class MyBooksWithData extends React.Component {
   }
 }
 
-export default withAuth(withLayout(MyBooksWithData));
+export default withAuth(withLayout(MyBooks));

@@ -35,16 +35,6 @@ function callAPI({ path, method, data }) {
   });
 }
 
-async function getMemberDetail({ email, listName }) {
-  const hash = crypto.createHash('md5');
-
-  const path = `/lists/${LIST_IDS[listName]}/members/${hash.update(email).digest('hex')}`;
-
-  const res = await callAPI({ path, method: 'GET' });
-
-  return res;
-}
-
 export async function subscribe({ email, listName }) {
   const data = {
     email_address: email,
@@ -52,13 +42,6 @@ export async function subscribe({ email, listName }) {
   };
 
   const path = `/lists/${LIST_IDS[listName]}/members/`;
-
-  let res = await callAPI({ path, method: 'POST', data });
-  if (res.id) {
-    return;
-  }
-
-  res = await getMemberDetail({ email, listName });
 
   const hash = crypto.createHash('md5');
 
