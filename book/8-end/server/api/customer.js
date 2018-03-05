@@ -28,14 +28,11 @@ router.post('/buy-book', async (req, res) => {
 
 router.get('/my-books', async (req, res) => {
   try {
-    const { purchasedBookIds = [], freeBookIds = [] } = req.user;
+    const { purchasedBookIds = [] } = req.user;
 
-    const { purchasedBooks, freeBooks, otherBooks } = await Book.getPurchasedBooks({
-      purchasedBookIds,
-      freeBookIds,
-    });
+    const { purchasedBooks } = await Book.getPurchasedBooks({ purchasedBookIds });
 
-    res.json({ purchasedBooks, freeBooks, otherBooks });
+    res.json({ purchasedBooks });
   } catch (err) {
     res.json({ error: err.message || err.toString() });
   }

@@ -46,11 +46,21 @@ const mongoSchema = new Schema({
   githubAccessToken: {
     type: String,
   },
+  purchasedBookIds: [String],
 });
 
 class UserClass {
   static publicFields() {
-    return ['id', 'displayName', 'email', 'avatarUrl', 'slug', 'isAdmin', 'isGithubConnected'];
+    return [
+      'id',
+      'displayName',
+      'email',
+      'avatarUrl',
+      'slug',
+      'isAdmin',
+      'isGithubConnected',
+      'purchasedBookIds',
+    ];
   }
 
   static async signInOrSignUp({

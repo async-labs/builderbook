@@ -13,9 +13,7 @@ import {
 } from '../../lib/api/admin';
 
 
-const Index = ({
-  books,
-}) => (
+const Index = ({ books }) => (
   <div style={{ padding: '10px 45px' }}>
     <div>
       <h2>Books</h2>

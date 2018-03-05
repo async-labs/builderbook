@@ -1,137 +1,69 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Error from 'next/error';
-import NProgress from 'nprogress';
+import Head from 'next/head';
 
 import { getMyBookList } from '../../lib/api/customer';
-import notify from '../../lib/notifier';
 import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 
-function renderBookRow(book) {
-  return (
-    <li key={book._id}>
-      <Link
-        as={`/books/${book.slug}/introduction`}
-        href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=introduction`}
-      >
-        <a>{book.name}</a>
-      </Link>
-    </li>
-  );
-}
-
-function renderFreeBookRow(book) {
-  return (
-    <li key={book._id}>
-      <Link
-        as={`/books/${book.slug}/introduction`}
-        href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=introduction`}
-      >
-        <a>{book.name}</a>
-      </Link>
-      <span> (free book from Team Builder Book)</span>
-    </li>
-  );
-}
-
-function MyBooks({
-  purchasedBooks, freeBooks, otherBooks, error, loading,
-}) {
-  if (error) {
-    notify(error);
-    return <Error statusCode={500} />;
-  }
-
-  if (loading) {
-    return (
-      <div style={{ padding: '10px 45px' }}>
-        <p>loading...</p>
-      </div>
-    );
-  }
-
-  return (
-    <div style={{ padding: '10px 45px' }}>
-      {purchasedBooks && purchasedBooks.length > 0 ? (
-        <div>
-          <h3>Your books</h3>
-          <ul>{purchasedBooks.map(book => renderBookRow(book))}</ul>
-        </div>
-        ) : (
-          <div>
-            <h3>Your books</h3>
-            <p>You have not purchased any book.</p>
-          </div>
-        )}
-
-      {freeBooks && freeBooks.length > 0 ? (
-        <ul>{freeBooks.map(book => renderFreeBookRow(book))}</ul>
-            ) : null}
-
-      {otherBooks && otherBooks.length > 0 ? (
-        <div>
-          <h3>Available books</h3>
-          <p>Check out books available for purchase:</p>
-          <ul>{otherBooks.map(book => renderBookRow(book))}</ul>
-        </div>
-        ) : null}
-
-    </div>
-  );
-}
-
-MyBooks.propTypes = {
-  purchasedBooks: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  })),
-  freeBooks: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  })),
-  otherBooks: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  })),
-  error: PropTypes.string,
-  loading: PropTypes.bool.isRequired,
-};
-
-MyBooks.defaultProps = {
-  error: null,
-  purchasedBooks: null,
-  freeBooks: null,
-  otherBooks: null,
-};
 
 class MyBooksWithData extends React.Component {
-  state = {
-    loading: true,
-    error: null,
-    purchasedBooks: null,
-    freeBooks: null,
-    otherBooks: null,
+  static propTypes = {
+    purchasedBooks: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    })),
+  };
+  static defaultProps = {
+    purchasedBooks: [],
   };
 
-  async componentDidMount() {
-    NProgress.start();
-
-    try {
-      const { purchasedBooks, freeBooks, otherBooks } = await getMyBookList();
-      this.setState({ // eslint-disable-line
-        purchasedBooks,
-        freeBooks,
-        otherBooks,
-        loading: false,
-      });
-      NProgress.done();
-    } catch (err) {
-      this.setState({ loading: false, error: err.message || err.toString() }); // eslint-disable-line
-      NProgress.done();
+  static async getInitialProps({ req }) {
+    const headers = {};
+    if (req && req.headers && req.headers.cookie) {
+      headers.cookie = req.headers.cookie;
     }
+
+    const { purchasedBooks } = await getMyBookList({ headers });
+    return { purchasedBooks };
   }
 
   render() {
-    return <MyBooks {...this.props} {...this.state} />;
+    function renderBookRow(book) {
+      return (
+        <li key={book._id}>
+          <Link
+            as={`/books/${book.slug}/introduction`}
+            href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=introduction`}
+          >
+            <a>{book.name}</a>
+          </Link>
+        </li>
+      );
+    }
+
+    const { purchasedBooks } = this.props;
+
+    return (
+      <div>
+        <Head>
+          <title>My Books</title>
+        </Head>
+        <div style={{ padding: '10px 45px' }}>
+          {purchasedBooks && purchasedBooks.length > 0 ? (
+            <div>
+              <h3>Your books</h3>
+              <ul>{purchasedBooks.map(book => renderBookRow(book))}</ul>
+            </div>
+          ) : (
+            <div>
+              <h3>Your books</h3>
+              <p>You have not purchased any book.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    );
   }
 }
 

@@ -4,11 +4,12 @@ import frontmatter from 'front-matter';
 import Chapter from './Chapter';
 import Purchase from './Purchase';
 import getEmailTemplate from './EmailTemplate';
+import User from './User';
 
-import stripeCharge from '../stripe';
+import { stripeCharge } from '../stripe';
 import { getCommits, getContent } from '../github';
 import sendEmail from '../aws';
-import { subscribe } from '../mailchimp';
+// import { subscribe } from '../mailchimp';
 
 import generateSlug from '../utils/slugify';
 import logger from '../logs';
@@ -177,6 +178,8 @@ class BookClass {
       buyerEmail: user.email,
     });
 
+    User.findByIdAndUpdate(user.id, { $addToSet: { purchasedBookIds: book.id } }).exec();
+
     const template = await getEmailTemplate('purchase', {
       userName: user.displayName,
       bookTitle: book.name,
@@ -191,7 +194,7 @@ class BookClass {
     }).catch((error) => {
       logger.error('Email sending error:', error);
     });
-
+    /*
     subscribe({
       email: user.email,
       listName: 'ordered',
@@ -199,7 +202,7 @@ class BookClass {
     }).catch((error) => {
       logger.error('Mailchimp subscribing error:', error);
     });
-
+    */
     return Purchase.create({
       userId: user._id,
       bookId: book._id,
@@ -209,24 +212,18 @@ class BookClass {
     });
   }
 
-  static async getPurchasedBooks({ purchasedBookIds, freeBookIds }) {
+  static async getPurchasedBooks({ purchasedBookIds }) {
     const allBooks = await this.find().sort({ createdAt: -1 });
 
     const purchasedBooks = [];
-    const freeBooks = [];
-    const otherBooks = [];
 
     allBooks.forEach((b) => {
       if (purchasedBookIds.includes(b.id)) {
         purchasedBooks.push(b);
-      } else if (freeBookIds.includes(b.id)) {
-        freeBooks.push(b);
-      } else {
-        otherBooks.push(b);
       }
     });
 
-    return { purchasedBooks, freeBooks, otherBooks };
+    return { purchasedBooks };
   }
 }
 

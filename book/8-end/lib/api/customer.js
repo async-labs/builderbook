@@ -7,7 +7,13 @@ export const buyBook = ({ id, stripeToken }) =>
     body: JSON.stringify({ id, stripeToken }),
   });
 
-export const getMyBookList = () =>
-  sendRequest(`${BASE_PATH}/my-books`, {
-    method: 'GET',
-  });
+export const getMyBookList = (options = {}) =>
+  sendRequest(
+    `${BASE_PATH}/my-books`,
+    Object.assign(
+      {
+        method: 'GET',
+      },
+      options,
+    ),
+  );

@@ -257,7 +257,6 @@ class BookClass {
       amount: price * 100,
       createdAt: new Date(),
       stripeCharge: chargeObj,
-
       isPreorder,
     });
   }
