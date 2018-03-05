@@ -27,6 +27,9 @@ class ReadChapter extends React.Component {
     user: PropTypes.shape({
       _id: PropTypes.string.isRequired,
     }),
+    url: PropTypes.shape({
+      asPath: PropTypes.string.isRequired,
+    }).isRequired,
     showStripeModal: PropTypes.bool.isRequired,
   };
 
@@ -44,7 +47,6 @@ class ReadChapter extends React.Component {
     }
 
     const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
-
     const showStripeModal = req ? !!req.query.buy : window.location.search.includes('buy=1');
 
     return { chapter, showStripeModal };
@@ -168,6 +170,8 @@ class ReadChapter extends React.Component {
       chapter, htmlContent, showTOC, isMobile,
     } = this.state;
 
+    const { book } = chapter;
+
     let padding = '20px 20%';
     if (!isMobile && showTOC) {
       padding = '20px 10%';
@@ -186,7 +190,7 @@ class ReadChapter extends React.Component {
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
         {!chapter.isPurchased && !chapter.isFree ? (
-          <BuyButton user={user} book={chapter.book} showModal={showStripeModal} />
+          <BuyButton user={user} book={book} showModal={showStripeModal} />
         ) : null}
       </div>
     );
@@ -275,7 +279,7 @@ class ReadChapter extends React.Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, url } = this.props;
 
     const {
       chapter, showTOC, hideHeader, isMobile,
@@ -303,7 +307,7 @@ class ReadChapter extends React.Component {
           ) : null}
         </Head>
 
-        <Header user={user} hideHeader={hideHeader} />
+        <Header user={user} hideHeader={hideHeader} redirectUrl={url.asPath} />
 
         {this.renderSidebar()}
 

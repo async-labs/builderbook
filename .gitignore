@@ -12,3 +12,5 @@ node_modules/
 .coverage
 .env
 env-config.js
+
+book/8-exp

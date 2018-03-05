@@ -177,7 +177,7 @@ class BookClass {
       buyerEmail: user.email,
     });
 
-    const template = await getEmailTemplate('ordered', {
+    const template = await getEmailTemplate('purchase', {
       userName: user.displayName,
       bookTitle: book.name,
       bookUrl: `${ROOT_URL}/books/${book.slug}/introduction`,

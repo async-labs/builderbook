@@ -38,6 +38,25 @@ function insertTemplates() {
         Team BB
       `,
     },
+    {
+      name: 'purchase',
+      subject: 'You purchased book at builderbook.org',
+      message: `{{userName}},
+        <p>
+          Thank you for purchasing our book! You will get confirmation email from Stripe shortly.
+        </p>
+        <p>
+          Start reading your book: <a href="{{bookUrl}}" target="_blank">{{bookTitle}}</a>
+        </p>
+        <p>
+          If you have any questions while reading the book, 
+          please fill out an issue on 
+          <a href="https://github.com/builderbook/builderbook/issues" target="blank">Github</a>.
+        </p>
+      
+        Kelly & Timur, Team Builder Book
+      `,
+    },
   ];
 
   templates.forEach(async (template) => {
@@ -45,11 +64,9 @@ function insertTemplates() {
       return;
     }
 
-    EmailTemplate
-      .create(template)
-      .catch((error) => {
-        logger.error('EmailTemplate insertion error:', error);
-      });
+    EmailTemplate.create(template).catch((error) => {
+      logger.error('EmailTemplate insertion error:', error);
+    });
   });
 }
 
@@ -66,4 +83,3 @@ export default async function getEmailTemplate(name, params) {
     subject: Handlebars.compile(source.subject)(params),
   };
 }
-

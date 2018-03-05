@@ -52,13 +52,18 @@ export default function auth({ ROOT_URL, server }) {
   server.use(passport.initialize());
   server.use(passport.session());
 
-  server.get(
-    '/auth/google',
+  server.get('/auth/google', (req, res, redirectUrl) => {
+    if (req.query && req.query.redirectUrl && req.query.redirectUrl.startsWith('/')) {
+      req.session.finalUrl = req.query.redirectUrl;
+    } else {
+      req.session.finalUrl = null;
+    }
+
     passport.authenticate('google', {
       scope: ['profile', 'email'],
       prompt: 'select_account',
-    }),
-  );
+    })(req, res, redirectUrl);
+  });
 
   server.get(
     '/oauth2callback',
@@ -68,6 +73,8 @@ export default function auth({ ROOT_URL, server }) {
     (req, res) => {
       if (req.user && req.user.isAdmin) {
         res.redirect('/admin');
+      } else if (req.session.finalUrl) {
+        res.redirect(req.session.finalUrl);
       } else {
         res.redirect('/my-books');
       }

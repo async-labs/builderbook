@@ -146,14 +146,6 @@ class ReadChapter extends React.Component {
     this.setState({ showTOC: !this.state.showTOC });
   };
 
-  changeBookmark = (bookmark) => {
-    const { chapter } = this.state;
-
-    this.setState({
-      chapter: Object.assign({}, chapter, { bookmark }),
-    });
-  };
-
   closeTocWhenMobile = () => {
     this.setState({ showTOC: !this.state.isMobile });
   };

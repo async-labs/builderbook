@@ -48,7 +48,7 @@ class BuyButton extends React.Component {
     try {
       await buyBook({ stripeToken: token, id: book._id });
       notify('Success!');
-      window.location.reload();
+      window.location.reload(true);
       NProgress.done();
     } catch (err) {
       NProgress.done();
@@ -60,8 +60,8 @@ class BuyButton extends React.Component {
     const { user } = this.props;
 
     if (!user) {
-      const next = `${window.location.pathname}?buy=1`;
-      window.location.href = `/auth/google?next=${next}`;
+      const redirectUrl = `${window.location.pathname}?buy=1`;
+      window.location.href = `/auth/google?redirectUrl=${redirectUrl}`;
     }
   };
 

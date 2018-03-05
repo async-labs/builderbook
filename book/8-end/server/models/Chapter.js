@@ -181,7 +181,9 @@ class ChapterClass {
       chapterObj.isPurchased = !!purchase || isAdmin;
     }
 
-    if (!chapterObj.isPurchased) {
+    const isFreeOrPurchased = chapter.isFree || chapterObj.isPurchased;
+
+    if (!isFreeOrPurchased) {
       delete chapterObj.htmlContent;
     }
 
