@@ -7,7 +7,6 @@ import { getMyBookList } from '../../lib/api/customer';
 import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 
-
 class MyBooks extends React.Component {
   static propTypes = {
     purchasedBooks: PropTypes.arrayOf(PropTypes.shape({
@@ -18,14 +17,24 @@ class MyBooks extends React.Component {
     purchasedBooks: [],
   };
 
-  static async getInitialProps({ req }) {
+  static async getInitialProps({ req, res }) {
     const headers = {};
     if (req && req.headers && req.headers.cookie) {
       headers.cookie = req.headers.cookie;
     }
 
-    const { purchasedBooks } = await getMyBookList({ headers });
-    return { purchasedBooks };
+    try {
+      const { purchasedBooks } = await getMyBookList({ headers });
+      return { purchasedBooks };
+    } catch (err) {
+      if (err.message === 'Unauthorized' && res) {
+        res.redirect('/login');
+      } else {
+        throw err;
+      }
+
+      return { purchasedBooks: [] };
+    }
   }
 
   render() {
