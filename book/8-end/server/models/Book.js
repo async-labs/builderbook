@@ -9,7 +9,7 @@ import User from './User';
 import { stripeCharge } from '../stripe';
 import { getCommits, getContent } from '../github';
 import sendEmail from '../aws';
-// import { subscribe } from '../mailchimp';
+import { subscribe } from '../mailchimp';
 
 import generateSlug from '../utils/slugify';
 import logger from '../logs';
@@ -185,23 +185,23 @@ class BookClass {
       bookUrl: `${ROOT_URL}/books/${book.slug}/introduction`,
     });
 
-    sendEmail({
-      from: `Kelly from builderbook.org <${process.env.EMAIL_SUPPORT_FROM_ADDRESS}>`,
-      to: [user.email],
-      subject: template.subject,
-      body: template.message,
-    }).catch((error) => {
+    try {
+      await sendEmail({
+        from: `Kelly from builderbook.org <${process.env.EMAIL_SUPPORT_FROM_ADDRESS}>`,
+        to: [user.email],
+        subject: template.subject,
+        body: template.message,
+      });
+    } catch (error) {
       logger.error('Email sending error:', error);
-    });
-    /*
-    subscribe({
-      email: user.email,
-      listName: 'ordered',
-      book: book.slug,
-    }).catch((error) => {
-      logger.error('Mailchimp subscribing error:', error);
-    });
-    */
+    }
+
+    try {
+      await subscribe({ email: user.email, listName: 'purchased' });
+    } catch (error) {
+      logger.error('Mailchimp error:', error);
+    }
+
     return Purchase.create({
       userId: user._id,
       bookId: book._id,
