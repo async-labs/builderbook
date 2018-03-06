@@ -59,8 +59,7 @@ class BookClass {
 
     const book = bookDoc.toObject();
 
-    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug')
-      .sort({ order: 1 })).map(chapter => chapter.toObject());
+    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug').sort({ order: 1 })).map(chapter => chapter.toObject());
 
     return book;
   }
@@ -213,16 +212,9 @@ class BookClass {
   }
 
   static async getPurchasedBooks({ purchasedBookIds }) {
-    const allBooks = await this.find().sort({ createdAt: -1 });
-
-    const purchasedBooks = [];
-
-    allBooks.forEach((b) => {
-      if (purchasedBookIds.includes(b.id)) {
-        purchasedBooks.push(b);
-      }
+    const purchasedBooks = await this.find({ _id: { $in: purchasedBookIds } }).sort({
+      createdAt: -1,
     });
-
     return { purchasedBooks };
   }
 }
