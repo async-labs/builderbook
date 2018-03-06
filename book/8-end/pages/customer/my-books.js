@@ -18,23 +18,18 @@ class MyBooks extends React.Component {
   };
 
   static async getInitialProps({ req, res }) {
+    if (req && !req.user) {
+      res.redirect('/login');
+      return { purchasedBooks: [] };
+    }
+
     const headers = {};
     if (req && req.headers && req.headers.cookie) {
       headers.cookie = req.headers.cookie;
     }
 
-    try {
-      const { purchasedBooks } = await getMyBookList({ headers });
-      return { purchasedBooks };
-    } catch (err) {
-      if (err.message === 'Unauthorized' && res) {
-        res.redirect('/login');
-      } else {
-        throw err;
-      }
-
-      return { purchasedBooks: [] };
-    }
+    const { purchasedBooks } = await getMyBookList({ headers });
+    return { purchasedBooks };
   }
 
   render() {
