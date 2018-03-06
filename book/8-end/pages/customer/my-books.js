@@ -33,19 +33,6 @@ class MyBooks extends React.Component {
   }
 
   render() {
-    function renderBookRow(book) {
-      return (
-        <li key={book._id}>
-          <Link
-            as={`/books/${book.slug}/introduction`}
-            href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=introduction`}
-          >
-            <a>{book.name}</a>
-          </Link>
-        </li>
-      );
-    }
-
     const { purchasedBooks } = this.props;
 
     return (
@@ -57,7 +44,18 @@ class MyBooks extends React.Component {
           {purchasedBooks && purchasedBooks.length > 0 ? (
             <div>
               <h3>Your books</h3>
-              <ul>{purchasedBooks.map(book => renderBookRow(book))}</ul>
+              <ul>
+                {purchasedBooks.map(book => (
+                  <li key={book._id}>
+                    <Link
+                      as={`/books/${book.slug}/introduction`}
+                      href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=introduction`}
+                    >
+                      <a>{book.name}</a>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           ) : (
             <div>
