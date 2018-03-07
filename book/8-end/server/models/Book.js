@@ -197,7 +197,7 @@ class BookClass {
     }
 
     try {
-      await subscribe({ email: user.email, listName: 'purchased' });
+      await subscribe({ email: user.email });
     } catch (error) {
       logger.error('Mailchimp error:', error);
     }
