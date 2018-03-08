@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session';
+import compression from 'compression';
 import mongoSessionStore from 'connect-mongo';
 import bodyParser from 'body-parser';
 import next from 'next';
@@ -34,6 +35,16 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
+  server.use(compression());
+
+  // give all Nextjs's request to Nextjs before anything else
+  server.get('/_next/*', (req, res) => {
+    handle(req, res);
+  });
+
+  server.get('/static/*', (req, res) => {
+    handle(req, res);
+  });
 
   server.use(bodyParser.json());
 
@@ -76,4 +87,3 @@ app.prepare().then(() => {
     logger.info(`> Ready on ${ROOT_URL}`);
   });
 });
-

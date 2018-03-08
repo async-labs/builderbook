@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session';
+import compression from 'compression';
 import mongoSessionStore from 'connect-mongo';
 import bodyParser from 'body-parser';
 import next from 'next';
@@ -35,9 +36,9 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
+  server.use(compression());
 
   // give all Nextjs's request to Nextjs before anything else
-  // no middleware (auth, session etc...) needed for it
   server.get('/_next/*', (req, res) => {
     handle(req, res);
   });
