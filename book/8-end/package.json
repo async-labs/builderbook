@@ -1,10 +1,10 @@
 {
-  "name": "8-start",
+  "name": "8-end",
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "build": "next build",
-    "start": "next start",
+    "build": "NODE_ENV=production next build",
+    "start": "babel-node server/app.js",
     "dev": "nodemon server/app.js --watch server --exec babel-node",
     "lint": "eslint components pages lib server",
     "test": "jest --coverage"

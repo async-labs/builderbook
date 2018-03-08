@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import frontmatter from 'front-matter';
 
+import getRootUrl from '../../lib/api/getRootUrl';
 import Chapter from './Chapter';
 import Purchase from './Purchase';
 import getEmailTemplate from './EmailTemplate';
@@ -14,7 +15,7 @@ import { subscribe } from '../mailchimp';
 import generateSlug from '../utils/slugify';
 import logger from '../logs';
 
-const ROOT_URL = process.env.ROOT_URL || `http://localhost:${process.env.PORT || 8000}`;
+const ROOT_URL = getRootUrl();
 
 const mongoSchema = new Schema({
   name: {

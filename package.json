@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon server/app.js --watch server --exec babel-node",
     "build": "next build",
-    "start": "NODE_ENV=production ROOT_URL=https://builderbook.org babel-node server/app.js",
+    "start": "NODE_ENV=production babel-node server/app.js",
     "lint": "eslint components pages lib server",
     "test": "jest --coverage"
   },

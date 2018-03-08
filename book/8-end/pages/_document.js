@@ -56,9 +56,11 @@ class MyDocument extends Document {
                 background:#FFF;
                 color: #000;
                 border: 1px solid #ddd;
+                font-size: 14px;
               }
               code {
                 font-size: 14px;
+                background: #FFF;
               }
             `}
           </style>

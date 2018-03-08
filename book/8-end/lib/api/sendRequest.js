@@ -1,7 +1,5 @@
 import 'isomorphic-fetch';
-
-const port = process.env.PORT || 8000;
-const ROOT_URL = process.env.ROOT_URL || `http://localhost:${port}`;
+import getRootUrl from './getRootUrl';
 
 export default async function sendRequest(path, options = {}) {
   const headers = Object.assign({}, options.headers || {}, {
@@ -9,7 +7,7 @@ export default async function sendRequest(path, options = {}) {
   });
 
   const response = await fetch(
-    `${ROOT_URL}${path}`,
+    `${getRootUrl()}${path}`,
     Object.assign({ method: 'POST', credentials: 'include' }, options, { headers }),
   );
 
