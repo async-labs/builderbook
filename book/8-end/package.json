@@ -44,6 +44,7 @@
     "react-jss": "^8.2.1",
     "react-stripe-checkout": "2.6.3",
     "request": "^2.83.0",
+    "sitemap": "^1.13.0",
     "stripe": "5.4.0",
     "winston": "^3.0.0-rc1"
   },

@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon server/app.js --watch server --exec babel-node",
-    "build": "next build",
-    "start": "NODE_ENV=production babel-node server/app.js",
+    "build": "NODE_ENV=production next build",
+    "start": "babel-node server/app.js",
     "lint": "eslint components pages lib server",
     "test": "jest --coverage"
   },
@@ -44,6 +44,7 @@
     "react-jss": "^8.1.0",
     "react-stripe-checkout": "^2.6.3",
     "request": "^2.83.0",
+    "sitemap": "^1.13.0",
     "stripe": "^5.3.0",
     "winston": "^3.0.0-rc1"
   },

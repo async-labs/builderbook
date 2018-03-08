@@ -1,11 +1,12 @@
 import express from 'express';
 import session from 'express-session';
-import path from 'path';
 import mongoSessionStore from 'connect-mongo';
 import bodyParser from 'body-parser';
 import next from 'next';
 import mongoose from 'mongoose';
 
+import sitemapAndRobots from './sitemapAndRobots';
+import getRootUrl from '../lib/api/getRootUrl';
 import auth from './google';
 import { setupGithub as github } from './github';
 import api from './api';
@@ -22,7 +23,7 @@ const MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
 mongoose.connect(MONGO_URL);
 
 const port = process.env.PORT || 8000;
-const ROOT_URL = process.env.ROOT_URL || `http://localhost:${port}`;
+const ROOT_URL = getRootUrl();
 
 const URL_MAP = {
   '/login': '/public/login',
@@ -75,10 +76,7 @@ app.prepare().then(() => {
   api(server);
   routesWithSlug({ server, app });
 
-  // for indexing bots
-  server.get('/robots.txt', (req, res) => {
-    res.sendFile(path.join(__dirname, '../static', 'robots.txt'));
-  });
+  sitemapAndRobots({ server });
 
   server.get('*', (req, res) => {
     const url = URL_MAP[req.path];

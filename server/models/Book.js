@@ -9,12 +9,13 @@ import logger from '../logs';
 import generateSlug from '../utils/slugify';
 import { subscribe } from '../mailchimp';
 
+import getRootUrl from '../../lib/api/getRootUrl';
 import Chapter from './Chapter';
 import User from './User';
 import Purchase from './Purchase';
 import getEmailTemplate from './EmailTemplate';
 
-const ROOT_URL = process.env.ROOT_URL || `http://localhost:${process.env.PORT || 8000}`;
+const ROOT_URL = getRootUrl();
 
 const mongoSchema = new Schema({
   name: {

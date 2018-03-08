@@ -6,6 +6,7 @@ import next from 'next';
 import mongoose from 'mongoose';
 
 import getRootUrl from '../lib/api/getRootUrl';
+import sitemapAndRobots from './sitemapAndRobots';
 import auth from './google';
 import { setupGithub as github } from './github';
 import api from './api';
@@ -58,6 +59,8 @@ app.prepare().then(() => {
   github({ server });
   api(server);
   routesWithSlug({ server, app });
+
+  sitemapAndRobots({ server });
 
   server.get('*', (req, res) => {
     const url = URL_MAP[req.path];
