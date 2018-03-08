@@ -35,7 +35,9 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
+  server.disable('x-powered-by');
   server.use(compression());
+  server.use(bodyParser.json());
 
   // give all Nextjs's request to Nextjs before anything else
   server.get('/_next/*', (req, res) => {
@@ -45,8 +47,6 @@ app.prepare().then(() => {
   server.get('/static/*', (req, res) => {
     handle(req, res);
   });
-
-  server.use(bodyParser.json());
 
   const MongoStore = mongoSessionStore(session);
   const sess = {

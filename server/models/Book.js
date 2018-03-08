@@ -223,7 +223,6 @@ class BookClass {
     const chargeObj = await stripeCharge({
       amount: price * 100,
       token: stripeToken.id,
-      bookName: book.name,
       buyerEmail: user.email,
     });
 
