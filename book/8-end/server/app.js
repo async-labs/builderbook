@@ -5,7 +5,7 @@ import mongoSessionStore from 'connect-mongo';
 import bodyParser from 'body-parser';
 import next from 'next';
 import mongoose from 'mongoose';
-
+import helmet from 'helmet';
 import getRootUrl from '../lib/api/getRootUrl';
 import sitemapAndRobots from './sitemapAndRobots';
 import auth from './google';
@@ -35,7 +35,7 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
-  server.disable('x-powered-by');
+  server.use(helmet());
   server.use(compression());
   server.use(bodyParser.json());
 
@@ -64,13 +64,17 @@ app.prepare().then(() => {
     },
   };
 
+  if (!dev) {
+    server.set('trust proxy', 1); // sets req.hostname, req.ip
+    sess.cookie.secure = true; // sets cookie over HTTPS only
+  }
+
   server.use(session(sess));
 
   auth({ server, ROOT_URL });
   github({ server });
   api(server);
   routesWithSlug({ server, app });
-
   sitemapAndRobots({ server });
 
   server.get('*', (req, res) => {

@@ -5,7 +5,7 @@ import mongoSessionStore from 'connect-mongo';
 import bodyParser from 'body-parser';
 import next from 'next';
 import mongoose from 'mongoose';
-
+import helmet from 'helmet';
 import sitemapAndRobots from './sitemapAndRobots';
 import getRootUrl from '../lib/api/getRootUrl';
 import auth from './google';
@@ -36,7 +36,7 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
-  server.disable('x-powered-by');
+  server.use(helmet());
   server.use(compression());
   server.use(bodyParser.json());
 
