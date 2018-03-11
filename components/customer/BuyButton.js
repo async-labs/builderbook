@@ -88,12 +88,7 @@ class BuyButton extends React.Component {
           >
             {preorderPrice ? 'Pre-order' : 'Buy'} for ${price}
           </Button>
-
-          {preorderPrice ? (
-            <span style={{ verticalAlign: 'middle', fontSize: '15px' }}>
-              On March 15th, price becomes ${book.price}.
-            </span>
-          ) : null}
+          <span style={{ verticalAlign: 'middle', fontSize: '15px' }}>{book.textNearButton} </span>
         </div>
       );
     }
@@ -110,12 +105,7 @@ class BuyButton extends React.Component {
         <Button variant="raised" style={styleBuyButton} color="primary">
           {preorderPrice ? 'Pre-order' : 'Buy'} for ${price}
         </Button>
-
-        {preorderPrice ? (
-          <span style={{ verticalAlign: 'middle', fontSize: '15px' }}>
-            On March 15th, price becomes ${book.price}.
-          </span>
-        ) : null}
+        <span style={{ verticalAlign: 'middle', fontSize: '15px' }}>{book.textNearButton} </span>
       </StripeCheckout>
     );
   }

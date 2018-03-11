@@ -143,6 +143,22 @@ class EditBook extends React.Component {
             onChange={(event) => {
               this.setState({
                 book: Object.assign({}, this.state.book, {
+                  textNearButton: event.target.value,
+                }),
+              });
+            }}
+            value={this.state.book.textNearButton || ''}
+            label="Text next to Buy Button"
+            className="textFieldInput"
+            style={styleTextField}
+          />
+          <br />
+          <br />
+
+          <TextField
+            onChange={(event) => {
+              this.setState({
+                book: Object.assign({}, this.state.book, {
                   preorderPrice: Number(event.target.value),
                 }),
               });
