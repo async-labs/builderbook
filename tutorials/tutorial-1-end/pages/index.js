@@ -1,3 +1,5 @@
+/* eslint react/prefer-stateless-function: 0 */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
@@ -10,11 +12,11 @@ class Index extends React.Component {
     user: PropTypes.shape({
       email: PropTypes.string.isRequired,
     }),
-  }
+  };
 
   static defaultProps = {
     user: null,
-  }
+  };
 
   render() {
     const { user } = this.props;
@@ -22,14 +24,10 @@ class Index extends React.Component {
       <div style={{ padding: '10px 45px' }}>
         <Head>
           <title>Dashboard</title>
-          <meta
-            name="description"
-            content="description for indexing bots"
-          />
+          <meta name="description" content="description for indexing bots" />
         </Head>
         <p> Dashboard </p>
         <p>Email: {user.email}</p>
-
       </div>
     );
   }

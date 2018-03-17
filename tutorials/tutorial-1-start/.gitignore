@@ -12,3 +12,5 @@ node_modules/
 .coverage
 .env
 .next
+
+yarn-error.log

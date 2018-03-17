@@ -1,5 +1,5 @@
 {
-  "name": "3-end",
+  "name": "tutorial-1-end",
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
@@ -17,7 +17,6 @@
     "googleapis": "^24.0.0",
     "lodash": "^4.17.4",
     "material-ui": "^1.0.0-beta.32",
-    "material-ui-icons": "^1.0.0-alpha.19",
     "mongoose": "^5.0.0-rc0",
     "next": "^5.0.0",
     "nprogress": "^0.2.0",
