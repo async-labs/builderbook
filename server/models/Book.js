@@ -44,6 +44,8 @@ const mongoSchema = new Schema({
     required: true,
   },
 
+  textNearButton: String,
+
   isInPreorder: {
     type: Boolean,
     defaultValue: false,
@@ -94,6 +96,7 @@ class BookClass {
   static async add({
     name,
     price,
+    textNearButton = '',
     githubRepo,
     supportURL = '',
     isInPreorder = null,
@@ -105,6 +108,7 @@ class BookClass {
       name,
       slug,
       price,
+      textNearButton,
       githubRepo,
       supportURL,
       isInPreorder,
@@ -117,6 +121,7 @@ class BookClass {
     id,
     name,
     price,
+    textNearButton = '',
     githubRepo,
     supportURL = '',
     isInPreorder = null,
@@ -130,6 +135,7 @@ class BookClass {
 
     const modifier = {
       price,
+      textNearButton,
       supportURL,
       githubRepo,
       isInPreorder,
