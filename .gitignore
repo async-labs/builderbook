@@ -11,6 +11,6 @@ npm-debug.log
 node_modules/
 .coverage
 .env
-env-config.js
+.next
 
 book/8-exp
