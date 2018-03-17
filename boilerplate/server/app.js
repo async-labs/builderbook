@@ -3,7 +3,7 @@ import session from 'express-session';
 import mongoSessionStore from 'connect-mongo';
 import next from 'next';
 import mongoose from 'mongoose';
-
+import getRootUrl from '../lib/api/getRootUrl';
 import auth from './google';
 
 require('dotenv').config();
@@ -14,7 +14,7 @@ const MONGO_URL = process.env.MONGO_URL_TEST;
 mongoose.connect(MONGO_URL);
 
 const port = process.env.PORT || 8000;
-const ROOT_URL = process.env.ROOT_URL || `http://localhost:${port}`;
+const ROOT_URL = getRootUrl();
 
 const app = next({ dev });
 const handle = app.getRequestHandler();

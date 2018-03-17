@@ -1,10 +1,12 @@
 import express from 'express';
 import session from 'express-session';
 import mongoSessionStore from 'connect-mongo';
+import bodyParser from 'body-parser';
 import next from 'next';
 import mongoose from 'mongoose';
-
+import getRootUrl from '../lib/api/getRootUrl';
 import auth from './google';
+import api from './api';
 
 require('dotenv').config();
 
@@ -14,7 +16,7 @@ const MONGO_URL = process.env.MONGO_URL_TEST;
 mongoose.connect(MONGO_URL);
 
 const port = process.env.PORT || 8000;
-const ROOT_URL = process.env.ROOT_URL || `http://localhost:${port}`;
+const ROOT_URL = getRootUrl();
 
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -22,6 +24,8 @@ const handle = app.getRequestHandler();
 // Nextjs's server prepared
 app.prepare().then(() => {
   const server = express();
+
+  server.use(bodyParser.json());
 
   // confuring MongoDB session store
   const MongoStore = mongoSessionStore(session);
@@ -43,6 +47,7 @@ app.prepare().then(() => {
   server.use(session(sess));
 
   auth({ server, ROOT_URL });
+  api(server);
 
   server.get('*', (req, res) => handle(req, res));
 
