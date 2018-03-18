@@ -5,7 +5,6 @@
 Builder Book is an open source web app to publish documentation or books. The app is built with React/Material-UI/Next/Express/Mongoose/MongoDB and includes these third party APIs: Google, Github, AWS SES, Mailchimp, Stripe.
 
 - Live app: https://builderbook.org/books/builder-book/introduction.
-- Check our [Admin demo](https://github.com/builderbook/builderbook#admin-demo) to edit a book and create your own from a Github repo.
 - Learn how to build this app from scratch with [our book](https://builderbook.org/book)
 
 
@@ -15,9 +14,9 @@ Builder Book is an open source web app to publish documentation or books. The ap
 
 
 ## Contents
-- [Admin demo](#admin-demo)
 - [Run locally](#run-locally)
 - [Deploy](#deploy)
+- [Add new book](#add-new-book)
 - [Screenshots](#screenshots)
 - [Built with](#built-with)
   - [Core stack](#core-stack)
@@ -28,41 +27,15 @@ Builder Book is an open source web app to publish documentation or books. The ap
 - [License](#license)
 
 
-## Admin demo
-- Fork our [demo book repository](https://github.com/builderbook/demo-book) to use as sample content for the demo.
-  
-  _Important note_: Content in the demo-book repo has the proper format to create a book. If you use another repo but don't follow this format, then book creation will not work.
-   - Any Github repo you use must have a non-empty `introduction.md` file at the root.
-   - The `introduction.md` and any other `.md` files with conent must have metadata in the format shown below:
-
-  ```
-  ---
-  title: Introduction
-  seoTitle: title for search engines
-  seoDescription: description for search engines
-  isFree: true
-  ---
-  ```
-
-  - To make the content of a `.md` file _private_ (meaning a person must buy the book to see its content), change `isFree:true` to `excerpt:""`. Add some sample content between the quotes - this content is public and serves as a free preview.
-- Log in to [our demo app](https://demo.builderbook.org/login) with Google. You'll be logged in as an Admin.
-- After logging in:
-  - Click `Connect Github`.
-  - Click `Add book`.
-  - Enter details and select the `/demo-book` Github repo that you forked earlier.
-  - Click `Save`.
-  - You are now on the `book-detail` page, where you see links to the Introduction and Chapter 1.
-    - Example of Introduction _without_ Buy button: [link](https://demo.builderbook.org/books/demo-book/introduction)
-    - Example of Chapter 1 _with_ Buy button: [link](https://demo.builderbook.org/books/demo-book/example)
-- Edit some content in the `introduction.md` and `chapter-1.md` files in your `/demo-book` repo. 
-- Go back to the `book-detail` page and click `Sync with Github` to update your book.
-
-
 ## Run locally
 - Clone the project and run `yarn` to add packages.
-- Before you start the app, create a `.env` file at the app's root. This file must have _at least three env variables_: `MONGO_URL_TEST`, `Google_clientID`, `Google_clientSecret`.
-  - For `MONGO_URL_TEST`, we recommend a [free MongoDB at mLab](http://docs.mlab.com/).
-  - For Google API keys, see the [official OAuth tutorial](https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin).
+- Before you start the app, create a `.env` file at the app's root. This file must have values for env variables specified below.
+  - To get `MONGO_URL_TEST`, we recommend a [free MongoDB at mLab](http://docs.mlab.com/).
+  - Get Google API keys by following [official OAuth tutorial](https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin).
+    For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback
+    _You have to enable Google+ API in your Google Cloud Platform account._
+  
+  - For Github OAuth app, callback URL is: http://localhost:8000/auth/github/callback
 
   To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values to all env variables in `.env` file:
   `.env` :
@@ -87,33 +60,20 @@ Builder Book is an open source web app to publish documentation or books. The ap
   Stripe_Test_SecretKey="XXXXXX"
   Stripe_Live_SecretKey="XXXXXX"
 
+  Stripe_Test_PublishableKey="XXXXXX"
+  Stripe_Live_PublishableKey="XXXXXX"
+
   MAILCHIMP_API_KEY="XXXXXX"
   MAILCHIMP_REGION="XXXXXX"
   MAILCHIMP_PREORDERED_LIST_ID="XXXXXX"
   MAILCHIMP_ORDERED_LIST_ID="XXXXXX"
   ```
 
-  For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback
-  You have to enable Google+ API in your Google Cloud Platform account.
-  
-  For Github OAuth app, callback URL is: http://localhost:8000/auth/github/callback
-
-- Before you start the app, create a `env-config.js` file at the app's root. This file makes Stripe's public keys (keys that start with `pk`) available on client. Content of this file:
-  `env-config.js` :
-  ```
-  const dev = process.env.NODE_ENV !== 'production';
-
-  module.exports = {
-    StripePublishableKey: dev
-      ? 'pk_test_XXXXXX'
-      : 'pk_live_XXXXXX',
-  };
-  ```
 - Start the app with `yarn dev`.
 - The _first registered user_ in the app becomes an Admin user (`"isAdmin": true`).
 
 
-## Sync content from Github
+## Add new book
 - Create a new Github repo (public or private).
 - In that repo, create an `introduction.md` file and write some content.
 - At the top of your `introduction.md` file, add metadata in the format shown below. See [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
@@ -131,9 +91,12 @@ Builder Book is an open source web app to publish documentation or books. The ap
 - Click "Add Book". Enter details and select the Github repo you created.
 - Click "Save".
 
-When you add new `.md` files or update content, go to the `book-detail` page of your app and click `Sync with Github`. Note that all `.md` files in your Github repo _must_ have metadata in the format shown above.
+When you add new `.md` files or update content, go to the `BookDetail` page of your app and click `Sync with Github`. 
 
-To make the content of a `.md` file _private_ (meaning a person must purchase the content to see it), change `isFree:true` to `excerpt:""`. Add some sample content between the quotes - this content is public and serves as a free preview.
+IMPORTANT: Note that all `.md` files in your Github repo _must_ have metadata in the format shown above.
+IMPORTANT: All `.md` files in your Github repo _must_ have name `introduction.md` or `chapter-N.md`.
+
+To make the content of a `.md` file _private_ (meaning a person must purchase the content to see it, remove `isFree:true`  and add `excerpt:""`. Add some excerpt content - this content is public and serves as a free preview.
 
 
 ## Deploy
@@ -144,7 +107,7 @@ To make the content of a `.md` file _private_ (meaning a person must purchase th
 - Check that you have all production-level env variables in `.env`. 
 - In your terminal, deploy the app by running `now`.
 - Now outputs your deployment's URL, for example: `builderbook-zomcvzgtvc.now.sh`.
-- Point successful deployment to your domain, for example: `now ln builderbook-demo-zomcvzgtvc.now.sh builderbook.org`.
+- Point successful deployment to your domain, for example: `now ln builderbook-zomcvzgtvc.now.sh builderbook.org`.
 
 
 ## Screenshots
