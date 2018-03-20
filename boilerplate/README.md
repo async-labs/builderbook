@@ -65,8 +65,8 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 │   ├── withLayout.js           # HOC for SSR with Material-UI and more
 ├── pages                       # Pages
 │   ├── login.js                # Login page
-│   ├── _document.js            # Allows to customize pages (feature of Next.js)
-│   ├── index.js                # Homepage
+│   ├── _document.js            # Main Document for Next.js pages
+│   ├── index.js                # Dashboard page
 ├── server                      # Server code
 │   ├── models                  # Mongoose models
 │   │   ├── User.js             # User model

@@ -1,31 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Head from 'next/head';
 
-import withAuth from '../lib/withAuth';
 import withLayout from '../lib/withLayout';
 
-function Index({ user }) {
+function Index() {
   return (
     <div style={{ padding: '10px 45px' }}>
       <Head>
-        <title>Dashboard</title>
+        <title>Index page</title>
         <meta name="description" content="description for indexing bots" />
       </Head>
-      <p> Dashboard </p>
-      <p>Email: {user.email}</p>
+      <p> Content </p>
     </div>
   );
 }
 
-Index.propTypes = {
-  user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-  }),
-};
-
-Index.defaultProps = {
-  user: null,
-};
-
-export default withAuth(withLayout(Index));
+export default withLayout(Index);

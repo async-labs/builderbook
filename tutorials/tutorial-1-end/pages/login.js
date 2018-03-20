@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Button from 'material-ui/Button';
 
-import withAuth from '../lib/withAuth';
 import withLayout from '../lib/withLayout';
 import { styleLoginButton } from '../components/SharedStyles';
 
@@ -22,4 +21,4 @@ const Login = () => (
   </div>
 );
 
-export default withAuth(withLayout(Login), { logoutRequired: true });
+export default withLayout(Login);

@@ -7,7 +7,7 @@ import SubscribeForm from '../components/SubscribeForm';
 import withAuth from '../lib/withAuth';
 import withLayout from '../lib/withLayout';
 
-class Index extends React.Component {
+class Subscribe extends React.Component {
   render() {
     return (
       <div style={{ padding: '10px 45px' }}>
@@ -16,12 +16,11 @@ class Index extends React.Component {
           <meta name="description" content="description for indexing bots" />
         </Head>
         <br />
-        <p> Mailchimp form goes here </p>
+        
         <SubscribeForm />
-
       </div>
     );
   }
 }
 
-export default withAuth(withLayout(Index), { logoutRequired: true });
+export default withAuth(withLayout(Subscribe), { logoutRequired: true });

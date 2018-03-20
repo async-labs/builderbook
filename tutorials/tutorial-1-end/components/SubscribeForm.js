@@ -19,7 +19,7 @@ class SubscribeForm extends React.Component {
     NProgress.start();
 
     try {
-      await subscribeToTutorials({ email });
+      await subscribeToNewsletter({ email });
 
       if (this.emailInput) {
         this.emailInput.value = '';
