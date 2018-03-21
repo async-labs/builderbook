@@ -1,21 +1,18 @@
 import request from 'request';
 
-require('dotenv').config();
-
 export async function subscribe({ email }) {
   const data = {
     email_address: email,
     status: 'subscribed',
   };
 
-  const LIST_IDS = process.env.MAILCHIMP_TUTORIALS_LIST_ID;
-
-  const API_KEY = process.env.MAILCHIMP_API_KEY;
+  const listId = 'fc4171c626';
+  const API_KEY = 'c82d5b7241e88d04f74705eaaeeb6fe7-us17';
 
   await new Promise((resolve, reject) => {
     request.post(
       {
-        uri: `https://us17.api.mailchimp.com/3.0/lists/${LIST_IDS}/members/`,
+        uri: `https://us17.api.mailchimp.com/3.0/lists/${listId}/members/`,
         headers: {
           Accept: 'application/json',
           Authorization: `Basic ${Buffer.from(`apikey:${API_KEY}`).toString('base64')}`,

@@ -1,14 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import next from 'next';
-import api from './api';
+
+import { subscribe } from './mailchimp';
+
 
 require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
-
 const port = process.env.PORT || 8000;
-const ROOT_URL = dev ? `http://localhost:${port}` : 'https://builderbook.org';
+const ROOT_URL = 'http://localhost:8000';
+
 
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -19,7 +21,21 @@ app.prepare().then(() => {
 
   server.use(bodyParser.json());
 
-  api(server);
+  server.post('/api/v1/public/subscribe', async (req, res) => {
+    const { email } = req.body;
+    if (!email) {
+      res.json({ error: 'Email is required' });
+      return;
+    }
+
+    try {
+      await subscribe({ email });
+      res.json({ subscribed: 1 });
+      console.log(email);
+    } catch (err) {
+      res.json({ error: err.message || err.toString() });
+    }
+  });
 
   server.get('*', (req, res) => handle(req, res));
 

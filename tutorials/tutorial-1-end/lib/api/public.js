@@ -1,19 +1,15 @@
 import 'isomorphic-fetch';
 
-const port = process.env.PORT || 8000;
-const dev = process.env.NODE_ENV !== 'production';
-const ROOT_URL = dev ? `http://localhost:${port}` : 'https://builderbook.org';
-
-const BASE_PATH = '/api/v1/public';
+const ROOT_URL = 'http://localhost:8000';
 
 async function sendRequest(path, options = {}) {
-  const headers = Object.assign({}, options.headers || {}, {
+  const headers = {
     'Content-type': 'application/json; charset=UTF-8',
-  });
+  };
 
   const response = await fetch(
     `${ROOT_URL}${path}`,
-    Object.assign({ method: 'POST', credentials: 'include' }, options, { headers }),
+    Object.assign({ method: 'POST', credentials: 'include' }, { headers }, options),
   );
 
   const data = await response.json();
@@ -26,6 +22,6 @@ async function sendRequest(path, options = {}) {
 }
 
 export const subscribeToNewsletter = ({ email }) =>
-  sendRequest(`${BASE_PATH}/subscribe`, {
+  sendRequest('/api/v1/public/subscribe', {
     body: JSON.stringify({ email }),
   });
