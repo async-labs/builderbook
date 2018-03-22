@@ -30,7 +30,7 @@ class MenuDrop extends React.Component {
     const { options, src, alt } = this.props;
 
     return (
-      <div>
+      <div style={{ verticalAlign: 'middle', display: 'inline-block '}}>
         <Avatar
           role="presentation"
           aria-owns="simple-menu"

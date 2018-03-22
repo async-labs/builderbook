@@ -45,6 +45,17 @@ const styleGrid = {
   lineHeight: '1.5em',
 };
 
+const styleH1 = {
+  textAlign: 'center',
+  fontWeight: '400',
+  lineHeight: '45px',
+};
+
+const styleHomepageFeature = {
+  textAlign: 'center',
+  padding: '10px 45px',
+};
+
 module.exports = {
   styleBigAvatar,
   styleRaisedButton,
@@ -53,4 +64,6 @@ module.exports = {
   styleTextField,
   styleForm,
   styleGrid,
+  styleH1,
+  styleHomepageFeature,
 };

@@ -2,7 +2,7 @@ import express from 'express';
 
 import Book from '../models/Book';
 import Chapter from '../models/Chapter';
-import User from '../models/User';
+import Review from '../models/Review';
 
 const router = express.Router();
 
@@ -56,5 +56,21 @@ router.get('/get-table-of-contents', async (req, res) => {
     res.json({ error: err.message || err.toString() });
   }
 });
+
+router.get('/get-book-reviews', async (req, res) => {
+  try {
+    const book = await Book.findOne({ slug: req.query.slug }, 'id');
+    if (!book) {
+      throw new Error('Not found');
+    }
+
+    const review = await Review.findOne({ bookId: book.id });
+
+    res.json(review);
+  } catch (err) {
+    res.json({ error: err.message || err.toString() });
+  }
+});
+
 
 export default router;
