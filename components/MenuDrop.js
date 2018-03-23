@@ -30,7 +30,7 @@ class MenuDrop extends React.Component {
     const { options, src, alt } = this.props;
 
     return (
-      <div>
+      <div style={{ verticalAlign: 'middle', display: 'inline-block '}}>
         <Avatar
           role="presentation"
           aria-owns="simple-menu"
@@ -50,7 +50,7 @@ class MenuDrop extends React.Component {
           <p />
           {options.map(option => (
             <div id="wrappingLink" key={option.text}>
-              <Link prefetch href={option.href} as={option.as || option.href}>
+              <Link prefetch={!option.noPrefetch} href={option.href} as={option.as || option.href}>
                 <a style={{ padding: '0px 20px' }}>{option.text}</a>
               </Link>
               <p />

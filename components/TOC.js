@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import Grid from 'material-ui/Grid';
 
-import { styleGrid } from '../components/SharedStyles';
-
 function getItemElm(i, chapter, bookSlug) {
   return (
     <div key={chapter._id}>
@@ -46,7 +44,6 @@ export default function TOC({ toc, bookSlug }) {
         style={{
           textAlign: 'center',
           fontWeight: '400',
-          fontSize: '36px',
           lineHeight: '45px',
         }}
       >
@@ -54,7 +51,7 @@ export default function TOC({ toc, bookSlug }) {
       </h1>
       <p />
       <Grid
-        style={{ styleGrid, padding: '0% 8%', fontSize: '17px' }}
+        style={{ padding: '0% 8%' }}
         container
         direction="row"
         justify="space-around"

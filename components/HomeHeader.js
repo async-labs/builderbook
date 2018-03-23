@@ -17,6 +17,7 @@ const optionsMenuCustomer = [
   {
     text: 'Log out',
     href: '/logout',
+    noPrefetch: true,
   },
 ];
 
@@ -28,6 +29,7 @@ const optionsMenuAdmin = [
   {
     text: 'Log out',
     href: '/logout',
+    noPrefetch: true,
   },
 ];
 
@@ -36,7 +38,7 @@ function Header({ user }) {
     <div>
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justify="space-around" alignItems="center">
-          <Grid item sm={10} xs={9} style={{ textAlign: 'left' }}>
+          <Grid item sm={8} xs={6} style={{ textAlign: 'left' }}>
             {!user ? (
               <Link prefetch href="/">
                 <Avatar
@@ -47,15 +49,20 @@ function Header({ user }) {
               </Link>
             ) : null}
           </Grid>
-          <Grid item sm={2} xs={3} style={{ textAlign: 'right' }}>
+          <Grid item sm={4} xs={6} style={{ textAlign: 'right' }}>
             {user ? (
-              <div style={{ whiteSpace: ' nowrap' }}>
+              <div style={{ whiteSpace: 'nowrap' }}>
                 {!user.isAdmin ? (
-                  <MenuDrop
-                    options={optionsMenuCustomer}
-                    src={user.avatarUrl}
-                    alt={user.displayName}
-                  />
+                  <div>
+                    <Link prefetch href="/book" as="/book">
+                      <a style={{ margin: '20px 30px 0px auto', verticalAlign: 'middle' }}>Our book</a>
+                    </Link>
+                    <MenuDrop
+                      options={optionsMenuCustomer}
+                      src={user.avatarUrl}
+                      alt={user.displayName}
+                    />
+                  </div>
                 ) : null}
                 {user.isAdmin ? (
                   <MenuDrop
@@ -66,10 +73,15 @@ function Header({ user }) {
                 ) : null}
               </div>
             ) : (
-              <Link prefetch href="/public/login" as="/login">
-                <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
-              </Link>
-            )}
+              <div>
+                <Link prefetch href="/book" as="/book">
+                  <a style={{ margin: '20px 30px 0px auto' }}>Our book</a>
+                </Link>
+                <Link prefetch href="/public/login" as="/login">
+                  <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
+                </Link>
+              </div>
+              )}
           </Grid>
         </Grid>
       </Toolbar>

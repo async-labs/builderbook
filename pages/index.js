@@ -8,14 +8,18 @@ import Button from 'material-ui/Button';
 import Header from '../components/HomeHeader';
 import Footer from '../components/HomeFooter';
 
-import { styleBigAvatar, styleRaisedButton } from '../components/SharedStyles';
+import {
+  styleBigAvatar,
+  styleRaisedButton,
+  styleHomepageFeature,
+  styleH1,
+} from '../components/SharedStyles';
 import withLayout from '../lib/withLayout';
 import withAuth from '../lib/withAuth';
 
-const styleH1 = {
+const styleTeamMember = {
   textAlign: 'center',
-  fontWeight: '400',
-  lineHeight: '45px',
+  padding: '10px 5%',
 };
 
 const Index = ({ user }) => (
@@ -33,17 +37,19 @@ const Index = ({ user }) => (
         <Grid item sm={12} xs={12} style={{ textAlign: 'center' }}>
           <br />
           <p style={{ margin: '45px auto', fontSize: '44px', fontWeight: '400' }}>Builder Book</p>
-          <p>Open source web app (MIT License) to publish documentation and books.</p>
+          <iframe
+            src="https://ghbtns.com/github-btn.html?user=builderbook&repo=builderbook&type=star&count=true&size=large"
+            frameBorder="0"
+            scrolling="0"
+            width="160px"
+            height="30px"
+            title="Builder Book Github"
+          />
+          <p>
+            Open source web app (MIT License) to publish documentation and books.
+            <br /> Built with React, Material-UI, Next, Express, Mongoose, and MongoDB.
+          </p>
           <p style={{ textAlign: 'center' }}>
-            <a
-              href="https://github.com/builderbook/builderbook"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button variant="raised" color="secondary" style={styleRaisedButton}>
-                Github
-              </Button>
-            </a>
             <Link
               prefetch
               as="/books/builder-book/introduction"
@@ -53,21 +59,22 @@ const Index = ({ user }) => (
                 Live App
               </Button>
             </Link>
-          </p>
-          <p>
-            <b>Built with:</b> React, Material-UI, Next, Express, Mongoose, MongoDB.
-          </p>
-          <p>
-            <b>Third party APIs:</b> Google OAuth, Github, Stripe, AWS SES, MailChimp.
+            <a
+              href="https://github.com/builderbook/builderbook"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="raised" color="secondary" style={styleRaisedButton}>
+                Github
+              </Button>
+            </a>
           </p>
         </Grid>
       </Grid>
 
-      <br />
-
       <h1 style={styleH1}>How can you use this app?</h1>
       <Grid container direction="row" justify="space-around" align="flex-start">
-        <Grid item sm={6} xs={12} style={{ textAlign: 'center', padding: '10px 45px' }}>
+        <Grid item sm={6} xs={12} style={styleHomepageFeature}>
           <p>
             <b> As learning material </b>
           </p>
@@ -85,7 +92,7 @@ const Index = ({ user }) => (
             or clone the entire project. Customize the code to build your own web app.
           </p>
         </Grid>
-        <Grid item sm={6} xs={12} style={{ textAlign: 'center', padding: '10px 45px' }}>
+        <Grid item sm={6} xs={12} style={styleHomepageFeature}>
           <p>
             <b> To publish documentation or a book </b>
           </p>
@@ -100,7 +107,7 @@ const Index = ({ user }) => (
 
       <h1 style={styleH1}>Features</h1>
       <Grid container direction="row" justify="space-around" align="flex-start">
-        <Grid item sm={6} xs={12} style={{ textAlign: 'center', padding: '10px 45px' }}>
+        <Grid item sm={6} xs={12} style={styleHomepageFeature}>
           <p>
             <b> Modern JavaScript stack </b>
           </p>
@@ -118,7 +125,7 @@ const Index = ({ user }) => (
             up-to-date.
           </p>
         </Grid>
-        <Grid item sm={6} xs={12} style={{ textAlign: 'center', padding: '10px 45px' }}>
+        <Grid item sm={6} xs={12} style={styleHomepageFeature}>
           <p>
             <b> Popular third party APIs </b>
           </p>
@@ -127,7 +134,7 @@ const Index = ({ user }) => (
             transactional emails, MailChimp for newsletters, Stripe for selling.
           </p>
         </Grid>
-        <Grid item sm={6} xs={12} style={{ textAlign: 'center', padding: '10px 45px' }}>
+        <Grid item sm={6} xs={12} style={styleHomepageFeature}>
           <p>
             <b> Blazing fast </b>
           </p>
@@ -136,7 +143,7 @@ const Index = ({ user }) => (
             loads are client-side rendered. Some pages are prefetched in the background.
           </p>
         </Grid>
-        <Grid item sm={6} xs={12} style={{ textAlign: 'center', padding: '10px 45px' }}>
+        <Grid item sm={6} xs={12} style={styleHomepageFeature}>
           <p>
             <b> Deploy in under 60 seconds </b>
           </p>
@@ -192,7 +199,7 @@ const Index = ({ user }) => (
       </div>
       <br />
       <Grid container direction="row" justify="space-around" align="flex-start">
-        <Grid item sm={4} xs={12} style={{ textAlign: 'center', padding: '10px 45px' }}>
+        <Grid item sm={4} xs={12} style={styleTeamMember}>
           <Avatar
             src="https://storage.googleapis.com/builderbook/timur-picture.png"
             style={styleBigAvatar}
@@ -210,7 +217,7 @@ const Index = ({ user }) => (
             end-user experience.
           </p>
         </Grid>
-        <Grid item sm={4} xs={12} style={{ textAlign: 'center', padding: '10px 45px' }}>
+        <Grid item sm={4} xs={12} style={styleTeamMember}>
           <Avatar
             src="https://storage.googleapis.com/builderbook/kelly-picture.png"
             style={styleBigAvatar}
@@ -228,7 +235,7 @@ const Index = ({ user }) => (
             and enjoys solving UX problems.
           </p>
         </Grid>
-        <Grid item sm={4} xs={12} style={{ textAlign: 'center', padding: '10px 45px' }}>
+        <Grid item sm={4} xs={12} style={styleTeamMember}>
           <Avatar
             src="https://storage.googleapis.com/builderbook/delgermurun-picture.png"
             style={styleBigAvatar}
