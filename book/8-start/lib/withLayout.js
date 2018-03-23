@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MuiThemeProvider } from 'material-ui/styles';
-import Reboot from 'material-ui/Reboot';
+import CssBaseline from 'material-ui/CssBaseline';
 
 import getContext from '../lib/context';
 import Notifier from '../components/Notifier';
@@ -26,7 +26,7 @@ function withLayout(BaseComponent, { noHeader = false } = {}) {
           theme={this.pageContext.theme}
           sheetsManager={this.pageContext.sheetsManager}
         >
-          <Reboot />
+          <CssBaseline />
           <div>
             {noHeader ? null : <Header {...this.props} />}
             <BaseComponent {...this.props} />

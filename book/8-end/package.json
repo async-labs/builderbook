@@ -33,7 +33,7 @@
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "marked": "^0.3.12",
-    "material-ui": "^1.0.0-beta.32",
+    "material-ui": "1.0.0-beta.38",
     "mongoose": "^5.0.0-rc0",
     "next": "^5.0.0",
     "nprogress": "^0.2.0",
