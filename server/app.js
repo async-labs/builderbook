@@ -26,6 +26,8 @@ mongoose.connect(MONGO_URL);
 const port = process.env.PORT || 8000;
 const ROOT_URL = getRootUrl();
 
+const sessionSecret = process.env.SESSION_SECRET;
+
 const URL_MAP = {
   '/login': '/public/login',
   '/my-books': '/customer/my-books',
@@ -53,7 +55,7 @@ app.prepare().then(() => {
   const MongoStore = mongoSessionStore(session);
   const sess = {
     name: 'builderbook.sid',
-    secret: 'Hw.)q*VqRT4/#:M/,E^B)}AS_-DKdKe[wk',
+    secret: sessionSecret,
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       ttl: 14 * 24 * 60 * 60, // save session 14 days

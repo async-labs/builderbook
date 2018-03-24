@@ -31,13 +31,16 @@ Builder Book is an open source web app to publish documentation or books. The ap
 - Clone the project and run `yarn` to add packages.
 - Before you start the app, create a `.env` file at the app's root. This file must have values for env variables specified below.
   - To get `MONGO_URL_TEST`, we recommend a [free MongoDB at mLab](http://docs.mlab.com/).
-  - Get Google API keys by following [official OAuth tutorial](https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin).
-    For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback
-    _You have to enable Google+ API in your Google Cloud Platform account._
-  
-  - For Github OAuth app, callback URL is: http://localhost:8000/auth/github/callback
+  - Get `Google_clientID` and `Google_clientSecret` by following [official OAuth tutorial](https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin).
+
+    Important: For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback
+    
+    Important: You have to enable Google+ API in your Google Cloud Platform account.
+
+  - Add secret for Express session `SESSION_SECRET`: https://github.com/expressjs/session#secret
 
   To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values to all env variables in `.env` file:
+
   `.env` :
   ```
   MONGO_URL="XXXXXX"
@@ -45,6 +48,8 @@ Builder Book is an open source web app to publish documentation or books. The ap
 
   Google_clientID="XXXXXX"
   Google_clientSecret="XXXXXX"
+
+  SESSION_SECRET="XXXXXX"
 
   Amazon_accessKeyId="XXXXXX"
   Amazon_secretAccessKey="XXXXXX"
@@ -157,6 +162,7 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 │   ├── customer                # Components used on Customer pages
 │   │   ├── Bookmark.js         # Bookmark a section within a book chapter
 │   │   ├── BuyButton.js        # Buy book
+│   ├── BookReviews.js          # Component that outputs grid of reviews
 │   ├── Header.js               # Header component
 │   ├── HomeFooter.js           # Footer component on homepage
 │   ├── HomeHeader.js           # Header component on homepage
@@ -188,6 +194,7 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 │   │   ├── read-chapter.js     # Page with chapter's content
 │   ├── _document.js            # Allows to customize pages (feature of Next.js)
 │   ├── index.js                # Homepage
+│   ├── book.js                 # Book page
 ├── server                      # Server code
 │   ├── api                     # Express routes, route-level middleware
 │   │   ├── admin.js            # Admin routes
