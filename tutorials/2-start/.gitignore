@@ -13,5 +13,4 @@ node_modules/
 .env
 .next
 
-book/8-exp
-tutorials/working
+yarn-error.log

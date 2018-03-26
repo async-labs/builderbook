@@ -1,4 +1,4 @@
-## Boilerplate
+## Tutorial 2
 Boilerplate with React, Material-UI, Next, Express, Mongoose, MongoDB.
 
 
