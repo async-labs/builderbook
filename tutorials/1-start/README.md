@@ -1,54 +1,11 @@
-## Boilerplate
-Boilerplate with React, Material-UI, Next, Express, Mongoose, MongoDB.
-
-
-## Contents
-- [Run locally](#run-locally)
-- [Deploy](#deploy)
-- [Built with](#built-with)
-  - [Core stack](#core-stack)
-  - [Third party APIs](#third-party-apis)
-- [Project structure](#project-structure)
+## How to integrate MailChimp in a JavaScript web app
+This folder contains code for our tutorial on how to add MailChimp integration to a simple JavaScript web app. In the tutorial, you build a form for guest users to subscribe to a MailChimp newsletter.
 
 
 ## Run locally
-- Clone the project and run `yarn` to add packages.
-- Before you start the app, create a `.env` file at the app's root. This file must have _at least three env variables_: `MONGO_URL_TEST`, `Google_clientID`, `Google_clientSecret`. We recommend [free MongoDB at mLab](http://docs.mlab.com/).
-
-  `.env` :
-  ```
-  MONGO_URL_TEST="XXXXXX"
-
-  Google_clientID="XXXXXX"
-  Google_clientSecret="XXXXXX"
-  ```
-
-  For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback
-  You have to enable Google+ API in your Google Cloud Platform account.
-  
-- Start the app with `yarn dev`.
-
-- The _first registered user_ in the app becomes an Admin user (`"isAdmin": true`).
-
-
-## Deploy
-See the [deploy section](https://github.com/builderbook/builderbook#deploy) on our main repository README.
-
-
-## Built with
-
-#### Core stack
-- [React](https://github.com/facebook/react)
-- [Material-UI](https://github.com/mui-org/material-ui)
-- [Next](https://github.com/zeit/next.js)
-- [Express](https://github.com/expressjs/express)
-- [Mongoose](https://github.com/Automattic/mongoose)
-- [MongoDB](https://github.com/mongodb/mongo)
-
-#### Third party APIs
-- Google OAuth
-
-Check out [package.json](https://github.com/builderbook/builderbook/blob/master/boilerplate/package.json).
+- Clone the builderbook repo to your local machine: `git clone git@github.com:builderbook/builderbook.git`
+- Inside the `tutorials/1-start` folder, run `yarn` to add packages
+- Start the app with `yarn dev`
 
 
 ## Project structure
@@ -57,22 +14,16 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 .
 ├── components                  # React components
 │   ├── Header.js               # Header component
-│   ├── MenuDrop.js             # Dropdown menu
 │   ├── SharedStyles.js         # List of _reusable_ styles
 ├── lib                         # Code available on both client and server
 │   ├── context.js              # Context for Material-UI integration
-│   ├── withAuth.js             # HOC that passes user to pages and more
 │   ├── withLayout.js           # HOC for SSR with Material-UI and more
 ├── pages                       # Pages
-│   ├── login.js                # Login page
 │   ├── _document.js            # Main Document for Next.js pages
+│   ├── login.js                # Login page
 │   ├── index.js                # Dashboard page
 ├── server                      # Server code
-│   ├── models                  # Mongoose models
-│   │   ├── User.js             # User model
 │   ├── app.js                  # Custom Express/Next server
-│   ├── google.js               # Google OAuth API
-├── static                      # Static resources
 ├── .babelrc                    # Config for Babel
 ├── .eslintrc.js                # Config for Eslint
 ├── .gitignore                  # List of ignored files and directories
