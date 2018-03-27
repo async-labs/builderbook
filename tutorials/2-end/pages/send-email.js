@@ -6,9 +6,9 @@ import NProgress from 'nprogress';
 
 import { styleTextField } from '../components/SharedStyles';
 import withLayout from '../lib/withLayout';
-import { sendEmailApiMethod } from '../lib/api/public';
+import { sendRequestToServer } from '../lib/api/public';
 
-class AwsSes extends React.Component {
+class SendEmail extends React.Component {
   onSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,7 +19,7 @@ class AwsSes extends React.Component {
 
     NProgress.start();
     try {
-      await sendEmailApiMethod({ email });
+      await sendRequestToServer({ email });
 
       if (this.emailInput) {
         this.emailInput.value = '';
@@ -62,4 +62,4 @@ class AwsSes extends React.Component {
   }
 }
 
-export default withLayout(AwsSes);
+export default withLayout(SendEmail);

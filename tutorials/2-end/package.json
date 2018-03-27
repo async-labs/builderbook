@@ -12,7 +12,6 @@
     "aws-sdk": "^2.213.1",
     "babel-cli": "^6.26.0",
     "body-parser": "^1.18.2",
-    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "isomorphic-fetch": "^2.2.1",
     "material-ui": "1.0.0-beta.38",

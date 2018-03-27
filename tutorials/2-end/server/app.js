@@ -3,8 +3,6 @@ import next from 'next';
 import bodyParser from 'body-parser';
 import sendEmail from './aws';
 
-require('dotenv').config();
-
 const dev = process.env.NODE_ENV !== 'production';
 
 const port = process.env.PORT || 8000;
@@ -35,20 +33,19 @@ app.prepare().then(() => {
         <p>
           Have a good day.
         </p>
-      
         Mr. Hanky
       `,
     };
 
     try {
-      const EMAIL_FROM_ADDRESS = 'team@builderbook.org';
       await sendEmail({
-        from: `Mr.Hanky from Builder Book <${EMAIL_FROM_ADDRESS}>`,
+        from: 'Mr.Hanky from Builder Book <team@builderbook.org>',
         to: [email],
         subject: template.subject,
         body: template.message,
       });
       res.json({ sent: 1 });
+      console.log(email); // eslint-disable-line no-console
     } catch (err) {
       console.log('Email sending error:', err); // eslint-disable-line no-console
     }

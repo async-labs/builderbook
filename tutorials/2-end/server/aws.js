@@ -1,5 +1,8 @@
 import aws from 'aws-sdk';
 
+const Amazon_accessKeyId = 'xxxxxx';
+const Amazon_secretAccessKey= 'xxxxxx';
+
 export default function sendEmail(options) {
   aws.config.update({
     region: 'us-east-1',

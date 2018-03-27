@@ -21,7 +21,7 @@ async function sendRequest(path, options = {}) {
   return data;
 }
 
-export const sendEmailApiMethod = ({ email }) =>
+export const sendRequestToServer = ({ email }) =>
   sendRequest('/api/v1/public/send-email', {
     body: JSON.stringify({ email }),
   });
