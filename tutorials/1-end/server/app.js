@@ -1,5 +1,4 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import next from 'next';
 
 import { subscribe } from './mailchimp';
@@ -16,7 +15,7 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
-  server.use(bodyParser.json());
+  server.use(express.json());
 
   server.post('/api/v1/public/subscribe', async (req, res) => {
     const { email } = req.body;

@@ -2,7 +2,6 @@ import express from 'express';
 import session from 'express-session';
 import compression from 'compression';
 import mongoSessionStore from 'connect-mongo';
-import bodyParser from 'body-parser';
 import next from 'next';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
@@ -50,7 +49,7 @@ app.prepare().then(() => {
 
   server.use(helmet());
   server.use(compression());
-  server.use(bodyParser.json());
+  server.use(express.json());
 
   const MongoStore = mongoSessionStore(session);
   const sess = {

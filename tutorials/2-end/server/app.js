@@ -1,6 +1,5 @@
 import express from 'express';
 import next from 'next';
-import bodyParser from 'body-parser';
 import sendEmail from './aws';
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -15,7 +14,7 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
-  server.use(bodyParser.json());
+  server.use(express.json());
 
   server.post('/api/v1/public/send-email', async (req, res) => {
     const { email } = req.body;
