@@ -6,8 +6,8 @@ const Amazon_secretAccessKey= 'xxxxxx';
 export default function sendEmail(options) {
   aws.config.update({
     region: 'us-east-1',
-    accessKeyId: process.env.Amazon_accessKeyId,
-    secretAccessKey: process.env.Amazon_secretAccessKey,
+    accessKeyId: Amazon_accessKeyId,
+    secretAccessKey: Amazon_secretAccessKey,
   });
 
   const ses = new aws.SES({ apiVersion: 'latest' });
