@@ -37,7 +37,7 @@ Builder Book is an open source web app to publish documentation or books. The ap
     
     Important: You have to enable Google+ API in your Google Cloud Platform account.
 
-  - Add secret for Express session `SESSION_SECRET`: https://github.com/expressjs/session#secret
+  - Specify your own secret key for Express session `SESSION_SECRET`: https://github.com/expressjs/session#secret
 
   To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values to all env variables in `.env` file:
 

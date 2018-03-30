@@ -13,7 +13,15 @@ Boilerplate with React, Material-UI, Next, Express, Mongoose, MongoDB.
 
 ## Run locally
 - Clone the project and run `yarn` to add packages.
-- Before you start the app, create a `.env` file at the app's root. This file must have _at least three env variables_: `MONGO_URL_TEST`, `Google_clientID`, `Google_clientSecret`. We recommend [free MongoDB at mLab](http://docs.mlab.com/).
+- Before you start the app, create a `.env` file at the app's root. This file must have values for env variables specified below.
+  - To get `MONGO_URL_TEST`, we recommend a [free MongoDB at mLab](http://docs.mlab.com/).
+  - Get `Google_clientID` and `Google_clientSecret` by following [official OAuth tutorial](https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin).
+
+    Important: For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback
+    
+    Important: You have to enable Google+ API in your Google Cloud Platform account.
+
+  - Specify your own secret key for Express session `SESSION_SECRET`: https://github.com/expressjs/session#secret.
 
   `.env` :
   ```
@@ -21,13 +29,11 @@ Boilerplate with React, Material-UI, Next, Express, Mongoose, MongoDB.
 
   Google_clientID="XXXXXX"
   Google_clientSecret="XXXXXX"
-  ```
 
-  For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback
-  You have to enable Google+ API in your Google Cloud Platform account.
+  SESSION_SECRET="XXXXXX"
+  ```
   
 - Start the app with `yarn dev`.
-
 - The _first registered user_ in the app becomes an Admin user (`"isAdmin": true`).
 
 
