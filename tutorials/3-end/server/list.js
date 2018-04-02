@@ -1,10 +1,11 @@
 export default function list() {
+  const n = 100;
   const array = [];
-  const n = 50000;
 
   for (let i = 0; i < n; i += 1) {
-    array.push({ name: `Item ${i + 1}` });
+    array.push({ name: `Item ${i + 1} of ${n}` });
   }
+
   // console.log(array);
 
   return array;

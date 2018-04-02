@@ -17,7 +17,7 @@ app.prepare().then(() => {
   server.get('/api/v1/public/list', async (req, res) => {
     try {
       const listOfItems = await list();
-      res.json({ listOfItems });
+      setTimeout(() => { res.json({ listOfItems }); }, 3000);
       // console.log(listOfItems);
     } catch (err) {
       res.json({ error: err.message || err.toString() });
