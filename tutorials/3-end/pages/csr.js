@@ -7,7 +7,7 @@ import { getList } from '../lib/api/public';
 
 import withLayout from '../lib/withLayout';
 
-function CSR({ list, loading }) {
+function CSRNoData({ list, loading }) {
   if (loading) {
     return (
       <div style={{ padding: '10px 45px' }}>
@@ -33,19 +33,19 @@ function CSR({ list, loading }) {
   );
 }
 
-CSR.propTypes = {
+CSRNoData.propTypes = {
   list: PropTypes.shape({
     listOfItems: PropTypes.array.isRequired,
   }),
   loading: PropTypes.bool,
 };
 
-CSR.defaultProps = {
+CSRNoData.defaultProps = {
   list: null,
   loading: true,
 };
 
-class CSRWithData extends React.Component {
+class CSR extends React.Component {
   state = {
     list: null,
     loading: true,
@@ -68,11 +68,8 @@ class CSRWithData extends React.Component {
   }
 
   render() {
-    return <CSR {...this.props} {...this.state} />;
+    return <CSRNoData {...this.props} {...this.state} />;
   }
 }
 
-
-// works as well
-
-export default withLayout(CSRWithData);
+export default withLayout(CSR);

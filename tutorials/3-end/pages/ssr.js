@@ -6,9 +6,7 @@ import withLayout from '../lib/withLayout';
 
 class SSR extends React.Component {
   static async getInitialProps() {
-    // NProgress.start();
     const list = await getList();
-    // NProgress.done();
     return { list };
   }
 
@@ -31,10 +29,6 @@ class SSR extends React.Component {
     );
   }
 }
-
-// nice, example works
-// no page, then page appears with all data
-// describe why Nprogress does not work
 
 SSR.propTypes = {
   list: PropTypes.shape({

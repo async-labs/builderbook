@@ -1,5 +1,5 @@
 export default function list() {
-  const n = 100;
+  const n = 10000;
   const array = [];
 
   for (let i = 0; i < n; i += 1) {
