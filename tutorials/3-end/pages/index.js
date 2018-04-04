@@ -10,7 +10,7 @@ function Index() {
         <title>Index page</title>
         <meta name="description" content="description for indexing bots" />
       </Head>
-      <p> Content on Index page </p>
+      <p>Content on Index page</p>
     </div>
   );
 }

@@ -3,9 +3,11 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 import Toolbar from 'material-ui/Toolbar';
 import Grid from 'material-ui/Grid';
-import Avatar from 'material-ui/Avatar';
-
 import { styleToolbar } from './SharedStyles';
+
+const styleAnchor = {
+  margin: '0px 20px 0px auto',
+};
 
 Router.onRouteChangeStart = () => {
   NProgress.start();
@@ -18,21 +20,20 @@ function Header() {
     <div>
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justify="space-around" alignItems="center">
-          <Grid item sm={10} xs={9} style={{ textAlign: 'left' }}>
-            <Link prefetch href="/" as="/">
-              <a>
-                <Avatar
-                  src="https://storage.googleapis.com/builderbook/logo.svg"
-                  alt="Builder Book logo"
-                  style={{ margin: '0px auto 0px 20px' }}
-                />
-              </a>
+          <Grid item sm={9} xs={8} style={{ textAlign: 'left' }}>
+            <Link prefetch href="/send-email" as="/send-email">
+              <a>Send email with AWS SES</a>
             </Link>
           </Grid>
-          <Grid item sm={1} xs={3} style={{ textAlign: 'right' }}>
-            <Link prefetch href="/login" as="/login">
-              <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
-            </Link>
+          <Grid item sm={3} xs={4} style={{ textAlign: 'right' }}>
+            <a
+              href="https://builderbook.org/book"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={styleAnchor}
+            >
+              Our book
+            </a>
           </Grid>
         </Grid>
       </Toolbar>

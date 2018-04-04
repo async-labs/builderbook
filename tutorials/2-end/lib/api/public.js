@@ -1,6 +1,9 @@
 import 'isomorphic-fetch';
 
-const ROOT_URL = 'http://localhost:8000';
+const dev = process.env.NODE_ENV !== 'production';
+const port = process.env.PORT || 8000;
+const ROOT_URL = dev ? `http://localhost:${port}` : 'https://aws-ses.builderbook.org';
+
 
 async function sendRequest(path, options = {}) {
   const headers = {

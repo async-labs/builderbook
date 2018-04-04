@@ -40,8 +40,17 @@ class Subscribe extends React.Component {
           <meta name="description" content="description for indexing bots" />
         </Head>
         <br />
+        This app was created for
+        <a
+          href="https://medium.freecodecamp.org/how-to-integrate-mailchimp-in-a-javascript-web-app-2a889fb43f6f"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {' '}this tutorial
+        </a>.
+        <br />
         <form onSubmit={this.onSubmit}>
-          <p>We will email you when a new tutorial is released:</p>
+          <p>Your email will be added to Mailchimp list and you will get confirmation email:</p>
           <TextField
             inputRef={(elm) => {
               this.emailInput = elm;

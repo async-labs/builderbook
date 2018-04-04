@@ -1,13 +1,12 @@
 import React from 'react';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
-import NProgress from 'nprogress';
 
 import { getList } from '../lib/api/public';
 
 import withLayout from '../lib/withLayout';
 
-function CSRNoData({ list, loading }) {
+function CSR({ list, loading }) {
   if (loading) {
     return (
       <div style={{ padding: '10px 45px' }}>
@@ -33,26 +32,25 @@ function CSRNoData({ list, loading }) {
   );
 }
 
-CSRNoData.propTypes = {
+CSR.propTypes = {
   list: PropTypes.shape({
     listOfItems: PropTypes.array.isRequired,
   }),
   loading: PropTypes.bool,
 };
 
-CSRNoData.defaultProps = {
+CSR.defaultProps = {
   list: null,
   loading: true,
 };
 
-class CSR extends React.Component {
+class CSRWithData extends React.Component {
   state = {
     list: null,
     loading: true,
   };
 
   async componentDidMount() {
-    NProgress.start();
     try {
       const list = await getList();
       // console.log(list.listOfItems);
@@ -60,16 +58,14 @@ class CSR extends React.Component {
         list,
         loading: false,
       });
-      NProgress.done();
     } catch (err) {
       this.setState({ loading: false, error: err.message || err.toString() }); // eslint-disable-line
-      NProgress.done();
     }
   }
 
   render() {
-    return <CSRNoData {...this.props} {...this.state} />;
+    return <CSR {...this.props} {...this.state} />;
   }
 }
 
-export default withLayout(CSR);
+export default withLayout(CSRWithData);

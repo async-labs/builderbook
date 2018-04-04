@@ -41,8 +41,17 @@ class SendEmail extends React.Component {
           <meta name="description" content="description for indexing bots" />
         </Head>
         <br />
+        This app was created for
+        <a
+          href="https://codeburst.io/add-transactional-emails-to-a-javascript-web-app-react-express-9fa1ff2e40e0"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {' '}this tutorial
+        </a>.
+        <br />
         <form onSubmit={this.onSubmit}>
-          <p>We will email you when a new tutorial is released:</p>
+          <p>Add your email address and app will send you email via AWS SES:</p>
           <TextField
             inputRef={(elm) => {
               this.emailInput = elm;
@@ -54,7 +63,7 @@ class SendEmail extends React.Component {
           />
           <p />
           <Button variant="raised" color="primary" type="submit">
-            Subscribe
+            Send email with AWS SES
           </Button>
         </form>
       </div>

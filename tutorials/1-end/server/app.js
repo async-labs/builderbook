@@ -5,7 +5,7 @@ import { subscribe } from './mailchimp';
 
 const dev = process.env.NODE_ENV !== 'production';
 const port = process.env.PORT || 8000;
-const ROOT_URL = 'http://localhost:8000';
+const ROOT_URL = dev ? `http://localhost:${port}` : 'https://mailchimp.builderbook.org';
 
 
 const app = next({ dev });

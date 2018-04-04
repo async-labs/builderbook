@@ -2,7 +2,7 @@ import 'isomorphic-fetch';
 
 const dev = process.env.NODE_ENV !== 'production';
 const port = process.env.PORT || 8000;
-const ROOT_URL = dev ? `http://localhost:${port}` : 'https://ssr-csr.now.sh';
+const ROOT_URL = dev ? `http://localhost:${port}` : 'https://ssr-csr.builderbook.org';
 
 async function sendRequest(path, options = {}) {
   const headers = {

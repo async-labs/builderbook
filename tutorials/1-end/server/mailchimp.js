@@ -6,15 +6,13 @@ export async function subscribe({ email }) {
     status: 'subscribed',
   };
 
-  const listId = 'fc4171c626';
-  const API_KEY = 'c82d5b7241e88d04f74705eaaeeb6fe7-us17';
-  // these are non-functional keys
-  // get your own keys at Mailchimp
+  const LIST_ID = 'xxxxxx';
+  const API_KEY = 'xxxxxx';
 
   await new Promise((resolve, reject) => {
     request.post(
       {
-        uri: `https://us17.api.mailchimp.com/3.0/lists/${listId}/members/`,
+        uri: `https://us17.api.mailchimp.com/3.0/lists/${LIST_ID}/members/`,
         headers: {
           Accept: 'application/json',
           Authorization: `Basic ${Buffer.from(`apikey:${API_KEY}`).toString('base64')}`,
