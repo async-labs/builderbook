@@ -1,10 +1,13 @@
 ## How to integrate MailChimp in a JavaScript web app
 This folder contains the ending code for our tutorial on how to add MailChimp integration to a simple JavaScript web app. In the tutorial, you build a form for guest users to subscribe to a MailChimp newsletter.
 
+- [link to tutorial](https://medium.freecodecamp.org/how-to-integrate-mailchimp-in-a-javascript-web-app-2a889fb43f6f). 
+- [link to deployed app](https://mailchimp.builderbook.org/subscribe). 
+
 
 ## Run locally
 - Clone the builderbook repo to your local machine: `git clone git@github.com:builderbook/builderbook.git`
-- Inside the `tutorials/1-start` folder, run `yarn` to add packages
+- Inside the `tutorials/1-end` folder, run `yarn` to add packages
 - Start the app with `yarn dev`
 - _Important note_: You will need to add your own MailChimp `listId` and `API_KEY` values in the `server/mailchimp.js` file
 

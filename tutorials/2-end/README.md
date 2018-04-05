@@ -1,10 +1,13 @@
-## Add transactional emails to a JavaScript web app (React, Express)
-This folder contains the ending code for our tutorial on how to add transactional emails to a JavaScript web app (React, Express). In the tutorial, you integrate an app with AWS SES to send a welcome email to a guest user.
+## Add transactional emails to a JavaScript web app (React, Express) with AWS SES
+This folder contains the ending code for our tutorial on how to add transactional emails to a JavaScript web app (React, Express) with AWS SES. In the tutorial, you integrate an app with AWS SES to send a welcome email to a guest user.
+
+- [link to tutorial](https://codeburst.io/add-transactional-emails-to-a-javascript-web-app-react-express-9fa1ff2e40e0?gi=8fc42ff4008d). 
+- [link to deployed app](https://aws-ses.builderbook.org/send-email)
 
 
 ## Run locally
 - Clone the builderbook repo to your local machine: `git clone git@github.com:builderbook/builderbook.git`
-- Inside the `tutorials/2-start` folder, run `yarn` to add packages
+- Inside the `tutorials/2-end` folder, run `yarn` to add packages
 - Start the app with `yarn dev`
 - _Important note_: You will need to add your own `Amazon_accessKeyId` and `Amazon_secretAccessKey` values from AWS SES in `server/aws.js`
 

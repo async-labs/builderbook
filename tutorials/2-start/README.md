@@ -1,5 +1,8 @@
-## Add transactional emails to a JavaScript web app (React, Express)
-This folder contains the starting code for our tutorial on how to add transactional emails to a JavaScript web app (React, Express). In the tutorial, you integrate an app with AWS SES to send a welcome email to a guest user.
+## Add transactional emails to a JavaScript web app (React, Express) with AWS SES
+This folder contains the starting code for our tutorial on how to add transactional emails to a JavaScript web app (React, Express) with AWS SES. In the tutorial, you integrate an app with AWS SES to send a welcome email to a guest user.
+
+- [link to tutorial](https://codeburst.io/add-transactional-emails-to-a-javascript-web-app-react-express-9fa1ff2e40e0?gi=8fc42ff4008d). 
+- [link to deployed app](https://aws-ses.builderbook.org/send-email)
 
 
 ## Run locally

@@ -1,5 +1,8 @@
 ## How to integrate MailChimp in a JavaScript web app
-This folder contains code for our tutorial on how to add MailChimp integration to a simple JavaScript web app. In the tutorial, you build a form for guest users to subscribe to a MailChimp newsletter.
+This folder contains the starting code for our tutorial on how to add MailChimp integration to a simple JavaScript web app. In the tutorial, you build a form for guest users to subscribe to a MailChimp newsletter.
+
+- [link to tutorial](https://medium.freecodecamp.org/how-to-integrate-mailchimp-in-a-javascript-web-app-2a889fb43f6f). 
+- [link to deployed app](https://mailchimp.builderbook.org/subscribe). 
 
 
 ## Run locally
