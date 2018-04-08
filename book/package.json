@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "set-var-remove-add": "cross-env PACKAGE=material-ui VERSION=@1.0.0-beta.41 yarn remove-add-all",
+    "set-var-remove-add": "cross-env PACKAGE=material-ui VERSION=@1.0.0-beta.41 yarn remove-add-1",
     "remove-add-all": "yarn remove-add-1 && yarn remove-add-2 && yarn remove-add-3 && yarn remove-add-4 && yarn remove-add-5 && yarn remove-add-6 && yarn remove-add-7 && yarn remove-add-8",
     "remove-add-1": "cross-env-shell && cd 1-start && yarn remove $PACKAGE && yarn add $PACKAGE$VERSION && cd .. && cd 1-end && yarn remove $PACKAGE && yarn add $PACKAGE$VERSION && cd ..",
     "remove-add-2": "cross-env-shell && cd 2-start && yarn remove $PACKAGE && yarn add $PACKAGE$VERSION && cd .. && cd 2-end && yarn remove $PACKAGE && yarn add $PACKAGE$VERSION && cd ..",
@@ -14,7 +14,6 @@
     "remove-add-7": "cross-env-shell && cd 7-start && yarn remove $PACKAGE && yarn add $PACKAGE$VERSION && cd .. && cd 7-end && yarn remove $PACKAGE && yarn add $PACKAGE$VERSION && cd ..",
     "remove-add-8": "cross-env-shell && cd 8-start && yarn remove $PACKAGE && yarn add $PACKAGE$VERSION && cd .. && cd 8-end && yarn remove $PACKAGE && yarn add $PACKAGE$VERSION && cd ..",
     "remove-add-boilerplate": "cross-env-shell && cd .. && cd boilerplate && yarn remove $PACKAGE && yarn add $PACKAGE$VERSION && cd .. && cd book"
-
   },
   "devDependencies": {
     "cross-env": "^5.1.4"
