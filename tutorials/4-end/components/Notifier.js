@@ -21,7 +21,10 @@ class Notifier extends React.PureComponent {
   };
 
   openSnackbar = ({ message }) => {
-    this.setState({ open: true, message });
+    this.setState({
+      open: true,
+      message,
+    });
   };
 
   render() {
