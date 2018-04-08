@@ -13,17 +13,17 @@ class Notifier extends React.PureComponent {
     openSnackbarFn = this.openSnackbar;
   }
 
-  handleSnackbarClose = () => {
-    this.setState({
-      open: false,
-      message: '',
-    });
-  };
-
   openSnackbar = ({ message }) => {
     this.setState({
       open: true,
       message,
+    });
+  };
+
+  handleSnackbarClose = () => {
+    this.setState({
+      open: false,
+      message: '',
     });
   };
 

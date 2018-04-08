@@ -44,7 +44,6 @@ class Notify extends React.Component {
               color: '#222',
               fontWeight: '300',
             }}
-            required
           />
           <p />
           <Button
