@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Error from 'next/error';
+import Head from 'next/head';
 import NProgress from 'nprogress';
 
 import { getMyBookList } from '../../lib/api/customer';
@@ -53,31 +54,36 @@ function MyBooks({
   }
 
   return (
-    <div style={{ padding: '10px 45px' }}>
-      {purchasedBooks && purchasedBooks.length > 0 ? (
-        <div>
-          <h3>Your books</h3>
-          <ul>{purchasedBooks.map(book => renderBookRow(book))}</ul>
-        </div>
+    <div>
+      <Head>
+        <title>My Books</title>
+        <meta name="description" content="List of purchased books" />
+      </Head>
+      <div style={{ padding: '10px 45px' }}>
+        {purchasedBooks && purchasedBooks.length > 0 ? (
+          <div>
+            <h3>Your books</h3>
+            <ul>{purchasedBooks.map(book => renderBookRow(book))}</ul>
+          </div>
         ) : (
           <div>
             <h3>Your books</h3>
             <p>You have not purchased any book.</p>
           </div>
-        )}
+          )}
 
-      {freeBooks && freeBooks.length > 0 ? (
-        <ul>{freeBooks.map(book => renderFreeBookRow(book))}</ul>
-            ) : null}
-
-      {otherBooks && otherBooks.length > 0 ? (
-        <div>
-          <h3>Available books</h3>
-          <p>Check out books available for purchase:</p>
-          <ul>{otherBooks.map(book => renderBookRow(book))}</ul>
-        </div>
+        {freeBooks && freeBooks.length > 0 ? (
+          <ul>{freeBooks.map(book => renderFreeBookRow(book))}</ul>
         ) : null}
 
+        {otherBooks && otherBooks.length > 0 ? (
+          <div>
+            <h3>Available books</h3>
+            <p>Check out books available for purchase:</p>
+            <ul>{otherBooks.map(book => renderBookRow(book))}</ul>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }

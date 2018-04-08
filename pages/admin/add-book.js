@@ -1,6 +1,7 @@
 import React from 'react';
 import Router from 'next/router';
 import NProgress from 'nprogress';
+import Head from 'next/head';
 
 import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
@@ -34,6 +35,10 @@ class AddBook extends React.Component {
   render() {
     return (
       <div style={{ padding: '10px 45px' }}>
+        <Head>
+          <title>Add Book</title>
+          <meta name="description" content="Add new book" />
+        </Head>
         <EditBook onSave={this.addBookOnSave} />
       </div>
     );

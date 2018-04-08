@@ -2,6 +2,7 @@ import React from 'react';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import PropTypes from 'prop-types';
+import Head from 'next/head';
 import Error from 'next/error';
 
 import EditBookComp from '../../components/admin/EditBook';
@@ -66,6 +67,10 @@ class EditBook extends React.Component {
 
     return (
       <div>
+        <Head>
+          <title>Edit {book.name}</title>
+          <meta name="description" content={`Edit book: ${book.name}`} />
+        </Head>
         <EditBookComp onSave={this.editBookOnSave} book={book} />
       </div>
     );

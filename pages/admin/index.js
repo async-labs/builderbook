@@ -16,7 +16,7 @@ const Index = ({ books }) => (
   <div style={{ padding: '10px 45px' }}>
     <Head>
       <title>Admin</title>
-      <meta name="description" content="settings for Admin" />
+      <meta name="description" content="Settings for Admin" />
     </Head>
     <Grid container>
       <Grid item xs={12} sm={4}>
