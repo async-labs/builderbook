@@ -1,4 +1,4 @@
-## Builder Book
+## Open source web app (Builder Book)
 [![apm](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/builderbook/builderbook/blob/master/LICENSE.md)
 [![apm](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/builderbook/builderbook#contributing)
 
