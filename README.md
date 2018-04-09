@@ -9,7 +9,7 @@ Builder Book is an open source web app to publish documentation or books. The ap
 
 
 ## How can you use this app?
-- As learning material for React/Material-UI/Next/Express/Mongoose/MongoDB stack and Google/Github/AWS SES/Mailchimp/Stripe APIs. You can start from our [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate) or modify the final app into your own project.
+- As learning material for React/Material-UI/Next/Express/Mongoose/MongoDB stack and Google/Github/AWS SES/Mailchimp/Stripe APIs.<br> You can start from our [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate) or modify the final app into your own project.<br> For initial load, pages are rendered by the server; for subsequent loads, pages are rendered on the client.
 - As a production-ready web app to publish documentation or sell books on your own website.
 
 
@@ -98,10 +98,11 @@ Builder Book is an open source web app to publish documentation or books. The ap
 
 When you add new `.md` files or update content, go to the `BookDetail` page of your app and click `Sync with Github`. 
 
-IMPORTANT: Note that all `.md` files in your Github repo _must_ have metadata in the format shown above.
+IMPORTANT: All `.md` files in your Github repo _must_ have metadata in the format shown above.
+
 IMPORTANT: All `.md` files in your Github repo _must_ have name `introduction.md` or `chapter-N.md`.
 
-To make the content of a `.md` file _private_ (meaning a person must purchase the content to see it, remove `isFree:true`  and add `excerpt:""`. Add some excerpt content - this content is public and serves as a free preview.
+To make the content of a `.md` file _private_ (meaning a person must purchase the content to see it), remove `isFree:true`  and add `excerpt:""`. Add some excerpt content - this content is public and serves as a free preview.
 
 
 ## Deploy
@@ -117,16 +118,16 @@ To make the content of a `.md` file _private_ (meaning a person must purchase th
 
 ## Screenshots
 Chapter excerpt with Buy Button for Pubilc/Guest visitor:
-![builderbook-public-readchapter](https://user-images.githubusercontent.com/26158226/35484937-d9595078-040c-11e8-97d9-d5ff47f5ac58.png)
+![builderbook-public-readchapter](https://user-images.githubusercontent.com/26158226/38517453-e84a7566-3bee-11e8-82cd-14b4dfbe6a78.png)
 
-Chapter content for book Customer:
-![builderbook-customer-readchapter](https://user-images.githubusercontent.com/26158226/35484940-db47cdb0-040c-11e8-9f8b-029eb536a74d.png)
+Chapter content and Table of Contents for book Customer:
+![builderbook-customer-readchapter](https://user-images.githubusercontent.com/26158226/38518394-9ee97306-3bf1-11e8-8df2-8c05fb75249a.png)
 
 Add-book/Edit-book page for Admin user:
-![builderbook-admin-editbook](https://user-images.githubusercontent.com/26158226/35486364-d64300d6-0421-11e8-8bcd-088c73fabcf7.png)
+![builderbook-admin-editbook](https://user-images.githubusercontent.com/26158226/38517449-e5faaa38-3bee-11e8-9c02-740096dc860e.png)
 
 Book-detail page for Admin user:
-![builderbook-admin-bookdetails](https://user-images.githubusercontent.com/26158226/35486362-d3f25390-0421-11e8-9e26-7bdaee573e1d.png)
+![builderbook-admin-bookdetails](https://user-images.githubusercontent.com/26158226/38517450-e7005bd0-3bee-11e8-9916-81f32d3d1827.png)
 
 
 ## Built with
