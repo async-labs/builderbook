@@ -29,7 +29,10 @@ class Notifier extends React.PureComponent {
 
   render() {
     const message = (
-      <span id="snackbar-message-id" dangerouslySetInnerHTML={{ __html: this.state.message }} />
+      <span
+        id="snackbar-message-id"
+        dangerouslySetInnerHTML={{ __html: this.state.message }}
+      />
     );
 
     return (

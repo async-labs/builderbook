@@ -12,7 +12,7 @@ function Header() {
     <div>
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justify="space-around" alignItems="center">
-          <Grid item sm={9} xs={8} style={{ textAlign: 'left' }}>
+          <Grid item sm={9} xs={8}>
             <div />
           </Grid>
           <Grid item sm={3} xs={4} style={{ textAlign: 'right' }}>
