@@ -5,7 +5,7 @@ import Chapter from './models/Chapter';
 
 const sitemap = sm.createSitemap({
   hostname: 'https://builderbook.org',
-  cacheTime: 600000, // 600 sec - cache purge period
+  cacheTime: 6000000, // 6000 sec - cache purge period
 });
 
 export default function setup({ server }) {
@@ -17,6 +17,18 @@ export default function setup({ server }) {
         priority: 1,
       });
     });
+  });
+
+  sitemap.add({
+    url: '/book',
+    changefreq: 'daily',
+    priority: 1,
+  });
+
+  sitemap.add({
+    url: '/tutorials',
+    changefreq: 'daily',
+    priority: 1,
   });
 
   server.get('/sitemap.xml', (req, res) => {

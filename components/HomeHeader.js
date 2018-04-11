@@ -55,7 +55,7 @@ function Header({ user }) {
                 {!user.isAdmin ? (
                   <div>
                     <Link prefetch href="/book" as="/book">
-                      <a style={{ margin: '20px 30px 0px auto', verticalAlign: 'middle' }}>Our book</a>
+                      <a style={{ margin: '20px 30px 0px auto', verticalAlign: 'middle' }}>Book</a>
                     </Link>
                     <MenuDrop
                       options={optionsMenuCustomer}
