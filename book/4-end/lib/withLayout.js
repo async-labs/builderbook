@@ -9,7 +9,8 @@ import Notifier from '../components/Notifier';
 
 function withLayout(BaseComponent) {
   class App extends React.Component {
-    componentWillMount() {
+    constructor(props, context) {
+      super(props, context);
       this.pageContext = this.props.pageContext || getContext();
     }
 
