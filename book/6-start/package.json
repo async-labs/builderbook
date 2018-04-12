@@ -16,7 +16,6 @@
     "@octokit/rest": "14.0.5",
     "aws-sdk": "^2.182.0",
     "babel-cli": "^6.26.0",
-    "body-parser": "^1.18.2",
     "connect-mongo": "^2.0.1",
     "dotenv": "^4.0.0",
     "email-addresses": "^3.0.1",

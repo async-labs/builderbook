@@ -14,7 +14,7 @@ function callAPI({ path, method, data }) {
   const API_KEY = process.env.MAILCHIMP_API_KEY;
 
   return new Promise((resolve, reject) => {
-    request(
+    request.post(
       {
         method,
         uri: `${ROOT_URI}${path}`,

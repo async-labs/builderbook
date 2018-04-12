@@ -1,7 +1,6 @@
 import express from 'express';
 import session from 'express-session';
 import mongoSessionStore from 'connect-mongo';
-import bodyParser from 'body-parser';
 import next from 'next';
 import mongoose from 'mongoose';
 
@@ -33,7 +32,7 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
-  server.use(bodyParser.json());
+  server.use(express.json());
 
   const MongoStore = mongoSessionStore(session);
   const sess = {
