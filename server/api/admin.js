@@ -1,9 +1,12 @@
 import express from 'express';
+import { fork } from 'child_process';
 
 import Book from '../models/Book';
 import { getContent, getRepos } from '../github';
 import User from '../models/User';
 import logger from '../logs';
+
+const dev = process.env.NODE_ENV !== 'production';
 
 const router = express.Router();
 
@@ -54,10 +57,10 @@ router.get('/books/detail/:slug', async (req, res) => {
   }
 });
 
-router.post('/books/sync-content', async (req, res) => {
-  const { bookId } = req.body;
+router.post('/books/sync-one-chapter', async (req, res) => {
+  const { bookId, chapterId } = req.body;
 
-  const user = await User.findById(req.user._id, 'isGithubConnected githubAccessToken');
+  const user = await User.findById(req.user._id, 'isGithubConnected githubAccessToken').lean();
 
   if (!user.isGithubConnected || !user.githubAccessToken) {
     res.json({ error: 'Github not connected' });
@@ -65,8 +68,64 @@ router.post('/books/sync-content', async (req, res) => {
   }
 
   try {
-    await Book.syncContent({ id: bookId, githubAccessToken: user.githubAccessToken });
-    res.json({ done: 1 });
+    const sync = fork(dev ? './server/api/sync-inside-fork.js' : './compiled/server/api/sync-inside-fork.js');
+    const userGithubToken = user.githubAccessToken;
+    sync.send({ bookId, chapterId, userGithubToken });
+    sync.on('message', (msg) => {
+      // logger.info('Message from child', msg);
+      if (msg.error) {
+        res.json({ error: msg.error.message || msg.error.toString() });
+      } else {
+        res.json({ syncedInsideFork: 1 });
+      }
+      sync.kill();
+    });
+  } catch (err) {
+    res.json({ error: err.message || err.toString() });
+  }
+});
+
+// syncing one chapter in main process
+
+// router.post('/books/sync-one-chapter', async (req, res) => {
+//   const { bookId, chapterId } = req.body;
+
+//   const user = await User.findById(req.user._id, 'isGithubConnected githubAccessToken').lean();
+
+//   if (!user.isGithubConnected || !user.githubAccessToken) {
+//     res.json({ error: 'Github not connected' });
+//     return;
+//   }
+//   console.log(bookId, chapterId);
+//   try {
+//     await Book.syncOneChapter({
+//       id: bookId,
+//       githubAccessToken: user.githubAccessToken,
+//       chapterId,
+//     });
+//     res.json({ syncedOneChapter: 1 });
+//   } catch (err) {
+//     logger.error(err);
+//     res.json({ error: err.message || err.toString() });
+//   }
+// });
+
+router.post('/books/sync-all-chapters', async (req, res) => {
+  const { bookId } = req.body;
+
+  const user = await User.findById(req.user._id, 'isGithubConnected githubAccessToken').lean();
+
+  if (!user.isGithubConnected || !user.githubAccessToken) {
+    res.json({ error: 'Github not connected' });
+    return;
+  }
+
+  try {
+    await Book.syncAllChapters({
+      id: bookId,
+      githubAccessToken: user.githubAccessToken,
+    });
+    res.json({ syncedAllChapters: 1 });
   } catch (err) {
     logger.error(err);
     res.json({ error: err.message || err.toString() });

@@ -6,15 +6,29 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Button from 'material-ui/Button';
 
-import { getBookDetail, syncBookContent } from '../../lib/api/admin';
+import { getBookDetail, syncOneChapter, syncAllChapters } from '../../lib/api/admin';
 import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 import notify from '../../lib/notifier';
 
-const handleSyncContent = bookId => async () => {
+const handleSyncOneChapter = async (event) => {
   NProgress.start();
   try {
-    await syncBookContent({ bookId });
+    const { bookid: bookId, chapterid: chapterId } = event.currentTarget.dataset;
+    await syncOneChapter({ bookId, chapterId });
+    notify('Synced');
+    NProgress.done();
+  } catch (err) {
+    notify(err);
+    NProgress.done();
+  }
+};
+
+const handleSyncAllChapters = async (event) => {
+  NProgress.start();
+  try {
+    const { bookid: bookId } = event.currentTarget.dataset;
+    await syncAllChapters({ bookId });
     notify('Synced');
     NProgress.done();
   } catch (err) {
@@ -42,20 +56,22 @@ const MyBook = ({ book, error }) => {
         <meta name="description" content={`Details for book: ${book.name}`} />
       </Head>
       <h2>{book.name}</h2>
-      <p>
-        <a href={`https://github.com/${book.githubRepo}`} target="_blank">
-          {book.githubRepo}
-        </a>
-      </p>
-      <Button variant="raised" onClick={handleSyncContent(book._id)}>
-        Sync with Github
-      </Button>{' '}
+      <a href={`https://github.com/${book.githubRepo}`} target="_blank" rel="noopener noreferrer">
+        Repo on Github
+      </a>
+      <p />
+      <Button variant="raised" data-bookid={book._id} onClick={handleSyncAllChapters}>
+        Sync all chapters
+      </Button>
       <Link as={`/admin/edit-book/${book.slug}`} href={`/admin/edit-book?slug=${book.slug}`}>
-        <Button variant="raised">Edit book</Button>
+        <Button variant="raised" style={{ marginLeft: '20px' }}>Edit book</Button>
       </Link>
-      <ul>
+      <ul style={{ listStyleType: 'none', padding: '10px 0px' }}>
         {chapters.map(ch => (
           <li key={ch._id}>
+            <Button data-bookid={book._id} data-chapterid={ch._id} onClick={handleSyncOneChapter}>
+              Sync
+            </Button>
             <Link
               as={`/books/${book.slug}/${ch.slug}`}
               href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}

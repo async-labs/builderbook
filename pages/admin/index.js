@@ -6,7 +6,6 @@ import Link from 'next/link';
 import Grid from 'material-ui/Grid';
 
 import notify from '../../lib/notifier';
-import GiveFreeBook from '../../components/admin/GiveFreeBook';
 
 import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
@@ -22,6 +21,9 @@ const Index = ({ books }) => (
       <Grid item xs={12} sm={4}>
         <div>
           <h2>Books</h2>
+          <Link href="/admin/add-book">
+            <Button variant="raised">Add book</Button>
+          </Link>
           <ul>
             {books.map(b => (
               <li key={b._id}>
@@ -35,16 +37,7 @@ const Index = ({ books }) => (
               </li>
             ))}
           </ul>
-
-          <Link href="/admin/add-book">
-            <Button variant="raised">Add book</Button>
-          </Link>
         </div>
-        <br />
-      </Grid>
-
-      <Grid item xs={12} sm={8}>
-        <GiveFreeBook books={books} />
       </Grid>
     </Grid>
   </div>

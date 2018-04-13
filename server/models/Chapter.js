@@ -240,9 +240,9 @@ class ChapterClass {
     const { body, path } = data;
 
     const chapter = await this.findOne({
-      bookId: book.id,
+      bookId: book._id,
       githubFilePath: path,
-    });
+    }).lean();
 
     let order;
 
@@ -296,6 +296,22 @@ class ChapterClass {
         bookId: chapter.bookId,
       });
     }
+
+    const purchasesWithBookmark = await Purchase.find({ bookId: book._id, bookmarks: { $elemMatch: { chapterId: chapter._id } } }, '_id bookmarks').lean();
+
+    const orderForBookmark = modifier.order;
+    const slugForBookmark = modifier.slug;
+
+    await Promise.all(purchasesWithBookmark.map(async (purchase) => {
+      const { chapterId } = purchase.bookmarks[0];
+
+      const modifierForBookmark = {
+        'bookmarks.$.chapterOrder': orderForBookmark,
+        'bookmarks.$.chapterSlug': slugForBookmark,
+      };
+
+      await Purchase.updateOne({ _id: purchase._id, 'bookmarks.chapterId': chapterId }, { $set: modifierForBookmark });
+    }));
 
     return this.updateOne({ _id: chapter._id }, { $set: modifier });
   }

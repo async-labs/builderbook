@@ -150,8 +150,33 @@ class BookClass {
     return this.updateOne({ _id: id }, { $set: modifier });
   }
 
-  static async syncContent({ id, githubAccessToken }) {
-    const book = await this.findById(id, 'githubRepo githubLastCommitSha');
+  static async syncOneChapter({ id, githubAccessToken, chapterId }) {
+    const book = await this.findById(id, 'userId githubRepo').lean();
+    const chapter = await Chapter.findById(chapterId, 'githubFilePath').lean();
+
+    if (!book) {
+      throw new Error('Not found');
+    }
+
+    const chapterContent = await getContent({
+      accessToken: githubAccessToken,
+      repoName: book.githubRepo,
+      path: chapter.githubFilePath,
+    });
+
+    const data = frontmatter(Buffer.from(chapterContent.data.content, 'base64').toString('utf8'));
+    data.path = chapter.githubFilePath;
+
+    try {
+      await Chapter.syncContent({ book, data });
+      logger.info('Content is synced', { path: chapter.githubFilePath });
+    } catch (error) {
+      logger.error('Content sync has error', { path: chapter.githubFilePath, error });
+    }
+  }
+
+  static async syncAllChapters({ id, githubAccessToken }) {
+    const book = await this.findById(id, 'userId githubRepo githubLastCommitSha').lean();
 
     if (!book) {
       throw new Error('Not found');
@@ -164,14 +189,15 @@ class BookClass {
     });
 
     if (!lastCommit || !lastCommit.data || !lastCommit.data[0]) {
-      throw new Error('No change!');
+      throw new Error('No change in content!');
     }
 
     const lastCommitSha = lastCommit.data[0].sha;
+    /*
     if (lastCommitSha === book.githubLastCommitSha) {
-      throw new Error('No change!');
+      throw new Error('No change in content!');
     }
-
+    */
     const mainFolder = await getContent({
       accessToken: githubAccessToken,
       repoName: book.githubRepo,
@@ -205,7 +231,7 @@ class BookClass {
       }
     }));
 
-    return book.update({ githubLastCommitSha: lastCommitSha });
+    return this.findByIdAndUpdate(book._id, { githubLastCommitSha: lastCommitSha });
   }
 
   static async buy({ id, user, stripeToken }) {
