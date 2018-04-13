@@ -1,7 +1,9 @@
 import express from 'express';
+import _ from 'lodash';
 
 import Book from '../models/Book';
 import Chapter from '../models/Chapter';
+import Purchase from '../models/Purchase';
 import logger from '../logs';
 
 const router = express.Router();
@@ -30,6 +32,32 @@ router.get('/my-books', async (req, res) => {
   }
 });
 
+router.get('/my-bookmarks', async (req, res) => {
+  try {
+    const { user } = req;
+    const allPurchases = await Purchase.find({ userId: user._id }, 'bookId bookmarks').lean();
+    // logger.info(allPurchases);
+
+    const bookmarks = await Promise.all(allPurchases.map(async (purchase) => {
+      if (!purchase.bookmarks || purchase.bookmarks.length < 1) {
+        return null;
+      }
+
+      const book = await Book.findById(purchase.bookId, 'name slug').lean();
+      // logger.info(book.name);
+      return {
+        bookName: book.name,
+        bookSlug: book.slug,
+        bookmarksArray: _.sortBy(purchase.bookmarks, 'chapterOrder'),
+      };
+    }));
+
+    res.json({ bookmarks: bookmarks.filter(b => !!b) });
+  } catch (err) {
+    res.json({ error: err.message || err.toString() });
+  }
+});
+
 router.post('/buy-book', async (req, res) => {
   const { id, stripeToken } = req.body;
 
@@ -43,10 +71,15 @@ router.post('/buy-book', async (req, res) => {
 });
 
 router.post('/chapters/add-bookmark', async (req, res) => {
-  const { chapterId, hash, text } = req.body;
+  const {
+    chapterId, chapterSlug, chapterOrder, hash, text,
+  } = req.body;
+  // logger.info(chapterSlug);
   try {
     await Chapter.addBookmark({
       chapterId,
+      chapterSlug,
+      chapterOrder,
       hash,
       text,
       userId: req.user.id,

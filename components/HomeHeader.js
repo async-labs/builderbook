@@ -75,7 +75,7 @@ function Header({ user }) {
             ) : (
               <div>
                 <Link prefetch href="/book" as="/book">
-                  <a style={{ margin: '20px 30px 0px auto' }}>Our book</a>
+                  <a style={{ margin: '20px 30px 0px auto' }}>Book</a>
                 </Link>
                 <Link prefetch href="/public/login" as="/login">
                   <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>

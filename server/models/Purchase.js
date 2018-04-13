@@ -21,6 +21,14 @@ const mongoSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
       },
+      chapterSlug: {
+        type: String,
+        required: true,
+      },
+      chapterOrder: {
+        type: Number,
+        required: true,
+      },
       text: {
         type: String,
         required: true,

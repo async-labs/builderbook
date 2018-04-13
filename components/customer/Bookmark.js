@@ -6,10 +6,11 @@ import Menu, { MenuItem } from 'material-ui/Menu';
 import notify from '../../lib/notifier';
 import { addBookmark } from '../../lib/api/customer';
 
-export default class Bookmark extends React.Component {
+export default class Bookmark extends React.PureComponent {
   static propTypes = {
     chapter: PropTypes.shape({
       _id: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired,
     }).isRequired,
     bookmark: PropTypes.shape({
       hash: PropTypes.string.isRequired,
@@ -48,7 +49,7 @@ export default class Bookmark extends React.Component {
     NProgress.start();
 
     try {
-      await addBookmark(Object.assign({ chapterId: chapter._id }, activeSection));
+      await addBookmark(Object.assign({ chapterId: chapter._id, chapterSlug: chapter.slug, chapterOrder: chapter.order }, activeSection));
       NProgress.done();
       notify(`You successfully bookmarked Chapter ${chapter.order - 1}, Section "${
         activeSection.text
@@ -74,7 +75,7 @@ export default class Bookmark extends React.Component {
 
     return (
       <div>
-        <i //eslint-disable-line
+        <i // eslint-disable-line
           className="material-icons"
           onClick={this.handleClick}
           onKeyPress={this.handleClick}

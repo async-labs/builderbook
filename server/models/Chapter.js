@@ -155,18 +155,18 @@ const mongoSchema = new Schema({
 
 class ChapterClass {
   static async addBookmark({
-    chapterId, hash, text, userId,
+    chapterId, chapterSlug, chapterOrder, hash, text, userId,
   }) {
     if (!userId) {
       throw new Error('User is required');
     }
 
-    const chapter = await this.findById(chapterId, 'bookId');
+    const chapter = await this.findById(chapterId, 'bookId').lean();
     if (!chapter) {
       throw new Error('Chapter not found');
     }
 
-    const book = await Book.findById(chapter.bookId, 'id');
+    const book = await Book.findById(chapter.bookId, 'id').lean();
     if (!book) {
       throw new Error('Book not found');
     }
@@ -175,13 +175,17 @@ class ChapterClass {
     if (!purchase) {
       throw new Error('You have not bought this book.');
     }
-
-    purchase.bookmarks.forEach((b) => {
+    // console.log(chapterSlug);
+    for (let i = 0; i < purchase.bookmarks.length; i += 1) {
+      const b = purchase.bookmarks[i];
       if (b.chapterId.equals(chapterId)) {
         purchase.bookmarks.pull(b._id);
       }
+    }
+
+    purchase.bookmarks.push({
+      chapterId, chapterSlug, chapterOrder, hash, text,
     });
-    purchase.bookmarks.push({ chapterId, hash, text });
 
     return purchase.save();
   }
