@@ -67,6 +67,7 @@ class EditBook extends React.Component {
   render() {
     return (
       <div style={{ padding: '10px 45px' }}>
+        <br />
         <form onSubmit={this.onSubmit}>
           <TextField
             onChange={(event) => {
@@ -153,40 +154,6 @@ class EditBook extends React.Component {
             style={styleTextField}
           />
           <br />
-          <br />
-
-          <TextField
-            onChange={(event) => {
-              this.setState({
-                book: Object.assign({}, this.state.book, {
-                  preorderPrice: Number(event.target.value),
-                }),
-              });
-            }}
-            value={this.state.book.preorderPrice || ''}
-            type="number"
-            label="Book's preorder price"
-            className="textFieldInput"
-            style={styleTextField}
-            step="1"
-          />
-          <br />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.book.isInPreorder}
-                onChange={(event) => {
-                  this.setState({
-                    book: Object.assign({}, this.state.book, {
-                      isInPreorder: event.target.checked,
-                    }),
-                  });
-                }}
-                value="on"
-              />
-            }
-            label="Preorder"
-          />
           <br />
           <Button variant="raised" type="submit">
             Save

@@ -55,28 +55,6 @@ function insertTemplates() {
         Kelly & Timur, Team Builder Book
       `,
     },
-    {
-      name: 'preorder',
-      subject: 'You pre-ordered "{{bookTitle}}" at builderbook.org',
-      message: `{{userName}},
-        <p>
-          Thank you for pre-ordering our book! You just saved $20.
-        </p>
-        <p>
-          Start reading your book: <a href="{{bookUrl}}" target="_blank">{{bookTitle}}</a>
-        </p>
-        <p>
-          We will email you once we add each new chapter.
-        </p>
-        <p>
-          If you have any questions while reading the book, 
-          please fill out an issue on 
-          <a href="https://github.com/builderbook/builderbook target="blank">Gihub</a>.
-        </p>
-      
-        Kelly & Timur, Team Builder Book
-      `,
-    },
   ];
 
   templates.forEach(async (t) => {

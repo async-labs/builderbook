@@ -4,8 +4,9 @@ import crypto from 'crypto';
 require('dotenv').config();
 
 const LIST_IDS = {
-  preordered: process.env.MAILCHIMP_PREORDERED_LIST_ID,
-  ordered: process.env.MAILCHIMP_ORDERED_LIST_ID,
+  purchased: process.env.MAILCHIMP_PURCHASED_LIST_ID,
+  signups: process.env.MAILCHIMP_SIGNUPS_LIST_ID,
+  tutorials: process.env.MAILCHIMP_TUTORIALS_LIST_ID,
 };
 
 function callAPI({ path, method, data }) {

@@ -1,21 +1,21 @@
-/* globals StripePublishableKey */
+/* global StripePublishableKey */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import StripeCheckout from 'react-stripe-checkout';
 import NProgress from 'nprogress';
-
 import Button from 'material-ui/Button';
+import Link from 'next/link';
 
 import { buyBook } from '../../lib/api/customer';
 import notify from '../../lib/notifier';
 
 const styleBuyButton = {
-  margin: '20px 20px 20px 0px',
+  margin: '10px 20px 0px 0px',
   font: '14px Muli',
 };
 
-class BuyButton extends React.Component {
+class BuyButton extends React.PureComponent {
   static propTypes = {
     book: PropTypes.shape({
       _id: PropTypes.string.isRequired,
@@ -48,7 +48,7 @@ class BuyButton extends React.Component {
     try {
       await buyBook({ stripeToken: token, id: book._id });
       notify('Success!');
-      window.location.reload();
+      window.location.reload(true);
       NProgress.done();
     } catch (err) {
       NProgress.done();
@@ -56,11 +56,10 @@ class BuyButton extends React.Component {
     }
   };
 
-  onLoginClicked = (e) => {
+  onLoginClicked = () => {
     const { user } = this.props;
 
     if (!user) {
-      e.stopPropagation();
       const next = `${window.location.pathname}?buy=1`;
       window.location.href = `/auth/google?next=${next}`;
     }
@@ -69,9 +68,6 @@ class BuyButton extends React.Component {
   render() {
     const { book, user } = this.props;
     const { showModal } = this.state;
-
-    const preorderPrice = book.isInPreorder && book.preorderPrice;
-    const price = preorderPrice || book.price;
 
     if (!book) {
       return null;
@@ -82,30 +78,36 @@ class BuyButton extends React.Component {
         <div>
           <Button
             variant="raised"
-            style={styleBuyButton}
             color="primary"
+            style={styleBuyButton}
             onClick={this.onLoginClicked}
           >
-            {preorderPrice ? 'Pre-order' : 'Buy'} for ${price}
+            Buy book for ${book.price}
           </Button>
-          <span style={{ verticalAlign: 'middle', fontSize: '15px' }}>{book.textNearButton} </span>
+          <Link prefetch as="/book-reviews" href="/book-reviews">
+            <Button variant="raised" color="secondary" style={styleBuyButton}>
+              See Reviews
+            </Button>
+          </Link>
+          <p style={{ verticalAlign: 'middle', fontSize: '15px' }}>{book.textNearButton}</p>
+          <hr />
         </div>
       );
     }
-
     return (
       <StripeCheckout
         stripeKey={StripePublishableKey}
         token={this.onToken}
         name={book.name}
-        amount={price * 100}
+        amount={book.price * 100}
         email={user.email}
         desktopShowModal={showModal || null}
       >
-        <Button variant="raised" style={styleBuyButton} color="primary">
-          {preorderPrice ? 'Pre-order' : 'Buy'} for ${price}
+        <Button variant="raised" color="primary" style={styleBuyButton}>
+          Buy book for ${book.price}
         </Button>
-        <span style={{ verticalAlign: 'middle', fontSize: '15px' }}>{book.textNearButton} </span>
+        <p style={{ verticalAlign: 'middle', fontSize: '15px' }}>{book.textNearButton}</p>
+        <hr />
       </StripeCheckout>
     );
   }

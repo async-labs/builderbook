@@ -3,6 +3,8 @@ import express from 'express';
 import Book from '../models/Book';
 import Chapter from '../models/Chapter';
 import Review from '../models/Review';
+import Tutorial from '../models/Tutorial';
+import { subscribe } from '../mailchimp';
 
 const router = express.Router();
 
@@ -67,6 +69,31 @@ router.get('/get-book-reviews', async (req, res) => {
     const review = await Review.findOne({ bookId: book.id });
 
     res.json(review);
+  } catch (err) {
+    res.json({ error: err.message || err.toString() });
+  }
+});
+
+router.get('/get-tutorials', async (req, res) => {
+  try {
+    const tutorial = await Tutorial.findOne({ _id: '5ac841da734d1d2fb542b3d4' }, 'tutorials').lean();
+    console.log(tutorial);
+    res.json(tutorial);
+  } catch (err) {
+    res.json({ error: err.message || err.toString() });
+  }
+});
+
+router.post('/subscribe-to-tutorials', async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    res.json({ error: 'Email is required' });
+    return;
+  }
+
+  try {
+    await subscribe({ email, listName: 'tutorials' });
+    res.json({ subscribed: 1 });
   } catch (err) {
     res.json({ error: err.message || err.toString() });
   }

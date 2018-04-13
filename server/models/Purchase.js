@@ -52,11 +52,6 @@ const mongoSchema = new Schema({
     status: String,
   },
 
-  isPreorder: {
-    type: Boolean,
-    defaultValue: false,
-  },
-
   isFree: {
     type: Boolean,
     defaultValue: false,

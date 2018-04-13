@@ -57,6 +57,9 @@ function Header({ user }) {
                     <Link prefetch href="/book" as="/book">
                       <a style={{ margin: '20px 30px 0px auto', verticalAlign: 'middle' }}>Book</a>
                     </Link>
+                    <Link prefetch href="/tutorials">
+                      <a style={{ margin: '20px 30px 0px auto' }}>Tutorials</a>
+                    </Link>
                     <MenuDrop
                       options={optionsMenuCustomer}
                       src={user.avatarUrl}
@@ -76,6 +79,9 @@ function Header({ user }) {
               <div>
                 <Link prefetch href="/book" as="/book">
                   <a style={{ margin: '20px 30px 0px auto' }}>Book</a>
+                </Link>
+                <Link prefetch href="/tutorials">
+                  <a style={{ margin: '20px 30px 0px auto' }}>Tutorials</a>
                 </Link>
                 <Link prefetch href="/public/login" as="/login">
                   <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>

@@ -43,35 +43,40 @@ Builder Book is an open source web app to publish documentation or books. The ap
 
   `.env` :
   ```
-  MONGO_URL="XXXXXX"
-  MONGO_URL_TEST="XXXXXX"
+  MONGO_URL="xxxxxx"
+  MONGO_URL_TEST="xxxxxx"
 
-  Google_clientID="XXXXXX"
-  Google_clientSecret="XXXXXX"
+  Google_clientID="xxxxxx"
+  Google_clientSecret="xxxxxx"
 
-  SESSION_SECRET="XXXXXX"
+  SESSION_SECRET="xxxxxx"
 
-  Amazon_accessKeyId="XXXXXX"
-  Amazon_secretAccessKey="XXXXXX"
+  Amazon_accessKeyId="xxxxxx"
+  Amazon_secretAccessKey="xxxxxx"
 
-  EMAIL_SUPPORT_FROM_ADDRESS="XXXXXX"
+  EMAIL_SUPPORT_FROM_ADDRESS="xxxxxx"
 
-  Github_Test_ClientID="XXXXXX"
-  Github_Test_SecretKey="XXXXXX"
-  Github_Live_ClientID="XXXXXX"
-  Github_Live_SecretKey="XXXXXX"
+  Github_Test_ClientID="xxxxxx"
+  Github_Test_SecretKey="xxxxxx"
+  Github_Live_ClientID="xxxxxx"
+  Github_Live_SecretKey="xxxxxx"
 
 
-  Stripe_Test_SecretKey="XXXXXX"
-  Stripe_Live_SecretKey="XXXXXX"
+  Stripe_Test_SecretKey="xxxxxx"
+  Stripe_Live_SecretKey="xxxxxx"
 
-  Stripe_Test_PublishableKey="XXXXXX"
-  Stripe_Live_PublishableKey="XXXXXX"
+  Stripe_Test_PublishableKey="xxxxxx"
+  Stripe_Live_PublishableKey="xxxxxx"
 
-  MAILCHIMP_API_KEY="XXXXXX"
-  MAILCHIMP_REGION="XXXXXX"
-  MAILCHIMP_PREORDERED_LIST_ID="XXXXXX"
-  MAILCHIMP_ORDERED_LIST_ID="XXXXXX"
+  MAILCHIMP_API_KEY="xxxxxx"
+  MAILCHIMP_REGION="xxxxxx"
+  MAILCHIMP_SIGNUPS_LIST_ID="xxxxxx"
+  MAILCHIMP_PURCHASED_LIST_ID="xxxxxx"
+  MAILCHIMP_TUTORIALS_LIST_ID="xxxxxx"
+
+  SESSION_SECRET="xxxxxx"
+
+  GA_TRACKING_ID="xxxxxx"
   ```
 
 - Start the app with `yarn dev`.

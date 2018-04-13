@@ -46,12 +46,6 @@ const mongoSchema = new Schema({
 
   textNearButton: String,
 
-  isInPreorder: {
-    type: Boolean,
-    defaultValue: false,
-  },
-  preorderPrice: Number,
-
   supportURL: String,
 });
 
@@ -99,8 +93,6 @@ class BookClass {
     textNearButton = '',
     githubRepo,
     supportURL = '',
-    isInPreorder = null,
-    preorderPrice = null,
   }) {
     const slug = await generateSlug(this, name);
 
@@ -111,8 +103,6 @@ class BookClass {
       textNearButton,
       githubRepo,
       supportURL,
-      isInPreorder,
-      preorderPrice,
       createdAt: new Date(),
     });
   }
@@ -124,8 +114,6 @@ class BookClass {
     textNearButton = '',
     githubRepo,
     supportURL = '',
-    isInPreorder = null,
-    preorderPrice = null,
   }) {
     const book = await this.findById(id, 'slug name');
 
@@ -138,8 +126,6 @@ class BookClass {
       textNearButton,
       supportURL,
       githubRepo,
-      isInPreorder,
-      preorderPrice,
     };
 
     if (name !== book.name) {
@@ -235,64 +221,65 @@ class BookClass {
   }
 
   static async buy({ id, user, stripeToken }) {
-    const book = await this.findById(id, 'name slug price isInPreorder preorderPrice');
+    const book = await this.findById(id, 'name slug price').lean();
     if (!book) {
       throw new Error('Book not found');
     }
-
-    const isPreorder = !!book.isInPreorder && !!book.preorderPrice;
-    const price = (isPreorder && book.preorderPrice) || book.price;
 
     if (!user) {
       throw new Error('User required');
     }
 
-    const isPurchased = (await Purchase.find({ userId: user._id, bookId: id }).count()) > 0;
+    const isPurchased =
+      (await Purchase.find({ userId: user._id, bookId: book._id }).count()) > 0;
     if (isPurchased) {
       throw new Error('Already bought this book');
     }
 
     const chargeObj = await stripeCharge({
-      amount: price * 100,
+      amount: book.price * 100,
       token: stripeToken.id,
+      bookName: book.name,
       buyerEmail: user.email,
     });
 
-    User.findByIdAndUpdate(user.id, { $addToSet: { purchasedBookIds: book.id } }).exec();
+    User.findByIdAndUpdate(user.id, { $addToSet: { purchasedBookIds: book._id } }).exec();
 
-    const template = await getEmailTemplate(isPreorder ? 'preorder' : 'purchase', {
+    const template = await getEmailTemplate('purchased', {
       userName: user.displayName,
       bookTitle: book.name,
       bookUrl: `${ROOT_URL}/books/${book.slug}/introduction`,
     });
 
-    sendEmail({
-      from: `Kelly from builderbook.org <${process.env.EMAIL_SUPPORT_FROM_ADDRESS}>`,
-      to: [user.email],
-      subject: template.subject,
-      body: template.message,
-    }).catch((error) => {
+    try {
+      await sendEmail({
+        from: `Kelly from builderbook.org <${process.env.EMAIL_SUPPORT_FROM_ADDRESS}>`,
+        to: [user.email],
+        subject: template.subject,
+        body: template.message,
+      });
+    } catch (error) {
       logger.error('Email sending error:', error);
-    });
+    }
 
-    subscribe({
-      email: user.email,
-      listName: isPreorder ? 'preordered' : 'ordered',
-      book: book.slug,
-    }).catch((error) => {
-      logger.error('Mailchimp subscribing error:', error);
-    });
+    try {
+      await subscribe({
+        email: user.email,
+        listName: 'purchased',
+      });
+    } catch (error) {
+      logger.error('Mailchimp error:', error);
+    }
 
     return Purchase.create({
       userId: user._id,
       bookId: book._id,
-      amount: price * 100,
+      amount: book.price * 100,
       createdAt: new Date(),
       stripeCharge: chargeObj,
-      isPreorder,
     });
   }
-
+  
   static async getPurchasedBooks({ purchasedBookIds, freeBookIds }) {
     const allBooks = await this.find().sort({ createdAt: -1 });
 
