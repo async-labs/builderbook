@@ -43,39 +43,44 @@ Builder Book is an open source web app to publish documentation or books. The ap
 
   `.env` :
   ```
+  # Used in server/app.js
   MONGO_URL="xxxxxx"
   MONGO_URL_TEST="xxxxxx"
+  SESSION_SECRET="xxxxxx"
 
+  # Used in server/google.js
   Google_clientID="xxxxxx"
   Google_clientSecret="xxxxxx"
 
-  SESSION_SECRET="xxxxxx"
-
+  # Used in server/aws.js
   Amazon_accessKeyId="xxxxxx"
   Amazon_secretAccessKey="xxxxxx"
 
+  # Used in server/models/User.js
   EMAIL_SUPPORT_FROM_ADDRESS="xxxxxx"
 
+  # Used in server/github.js
   Github_Test_ClientID="xxxxxx"
   Github_Test_SecretKey="xxxxxx"
   Github_Live_ClientID="xxxxxx"
   Github_Live_SecretKey="xxxxxx"
 
-
+  # Used in server/stripe.js
   Stripe_Test_SecretKey="xxxxxx"
   Stripe_Live_SecretKey="xxxxxx"
 
+  # Used in env-config.js
   Stripe_Test_PublishableKey="xxxxxx"
   Stripe_Live_PublishableKey="xxxxxx"
 
+  # Used in server/mailchimp.js
   MAILCHIMP_API_KEY="xxxxxx"
   MAILCHIMP_REGION="xxxxxx"
   MAILCHIMP_SIGNUPS_LIST_ID="xxxxxx"
   MAILCHIMP_PURCHASED_LIST_ID="xxxxxx"
   MAILCHIMP_TUTORIALS_LIST_ID="xxxxxx"
 
-  SESSION_SECRET="xxxxxx"
-
+  # Used in pages/_document.js
   GA_TRACKING_ID="xxxxxx"
   ```
 
