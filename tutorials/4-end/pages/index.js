@@ -5,7 +5,7 @@ import Button from 'material-ui/Button';
 import Notifier, { openSnackbar } from '../components/Notifier';
 import withLayout from '../lib/withLayout';
 
-class Notify extends React.Component {
+class Index extends React.Component {
   showNotifier = (event) => {
     event.preventDefault();
 
@@ -27,7 +27,10 @@ class Notify extends React.Component {
       <div style={{ padding: '10px 45px' }}>
         <Head>
           <title>Notifier component</title>
-          <meta name="description" content="description for indexing bots" />
+          <meta
+            name="description"
+            content="How to show informational messages using Material-UI in a React web app"
+          />
         </Head>
         <br />
         <Notifier />
@@ -59,4 +62,4 @@ class Notify extends React.Component {
   }
 }
 
-export default withLayout(Notify);
+export default withLayout(Index);

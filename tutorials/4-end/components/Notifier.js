@@ -3,7 +3,7 @@ import Snackbar from 'material-ui/Snackbar';
 
 let openSnackbarFn;
 
-class Notifier extends React.PureComponent {
+class Notifier extends React.Component {
   state = {
     open: false,
     message: '',
