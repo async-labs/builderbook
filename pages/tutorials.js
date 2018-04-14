@@ -71,7 +71,7 @@ Tutorials.defaultProps = {
 Tutorials.getInitialProps = async function getInitialProps() {
   let tutorial;
   try {
-    tutorial = await getTutorials();
+    tutorial = await getTutorials({ slug: 'builder-book' });
   } catch (error) {
     console.log(error); // eslint-disable-line
   }

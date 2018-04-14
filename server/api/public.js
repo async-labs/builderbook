@@ -61,13 +61,7 @@ router.get('/get-table-of-contents', async (req, res) => {
 
 router.get('/get-book-reviews', async (req, res) => {
   try {
-    const book = await Book.findOne({ slug: req.query.slug }, 'id');
-    if (!book) {
-      throw new Error('Not found');
-    }
-
-    const review = await Review.findOne({ bookId: book.id });
-
+    const review = await Review.findOne({ bookSlug: req.query.slug }, 'reviews').lean();
     res.json(review);
   } catch (err) {
     res.json({ error: err.message || err.toString() });
@@ -76,8 +70,7 @@ router.get('/get-book-reviews', async (req, res) => {
 
 router.get('/get-tutorials', async (req, res) => {
   try {
-    const tutorial = await Tutorial.findOne({ _id: '5ac841da734d1d2fb542b3d4' }, 'tutorials').lean();
-    console.log(tutorial);
+    const tutorial = await Tutorial.findOne({ bookSlug: req.query.slug }, 'tutorials').lean();
     res.json(tutorial);
   } catch (err) {
     res.json({ error: err.message || err.toString() });
