@@ -9,13 +9,10 @@ import logger from '../logs';
 import generateSlug from '../utils/slugify';
 import { subscribe } from '../mailchimp';
 
-import getRootUrl from '../../lib/api/getRootUrl';
 import Chapter from './Chapter';
 import User from './User';
 import Purchase from './Purchase';
 import getEmailTemplate from './EmailTemplate';
-
-const ROOT_URL = getRootUrl();
 
 const mongoSchema = new Schema({
   name: {
@@ -248,7 +245,7 @@ class BookClass {
     const template = await getEmailTemplate('purchased', {
       userName: user.displayName,
       bookTitle: book.name,
-      bookUrl: `${ROOT_URL}/books/${book.slug}/introduction`,
+      bookUrl: `https://builderbook.org/books/${book.slug}/introduction`,
     });
 
     try {

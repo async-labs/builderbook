@@ -1,14 +1,14 @@
 import aws from 'aws-sdk';
 
-const Amazon_accessKeyId = 'xxxxxx';
-const Amazon_secretAccessKey= 'xxxxxx';
+// const Amazon_accessKeyId = 'xxxxxx';
+// const Amazon_secretAccessKey= 'xxxxxx';
 
 
 export default function sendEmail(options) {
   aws.config.update({
     region: 'us-east-1',
-    accessKeyId: Amazon_accessKeyId,
-    secretAccessKey: Amazon_secretAccessKey,
+    accessKeyId: process.env.Amazon_accessKeyId,
+    secretAccessKey: process.env.Amazon_secretAccessKey,
   });
 
   const ses = new aws.SES({ apiVersion: 'latest' });

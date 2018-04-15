@@ -6,7 +6,6 @@ import next from 'next';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
 import sitemapAndRobots from './sitemapAndRobots';
-import getRootUrl from '../lib/api/getRootUrl';
 import auth from './google';
 import { setupGithub as github } from './github';
 import api from './api';
@@ -17,13 +16,12 @@ import routesWithSlug from './routesWithSlug';
 require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
+const port = process.env.PORT || 8000;
+const ROOT_URL = dev ? `http://localhost:${port}` : 'https://builderbook.org';
 
 const MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
 
 mongoose.connect(MONGO_URL);
-
-const port = process.env.PORT || 8000;
-const ROOT_URL = getRootUrl();
 
 const sessionSecret = process.env.SESSION_SECRET;
 

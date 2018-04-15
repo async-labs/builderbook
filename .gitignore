@@ -15,3 +15,5 @@ node_modules/
 
 book/8-exp
 tutorials/working
+
+yarn-error.log
