@@ -4,10 +4,9 @@ import { MuiThemeProvider } from 'material-ui/styles';
 import CssBaseline from 'material-ui/CssBaseline';
 
 import getContext from '../lib/context';
-import Notifier from '../components/Notifier';
 import Header from '../components/Header';
 
-export default function withLayout(BaseComponent, { noHeader = false } = {}) {
+export default function withLayout(BaseComponent) {
   class App extends React.Component {
     constructor(props, context) {
       super(props, context);
@@ -21,8 +20,6 @@ export default function withLayout(BaseComponent, { noHeader = false } = {}) {
       }
     }
 
-    pageContext = null;
-
     render() {
       return (
         <MuiThemeProvider
@@ -31,9 +28,8 @@ export default function withLayout(BaseComponent, { noHeader = false } = {}) {
         >
           <CssBaseline />
           <div>
-            {noHeader ? null : <Header {...this.props} />}
+            <Header {...this.props} />
             <BaseComponent {...this.props} />
-            <Notifier />
           </div>
         </MuiThemeProvider>
       );

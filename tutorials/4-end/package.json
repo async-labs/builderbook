@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint components pages lib server",
-    "now": "now && now alias"
+    "now": "now && now alias",
+    "rm": "now rm tutorial-4-end --safe --yes"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
