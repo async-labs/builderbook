@@ -29,7 +29,7 @@ function renderTutorials(tutorialItem) {
   );
 }
 
-const Tutorials = ({ user, tutorial }) => (
+const Tutorials = ({ user, tutorials }) => (
   <div>
     <Head>
       <title>Tutorials at builderbook.org</title>
@@ -44,9 +44,9 @@ const Tutorials = ({ user, tutorial }) => (
       <h1 style={styleH1}>Our tutorials</h1>
       <p style={{ margin: '0px 20px', textAlign: 'center' }}>Get notified about new tutorials:</p>
       <SubscribeForm />
-      {tutorial && tutorial.tutorials.length > 0 ? (
+      {tutorials && tutorials.length > 0 ? (
         <div style={{ margin: '20px 0px 400px 0px' }}>
-          {tutorial.tutorials.map(tutorialItem => renderTutorials(tutorialItem))}
+          {tutorials.map(tutorialItem => renderTutorials(tutorialItem))}
         </div>
       ) : null}
       <br />
@@ -59,9 +59,8 @@ Tutorials.propTypes = {
   user: PropTypes.shape({
     _id: PropTypes.string.isRequired,
   }),
-  tutorial: PropTypes.shape({
-    tutorials: PropTypes.array.isRequired,
-  }).isRequired,
+  tutorials: PropTypes.arrayOf(PropTypes.shape({}))
+    .isRequired,
 };
 
 Tutorials.defaultProps = {
@@ -69,13 +68,13 @@ Tutorials.defaultProps = {
 };
 
 Tutorials.getInitialProps = async function getInitialProps() {
-  let tutorial;
+  let tutorials;
   try {
-    tutorial = await getTutorials({ slug: 'builder-book' });
+    tutorials = await getTutorials({ slug: 'builder-book' });
   } catch (error) {
     console.log(error); // eslint-disable-line
   }
-  return { tutorial };
+  return { tutorials };
 };
 
 export default withAuth(withLayout(Tutorials, { noHeader: true }), { loginRequired: false });

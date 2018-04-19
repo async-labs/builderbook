@@ -25,7 +25,7 @@ const styleAuthor = {
   padding: '10px 10%',
 };
 
-const Book = ({ user, toc, review }) => (
+const Book = ({ user, toc, reviews }) => (
   <div>
     <Head>
       <title>Learn how to build a JavaScript web app from scratch</title>
@@ -94,7 +94,7 @@ const Book = ({ user, toc, review }) => (
       <br />
 
       <div>
-        <BookReviews reviewsArray={review.reviews} numberOfReviews={4} />
+        <BookReviews reviewsArray={reviews} numberOfReviews={8} />
       </div>
 
       <br />
@@ -179,9 +179,8 @@ Book.propTypes = {
   toc: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
   })).isRequired,
-  review: PropTypes.shape({
-    reviews: PropTypes.array.isRequired,
-  }).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape({}))
+    .isRequired,
 };
 
 Book.defaultProps = {
@@ -190,18 +189,18 @@ Book.defaultProps = {
 
 Book.getInitialProps = async function getInitialProps() {
   let toc = [];
-  let review;
+  let reviews = [];
   try {
     toc = await getTableOfContents({ slug: 'builder-book' });
   } catch (error) {
     console.log(error); // eslint-disable-line
   }
   try {
-    review = await getBookReviews({ slug: 'builder-book' });
+    reviews = await getBookReviews({ slug: 'builder-book' });
   } catch (error) {
     console.log(error); // eslint-disable-line
   }
-  return { toc, review };
+  return { toc, reviews };
 };
 
 export default withAuth(withLayout(Book, { noHeader: true }), { loginRequired: false });
