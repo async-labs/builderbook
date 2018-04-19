@@ -2,7 +2,7 @@
     "env": {
         "NODE_ENV": "production"
     },
-    "alias": "layout-hoc.builderbook.org",
+    "alias": "production-server.builderbook.org",
     "scale": {
       "sfo1": {
         "min": 1,
