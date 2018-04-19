@@ -4,7 +4,7 @@ import next from 'next';
 const dev = process.env.NODE_ENV !== 'production';
 
 const port = process.env.PORT || 8000;
-const ROOT_URL = dev ? `http://localhost:${port}` : 'https://builderbook.org';
+const ROOT_URL = dev ? `http://localhost:${port}` : 'https://sitemap-robots.now.sh';
 
 const app = next({ dev });
 const handle = app.getRequestHandler();

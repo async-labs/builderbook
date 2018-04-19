@@ -1,16 +1,14 @@
 import sm from 'sitemap';
 import path from 'path';
-
 import posts from './posts';
 
 const sitemap = sm.createSitemap({
-  hostname: 'https://builderbook.org',
+  hostname: 'https://sitemap-robots.now.sh',
   cacheTime: 600000, // 600 sec - cache purge period
 });
 
 export default function setup({ server }) {
   const Posts = posts();
-  // console.log(Posts);
   for (let i = 0; i < Posts.length; i += 1) {
     const post = Posts[i];
     sitemap.add({
@@ -21,7 +19,13 @@ export default function setup({ server }) {
   }
 
   sitemap.add({
-    url: '/book',
+    url: '/a',
+    changefreq: 'daily',
+    priority: 1,
+  });
+
+  sitemap.add({
+    url: '/b',
     changefreq: 'daily',
     priority: 1,
   });
