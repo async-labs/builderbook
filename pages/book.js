@@ -179,7 +179,7 @@ Book.propTypes = {
   toc: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
   })).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({}))
+  reviews: PropTypes.arrayOf(PropTypes.object)
     .isRequired,
 };
 

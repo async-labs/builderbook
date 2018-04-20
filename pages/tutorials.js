@@ -59,8 +59,7 @@ Tutorials.propTypes = {
   user: PropTypes.shape({
     _id: PropTypes.string.isRequired,
   }),
-  tutorials: PropTypes.arrayOf(PropTypes.shape({}))
-    .isRequired,
+  tutorials: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 Tutorials.defaultProps = {
