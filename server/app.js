@@ -5,13 +5,16 @@ import mongoSessionStore from 'connect-mongo';
 import next from 'next';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
+
+import routesWithSlug from './routesWithSlug';
+import routesWithCache from './routesWithCache';
+
 import sitemapAndRobots from './sitemapAndRobots';
 import auth from './google';
 import { setupGithub as github } from './github';
 import api from './api';
 
 import logger from './logs';
-import routesWithSlug from './routesWithSlug';
 
 require('dotenv').config();
 
@@ -36,7 +39,11 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
-  // give all Nextjs's request to Nextjs before anything else
+  server.use(helmet());
+  server.use(compression());
+  server.use(express.json());
+
+  // give all Nextjs's request to Nextjs server
   server.get('/_next/*', (req, res) => {
     handle(req, res);
   });
@@ -44,10 +51,6 @@ app.prepare().then(() => {
   server.get('/static/*', (req, res) => {
     handle(req, res);
   });
-
-  server.use(helmet());
-  server.use(compression());
-  server.use(express.json());
 
   const MongoStore = mongoSessionStore(session);
   const sess = {
@@ -75,7 +78,9 @@ app.prepare().then(() => {
   auth({ server, ROOT_URL });
   github({ server });
   api(server);
+
   routesWithSlug({ server, app });
+  routesWithCache({ server, app });
 
   sitemapAndRobots({ server });
 
