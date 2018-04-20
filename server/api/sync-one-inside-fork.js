@@ -152,9 +152,9 @@ const syncContent = async ({ book, data }) => {
   const sections = getSections(content);
 
   if (!chapter) {
-    const slug = await generateSlug(this, title, { bookId: book._id });
+    const slug = await generateSlug(Chapter, title, { bookId: book._id });
 
-    return this.create({
+    return Chapter.create({
       bookId: book._id,
       githubFilePath: path,
       title,

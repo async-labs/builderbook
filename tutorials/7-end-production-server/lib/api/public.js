@@ -7,7 +7,6 @@ const ROOT_URL = dev ? `http://localhost:${port}` : 'https://production-server.b
 async function sendRequest(path, options = {}) {
   const headers = {
     'content-type': 'application/json; charset=UTF-8',
-    // 'x-no-compression': 'on',
   };
 
   const response = await fetch(
