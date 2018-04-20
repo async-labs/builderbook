@@ -4,6 +4,9 @@ import compression from 'compression';
 import helmet from 'helmet';
 import getDataOnServer from './data';
 
+import routesWithNoCache from './routesWithNoCache';
+import routesWithCache from './routesWithCache';
+
 const dev = process.env.NODE_ENV !== 'production';
 const port = process.env.PORT || 8000;
 const ROOT_URL = dev ? `http://localhost:${port}` : 'https://layout-hoc.builderbook.org';
@@ -35,6 +38,9 @@ app.prepare().then(() => {
     }
   });
 
+  routesWithNoCache({ server, app });
+  routesWithCache({ server, app });
+
   server.get('*', (req, res) => handle(req, res));
 
   // starting express server
@@ -52,5 +58,3 @@ app.prepare().then(() => {
 // try/catch and async/await
 // separate Next and API servers (different posts or apps) (future post)
 
-// Todo:
-// 3. SSR caching
