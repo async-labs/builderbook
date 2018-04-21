@@ -55,7 +55,7 @@ class BookClass {
     return { books };
   }
 
-  static async getBySlug({ slug, userId }) {
+  static async getBySlug({ slug }) {
     const bookDoc = await this.findOne({ slug });
     if (!bookDoc) {
       throw new Error('Book not found');
@@ -66,20 +66,6 @@ class BookClass {
     book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug').sort({
       order: 1,
     })).map(ch => ch.toObject());
-
-    if (userId) {
-      const purchase = await Purchase.findOne({ userId, bookId: book._id }, 'doneChapterIds');
-
-      book.isPurchased = !!purchase;
-
-      if (purchase && purchase.doneChapterIds) {
-        book.chapters.forEach((ch) => {
-          Object.assign(ch, {
-            isFinished: _.some(purchase.doneChapterIds, id => id.equals(ch._id)),
-          });
-        });
-      }
-    }
 
     return book;
   }

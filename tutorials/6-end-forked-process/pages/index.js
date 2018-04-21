@@ -9,7 +9,7 @@ class Index extends React.Component {
   mainProcessButton = async () => {
     try {
       const sum = await sendRequestToMainProcess();
-      alert(sum); //eslint-disable-line
+      alert(`Calculated by main process: ${sum}`); //eslint-disable-line
     } catch (err) {
       console.log(err); //eslint-disable-line
     }
@@ -18,7 +18,7 @@ class Index extends React.Component {
   forkedProcessButton = async () => {
     try {
       const sum = await sendRequestToForkedProcess();
-      alert(sum); //eslint-disable-line
+      alert(`Calculated by forked process: ${sum}`); //eslint-disable-line
     } catch (err) {
       console.log(err); //eslint-disable-line
     }
@@ -28,9 +28,10 @@ class Index extends React.Component {
     return (
       <div style={{ padding: '10px 45px' }}>
         <Head>
-          <title>Scaling Node</title>
-          <meta name="description" content="Main vs forked process in Node" />
+          <title>Scaling Node server: main vs forked process.</title>
+          <meta name="description" content="Scaling Node server: isolate CPU-intensive tasks in forked process." />
         </Head>
+        <br />
         <br />
         <Button variant="raised" color="secondary" onClick={this.mainProcessButton}>
           Send request to main/parent Node process
@@ -40,6 +41,14 @@ class Index extends React.Component {
         <Button variant="raised" color="primary" onClick={this.forkedProcessButton}>
           Send request to forked/child Node process
         </Button>
+        <br />
+        <br />
+        <br />
+        <hr />
+        <span>Click this link right after clicking on any of the above buttons: </span>
+        <a href="/" target="_blank">
+          Open page in new tab
+        </a>
       </div>
     );
   }

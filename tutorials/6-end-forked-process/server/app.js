@@ -16,10 +16,10 @@ app.prepare().then(() => {
 
   server.get('/api/v1/public/main-process', async (req, res) => {
     try {
-      const limit = 2e9;
+      const limit = 3e9;
       const sum = await longComputation(limit);
       res.json(sum);
-      console.log('sent array to client');
+      // console.log('sent array to client');
     } catch (err) {
       res.json({ error: err.message || err.toString() });
     }
@@ -28,11 +28,11 @@ app.prepare().then(() => {
   server.get('/api/v1/public/forked-process', async (req, res) => {
     try {
       const forked = fork(dev ? './server/forked-longComputation.js' : './compiled/server/forked-longComputation.js');
-      const limit = 2e9;
+      const limit = 3e9;
       forked.send(limit);
       forked.on('message', (sum) => {
         res.json(sum);
-        console.log('sent array to client');
+        // console.log('sent array to client');
         forked.kill();
       });
     } catch (err) {

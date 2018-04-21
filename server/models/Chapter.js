@@ -193,7 +193,7 @@ class ChapterClass {
   static async getBySlug({
     bookSlug, chapterSlug, userId, isAdmin,
   }) {
-    const book = await Book.getBySlug({ slug: bookSlug, userId });
+    const book = await Book.getBySlug({ slug: bookSlug });
     if (!book) {
       throw new Error('Not found');
     }

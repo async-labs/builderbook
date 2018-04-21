@@ -9,7 +9,7 @@
     "start": "node compiled/server/app.js",
     "dev": "nodemon server/app.js --watch server --exec babel-node",
     "now": "now && now alias",
-    "rm": "now rm tutorial-6-end --safe --yes",
+    "now-rm": "now rm tutorial-6-end --safe --yes",
     "processes": "ss -lptn 'sport = :8000'",
     "kill-pud": "kill -9 <pid>"
   },

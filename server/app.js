@@ -43,6 +43,13 @@ app.prepare().then(() => {
   server.use(compression());
   server.use(express.json());
 
+  // potential fix for Error: Can't set headers
+  // try with Chrome Dev Tools open/close
+
+  // if (!dev) {
+  //   server.use(compression());
+  // };
+
   // give all Nextjs's request to Nextjs server
   server.get('/_next/*', (req, res) => {
     handle(req, res);
