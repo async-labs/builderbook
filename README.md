@@ -17,6 +17,7 @@ Builder Book is an open source web app to publish documentation or books. The ap
 - [Run locally](#run-locally)
 - [Deploy](#deploy)
 - [Add new book](#add-new-book)
+- [Create your own styles](#create-your-own-styles)
 - [Screenshots](#screenshots)
 - [Built with](#built-with)
   - [Core stack](#core-stack)
@@ -114,6 +115,106 @@ IMPORTANT: All `.md` files in your Github repo _must_ have name `introduction.md
 
 To make the content of a `.md` file _private_ (meaning a person must purchase the content to see it), remove `isFree:true`  and add `excerpt:""`. Add some excerpt content - this content is public and serves as a free preview.
 
+## Create your own styles
+Recommended ways to add styles to this app:
+1. [Inline style for a single element](#inline-style-for-a-single-element)
+2. [Reusable style for multiple elements within single page or component](#reusable-style-for-multiple-elements-within-single-page-or-component)
+3. [Reusable/importable style for multiple pages or components](#reusableimportable-style-for-multiple-pages-or-components)
+4. [Global style for all pages in application](global-style-for-all-pages-in-application)
+
+
+### Inline style for a single element
+USE CASE: apply a style to _one element_ on a single page/component <br>
+For example, in our `book` page, we wrote this single inline style:
+```
+<p style={{ textAlign: 'center' }}>
+  ...
+</p>
+```
+[See usage](https://github.com/builderbook/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/book.js#L48)
+
+
+### Reusable style for multiple elements within single page or component
+USE CASE: apply the same style to _multiple elements_ on a single page/component.<br>
+For example, in our `tutorials` page, we created `styleExcerpt` and applied it to a `<p>` element within the page:
+
+```
+const styleExcerpt = {
+  margin: '0px 20px',
+  opacity: '0.75',
+  fontSize: '13px',
+};
+
+<p style={styleExcerpt}>
+  ...
+</p>
+
+```
+[See usage](https://github.com/builderbook/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/tutorials.js#L14)
+
+
+### Reusable/importable style for multiple pages or components
+USE CASE: apply the same style to elements on _multiple pages/components_.<br>
+For example, we created `styleH1` inside `components/SharedStyles.js` and exported the style at the bottom of the file:
+```
+const styleH1 = {
+  textAlign: 'center',
+  fontWeight: '400',
+  lineHeight: '45px',
+};
+
+module.exports = {
+  styleH1,
+};
+```
+[See usage](https://github.com/builderbook/builderbook/blob/04c6cf78bee42455d48ef3466d868f2196381a57/components/SharedStyles.js#L48)
+
+We then imported `styleH1` into our `book` page, as well as our `index` page, and applied the style to a `<h1>` element:
+```
+import {
+  styleH1,
+} from '../components/SharedStyles';
+
+<h1 style={styleH1}>
+  ...
+</h1>
+```
+[See usage](https://github.com/builderbook/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/book.js#L13)
+
+
+### Global style for all pages in application
+USE CASE: apply the same style to elements on _all pages_ of your app.<br>
+Create your style in `pages/_document.js`. For example, we specified a style for all hyperlinks that use the `<a>` element:
+```
+<style>
+  {`
+    a, a:focus {
+      font-weight: 400;
+      color: #1565C0;
+      text-decoration: none;
+      outline: none
+    }
+  `}
+</style>
+```
+[See usage](https://github.com/builderbook/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/_document.js#L51)
+
+We also specified styles for all content inside a `<body>` element:
+```
+<body
+  style={{
+    font: '16px Muli',
+    color: '#222',
+    margin: '0px auto',
+    fontWeight: '400',
+    lineHeight: '1.5em',
+    backgroundColor: '#F7F9FC',
+  }}
+>
+</body>
+```
+[See usage](https://github.com/builderbook/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/_document.js#L96)
+
 
 ## Deploy
 - Install now: `npm install -g now`.
@@ -164,82 +265,91 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 
 ```
 .
-├── boilerplate                 # Boilerplate with React, Material-UI, Next, Express, Mongoose, MongoDB 
-├── book                        # Codebases for each chapter of our book
-├── components                  # React components
-│   ├── admin                   # Components used on Admin pages
-│   │   ├── EditBook.js         # Edit title, price, and repo of book
-│   │   ├── GiveFreeBook.js     # Give free book to user
-│   ├── customer                # Components used on Customer pages
-│   │   ├── Bookmark.js         # Bookmark a section within a book chapter
-│   │   ├── BuyButton.js        # Buy book
-│   ├── BookReviews.js          # Component that outputs grid of reviews
-│   ├── Header.js               # Header component
-│   ├── HomeFooter.js           # Footer component on homepage
-│   ├── HomeHeader.js           # Header component on homepage
-│   ├── MenuDrop.js             # Dropdown menu
-│   ├── Notifier.js             # In-app notifications for app's users
-│   ├── SharedStyles.js         # List of _reusable_ styles
-│   ├── TOC.js                  # Table of Contents
-├── lib                         # Code available on both client and server
-│   ├── api                     # Client-side API methods
-│   │   ├── admin.js            # Admin user methods
-│   │   ├── customer.js	        # Customer user methods
-│   │   ├── getRootURL.js       # Returns ROOT_URL
-│   │   ├── public.js           # Public user methods
-│   │   ├── sendRequest.js      # Reusable code for all GET and POST requests
-│   ├── context.js              # Context for Material-UI integration
-│   ├── notifier.js             # Contains notify() function that loads Notifier component
-│   ├── withAuth.js             # HOC that passes user to pages and more
-│   ├── withLayout.js           # HOC for SSR with Material-UI and more
-├── pages                       # Pages
-│   ├── admin                   # Admin pages
-│   │   ├── add-book.js         # Page to add a new book
-│   │   ├── book-detail.js      # Page to view book details and sync content with Github
-│   │   ├── edit-book.js        # Page to update title, price, and repo of book
-│   │   ├── index.js            # Main Admin page that has all books and more
-│   ├── customer                # Customer pages
-│   │   ├── my-books.js         # Customer's dashboard
-│   ├── public                  # Public pages (accessible to logged out users)
-│   │   ├── login.js            # Login page
-│   │   ├── read-chapter.js     # Page with chapter's content
-│   ├── _document.js            # Allows to customize pages (feature of Next.js)
-│   ├── index.js                # Homepage
-│   ├── book.js                 # Book page
-├── server                      # Server code
-│   ├── api                     # Express routes, route-level middleware
-│   │   ├── admin.js            # Admin routes
-│   │   ├── customer.js         # Customer routes
-│   │   ├── index.js            # Mounts all Express routes on server
-│   │   ├── public.js           # Public routes
-│   ├── models                  # Mongoose models
-│   │   ├── Book.js             # Book model
-│   │   ├── Chapter.js	        # Chapter model
-│   │   ├── EmailTemplate.js    # Email Template model
-│   │   ├── Purchase.js	        # Purchase model
-│   │   ├── User.js             # User model
-│   ├── utils                   # Server-side util
-│   │   ├──slugify.js           # Generates slug for any Model
-│   ├── app.js                  # Custom Express/Next server
-│   ├── aws.js                  # AWS SES API
-│   ├── github.js               # Github API
-│   ├── google.js               # Google OAuth API
-│   ├── logs.js                 # Logger
-│   ├── mailchimp.js            # MailChimp API
-│   ├── routesWithSlug.js       # Express routes that contain slug
-│   ├── sitemapAndRobots.js     # Express routes for sitemap.xml and robots.txt
-│   ├── stripe.js               # Stripe API
-├── static                      # Static resources
-│   ├── robots.txt              # Rules for search engine bots
-├── test/server/utils           # Tests
-│   ├── slugify.test.js         # Unit test for generateSlug() function
-├── .babelrc                    # Config for Babel
-├── .eslintrc.js                # Config for Eslint
-├── .gitignore                  # List of ignored files and directories
-├── .npmignore                  # Files and directories that are not uploaded to the server
-├── now.json                    # Settings for now from Zeit
-├── package.json                # List of packages and scripts
-├── yarn.lock                   # Exact versions of packages. Generated by yarn.
+├── boilerplate                         # Boilerplate with React, Material-UI, Next, Express, Mongoose, MongoDB 
+├── book                                # Codebases for each chapter of our book
+├── components                          # React components
+│   ├── admin                           # Components used on Admin pages
+│   │   ├── EditBook.js                 # Edit title, price, and repo of book
+│   │   ├── GiveFreeBook.js             # Give free book to user
+│   ├── customer                        # Components used on Customer pages
+│   │   ├── Bookmark.js                 # Bookmark a section within a book chapter
+│   │   ├── BuyButton.js                # Buy book
+│   ├── BookReviews.js                  # Component that outputs grid of reviews
+│   ├── Header.js                       # Header component
+│   ├── HomeFooter.js                   # Footer component on homepage
+│   ├── HomeHeader.js                   # Header component on homepage
+│   ├── MenuDrop.js                     # Dropdown menu
+│   ├── Notifier.js                     # In-app notifications for app's users
+│   ├── SharedStyles.js                 # List of _reusable_ styles
+│   ├── SubscribeForm.js                # Form to subscribe to MailChimp newsletter
+│   ├── TOC.js                          # Table of Contents
+├── lib                                 # Code available on both client and server
+│   ├── api                             # Client-side API methods
+│   │   ├── admin.js                    # Admin user methods
+│   │   ├── customer.js	                # Customer user methods
+│   │   ├── getRootURL.js               # Returns ROOT_URL
+│   │   ├── public.js                   # Public user methods
+│   │   ├── sendRequest.js              # Reusable code for all GET and POST requests
+│   ├── context.js                      # Context for Material-UI integration
+│   ├── notifier.js                     # Contains notify() function that loads Notifier component
+│   ├── withAuth.js                     # HOC that passes user to pages and more
+│   ├── withLayout.js                   # HOC for SSR with Material-UI and more
+├── pages                               # Pages
+│   ├── admin                           # Admin pages
+│   │   ├── add-book.js                 # Page to add a new book
+│   │   ├── book-detail.js              # Page to view book details and sync content with Github
+│   │   ├── edit-book.js                # Page to update title, price, and repo of book
+│   │   ├── index.js                    # Main Admin page that has all books and more
+│   ├── customer                        # Customer pages
+│   │   ├── my-books.js                 # Customer's dashboard
+│   ├── public                          # Public pages (accessible to logged out users)
+│   │   ├── login.js                    # Login page
+│   │   ├── read-chapter.js             # Page with chapter's content
+│   ├── _document.js                    # Allows to customize pages (feature of Next.js)
+│   ├── index.js                        # Homepage
+│   ├── book.js                         # Book page
+│   ├── tutorials.js                    # Tutorials page
+├── server                              # Server code
+│   ├── api                             # Express routes, route-level middleware
+│   │   ├── admin.js                    # Admin routes
+│   │   ├── customer.js                 # Customer routes
+│   │   ├── index.js                    # Mounts all Express routes on server
+│   │   ├── public.js                   # Public routes
+│   │   ├── sync-all-inside-fork.js     # Sync all book chapters in forked process
+│   │   ├── sync-one-inside-fork.js     # Sync single book chapter in forked process
+│   ├── models                          # Mongoose models
+│   │   ├── Book.js                     # Book model
+│   │   ├── Chapter.js	                # Chapter model
+│   │   ├── EmailTemplate.js            # Email Template model
+│   │   ├── Purchase.js                 # Purchase model
+│   │   ├── Review.js                   # Book Reviews model
+│   │   ├── Tutorial.js                 # Tutorial model
+│   │   ├── User.js                     # User model
+│   ├── utils                           # Server-side util
+│   │   ├──slugify.js                   # Generates slug for any Model
+│   ├── app.js                          # Custom Express/Next server
+│   ├── aws.js                          # AWS SES API
+│   ├── github.js                       # Github API
+│   ├── google.js                       # Google OAuth API
+│   ├── logs.js                         # Logger
+│   ├── mailchimp.js                    # MailChimp API
+│   ├── routesWithCache.js              # Express routes with cache
+│   ├── routesWithSlug.js               # Express routes that contain slug
+│   ├── sitemapAndRobots.js             # Express routes for sitemap.xml and robots.txt
+│   ├── stripe.js                       # Stripe API
+├── static                              # Static resources
+│   ├── robots.txt                      # Rules for search engine bots
+├── test/server/utils                   # Tests
+│   ├── slugify.test.js                 # Unit test for generateSlug() function
+├── tutorials                           # Codebases for our tutorials
+├── .babelrc                            # Config for Babel
+├── .eslintrc.js                        # Config for Eslint
+├── .gitignore                          # List of ignored files and directories
+├── .npmignore                          # Files and directories that are not uploaded to the server
+├── env-config.js                       # File for Stripe keys
+├── now.json                            # Settings for now from Zeit
+├── package.json                        # List of packages and scripts
+├── yarn.lock                           # Exact versions of packages. Generated by yarn.
 
 ```
 
