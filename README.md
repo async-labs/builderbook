@@ -120,7 +120,7 @@ Recommended ways to add styles to this app:
 1. [Inline style for a single element](#inline-style-for-a-single-element)
 2. [Reusable style for multiple elements within single page or component](#reusable-style-for-multiple-elements-within-single-page-or-component)
 3. [Reusable/importable style for multiple pages or components](#reusableimportable-style-for-multiple-pages-or-components)
-4. [Global style for all pages in application](global-style-for-all-pages-in-application)
+4. [Global style for all pages in application](#global-style-for-all-pages-in-application)
 
 
 ### Inline style for a single element
