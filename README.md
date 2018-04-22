@@ -16,8 +16,8 @@ Builder Book is an open source web app to publish documentation or books. The ap
 ## Contents
 - [Run locally](#run-locally)
 - [Deploy](#deploy)
-- [Add new book](#add-new-book)
-- [Create your own styles](#create-your-own-styles)
+- [Add a new book](#add-a-new-book)
+- [Add your own styles](#add-your-own-styles)
 - [Screenshots](#screenshots)
 - [Built with](#built-with)
   - [Core stack](#core-stack)
@@ -89,7 +89,18 @@ Builder Book is an open source web app to publish documentation or books. The ap
 - The _first registered user_ in the app becomes an Admin user (`"isAdmin": true`).
 
 
-## Add new book
+## Deploy
+- Install now: `npm install -g now`.
+- Point your domain to Zeit world nameservers: [three steps](https://zeit.co/world#get-started).
+- Check the `now.json` file. If you are using `dotenv` and `.env` for env variables, no need to change `now.json`. If you make changes to the app, check up how to [configure now](https://zeit.co/docs/features/configuration).
+- Make sure you updated `ROOT_URL` in `package.json` and `lib/getRootURL.js`.
+- Check that you have all production-level env variables in `.env`. 
+- In your terminal, deploy the app by running `now`.
+- Now outputs your deployment's URL, for example: `builderbook-zomcvzgtvc.now.sh`.
+- Point successful deployment to your domain, for example: `now ln builderbook-zomcvzgtvc.now.sh builderbook.org`.
+
+
+## Add a new book
 - Create a new Github repo (public or private).
 - In that repo, create an `introduction.md` file and write some content.
 - At the top of your `introduction.md` file, add metadata in the format shown below. See [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
@@ -115,7 +126,8 @@ IMPORTANT: All `.md` files in your Github repo _must_ have name `introduction.md
 
 To make the content of a `.md` file _private_ (meaning a person must purchase the content to see it), remove `isFree:true`  and add `excerpt:""`. Add some excerpt content - this content is public and serves as a free preview.
 
-## Create your own styles
+
+## Add your own styles
 Recommended ways to add styles to this app:
 1. [Inline style for a single element](#inline-style-for-a-single-element)
 2. [Reusable style for multiple elements within single page or component](#reusable-style-for-multiple-elements-within-single-page-or-component)
@@ -214,17 +226,6 @@ We also specified styles for all content inside a `<body>` element:
 </body>
 ```
 [See usage](https://github.com/builderbook/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/_document.js#L96)
-
-
-## Deploy
-- Install now: `npm install -g now`.
-- Point your domain to Zeit world nameservers: [three steps](https://zeit.co/world#get-started).
-- Check the `now.json` file. If you are using `dotenv` and `.env` for env variables, no need to change `now.json`. If you make changes to the app, check up how to [configure now](https://zeit.co/docs/features/configuration).
-- Make sure you updated `ROOT_URL` in `package.json` and `lib/getRootURL.js`.
-- Check that you have all production-level env variables in `.env`. 
-- In your terminal, deploy the app by running `now`.
-- Now outputs your deployment's URL, for example: `builderbook-zomcvzgtvc.now.sh`.
-- Point successful deployment to your domain, for example: `now ln builderbook-zomcvzgtvc.now.sh builderbook.org`.
 
 
 ## Screenshots
