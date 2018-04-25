@@ -1,25 +1,13 @@
 /* eslint-disable react/no-danger */
+/* global gaTrackingId */
 
 import React from 'react';
-import Router from 'next/router';
 import JssProvider from 'react-jss/lib/JssProvider';
 import Document, { Head, Main, NextScript } from 'next/document';
 
 import getContext from '../lib/context';
 
 require('dotenv').config();
-
-const gaTrackingId = 'process.env.GA_TRACKING_ID';
-
-Router.onRouteChangeComplete = () => {
-  if (window.gtag) {
-    window.gtag('config', window.gaTrackingId, {
-      page_location: window.location.href,
-      page_path: window.location.pathname,
-      page_title: window.document.title,
-    });
-  }
-};
 
 class MyDocument extends Document {
   render() {
@@ -82,7 +70,6 @@ class MyDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `
-                window.gaTrackingId = '${gaTrackingId}';
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){
                   dataLayer.push(arguments);
