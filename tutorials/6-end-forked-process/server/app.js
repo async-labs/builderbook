@@ -19,7 +19,7 @@ app.prepare().then(() => {
       const limit = 3e9;
       const sum = await longComputation(limit);
       res.json(sum);
-      // console.log('sent array to client');
+      // console.log('sent sum to client');
     } catch (err) {
       res.json({ error: err.message || err.toString() });
     }
@@ -32,7 +32,7 @@ app.prepare().then(() => {
       forked.send(limit);
       forked.on('message', (sum) => {
         res.json(sum);
-        // console.log('sent array to client');
+        // console.log('sent sum to client');
         forked.kill();
       });
     } catch (err) {

@@ -34,12 +34,12 @@ class Index extends React.Component {
         <br />
         <br />
         <Button variant="raised" color="secondary" onClick={this.mainProcessButton}>
-          Send request to main/parent Node process
+          Execute task in main Node process
         </Button>
         <br />
         <br />
         <Button variant="raised" color="primary" onClick={this.forkedProcessButton}>
-          Send request to forked/child Node process
+          Execute task in forked Node process
         </Button>
         <br />
         <br />
