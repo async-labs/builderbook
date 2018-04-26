@@ -7,6 +7,9 @@ export default function routesWithCache({ server, app }) {
   });
 
   function getCacheKey(req) {
+    if (req.user) {
+      return `${req.url}${req.user.id}`;
+    }
     return `${req.url}`;
   }
 
@@ -40,27 +43,27 @@ export default function routesWithCache({ server, app }) {
     }
   }
 
-  // server.get('/', (req, res) => {
-  //   renderAndCache(req, res, '/');
-  // });
+  server.get('/', (req, res) => {
+    renderAndCache(req, res, '/');
+  });
 
-  // server.get('/book', (req, res) => {
-  //   renderAndCache(req, res, '/book');
-  // });
+  server.get('/book', (req, res) => {
+    renderAndCache(req, res, '/book');
+  });
 
-  // server.get('/book-reviews', (req, res) => {
-  //   renderAndCache(req, res, '/book-reviews');
-  // });
+  server.get('/book-reviews', (req, res) => {
+    renderAndCache(req, res, '/book-reviews');
+  });
 
-  // server.get('/tutorials', (req, res) => {
-  //   renderAndCache(req, res, '/tutorials');
-  // });
+  server.get('/tutorials', (req, res) => {
+    renderAndCache(req, res, '/tutorials');
+  });
 
-  // server.get('/login', (req, res) => {
-  //   renderAndCache(req, res, '/public/login');
-  // });
+  server.get('/login', (req, res) => {
+    renderAndCache(req, res, '/public/login');
+  });
 
-  // server.get('/terms', (req, res) => {
-  //   renderAndCache(req, res, '/public/terms');
-  // });
+  server.get('/terms', (req, res) => {
+    renderAndCache(req, res, '/public/terms');
+  });
 }
