@@ -89,9 +89,20 @@ function Header({ user, hideHeader, next }) {
                 ) : null}
               </div>
             ) : (
-              <Link prefetch href={{ pathname: '/public/login', asPath: '/login', query: { next } }}>
-                <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
-              </Link>
+              <div>
+                <Link prefetch href="/book">
+                  <a style={{ margin: '20px 30px 0px auto' }}>Book</a>
+                </Link>
+                <Link prefetch href="/tutorials">
+                  <a style={{ margin: '20px 30px 0px auto' }}>Tutorials</a>
+                </Link>
+                <Link
+                  prefetch
+                  href={{ pathname: '/public/login', asPath: '/login', query: { next } }}
+                >
+                  <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
+                </Link>
+              </div>
             )}
           </Grid>
         </Grid>
