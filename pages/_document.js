@@ -1,13 +1,12 @@
 /* eslint-disable react/no-danger */
-/* global gaTrackingId */
-
 import React from 'react';
 import JssProvider from 'react-jss/lib/JssProvider';
 import Document, { Head, Main, NextScript } from 'next/document';
-
+import htmlescape from 'htmlescape';
 import getContext from '../lib/context';
 
-require('dotenv').config();
+const { GA_TRACKING_ID, StripePublishableKey } = process.env;
+const env = { GA_TRACKING_ID, StripePublishableKey };
 
 class MyDocument extends Document {
   render() {
@@ -66,7 +65,7 @@ class MyDocument extends Document {
               }
             `}
           </style>
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`} />
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -75,7 +74,7 @@ class MyDocument extends Document {
                   dataLayer.push(arguments);
                 }
                 gtag('js', new Date());
-                gtag('config', '${gaTrackingId}');
+                gtag('config', '${GA_TRACKING_ID}');
               `,
             }}
           />
@@ -91,6 +90,7 @@ class MyDocument extends Document {
           }}
         >
           <Main />
+          <script dangerouslySetInnerHTML={{ __html: `__ENV__ = ${htmlescape(env)}` }} />
           <NextScript />
         </body>
       </html>
@@ -115,7 +115,6 @@ MyDocument.getInitialProps = (ctx) => {
     styles: (
       <style
         id="jss-server-side"
-        // eslint-disable-next-line
         dangerouslySetInnerHTML={{ __html: pageContext.sheetsRegistry.toString() }}
       />
     ),

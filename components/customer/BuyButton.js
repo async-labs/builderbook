@@ -1,5 +1,3 @@
-/* global StripePublishableKey */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import StripeCheckout from 'react-stripe-checkout';
@@ -9,6 +7,10 @@ import Link from 'next/link';
 
 import { buyBook } from '../../lib/api/customer';
 import notify from '../../lib/notifier';
+
+import env from '../../lib/env';
+
+const { StripePublishableKey } = env;
 
 const styleBuyButton = {
   margin: '10px 20px 0px 0px',
