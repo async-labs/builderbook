@@ -9,8 +9,10 @@ Builder Book is an open source web app to publish documentation or books. The ap
 
 
 ## How can you use this app?
-- As learning material for React/Material-UI/Next/Express/Mongoose/MongoDB stack and Google/Github/AWS SES/Mailchimp/Stripe APIs.<br> You can start from our [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate) or modify the final app into your own project.<br> For initial load, pages are rendered by the server; for subsequent loads, pages are rendered on the client.
-- As a production-ready web app to publish documentation or sell books on your own website.
+- As learning material for React/Material-UI/Next/Express/Mongoose/MongoDB stack
+- As learning material for Google/Github/AWS SES/Mailchimp/Stripe APIs.<br> 
+- As starting point for your own project. Start from our [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate) or modify the final app.<br>
+- As a production-ready web app to publish documentation or sell content on your own website (we sell book).
 
 
 ## Contents
@@ -30,17 +32,17 @@ Builder Book is an open source web app to publish documentation or books. The ap
 
 ## Run locally
 - Clone the project and run `yarn` to add packages.
-- Before you start the app, create a `.env` file at the app's root. This file must have values for env variables specified below.
+- Before you start the app, create a `.env` file at the app's root. This file must have values for some env variables specified below.
   - To get `MONGO_URL_TEST`, we recommend a [free MongoDB at mLab](http://docs.mlab.com/).
   - Get `Google_clientID` and `Google_clientSecret` by following [official OAuth tutorial](https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin).
 
     Important: For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback
-    
     Important: You have to enable Google+ API in your Google Cloud Platform account.
 
   - Specify your own secret key for Express session `SESSION_SECRET`: https://github.com/expressjs/session#secret
 
-  To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values to all env variables in `.env` file:
+
+To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values to all env variables in `.env` file:
 
   `.env` :
   ```
@@ -70,10 +72,6 @@ Builder Book is an open source web app to publish documentation or books. The ap
   Stripe_Test_SecretKey="xxxxxx"
   Stripe_Live_SecretKey="xxxxxx"
 
-  # Used in env-config.js
-  Stripe_Test_PublishableKey="xxxxxx"
-  Stripe_Live_PublishableKey="xxxxxx"
-
   # Used in server/mailchimp.js
   MAILCHIMP_API_KEY="xxxxxx"
   MAILCHIMP_REGION="xxxxxx"
@@ -81,12 +79,12 @@ Builder Book is an open source web app to publish documentation or books. The ap
   MAILCHIMP_PURCHASED_LIST_ID="xxxxxx"
   MAILCHIMP_TUTORIALS_LIST_ID="xxxxxx"
 
-  # Used in pages/_document.js
-  GA_TRACKING_ID="xxxxxx"
   ```
 
-- Start the app with `yarn dev`.
-- The _first registered user_ in the app becomes an Admin user (`"isAdmin": true`).
+- Start the app with `GA_TRACKING_ID='xxxxxx' StripePublishableKey='xxxxxx' yarn dev`.
+
+  Env keys `GA_TRACKING_ID` and `StripePublishableKey` are universally available (client and server). Env keys inside `.env` file are used in server code only.
+- The _first registered user_ in the app becomes an Admin user (user document gets parameters`"isAdmin": true`).
 
 
 ## Add a new book
@@ -220,12 +218,28 @@ We also specified styles for all content inside a `<body>` element:
 ## Deploy
 - Install now: `npm install -g now`.
 - Point your domain to Zeit world nameservers: [three steps](https://zeit.co/world#get-started).
-- Check the `now.json` file. If you are using `dotenv` and `.env` for env variables, no need to change `now.json`. If you make changes to the app, check up how to [configure now](https://zeit.co/docs/features/configuration).
-- Make sure you updated `ROOT_URL` in `package.json` and `lib/getRootURL.js`.
+- Create `now.json` file. Make sure to add actual values for `GA_TRACKING_ID`, `StripePublishableKey` (production-level) and `alias`. Read more about how to [configure now](https://zeit.co/docs/features/configuration).
+```
+{
+  "env": {
+    "NODE_ENV": "production",
+    "GA_TRACKING_ID": "xxxxxx",
+    "StripePublishableKey": "xxxxxx"
+  },
+  "alias": "mydomain.com",
+  "scale": {
+    "sfo1": {
+      "min": 1,
+      "max": 1
+    }
+  }
+}
+```
+- Make sure you updated `ROOT_URL` value in `package.json` and `lib/getRootURL.js`.
 - Check that you have all production-level env variables in `.env`. 
 - In your terminal, deploy the app by running `now`.
 - Now outputs your deployment's URL, for example: `builderbook-zomcvzgtvc.now.sh`.
-- Point successful deployment to your domain, for example: `now ln builderbook-zomcvzgtvc.now.sh builderbook.org`.
+- Point successful deployment to your domain with `now alias` or `now ln NOW_URL mydomain.com` (`NOW_URL` is URL of your deployment).
 
 
 ## Screenshots
