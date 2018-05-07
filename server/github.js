@@ -1,13 +1,13 @@
-import qs from 'qs';
-import request from 'request';
-import GithubAPI from '@octokit/rest';
+const qs = require('qs');
+const request = require('request');
+const GithubAPI = require('@octokit/rest');
 
-import User from './models/User';
+const User = require('./models/User');
 
 const TOKEN_URI = 'https://github.com/login/oauth/access_token';
 const AUTHORIZE_URI = 'https://github.com/login/oauth/authorize';
 
-export function setupGithub({ server }) {
+function setupGithub({ server }) {
   const dev = process.env.NODE_ENV !== 'production';
 
   const CLIENT_ID = dev ? process.env.Github_Test_ClientID : process.env.Github_Live_ClientID;
@@ -96,22 +96,27 @@ function getAPI({ accessToken }) {
   return github;
 }
 
-export function getRepos({ accessToken }) {
+function getRepos({ accessToken }) {
   const github = getAPI({ accessToken });
 
   return github.repos.getAll({ per_page: 100 });
 }
 
-export function getContent({ accessToken, repoName, path }) {
+function getContent({ accessToken, repoName, path }) {
   const github = getAPI({ accessToken });
   const [owner, repo] = repoName.split('/');
 
   return github.repos.getContent({ owner, repo, path });
 }
 
-export function getCommits({ accessToken, repoName, limit }) {
+function getCommits({ accessToken, repoName, limit }) {
   const github = getAPI({ accessToken });
   const [owner, repo] = repoName.split('/');
 
   return github.repos.getCommits({ owner, repo, per_page: limit });
 }
+
+exports.setupGithub = setupGithub;
+exports.getRepos = getRepos;
+exports.getContent = getContent;
+exports.getCommits = getCommits;

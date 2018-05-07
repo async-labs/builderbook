@@ -36,7 +36,7 @@ const Index = ({ user }) => (
       <Grid container direction="row" justify="space-around" align="flex-start">
         <Grid item sm={12} xs={12} style={{ textAlign: 'center' }}>
           <br />
-          <p style={{ margin: '45px auto', fontSize: '44px', fontWeight: '400' }}>Builder Book</p>
+          <h1 style={styleH1}>Open source app</h1>
           <iframe
             src="https://ghbtns.com/github-btn.html?user=builderbook&repo=builderbook&type=star&count=true&size=large"
             frameBorder="0"

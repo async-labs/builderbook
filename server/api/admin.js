@@ -1,10 +1,12 @@
-import express from 'express';
-import { fork } from 'child_process';
+const express = require('express');
+const { fork } = require('child_process');
 
-import Book from '../models/Book';
-import { getContent, getRepos } from '../github';
-import User from '../models/User';
-import logger from '../logs';
+const { getRepos, getContent } = require('../github');
+
+const Book = require('../models/Book');
+const User = require('../models/User');
+
+const logger = require('../logs');
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -230,4 +232,4 @@ router.post('/users/give-free-book', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

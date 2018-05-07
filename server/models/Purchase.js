@@ -1,6 +1,8 @@
-import mongoose, { Schema } from 'mongoose';
+const mongoose = require('mongoose');
 
-class PurchaseClass {}
+const { Schema } = mongoose;
+
+// class PurchaseClass {}
 
 const mongoSchema = new Schema({
   userId: {
@@ -58,9 +60,9 @@ const mongoSchema = new Schema({
   },
 });
 
-mongoSchema.loadClass(PurchaseClass);
+// mongoSchema.loadClass(PurchaseClass);
 mongoSchema.index({ bookId: 1, userId: 1 }, { unique: true });
 
 const Purchase = mongoose.model('Purchase', mongoSchema);
 
-export default Purchase;
+module.exports = Purchase;

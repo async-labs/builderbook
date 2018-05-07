@@ -1,14 +1,13 @@
-import sm from 'sitemap';
-import path from 'path';
-
-import Chapter from './models/Chapter';
+const sm = require('sitemap');
+const path = require('path');
+const Chapter = require('./models/Chapter');
 
 const sitemap = sm.createSitemap({
   hostname: 'https://builderbook.org',
   cacheTime: 6000000, // 6000 sec - cache purge period
 });
 
-export default function setup({ server }) {
+function setup({ server }) {
   Chapter.find({}, 'slug').then((chapters) => {
     chapters.forEach((chapter) => {
       sitemap.add({
@@ -47,3 +46,5 @@ export default function setup({ server }) {
     res.sendFile(path.join(__dirname, '../static', 'robots.txt'));
   });
 }
+
+module.exports = setup;

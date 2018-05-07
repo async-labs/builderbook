@@ -1,10 +1,10 @@
-import express from 'express';
-import _ from 'lodash';
+const express = require('express');
+const _ = require('lodash');
 
-import Book from '../models/Book';
-import Chapter from '../models/Chapter';
-import Purchase from '../models/Purchase';
-import logger from '../logs';
+const Book = require('../models/Book');
+const Chapter = require('../models/Chapter');
+const Purchase = require('../models/Purchase');
+const logger = require('../logs');
 
 const router = express.Router();
 
@@ -90,4 +90,4 @@ router.post('/chapters/add-bookmark', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

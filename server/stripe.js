@@ -1,6 +1,6 @@
-import stripe from 'stripe';
+const stripe = require('stripe');
 
-export function charge({
+function charge({
   amount, token, buyerEmail,
 }) {
   const dev = process.env.NODE_ENV !== 'production';
@@ -15,3 +15,5 @@ export function charge({
     description: 'Payment for the book at builderbook.org',
   });
 }
+
+exports.charge = charge;

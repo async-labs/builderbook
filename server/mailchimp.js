@@ -1,5 +1,4 @@
-import request from 'request';
-import crypto from 'crypto';
+const request = require('request');
 
 require('dotenv').config();
 
@@ -37,54 +36,15 @@ function callAPI({ path, method, data }) {
   });
 }
 
-async function getMemberDetail({ email, listName }) {
-  const hash = crypto.createHash('md5');
-
-  const path = `/lists/${LIST_IDS[listName]}/members/${hash.update(email).digest('hex')}`;
-
-  const res = await callAPI({ path, method: 'GET' });
-
-  return res;
-}
-
-export async function subscribe({ email, listName, book }) {
+async function subscribe({ email, listName }) {
   const data = {
     email_address: email,
     status: 'subscribed',
   };
 
-  if (book) {
-    data.merge_fields = {
-      BOOK: book,
-    };
-  }
-
   const path = `/lists/${LIST_IDS[listName]}/members/`;
 
-  let res = await callAPI({ path, method: 'POST', data });
-  if (res.id || !book) {
-    return;
-  }
-
-  res = await getMemberDetail({ email, listName });
-  const { merge_fields: { BOOK = '' } } = res;
-
-  if (BOOK.includes(book)) {
-    return;
-  }
-
-  const books = BOOK.split(',')
-    .map(b => b.trim())
-    .filter(b => !!b);
-
-  books.push(book);
-
-  const hash = crypto.createHash('md5');
-
-  await callAPI({
-    path: `${path}${hash.update(email).digest('hex')}`,
-    method: 'PUT',
-    data: { merge_fields: { BOOK: books.join(', ') } },
-  });
+  await callAPI({ path, method: 'POST', data });
 }
 
+exports.subscribe = subscribe;

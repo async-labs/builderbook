@@ -7,6 +7,7 @@ import getContext from '../lib/context';
 
 const { GA_TRACKING_ID, StripePublishableKey } = process.env;
 const env = { GA_TRACKING_ID, StripePublishableKey };
+// console.log(GA_TRACKING_ID);
 
 class MyDocument extends Document {
   render() {

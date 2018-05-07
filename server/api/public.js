@@ -1,11 +1,11 @@
-import express from 'express';
-import _ from 'lodash';
+const express = require('express');
+const _ = require('lodash');
 
-import Book from '../models/Book';
-import Chapter from '../models/Chapter';
-import Review from '../models/Review';
-import Tutorial from '../models/Tutorial';
-import { subscribe } from '../mailchimp';
+const Book = require('../models/Book');
+const Chapter = require('../models/Chapter');
+const Review = require('../models/Review');
+const Tutorial = require('../models/Tutorial');
+const { subscribe } = require('../mailchimp');
 
 const router = express.Router();
 
@@ -96,4 +96,4 @@ router.post('/subscribe-to-tutorials', async (req, res) => {
 });
 
 
-export default router;
+module.exports = router;

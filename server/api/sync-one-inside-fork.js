@@ -1,16 +1,15 @@
-import frontmatter from 'front-matter';
-import marked from 'marked';
-import he from 'he';
-import hljs from 'highlight.js';
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+const frontmatter = require('front-matter');
+const marked = require('marked');
+const he = require('he');
+const hljs = require('highlight.js');
+const Book = require('../models/Book');
+const Chapter = require('../models/Chapter');
+const Purchase = require('../models/Purchase');
+const generateSlug = require('../utils/slugify');
+const { getContent } = require('../github');
 
-import Book from '../models/Book';
-import Chapter from '../models/Chapter';
-import Purchase from '../models/Purchase';
-
-import generateSlug from '../utils/slugify';
-import { getContent } from '../github';
-import logger from '../logs';
+const logger = require('../logs');
 
 require('dotenv').config();
 

@@ -49,6 +49,7 @@ const styleH1 = {
   textAlign: 'center',
   fontWeight: '400',
   lineHeight: '45px',
+  font: '44px Muli',
 };
 
 const styleHomepageFeature = {

@@ -12,7 +12,6 @@ node_modules/
 .coverage
 .env
 .next
-now.json
 
 book/8-exp
 tutorials/working

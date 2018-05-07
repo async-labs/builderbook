@@ -1,4 +1,6 @@
-import mongoose, { Schema } from 'mongoose';
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 
 const mongoSchema = new Schema({
   bookSlug: {
@@ -38,7 +40,7 @@ const mongoSchema = new Schema({
 
 const Review = mongoose.model('Review', mongoSchema);
 
-export async function insertReviewDocument() {
+async function insertReviewDocument() {
   const review = {
     bookSlug: 'builder-book',
     reviews: [
@@ -90,4 +92,4 @@ export async function insertReviewDocument() {
 
 insertReviewDocument();
 
-export default Review;
+module.exports = Review;

@@ -1,18 +1,18 @@
-import mongoose, { Schema } from 'mongoose';
-import _ from 'lodash';
-import frontmatter from 'front-matter';
+const mongoose = require('mongoose');
+const frontmatter = require('front-matter');
+const { getCommits, getContent } = require('../github');
+const { charge } = require('../stripe');
+const { subscribe } = require('../mailchimp');
+const generateSlug = require('../utils/slugify');
+const User = require('./User');
+const Purchase = require('./Purchase');
 
-import { getCommits, getContent } from '../github';
-import { charge as stripeCharge } from '../stripe';
-import sendEmail from '../aws';
-import logger from '../logs';
-import generateSlug from '../utils/slugify';
-import { subscribe } from '../mailchimp';
+const sendEmail = require('../aws');
+const getEmailTemplate = require('./EmailTemplate');
 
-import Chapter from './Chapter';
-import User from './User';
-import Purchase from './Purchase';
-import getEmailTemplate from './EmailTemplate';
+const logger = require('../logs');
+
+const { Schema } = mongoose;
 
 const mongoSchema = new Schema({
   name: {
@@ -63,6 +63,7 @@ class BookClass {
 
     const book = bookDoc.toObject();
 
+    // eslint-disable-next-line no-use-before-define
     book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug').sort({
       order: 1,
     })).map(ch => ch.toObject());
@@ -121,6 +122,7 @@ class BookClass {
 
   static async syncOneChapter({ id, githubAccessToken, chapterId }) {
     const book = await this.findById(id, 'userId githubRepo').lean();
+    // eslint-disable-next-line no-use-before-define
     const chapter = await Chapter.findById(chapterId, 'githubFilePath').lean();
 
     if (!book) {
@@ -137,6 +139,7 @@ class BookClass {
     data.path = chapter.githubFilePath;
 
     try {
+      // eslint-disable-next-line no-use-before-define
       await Chapter.syncContent({ book, data });
       logger.info('Content is synced', { path: chapter.githubFilePath });
     } catch (error) {
@@ -193,6 +196,7 @@ class BookClass {
       data.path = f.path;
 
       try {
+        // eslint-disable-next-line no-use-before-define
         await Chapter.syncContent({ book, data });
         logger.info('Content is synced', { path: f.path });
       } catch (error) {
@@ -219,7 +223,7 @@ class BookClass {
       throw new Error('Already bought this book');
     }
 
-    const chargeObj = await stripeCharge({
+    const chargeObj = await charge({
       amount: book.price * 100,
       token: stripeToken.id,
       bookName: book.name,
@@ -262,7 +266,7 @@ class BookClass {
       stripeCharge: chargeObj,
     });
   }
-  
+
   static async getPurchasedBooks({ purchasedBookIds, freeBookIds }) {
     const allBooks = await this.find().sort({ createdAt: -1 });
 
@@ -314,4 +318,7 @@ mongoSchema.loadClass(BookClass);
 
 const Book = mongoose.model('Book', mongoSchema);
 
-export default Book;
+module.exports = Book;
+
+const Chapter = require('./Chapter');
+

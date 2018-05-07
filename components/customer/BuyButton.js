@@ -11,6 +11,7 @@ import notify from '../../lib/notifier';
 import env from '../../lib/env';
 
 const { StripePublishableKey } = env;
+// console.log(StripePublishableKey);
 
 const styleBuyButton = {
   margin: '10px 20px 0px 0px',

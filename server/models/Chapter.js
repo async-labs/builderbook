@@ -1,11 +1,13 @@
-import mongoose, { Schema } from 'mongoose';
-import marked from 'marked';
-import he from 'he';
-import hljs from 'highlight.js';
+const mongoose = require('mongoose');
+const marked = require('marked');
+const he = require('he');
+const hljs = require('highlight.js');
 
-import generateSlug from '../utils/slugify';
-import Book from './Book';
-import Purchase from './Purchase';
+const Purchase = require('./Purchase');
+
+const generateSlug = require('../utils/slugify');
+
+const { Schema } = mongoose;
 
 function markdownToHtml(content) {
   const renderer = new marked.Renderer();
@@ -30,7 +32,9 @@ function markdownToHtml(content) {
           href="#${escapedText}"
           style="color: #222;"
         > 
-          <i class="material-icons" style="vertical-align: middle; opacity: 0.5; cursor: pointer;">link</i>
+          <i class="material-icons" style="vertical-align: middle; opacity: 0.5; cursor: pointer;">
+            link
+          </i>
         </a>
         <span class="section-anchor" name="${escapedText}">
           ${text}
@@ -45,7 +49,9 @@ function markdownToHtml(content) {
           href="#${escapedText}"
           style="color: #222;"
         >
-          <i class="material-icons" style="vertical-align: middle; opacity: 0.5; cursor: pointer;">link</i>
+          <i class="material-icons" style="vertical-align: middle; opacity: 0.5; cursor: pointer;">
+            link
+          </i>
         </a>
         ${text}
       </h${level}>`;
@@ -165,7 +171,7 @@ class ChapterClass {
     if (!chapter) {
       throw new Error('Chapter not found');
     }
-
+    // eslint-disable-next-line no-use-before-define
     const book = await Book.findById(chapter.bookId, 'id').lean();
     if (!book) {
       throw new Error('Book not found');
@@ -184,7 +190,11 @@ class ChapterClass {
     }
 
     purchase.bookmarks.push({
-      chapterId, chapterSlug, chapterOrder, hash, text,
+      chapterId,
+      chapterSlug,
+      chapterOrder,
+      hash,
+      text,
     });
 
     return purchase.save();
@@ -193,6 +203,7 @@ class ChapterClass {
   static async getBySlug({
     bookSlug, chapterSlug, userId, isAdmin,
   }) {
+    // eslint-disable-next-line no-use-before-define
     const book = await Book.getBySlug({ slug: bookSlug });
     if (!book) {
       throw new Error('Not found');
@@ -297,7 +308,10 @@ class ChapterClass {
       });
     }
 
-    const purchasesWithBookmark = await Purchase.find({ bookId: book._id, bookmarks: { $elemMatch: { chapterId: chapter._id } } }, '_id bookmarks').lean();
+    const purchasesWithBookmark = await Purchase.find(
+      { bookId: book._id, bookmarks: { $elemMatch: { chapterId: chapter._id } } },
+      '_id bookmarks',
+    ).lean();
 
     const orderForBookmark = modifier.order;
     const slugForBookmark = modifier.slug;
@@ -310,7 +324,10 @@ class ChapterClass {
         'bookmarks.$.chapterSlug': slugForBookmark,
       };
 
-      await Purchase.updateOne({ _id: purchase._id, 'bookmarks.chapterId': chapterId }, { $set: modifierForBookmark });
+      await Purchase.updateOne(
+        { _id: purchase._id, 'bookmarks.chapterId': chapterId },
+        { $set: modifierForBookmark },
+      );
     }));
 
     return this.updateOne({ _id: chapter._id }, { $set: modifier });
@@ -324,4 +341,6 @@ mongoSchema.loadClass(ChapterClass);
 
 const Chapter = mongoose.model('Chapter', mongoSchema);
 
-export default Chapter;
+module.exports = Chapter;
+
+const Book = require('./Book');

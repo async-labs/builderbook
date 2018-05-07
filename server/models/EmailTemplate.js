@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import Handlebars from 'handlebars';
+const mongoose = require('mongoose');
+const Handlebars = require('handlebars');
 
 const EmailTemplate = mongoose.model('EmailTemplate', {
   name: {
@@ -17,7 +17,7 @@ const EmailTemplate = mongoose.model('EmailTemplate', {
   },
 });
 
-function insertTemplates() {
+async function insertTemplates() {
   const templates = [
     {
       name: 'welcome',
@@ -57,20 +57,23 @@ function insertTemplates() {
     },
   ];
 
-  templates.forEach(async (t) => {
-    if ((await EmailTemplate.find({ name: t.name }).count()) > 0) {
-      return;
-    }
+  for (let i = 0; i < templates.length; i += 1) {
+    const t = templates[i];
 
-    EmailTemplate.create(Object.assign({}, t, { message: t.message.replace(/\n/g, '').replace(/[ ]+/g, ' ') })).catch(() => {
-      // just pass error
-    });
-  });
+    // eslint-disable-next-line no-await-in-loop
+    const count = await EmailTemplate.find({ name: t.name }).count();
+
+    if (count === 0) {
+      EmailTemplate.create(Object.assign({}, t, {
+        message: t.message.replace(/\n/g, '').replace(/[ ]+/g, ' '),
+      }));
+    }
+  }
 }
 
 insertTemplates();
 
-export default async function getEmailTemplate(name, params) {
+async function getEmailTemplate(name, params) {
   const source = await EmailTemplate.findOne({ name });
   if (!source) {
     throw new Error('not found');
@@ -81,3 +84,5 @@ export default async function getEmailTemplate(name, params) {
     subject: Handlebars.compile(source.subject)(params),
   };
 }
+
+module.exports = getEmailTemplate;

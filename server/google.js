@@ -1,10 +1,9 @@
-import passport from 'passport';
-import { OAuth2Strategy as Strategy } from 'passport-google-oauth';
+const passport = require('passport');
+const Strategy = require('passport-google-oauth').OAuth2Strategy;
+const User = require('./models/User');
 
-import User from './models/User';
 
-
-export default function auth({ ROOT_URL, server }) {
+function auth({ ROOT_URL, server }) {
   const verify = async (accessToken, refreshToken, profile, verified) => {
     let email;
     let avatarUrl;
@@ -89,3 +88,5 @@ export default function auth({ ROOT_URL, server }) {
     res.redirect('/login');
   });
 }
+
+module.exports = auth;

@@ -1,4 +1,6 @@
-import mongoose, { Schema } from 'mongoose';
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 
 const mongoSchema = new Schema({
   bookSlug: {
@@ -34,7 +36,7 @@ const mongoSchema = new Schema({
 
 const Tutorial = mongoose.model('Tutorial', mongoSchema);
 
-export async function insertTutorialDocument() {
+async function insertTutorialDocument() {
   const tutorial = {
     bookSlug: 'builder-book',
     tutorials: [
@@ -77,4 +79,4 @@ export async function insertTutorialDocument() {
 
 insertTutorialDocument();
 
-export default Tutorial;
+module.exports = Tutorial;

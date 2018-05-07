@@ -1,20 +1,19 @@
-import express from 'express';
-import session from 'express-session';
-import compression from 'compression';
-import mongoSessionStore from 'connect-mongo';
-import next from 'next';
-import mongoose from 'mongoose';
-import helmet from 'helmet';
+const express = require('express');
+const session = require('express-session');
+const compression = require('compression');
+const mongoSessionStore = require('connect-mongo');
+const next = require('next');
+const mongoose = require('mongoose');
+const helmet = require('helmet');
+const routesWithSlug = require('./routesWithSlug');
+const routesWithCache = require('./routesWithCache');
+const sitemapAndRobots = require('./sitemapAndRobots');
 
-import routesWithSlug from './routesWithSlug';
-import routesWithCache from './routesWithCache';
+const auth = require('./google');
+const { setupGithub } = require('./github');
+const api = require('./api');
 
-import sitemapAndRobots from './sitemapAndRobots';
-import auth from './google';
-import { setupGithub as github } from './github';
-import api from './api';
-
-import logger from './logs';
+const logger = require('./logs');
 
 require('dotenv').config();
 
@@ -44,7 +43,7 @@ app.prepare().then(() => {
   server.use(express.json());
 
   // potential fix for Error: Can't set headers
-  // try with Chrome Dev Tools open/close
+  // try reproducing with Chrome Dev Tools open
 
   // if (!dev) {
   //   server.use(compression());
@@ -83,7 +82,7 @@ app.prepare().then(() => {
   server.use(session(sess));
 
   auth({ server, ROOT_URL });
-  github({ server });
+  setupGithub({ server });
   api(server);
 
   routesWithSlug({ server, app });

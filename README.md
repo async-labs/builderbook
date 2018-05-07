@@ -81,7 +81,7 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
 
   ```
 
-- Start the app with `GA_TRACKING_ID='xxxxxx' StripePublishableKey='xxxxxx' yarn dev`.
+- Start the app with `GA_TRACKING_ID=xxxxxx StripePublishableKey=xxxxxx yarn dev`.
 
   Env keys `GA_TRACKING_ID` and `StripePublishableKey` are universally available (client and server). Env keys inside `.env` file are used in server code only.
 - The _first registered user_ in the app becomes an Admin user (user document gets parameters`"isAdmin": true`).
