@@ -5,11 +5,11 @@ import TextField from 'material-ui/TextField';
 import Input from 'material-ui/Input';
 import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
-import Checkbox from 'material-ui/Checkbox';
-import { FormControlLabel } from 'material-ui/Form';
+// import Checkbox from 'material-ui/Checkbox';
+// import { FormControlLabel } from 'material-ui/Form';
 
 import { getGithubRepos } from '../../lib/api/admin';
-import { styleTextField } from '../../components/SharedStyles';
+import { styleTextField } from '../../lib/SharedStyles';
 import notify from '../../lib/notifier';
 
 class EditBook extends React.Component {

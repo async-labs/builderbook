@@ -13,7 +13,7 @@ import {
   styleRaisedButton,
   styleHomepageFeature,
   styleH1,
-} from '../components/SharedStyles';
+} from '../lib/SharedStyles';
 import withLayout from '../lib/withLayout';
 import withAuth from '../lib/withAuth';
 

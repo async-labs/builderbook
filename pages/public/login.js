@@ -3,7 +3,7 @@ import Button from 'material-ui/Button';
 import PropTypes from 'prop-types';
 import withAuth from '../../lib/withAuth';
 import withLayout from '../../lib/withLayout';
-import { styleLoginButton } from '../../components/SharedStyles';
+import { styleLoginButton } from '../../lib/SharedStyles';
 
 function Login({ url }) {
   const next = (url.query && url.query.next) || '';

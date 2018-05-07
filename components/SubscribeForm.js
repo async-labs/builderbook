@@ -5,7 +5,7 @@ import NProgress from 'nprogress';
 
 import notify from '../lib/notifier';
 import { subscribeToTutorials } from '../lib/api/public';
-import { styleTextField, styleRaisedButton } from '../components/SharedStyles';
+import { styleTextField, styleRaisedButton } from '../lib/SharedStyles';
 
 class SubscribeForm extends React.Component {
   onSubmit = async (e) => {

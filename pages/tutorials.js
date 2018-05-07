@@ -9,7 +9,7 @@ import withLayout from '../lib/withLayout';
 import withAuth from '../lib/withAuth';
 import { getTutorials } from '../lib/api/public';
 
-import { styleH1 } from '../components/SharedStyles';
+import { styleH1 } from '../lib/SharedStyles';
 
 const styleExcerpt = {
   margin: '0px 20px',
