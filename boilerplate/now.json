@@ -2,5 +2,12 @@
     "env": {
         "NODE_ENV": "production"
     },
-    "dotenv": true
+    "dotenv": true,
+    "alias": "mydomain.com",
+    "scale": {
+      "sfo1": {
+        "min": 1,
+        "max": 1
+      }
+    }
 }

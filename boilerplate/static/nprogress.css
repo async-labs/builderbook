@@ -1,3 +1,5 @@
+/* You can remove this file if you serve nprogress.css from CDN */
+
 /* Make clicks pass-through */
 #nprogress {
   pointer-events: none;

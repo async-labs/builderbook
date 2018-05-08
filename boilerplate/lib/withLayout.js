@@ -8,15 +8,8 @@ import CssBaseline from 'material-ui/CssBaseline';
 import getContext from '../lib/context';
 import Header from '../components/Header';
 
-import * as gtag from './gtag';
-
-Router.onRouteChangeStart = () => {
-  NProgress.start();
-};
-Router.onRouteChangeComplete = (url) => {
-  NProgress.done();
-  gtag.pageview(url);
-};
+Router.onRouteChangeStart = () => NProgress.start();
+Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 function withLayout(BaseComponent) {

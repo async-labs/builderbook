@@ -12,9 +12,7 @@ import MenuDrop from './MenuDrop';
 
 import { styleToolbar, styleRaisedButton } from './SharedStyles';
 
-Router.onRouteChangeStart = () => {
-  NProgress.start();
-};
+Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 

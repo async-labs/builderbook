@@ -7,7 +7,7 @@ import Avatar from 'material-ui/Avatar';
 
 import MenuDrop from './MenuDrop';
 
-import { styleToolbar } from './SharedStyles';
+import { styleToolbar } from '../lib/SharedStyles';
 
 
 const optionsMenu = [
