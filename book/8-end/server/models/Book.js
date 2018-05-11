@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import frontmatter from 'front-matter';
 
 import getRootUrl from '../../lib/api/getRootUrl';
@@ -16,6 +16,8 @@ import generateSlug from '../utils/slugify';
 import logger from '../logs';
 
 const ROOT_URL = getRootUrl();
+
+const { Schema } = mongoose;
 
 const mongoSchema = new Schema({
   name: {

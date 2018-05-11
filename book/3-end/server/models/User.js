@@ -1,7 +1,9 @@
+import mongoose from 'mongoose';
 import _ from 'lodash';
-import mongoose, { Schema } from 'mongoose';
 
 import generateSlug from '../utils/slugify';
+
+const { Schema } = mongoose;
 
 const mongoSchema = new Schema({
   googleId: {

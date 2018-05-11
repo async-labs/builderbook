@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Router from 'next/router';
-import NProgress from 'nprogress';
 import Toolbar from 'material-ui/Toolbar';
 import Grid from 'material-ui/Grid';
 import Hidden from 'material-ui/Hidden';
@@ -11,12 +9,6 @@ import Button from 'material-ui/Button';
 import MenuDrop from './MenuDrop';
 
 import { styleToolbar } from './SharedStyles';
-
-Router.onRouteChangeStart = () => {
-  NProgress.start();
-};
-Router.onRouteChangeComplete = () => NProgress.done();
-Router.onRouteChangeError = () => NProgress.done();
 
 const optionsMenuCustomer = [
   {

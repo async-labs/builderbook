@@ -1,8 +1,9 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 import generateSlug from '../utils/slugify';
 import Chapter from './Chapter';
 
+const { Schema } = mongoose;
 
 const mongoSchema = new Schema({
   name: {

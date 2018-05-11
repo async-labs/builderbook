@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import frontmatter from 'front-matter';
 
 import generateSlug from '../utils/slugify';
@@ -6,6 +6,8 @@ import Chapter from './Chapter';
 
 import { getCommits, getContent } from '../github';
 import logger from '../logs';
+
+const { Schema } = mongoose;
 
 const mongoSchema = new Schema({
   name: {

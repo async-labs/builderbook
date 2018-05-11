@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import marked from 'marked';
 import he from 'he';
 import hljs from 'highlight.js';
@@ -98,6 +98,8 @@ function getSections(content) {
 
   return sections;
 }
+
+const { Schema } = mongoose;
 
 const mongoSchema = new Schema({
   bookId: {

@@ -1,7 +1,9 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import Handlebars from 'handlebars';
 
 import logger from '../logs';
+
+const { Schema } = mongoose;
 
 const mongoSchema = new Schema({
   name: {

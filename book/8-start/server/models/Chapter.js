@@ -1,9 +1,11 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 import marked from 'marked';
 import he from 'he';
 import hljs from 'highlight.js';
 import generateSlug from '../utils/slugify';
 import Book from './Book';
+
+const { Schema } = mongoose;
 
 function markdownToHtml(content) {
   const renderer = new marked.Renderer();

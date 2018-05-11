@@ -1,6 +1,8 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 import Book from './Book';
+
+const { Schema } = mongoose;
 
 const mongoSchema = new Schema({
   bookId: {
