@@ -20,6 +20,7 @@ Builder Book is an open source web app to publish documentation or books. The ap
 - [Add a new book](#add-a-new-book)
 - [Add your own styles](#add-your-own-styles)
 - [Deploy](#deploy)
+- [Scaling](#scaling)
 - [Screenshots](#screenshots)
 - [Built with](#built-with)
   - [Core stack](#core-stack)
@@ -240,6 +241,20 @@ We also specified styles for all content inside a `<body>` element:
 - In your terminal, deploy the app by running `now`.
 - Now outputs your deployment's URL, for example: `builderbook-zomcvzgtvc.now.sh`.
 - Point successful deployment to your domain with `now alias` or `now ln NOW_URL mydomain.com` (`NOW_URL` is URL of your deployment).
+
+## Scaling
+
+You may want to consider splitting single Next/Express server into two servers:
+- Next server for serving pages, server-side caching, sitemap and robots
+- Express server for internal and external APIs
+
+Here is an example of web application with split servers:
+https://github.com/async-labs/async-saas
+
+Splitting servers will get you:
+- faster page loads since Next rendering does not block internal and external APIs,
+- faster code reload times during development,
+- faster deployment and more flexible scaling of individual apps.
 
 
 ## Screenshots
