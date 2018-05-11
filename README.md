@@ -258,7 +258,7 @@ Splitting servers will get you:
 
 
 ## Screenshots
-Chapter excerpt with Buy Button for Pubilc/Guest visitor:
+Chapter excerpt with Buy Button for Public/Guest visitor:
 ![builderbook-public-readchapter](https://user-images.githubusercontent.com/26158226/38517453-e84a7566-3bee-11e8-82cd-14b4dfbe6a78.png)
 
 Chapter content and Table of Contents for book Customer:
