@@ -13,8 +13,8 @@ import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 
 const styleIcon = {
-  opacity: '0.5',
-  fontSize: '24',
+  opacity: '0.75',
+  fontSize: '24px',
   cursor: 'pointer',
 };
 
@@ -226,7 +226,7 @@ class ReadChapter extends React.Component {
           left: 0,
           overflowY: 'auto',
           overflowX: 'hidden',
-          width: isMobile ? '100%' : '300px',
+          width: isMobile ? '100%' : '400px',
           padding: '0px 25px',
         }}
       >
@@ -270,13 +270,13 @@ class ReadChapter extends React.Component {
       return <Error statusCode={404} />;
     }
 
-    let left = 20;
+    let left = '20px';
     if (showTOC) {
-      left = isMobile ? '100%' : '320px';
+      left = isMobile ? '100%' : '400px';
     }
 
     return (
-      <div>
+      <div style={{ overflowScrolling: 'touch', WebkitOverflowScrolling: 'touch' }}>
         <Head>
           <title>
             {chapter.title === 'Introduction'
@@ -304,30 +304,29 @@ class ReadChapter extends React.Component {
             left,
             overflowY: 'auto',
             overflowX: 'hidden',
-            zIndex: '1000',
           }}
           id="main-content"
         >
-          <div
-            style={{
-              position: 'fixed',
-              top: hideHeader ? '20px' : '80px',
-              transition: 'top 0.5s ease-in',
-              left: '15px',
-            }}
-          >
-            <i //eslint-disable-line
-              className="material-icons"
-              style={styleIcon}
-              onClick={this.toggleChapterList}
-              onKeyPress={this.toggleChapterList}
-              role="button"
-            >
-              format_list_bulleted
-            </i>
-          </div>
-
           {this.renderMainContent()}
+        </div>
+
+        <div
+          style={{
+            position: 'fixed',
+            top: hideHeader ? '20px' : '80px',
+            transition: 'top 0.5s ease-in',
+            left: '15px',
+          }}
+        >
+          <i //eslint-disable-line
+            className="material-icons"
+            style={styleIcon}
+            onClick={this.toggleChapterList}
+            onKeyPress={this.toggleChapterList}
+            role="button"
+          >
+            format_list_bulleted
+          </i>
         </div>
       </div>
     );

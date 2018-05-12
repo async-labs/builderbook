@@ -7,7 +7,12 @@ import getContext from '../lib/context';
 class MyDocument extends Document {
   render() {
     return (
-      <html lang="en">
+      <html
+        lang="en"
+        style={{
+          height: '100%',
+        }}
+      >
         <Head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -71,6 +76,7 @@ class MyDocument extends Document {
             fontWeight: '300',
             lineHeight: '1.5em',
             backgroundColor: '#F7F9FC',
+            minHeight: '100%',
           }}
         >
           <Main />
