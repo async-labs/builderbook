@@ -80,8 +80,7 @@ function getAPI({ accessToken }) {
   const github = new GithubAPI({
     // debug: true,
     timeout: 5000,
-    host: 'api.github.com', // should be api.github.com for GitHub
-    protocol: 'https',
+    baseUrl: 'https://api.github.com',
     headers: {
       accept: 'application/json',
     },
