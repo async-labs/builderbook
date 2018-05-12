@@ -43,21 +43,21 @@ function routesWithCache({ server, app }) {
     }
   }
 
-  // server.get('/', (req, res) => {
-  //   renderAndCache(req, res, '/');
-  // });
+  server.get('/', (req, res) => {
+    renderAndCache(req, res, '/');
+  });
 
-  // server.get('/book', (req, res) => {
-  //   renderAndCache(req, res, '/book');
-  // });
+  server.get('/book', (req, res) => {
+    renderAndCache(req, res, '/book');
+  });
 
-  // server.get('/book-reviews', (req, res) => {
-  //   renderAndCache(req, res, '/book-reviews');
-  // });
+  server.get('/book-reviews', (req, res) => {
+    renderAndCache(req, res, '/book-reviews');
+  });
 
-  // server.get('/tutorials', (req, res) => {
-  //   renderAndCache(req, res, '/tutorials');
-  // });
+  server.get('/tutorials', (req, res) => {
+    renderAndCache(req, res, '/tutorials');
+  });
 
   server.get('/login', (req, res) => {
     renderAndCache(req, res, '/public/login');

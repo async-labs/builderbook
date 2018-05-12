@@ -309,7 +309,7 @@ class ReadChapter extends React.Component {
     }
 
     return (
-      <div>
+      <div style={{ overflowScrolling: 'touch', WebkitOverflowScrolling: 'touch' }}>
         <Head>
           <title>
             {chapter.title === 'Introduction'
