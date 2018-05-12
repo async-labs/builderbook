@@ -15,8 +15,8 @@ import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 
 const styleIcon = {
-  opacity: '0.5',
-  fontSize: '24',
+  opacity: '0.75',
+  fontSize: '24px',
   cursor: 'pointer',
 };
 
@@ -261,7 +261,7 @@ class ReadChapter extends React.Component {
           left: 0,
           overflowY: 'auto',
           overflowX: 'hidden',
-          width: isMobile ? '100%' : '300px',
+          width: isMobile ? '100%' : '400px',
           padding: '0px 25px',
         }}
       >
@@ -303,9 +303,9 @@ class ReadChapter extends React.Component {
 
     const { book, bookmark } = chapter;
 
-    let left = 20;
+    let left = '20px';
     if (showTOC) {
-      left = isMobile ? '100%' : '320px';
+      left = isMobile ? '100%' : '400px';
     }
 
     return (
@@ -337,18 +337,21 @@ class ReadChapter extends React.Component {
             left,
             overflowY: 'auto',
             overflowX: 'hidden',
-            zIndex: '1000',
           }}
           id="main-content"
         >
-          <div
-            style={{
-              position: 'fixed',
-              top: hideHeader ? '20px' : '80px',
-              transition: 'top 0.5s ease-in',
-              left: '15px',
-            }}
-          >
+          {this.renderMainContent()}
+        </div>
+
+
+        <div
+          style={{
+            position: 'fixed',
+            top: hideHeader ? '20px' : '80px',
+            transition: 'top 0.5s ease-in',
+            left: '15px',
+          }}
+        >
             <i //eslint-disable-line
               className="material-icons"
               style={styleIcon}
@@ -359,39 +362,32 @@ class ReadChapter extends React.Component {
               format_list_bulleted
             </i>
 
-            {book.supportURL ? (
-              <div>
-                <a
-                  href={book.supportURL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: '#222', opacity: '1' }}
+          {book.supportURL ? (
+            <div>
+              <a
+                href={book.supportURL}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#222', opacity: '1' }}
+              >
+                <i
+                  className="material-icons"
+                  style={styleIcon}
                 >
-                  <i
-                    className="material-icons"
-                    style={{
-                      opacity: '0.5',
-                      fontSize: '24',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    help_outline
-                  </i>
-                </a>
-              </div>
-            ) : null}
+                  help_outline
+                </i>
+              </a>
+            </div>
+          ) : null}
 
-            {chapter.isPurchased && !chapter.isFree ? (
-              <Bookmark
-                chapter={chapter}
-                bookmark={bookmark}
-                changeBookmark={this.changeBookmark}
-                activeSection={this.state.activeSection}
-              />
-            ) : null}
-          </div>
-
-          {this.renderMainContent()}
+          {chapter.isPurchased && !chapter.isFree ? (
+            <Bookmark
+              chapter={chapter}
+              bookmark={bookmark}
+              changeBookmark={this.changeBookmark}
+              activeSection={this.state.activeSection}
+            />
+          ) : null}
         </div>
       </div>
     );

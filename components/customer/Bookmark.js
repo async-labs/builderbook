@@ -82,8 +82,8 @@ export default class Bookmark extends React.PureComponent {
           aria-owns={anchorEl ? 'simple-menu' : null}
           aria-haspopup="true"
           style={{
-            opacity: '0.5',
-            fontSize: '24',
+            opacity: '0.75',
+            fontSize: '24px',
             cursor: 'pointer',
           }}
           role="button"
