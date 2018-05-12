@@ -18,8 +18,8 @@ Builder Book is an open source web app to publish documentation or books. The ap
 ## Showcase
 Check out projects built with the help of this open source app.
 - [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee) : Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
-- Homepage for [Async](https://async-await.com/): Communication tool for remote engineering teams to achieve deep work.
-- [SaaS boilerplate](https://github.com/async-labs/async-saas): Boilerplate to quickly launch a SaaS MVP.
+- Homepage for [Async](https://async-await.com/) by our team: Communication tool for remote engineering teams to achieve deep work (prelaunch).
+- [SaaS boilerplate app](https://github.com/async-labs/async-saas) by our team: Boilerplate to quickly launch a SaaS MVP.
 
 
 ## Contents
