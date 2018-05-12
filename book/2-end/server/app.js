@@ -27,7 +27,7 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
-  // confuring MongoDB session store
+  // configuring MongoDB session store
   const MongoStore = mongoSessionStore(session);
 
   const sess = {

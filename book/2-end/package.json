@@ -6,8 +6,8 @@
     "build": "next build",
     "start": "next start",
     "dev": "next",
-    "dev-express": "nodemon server/app.js --watch server --exec node",
-    "lint": "eslint components pages lib server"
+    "lint": "eslint components pages lib server",
+    "dev-express": "nodemon server/app.js --watch server --exec babel-node --presets=@babel/preset-env"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.46",
