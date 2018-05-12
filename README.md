@@ -15,6 +15,11 @@ Builder Book is an open source web app to publish documentation or books. The ap
 - As a production-ready web app to publish documentation or sell content on your own website (we sell book).
 
 
+## Showcase
+Check out projects built with the help of this open source app.
+- [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee): Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
+
+
 ## Contents
 - [Run locally](#run-locally)
 - [Add a new book](#add-a-new-book)
