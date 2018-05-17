@@ -20,6 +20,7 @@ Check out projects built with the help of this open source app.
 - [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee) : Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
 - [Async homepage and blog](https://async-await.com/) by us: Communication tool for small and remote engineering teams to achieve deep work (prelaunch).
 - [SaaS boilerplate app](https://github.com/async-labs/async-saas) by us: Boilerplate to quickly launch a SaaS product.
+- [Harbor](https://github.com/builderbook/harbor) by us: Web app that allows anyone with a Gmail account to charge for advice sent via email.
 
 
 ## Contents
@@ -123,7 +124,9 @@ To make the content of a `.md` file _private_ (meaning a person must purchase th
 
 
 ## Add your own styles
-Recommended ways to add styles to this app:
+To change the color scheme of this app, modify the `primary` and `secondary` theme colors inside `lib/context.js`. Select any colors from Material UI's official [color palette](https://material-ui-next.com/style/color/#color).
+
+Recommended ways to add your own styles to this app:
 1. [Inline style for a single element](#inline-style-for-a-single-element)
 2. [Reusable style for multiple elements within single page or component](#reusable-style-for-multiple-elements-within-single-page-or-component)
 3. [Reusable/importable style for multiple pages or components](#reusableimportable-style-for-multiple-pages-or-components)
