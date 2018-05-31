@@ -43,10 +43,10 @@ class EditBook extends React.Component {
     NProgress.start();
 
     try {
-      await editBook({ ...data, id: book._id });
+      const editedBook = await editBook({ ...data, id: book._id });
       notify('Saved');
       NProgress.done();
-      Router.push(`/admin/book-detail?slug=${book.slug}`, `/admin/book-detail/${book.slug}`);
+      Router.push(`/admin/book-detail?slug=${editedBook.slug}`, `/admin/book-detail/${editedBook.slug}`);
     } catch (err) {
       notify(err);
       NProgress.done();

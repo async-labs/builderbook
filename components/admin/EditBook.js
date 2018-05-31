@@ -95,7 +95,6 @@ class EditBook extends React.Component {
               value={this.state.book.name || ''}
               type="text"
               label="Book's title"
-              labelClassName="textFieldLabel"
               style={styleTextField}
               required
             />

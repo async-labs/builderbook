@@ -77,7 +77,6 @@ class EditBook extends React.Component {
               value={this.state.book.name}
               type="text"
               label="Book's title"
-              labelClassName="textFieldLabel"
               style={styleTextField}
               required
             />
@@ -123,7 +122,7 @@ class EditBook extends React.Component {
           </div>
           <br />
           <br />
-          <Button raised type="submit">
+          <Button variant="raised" type="submit">
             Save
           </Button>
         </form>

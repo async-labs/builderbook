@@ -42,8 +42,8 @@ router.post('/books/add', async (req, res) => {
 
 router.post('/books/edit', async (req, res) => {
   try {
-    await Book.edit(req.body);
-    res.json({ done: 1 });
+    const editedBook = await Book.edit(req.body);
+    res.json(editedBook);
   } catch (err) {
     logger.error(err);
     res.json({ error: err.message || err.toString() });
