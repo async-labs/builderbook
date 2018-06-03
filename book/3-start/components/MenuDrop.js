@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Menu from 'material-ui/Menu';
-import Avatar from 'material-ui/Avatar';
+import Menu from '@material-ui/core/Menu';
+import Avatar from '@material-ui/core/Avatar';
 
 class MenuDrop extends React.Component {
   static propTypes = {

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Toolbar from 'material-ui/Toolbar';
-import Grid from 'material-ui/Grid';
-import Hidden from 'material-ui/Hidden';
-import Avatar from 'material-ui/Avatar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
+import Avatar from '@material-ui/core/Avatar';
 
 import MenuDrop from './MenuDrop';
 

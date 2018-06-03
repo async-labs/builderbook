@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Error from 'next/error';
 import Head from 'next/head';
-import Grid from 'material-ui/Grid';
+import Grid from '@material-ui/core/Grid';
 
 import { getChapterDetail } from '../../lib/api/public';
 import withLayout from '../../lib/withLayout';

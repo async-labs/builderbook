@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import StripeCheckout from 'react-stripe-checkout';
 import NProgress from 'nprogress';
 
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 
 import { buyBook } from '../../lib/api/customer';
 import notify from '../../lib/notifier';
-// import env from '../../lib/env';
+import env from '../../lib/env';
 
-// const { StripePublishableKey } = env;
+const { StripePublishableKey } = env;
 
 const styleBuyButton = {
   margin: '20px 20px 20px 0px',

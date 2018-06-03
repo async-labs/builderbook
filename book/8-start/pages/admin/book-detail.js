@@ -3,7 +3,7 @@ import NProgress from 'nprogress';
 import PropTypes from 'prop-types';
 import Error from 'next/error';
 import Link from 'next/link';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 
 import { getBookDetail, syncBookContent } from '../../lib/api/admin';
 import withLayout from '../../lib/withLayout';

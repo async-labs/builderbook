@@ -4,15 +4,7 @@ import Head from 'next/head';
 
 import withAuth from '../lib/withAuth';
 import withLayout from '../lib/withLayout';
-import notify from '../lib/notifier';
 
-import { styleExternalLinkIcon } from '../components/SharedStyles';
-
-
-const stylePaper = {
-  padding: '1px 20px 20px 20px',
-  margin: '20px 0px',
-};
 
 class Index extends React.Component {
   static propTypes = {

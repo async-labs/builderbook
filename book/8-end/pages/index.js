@@ -5,6 +5,7 @@ import Head from 'next/head';
 import withAuth from '../lib/withAuth';
 import withLayout from '../lib/withLayout';
 
+
 class Index extends React.Component {
   static propTypes = {
     user: PropTypes.shape({

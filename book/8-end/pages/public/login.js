@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 
 import withAuth from '../../lib/withAuth';
 import withLayout from '../../lib/withLayout';
