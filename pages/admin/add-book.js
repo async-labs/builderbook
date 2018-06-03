@@ -6,7 +6,7 @@ import NProgress from 'nprogress';
 import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 import EditBook from '../../components/admin/EditBook';
-import { addBook, syncBookContent } from '../../lib/api/admin';
+import { addBook, syncAllChapters } from '../../lib/api/admin';
 import notify from '../../lib/notifier';
 
 class AddBook extends React.Component {
@@ -18,7 +18,7 @@ class AddBook extends React.Component {
       notify('Saved');
       try {
         const bookId = book._id;
-        await syncBookContent({ bookId });
+        await syncAllChapters({ bookId });
         notify('Synced');
         NProgress.done();
         Router.push(`/admin/book-detail?slug=${book.slug}`, `/admin/book-detail/${book.slug}`);

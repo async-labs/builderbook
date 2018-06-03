@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NProgress from 'nprogress';
-import Menu, { MenuItem } from 'material-ui/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import notify from '../../lib/notifier';
 import { addBookmark } from '../../lib/api/customer';

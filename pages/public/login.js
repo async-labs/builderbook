@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import withAuth from '../../lib/withAuth';
 import withLayout from '../../lib/withLayout';

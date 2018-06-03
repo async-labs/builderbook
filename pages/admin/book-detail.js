@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Error from 'next/error';
 import Head from 'next/head';
 import Link from 'next/link';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 
 import { getBookDetail, syncOneChapter, syncAllChapters } from '../../lib/api/admin';
 import withLayout from '../../lib/withLayout';

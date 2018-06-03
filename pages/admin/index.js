@@ -1,9 +1,9 @@
 import React from 'react';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Link from 'next/link';
-import Grid from 'material-ui/Grid';
+import Grid from '@material-ui/core/Grid';
 
 import notify from '../../lib/notifier';
 

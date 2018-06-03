@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import Link from 'next/link';
-import Grid from 'material-ui/Grid';
-import Avatar from 'material-ui/Avatar';
-import Button from 'material-ui/Button';
+import Grid from '@material-ui/core/Grid';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 
 import Header from '../components/HomeHeader';
 import Footer from '../components/HomeFooter';
@@ -121,7 +121,7 @@ const Book = ({ user, toc, reviews }) => (
           {' '}
           Harbor
         </a>. Stay tuned for
-        <a href="https://github.com/builderbook/async" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/async-labs/async-saas" target="_blank" rel="noopener noreferrer">
           {' '}
           Async
         </a>.
