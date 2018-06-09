@@ -17,7 +17,7 @@
     "coverageDirectory": "./.coverage"
   },
   "dependencies": {
-    "@material-ui/core": "^1.1.0",
+    "@material-ui/core": "^1.2.0",
     "@octokit/rest": "15.2.7",
     "aws-sdk": "^2.233.1",
     "compression": "^1.7.2",

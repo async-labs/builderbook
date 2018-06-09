@@ -10,7 +10,7 @@
     "lint": "eslint components pages lib server"
   },
   "dependencies": {
-    "@material-ui/core": "^1.1.0",
+    "@material-ui/core": "^1.2.0",
     "connect-mongo": "^2.0.1",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
@@ -32,8 +32,8 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-react": "^7.8.2",
     "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.8.2",
     "nodemon": "^1.17.4"
   }
 }
