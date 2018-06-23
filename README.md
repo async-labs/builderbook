@@ -5,9 +5,9 @@
 Builder Book is an open source web app to publish documentation or books. The app is built with React/Material-UI/Next/Express/Mongoose/MongoDB and includes these third party APIs: Google, Github, AWS SES, Mailchimp, Stripe.
 
 - Live app: https://builderbook.org/books/builder-book/introduction.
-- Learn how to build this app from scratch with [our book](https://builderbook.org/book)
+- Learn how to build this app from scratch with our [book](https://builderbook.org/book)
 
-We used `builderbook` project to build [saas](https://github.com/async-labs/saas), [async](https://async-await.com) and other real-world web apps(see below).
+We've used this `builderbook` project to build [saas](https://github.com/async-labs/saas), [async](https://async-await.com), and other real-world web apps (see [other projects](https://github.com/builderbook/builderbook#other-projects) below).
 
 
 ## How can you use this app?
@@ -38,9 +38,9 @@ We used `builderbook` project to build [saas](https://github.com/async-labs/saas
 ## Showcase
 Check out projects built with the help of this open source app. Feel free to add your own project by creating a pull request.
 - [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee) : Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
-- [Async homepage and blog](https://async-await.com/) by us: Communication tool for engineering teams to achieve deep work.
-- [SaaS boilerplate app](https://github.com/async-labs/saas-by-async): Build and launch a SaaS product in weeks, not months.
-- [Harbor](https://github.com/builderbook/harbor): Web app that allows anyone with a Gmail account to automatically charge for advice sent via email.
+- [Async homepage and blog](https://async-await.com/): Communication tool for engineering teams to achieve deep work.
+- [SaaS boilerplate app](https://github.com/async-labs/saas-by-async): Open source web app that saves you weeks of work when building your own SaaS product. 
+- [Harbor](https://github.com/builderbook/harbor): Open source web app that allows anyone with a Gmail account to automatically charge for advice sent via email.
 
 
 ## Run locally
@@ -49,13 +49,13 @@ Check out projects built with the help of this open source app. Feel free to add
   - To get `MONGO_URL_TEST`, we recommend a [free MongoDB at mLab](http://docs.mlab.com/).
   - Get `Google_clientID` and `Google_clientSecret` by following [official OAuth tutorial](https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin).
 
-    Important: For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback
+    Important: For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback <br/>
     Important: You have to enable Google+ API in your Google Cloud Platform account.
 
   - Specify your own secret key for Express session `SESSION_SECRET`: https://github.com/expressjs/session#secret
 
 
-To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values to all env variables in `.env` file:
+To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values for all of the following env variables in your `.env` file:
 
   `.env` :
   ```
@@ -95,6 +95,8 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
   ```
 
 - Start the app with `GA_TRACKING_ID=xxxxxx StripePublishableKey=xxxxxx yarn dev`.
+  - To get `GA_TRACKING_ID`, set up Google Analytics and follow [these instructions](https://support.google.com/analytics/answer/1008080?hl=en) to find your tracking ID.
+  - To get `StripePublishableKey`, set up Stripe and find your key [here](https://dashboard.stripe.com/account/apikeys).
 
   Env keys `GA_TRACKING_ID` and `StripePublishableKey` are universally available (client and server). Env keys inside `.env` file are used in server code only.
 - The _first registered user_ in the app becomes an Admin user (user document gets parameters`"isAdmin": true`).
@@ -120,9 +122,9 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
 
 When you add new `.md` files or update content, go to the `BookDetail` page of your app and click `Sync with Github`. 
 
-IMPORTANT: All `.md` files in your Github repo _must_ have metadata in the format shown above.
+Important: All `.md` files in your Github repo _must_ have metadata in the format shown above.
 
-IMPORTANT: All `.md` files in your Github repo _must_ have name `introduction.md` or `chapter-N.md`.
+Important: All `.md` files in your Github repo _must_ have name `introduction.md` or `chapter-N.md`.
 
 To make the content of a `.md` file _private_ (meaning a person must purchase the content to see it), remove `isFree:true`  and add `excerpt:""`. Add some excerpt content - this content is public and serves as a free preview.
 
@@ -263,7 +265,7 @@ You may want to consider splitting single Next/Express server into two servers:
 - Express server for internal and external APIs
 
 Here is an example of web application with split servers:
-https://github.com/async-labs/async-saas
+https://github.com/async-labs/saas
 
 Splitting servers will get you:
 - faster page loads since Next rendering does not block internal and external APIs,
@@ -314,9 +316,9 @@ By participating in this project, you are expected to uphold Builder Book's [Cod
 ## Other projects
 Want to support this project?
 
-Sign up at [async](https://async-await.com) and/or [buy book](https://builderbook.org).
+Sign up at [async](https://async-await.com) and/or buy our [book](https://builderbook.org/book).
 
-Check up our open source [SaaS boilerplate app](https://github.com/async-labs/saas).
+Check out our open source [SaaS boilerplate app](https://github.com/async-labs/saas).
 
 
 ## Team
@@ -348,7 +350,6 @@ All code in this repository is provided under the [MIT License](https://github.c
 │   ├── HomeHeader.js                   # Header component on homepage
 │   ├── MenuDrop.js                     # Dropdown menu
 │   ├── Notifier.js                     # In-app notifications for app's users
-│   ├── SharedStyles.js                 # List of _reusable_ styles
 │   ├── SubscribeForm.js                # Form to subscribe to MailChimp newsletter
 │   ├── TOC.js                          # Table of Contents
 ├── lib                                 # Code available on both client and server
@@ -358,7 +359,10 @@ All code in this repository is provided under the [MIT License](https://github.c
 │   │   ├── getRootURL.js               # Returns ROOT_URL
 │   │   ├── public.js                   # Public user methods
 │   │   ├── sendRequest.js              # Reusable code for all GET and POST requests
+│   ├── SharedStyles.js                 # List of _reusable_ styles
 │   ├── context.js                      # Context for Material-UI integration
+│   ├── env.js                          # Universal config for environmental variables
+│   ├── gtag.js                         # Universal config for Google Analytics
 │   ├── notifier.js                     # Contains notify() function that loads Notifier component
 │   ├── withAuth.js                     # HOC that passes user to pages and more
 │   ├── withLayout.js                   # HOC for SSR with Material-UI and more
@@ -374,8 +378,8 @@ All code in this repository is provided under the [MIT License](https://github.c
 │   │   ├── login.js                    # Login page
 │   │   ├── read-chapter.js             # Page with chapter's content
 │   ├── _document.js                    # Allows to customize pages (feature of Next.js)
-│   ├── index.js                        # Homepage
 │   ├── book.js                         # Book page
+│   ├── index.js                        # Homepage
 │   ├── tutorials.js                    # Tutorials page
 ├── server                              # Server code
 │   ├── api                             # Express routes, route-level middleware
@@ -410,11 +414,9 @@ All code in this repository is provided under the [MIT License](https://github.c
 ├── test/server/utils                   # Tests
 │   ├── slugify.test.js                 # Unit test for generateSlug() function
 ├── tutorials                           # Codebases for our tutorials
-├── .babelrc                            # Config for Babel
 ├── .eslintrc.js                        # Config for Eslint
 ├── .gitignore                          # List of ignored files and directories
 ├── .npmignore                          # Files and directories that are not uploaded to the server
-├── env-config.js                       # File for Stripe keys
 ├── now.json                            # Settings for now from Zeit
 ├── package.json                        # List of packages and scripts
 ├── yarn.lock                           # Exact versions of packages. Generated by yarn.
