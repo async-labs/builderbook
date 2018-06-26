@@ -24,7 +24,7 @@ function Login({ url }) {
         style={styleLoginButton}
         href={`/auth/google?redirectUrl=${redirectUrl}`}
       >
-        <img src="https://storage.googleapis.com/nice-future-2156/G.svg" alt="Log in with Google" />
+        <img src="https://storage.googleapis.com/builderbook/G.svg" alt="Log in with Google" />
         &nbsp;&nbsp;&nbsp; Log in with Google
       </Button>
     </div>

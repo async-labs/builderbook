@@ -19,7 +19,7 @@ function Login({ url }) {
       <p>You’ll be logged in for 14 days unless you log out manually.</p>
       <br />
       <Button variant="raised" style={styleLoginButton} href={`/auth/google?next=${next}`}>
-        <img src="https://storage.googleapis.com/nice-future-2156/G.svg" alt="Log in with Google" />
+        <img src="https://storage.googleapis.com/builderbook/G.svg" alt="Log in with Google" />
         &nbsp;&nbsp;&nbsp; Log in with Google
       </Button>
     </div>
