@@ -13,11 +13,6 @@ const mongoSchema = new Schema({
     access_token: String,
     refresh_token: String,
   },
-  slug: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   createdAt: {
     type: Date,
     required: true,
@@ -48,7 +43,7 @@ const mongoSchema = new Schema({
 class UserClass {
   // User's public fields
   static publicFields() {
-    return ['id', 'displayName', 'email', 'avatarUrl', 'slug', 'isAdmin', 'isGithubConnected'];
+    return ['id', 'displayName', 'email', 'avatarUrl', 'isAdmin', 'isGithubConnected'];
   }
 
   static async signInOrSignUp({
