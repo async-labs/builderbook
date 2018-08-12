@@ -28,8 +28,8 @@ We've used this `builderbook` project to build [saas](https://github.com/async-l
 - [Built with](#built-with)
   - [Core stack](#core-stack)
   - [Third party APIs](#third-party-apis)
+- [Hire our team](#hire-our-team)
 - [Contributing](#contributing)
-- [Other projects](#other-projects)
 - [Team](#team)
 - [License](#license)
 - [Project structure](#project-structure)
@@ -307,18 +307,21 @@ Book-detail page for Admin user:
 Check out [package.json](https://github.com/builderbook/builderbook/blob/master/package.json).
 
 
+## Hire our team
+If you're interested in hiring our team to build custom SaaS features, fill out our [form](https://goo.gl/forms/4kk6mvowOjkQY21y2).
+
+We currently have 1 spot avaialble (30-40h/week engagement).
+We charge $100/h and are selective about type of product and client.
+
+If you are a small team, who works best in a calm environment and builds a SaaS product that solves a real problem - we want to hear from you.
+
+
 ## Contributing
 We welcome suggestions and pull requests, especially for [issues](https://github.com/builderbook/builderbook/issues) labeled as `discussion` and `contributions welcome`.
 
 By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook/blob/master/CODE-OF-CONDUCT.md).
 
-
-## Other projects
-Want to support this project?
-
-Sign up at [async](https://async-await.com) and/or buy our [book](https://builderbook.org/book).
-
-Check out our open source [SaaS boilerplate app](https://github.com/async-labs/saas).
+Want to support this project? Sign up at [async](https://async-await.com) and/or buy our [book](https://builderbook.org/book). Also check out our open source [SaaS boilerplate app](https://github.com/async-labs/saas).
 
 
 ## Team
