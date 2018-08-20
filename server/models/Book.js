@@ -236,7 +236,7 @@ class BookClass {
 
     User.findByIdAndUpdate(user.id, { $addToSet: { purchasedBookIds: book._id } }).exec();
 
-    const template = await getEmailTemplate('purchased', {
+    const template = await getEmailTemplate('purchase', {
       userName: user.displayName,
       bookTitle: book.name,
       bookUrl: `https://builderbook.org/books/${book.slug}/introduction`,
