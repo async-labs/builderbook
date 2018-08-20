@@ -70,7 +70,8 @@ router.post('/books/sync-one-chapter', async (req, res) => {
   }
 
   try {
-    const sync = fork(dev ? './server/api/sync-one-inside-fork.js' : './compiled/server/api/sync-one-inside-fork.js');
+    // const sync = fork(dev ? './server/api/sync-one-inside-fork.js' : './compiled/server/api/sync-one-inside-fork.js');
+    const sync = fork('./server/api/sync-one-inside-fork.js');
     const userGithubToken = user.githubAccessToken;
     sync.send({ bookId, chapterId, userGithubToken });
     sync.on('message', (msg) => {
@@ -98,7 +99,8 @@ router.post('/books/sync-all-chapters', async (req, res) => {
   }
 
   try {
-    const sync = fork(dev ? './server/api/sync-all-inside-fork.js' : './compiled/server/api/sync-all-inside-fork.js');
+    // const sync = fork(dev ? './server/api/sync-all-inside-fork.js' : './compiled/server/api/sync-all-inside-fork.js');
+    const sync = fork('./server/api/sync-all-inside-fork.js');
     const userGithubToken = user.githubAccessToken;
     sync.send({ bookId, userGithubToken });
     sync.on('message', (msg) => {
