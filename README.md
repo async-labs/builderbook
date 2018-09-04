@@ -7,7 +7,7 @@ Builder Book is an open source web app to publish documentation or books. The ap
 - Live app: https://builderbook.org/books/builder-book/introduction.
 - Learn how to build this app from scratch with our [book](https://builderbook.org/book)
 
-We've used this `builderbook` project to build [saas](https://github.com/async-labs/saas), [async](https://async-await.com), and other real-world web apps (see [other projects](https://github.com/builderbook/builderbook#other-projects) below).
+We've used this `builderbook` project to build [saas](https://github.com/async-labs/saas), [async](https://async-await.com), and other real-world web apps.
 
 
 ## How can you use this app?
@@ -38,9 +38,9 @@ We've used this `builderbook` project to build [saas](https://github.com/async-l
 ## Showcase
 Check out projects built with the help of this open source app. Feel free to add your own project by creating a pull request.
 - [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee) : Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
-- [Async homepage and blog](https://async-await.com/): Communication tool for engineering teams to achieve deep work.
 - [SaaS boilerplate app](https://github.com/async-labs/saas-by-async): Open source web app that saves you weeks of work when building your own SaaS product. 
 - [Harbor](https://github.com/builderbook/harbor): Open source web app that allows anyone with a Gmail account to automatically charge for advice sent via email.
+- [Async](https://async-await.com/): asynchronous communication and project management tool for small teams of software engineers.
 
 
 ## Run locally
