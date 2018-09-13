@@ -8,7 +8,7 @@ const Index = ({ user }) => (
   <div style={{ padding: '10px 45px' }}>
     <Head>
       <title>Dashboard</title>
-      <meta name="description" content="This is description of Index page" />
+      <meta name="description" content="This is a description of the Index page" />
     </Head>
     <p>Content on Index page</p>
     <p>Email: {user.email}</p>
