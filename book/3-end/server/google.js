@@ -14,6 +14,7 @@ export default function auth({ ROOT_URL, server }) {
 
     if (profile.photos && profile.photos.length > 0) {
       avatarUrl = profile.photos[0].value.replace('sz=50', 'sz=128');
+    }
 
     try {
       const user = await User.signInOrSignUp({
