@@ -12,9 +12,8 @@ export default function auth({ ROOT_URL, server }) {
       email = profile.emails[0].value;
     }
 
-    if (profile._json.image && profile._json.image.url) { // eslint-disable-line
-      avatarUrl = profile._json.image.url.replace('sz=50', 'sz=128'); // eslint-disable-line
-    }
+    if (profile.photos && profile.photos.length > 0) {
+      avatarUrl = profile.photos[0].value.replace('sz=50', 'sz=128');
 
     try {
       const user = await User.signInOrSignUp({
