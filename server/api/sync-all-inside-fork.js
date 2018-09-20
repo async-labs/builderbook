@@ -15,7 +15,7 @@ require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
 const MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
-mongoose.connect(MONGO_URL);
+mongoose.connect(MONGO_URL, { useNewUrlParser: true });
 
 function markdownToHtml(content) {
   const renderer = new marked.Renderer();

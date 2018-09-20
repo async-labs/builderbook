@@ -10,7 +10,7 @@ require('dotenv').config();
 const dev = process.env.NODE_ENV !== 'production';
 const MONGO_URL = process.env.MONGO_URL_TEST;
 
-mongoose.connect(MONGO_URL);
+mongoose.connect(MONGO_URL, { useNewUrlParser: true });
 
 const port = process.env.PORT || 8000;
 const ROOT_URL = dev ? `http://localhost:${port}` : 'https://mydomain.com';
