@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "dev": "next",
-    "lint": "eslint components pages lib server"
+    "lint": "eslint components pages lib"
   },
   "dependencies": {
     "@material-ui/core": "^1.3.0",

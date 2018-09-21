@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "dev": "next",
-    "lint": "eslint components pages lib server"
+    "lint": "eslint components pages lib"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.51",
