@@ -11,16 +11,26 @@ function Login({ url }) {
   return (
     <div style={{ textAlign: 'center', margin: '0 20px' }}>
       <Head>
-        <title>Log in to Builder Book</title>
+        <title>
+          Log in to Builder Book
+        </title>
         <meta name="description" content="Login page for builderbook.org" />
       </Head>
       <br />
-      <p style={{ margin: '45px auto', fontSize: '44px', fontWeight: '400' }}>Log in</p>
-      <p>You’ll be logged in for 14 days unless you log out manually.</p>
+      <p style={{ margin: '45px auto', fontSize: '44px', fontWeight: '400' }}>
+        Log in
+      </p>
+      <p>
+        You’ll be logged in for 14 days unless you log out manually.
+      </p>
       <br />
       <Button variant="raised" style={styleLoginButton} href={`/auth/google?next=${next}`}>
-        <img src="https://storage.googleapis.com/builderbook/G.svg" alt="Log in with Google" />
-        &nbsp;&nbsp;&nbsp; Log in with Google
+        <img
+          src="https://storage.googleapis.com/builderbook/G.svg"
+          alt="Log in with Google"
+          style={{ marginRight: '10px' }}
+        />
+        Log in with Google
       </Button>
     </div>
   );
