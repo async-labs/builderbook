@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import Menu from '@material-ui/core/Menu';
 import Avatar from '@material-ui/core/Avatar';
 
@@ -29,7 +30,7 @@ class MenuDrop extends React.Component {
     const { options, src, alt } = this.props;
 
     return (
-      <div style={{ whiteSpace: 'nowrap' }}>
+      <div>
         <Avatar
           role="presentation"
           aria-owns="simple-menu"
@@ -41,7 +42,6 @@ class MenuDrop extends React.Component {
           style={{ margin: '0px 20px 0px auto', cursor: 'pointer' }}
         />
         <Menu
-          style={{ padding: '0px 20px' }}
           id="simple-menu"
           anchorEl={this.state.anchorEl}
           open={this.state.open}
@@ -50,15 +50,9 @@ class MenuDrop extends React.Component {
           <p />
           {options.map(option => (
             <div id="wrappingLink" key={option.text}>
-              <a
-                href={option.url}
-                onClick={this.handleClose}
-                target={option.target}
-                rel={option.rel}
-                style={{ padding: '0px 20px' }}
-              >
-                {option.text}
-              </a>
+              <Link prefetch href={option.href} as={option.as || option.href}>
+                <a style={{ padding: '0px 20px' }}>{option.text}</a>
+              </Link>
               <p />
             </div>
           ))}
