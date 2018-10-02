@@ -32,7 +32,7 @@
     "lodash": "^4.17.10",
     "marked": "^0.4.0",
     "mongoose": "^5.1.7",
-    "next": "^6.1.1",
+    "next": "^7.0.0",
     "nprogress": "^0.2.0",
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
