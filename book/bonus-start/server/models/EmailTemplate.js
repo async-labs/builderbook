@@ -75,7 +75,7 @@ insertTemplates();
 export default async function getEmailTemplate(name, params) {
   const source = await EmailTemplate.findOne({ name });
   if (!source) {
-    throw new Error('not found');
+    throw new Error('No EmailTemplates found. Please check that at least one is generated at server startup, restart your server and try again.');
   }
 
   return {
