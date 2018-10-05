@@ -12,3 +12,4 @@ node_modules/
 .coverage
 .env
 .next
+package-lock.json

@@ -1,7 +1,10 @@
-const mongoose = require('mongoose');
-const Handlebars = require('handlebars');
+import mongoose from 'mongoose';
+import _ from 'lodash';
+import logger from '../logs';
 
-const EmailTemplate = mongoose.model('EmailTemplate', {
+const { Schema } = mongoose;
+
+const mongoSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -17,72 +20,69 @@ const EmailTemplate = mongoose.model('EmailTemplate', {
   },
 });
 
-async function insertTemplates() {
+const EmailTemplate = mongoose.model('EmailTemplate', mongoSchema);
+
+function insertTemplates() {
   const templates = [
     {
       name: 'welcome',
       subject: 'Welcome to builderbook.org',
-      message: `{{userName}},
+      message: `<%= userName %>,
         <p>
-          Thank you for signing up for Builder Book!
+          At Builder Book, we are excited to help you build useful, production-ready web apps from scratch.
         </p>
         <p>
-          In our books, we teach you how to build production-ready web apps from scratch.
+          See list of available books here.
         </p>
-        <p>
-          The code for our books will always be free and open source. 
-        </p>
-      
-        Kelly & Timur, Team Builder Book
+
+        Kelly & Timur,
+        Team BB
       `,
     },
     {
       name: 'purchase',
-      subject: 'You purchased "{{bookTitle}}" at builderbook.org',
-      message: `{{userName}},
+      subject: 'You purchased book at builderbook.org',
+      message: `<%= userName %>,
         <p>
-          Thank you for purchasing our book!
+          Thank you for purchasing our book! You will get confirmation email from Stripe shortly.
         </p>
         <p>
-          Start reading your book: <a href="{{bookUrl}}" target="_blank">{{bookTitle}}</a>
+          Start reading your book: <a href="<%= bookUrl %>" target="_blank"><%= bookTitle %></a>
         </p>
         <p>
-          If you have any questions while reading the book, 
-          please fill out an issue on 
-          <a href="https://github.com/builderbook/builderbook target="blank">Gihub</a>.
+          If you have any questions while reading the book,
+          please fill out an issue on
+          <a href="https://github.com/builderbook/builderbook/issues" target="blank">Github</a>.
         </p>
-      
+
         Kelly & Timur, Team Builder Book
       `,
     },
   ];
 
-  for (let i = 0; i < templates.length; i += 1) {
-    const t = templates[i];
-
-    // eslint-disable-next-line no-await-in-loop
-    const count = await EmailTemplate.find({ name: t.name }).count();
-
-    if (count === 0) {
-      EmailTemplate.create(Object.assign({}, t, {
-        message: t.message.replace(/\n/g, '').replace(/[ ]+/g, ' '),
-      }));
+  templates.forEach(async (template) => {
+    if ((await EmailTemplate.find({ name: template.name }).count()) > 0) {
+      return;
     }
-  }
+
+    EmailTemplate.create(template).catch((error) => {
+      logger.error('EmailTemplate insertion error:', error);
+    });
+  });
 }
 
 insertTemplates();
 
-async function getEmailTemplate(name, params) {
+export default async function getEmailTemplate(name, params) {
   const source = await EmailTemplate.findOne({ name });
   if (!source) {
-    throw new Error('not found');
+    throw new Error(`No EmailTemplates found.
+      Please check that at least one is generated at server startup,
+      restart your server and try again.`);
   }
 
   return {
-    message: Handlebars.compile(source.message)(params),
-    subject: Handlebars.compile(source.subject)(params),
+    message: _.template.compile(source.message)(params),
+    subject: _.template.compile(source.subject)(params),
   };
 }
-
-module.exports = getEmailTemplate;

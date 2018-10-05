@@ -2,7 +2,7 @@ const aws = require('aws-sdk');
 
 function sendEmail(options) {
   aws.config.update({
-    region: 'us-east-1',
+    region: process.env.Amazon_region,
     accessKeyId: process.env.Amazon_accessKeyId,
     secretAccessKey: process.env.Amazon_secretAccessKey,
   });
