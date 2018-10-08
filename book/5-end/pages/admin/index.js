@@ -70,4 +70,4 @@ class IndexWithData extends React.Component {
   }
 }
 
-export default withAuth(withLayout(IndexWithData), { adminRequired: true });
+export default withAuth(withLayout(IndexWithData));
