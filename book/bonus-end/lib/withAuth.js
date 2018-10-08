@@ -28,7 +28,7 @@ export default (
       }
 
       if (loginRequired && !logoutRequired && !user) {
-        Router.push('/login');
+        Router.push('/public/login', '/login');
         return;
       }
 
@@ -37,7 +37,7 @@ export default (
       }
 
       if (adminRequired && (!user || !user.isAdmin)) {
-        Router.push('/');
+        Router.push('/customer/my-books', '/my-books');
       }
     }
 

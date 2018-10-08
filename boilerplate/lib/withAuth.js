@@ -28,7 +28,7 @@ export default (
       }
 
       if (loginRequired && !logoutRequired && !user) {
-        Router.push('/login');
+        Router.push('/public/login', '/login');
         return;
       }
 
