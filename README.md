@@ -71,6 +71,7 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
   # Used in server/aws.js
   Amazon_accessKeyId="xxxxxx"
   Amazon_secretAccessKey="xxxxxx"
+  Amazon_region="xxxxxx"
 
   # Used in server/models/User.js
   EMAIL_SUPPORT_FROM_ADDRESS="xxxxxx"
