@@ -9,7 +9,6 @@ import MenuDrop from './MenuDrop';
 
 import { styleToolbar } from '../lib/SharedStyles';
 
-
 const optionsMenu = [
   {
     text: 'Got question?',
