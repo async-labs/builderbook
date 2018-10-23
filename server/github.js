@@ -79,7 +79,7 @@ function setupGithub({ server }) {
 function getAPI({ accessToken }) {
   const github = new GithubAPI({
     // debug: true,
-    timeout: 5000,
+    timeout: 0,
     baseUrl: 'https://api.github.com',
     headers: {
       accept: 'application/json',

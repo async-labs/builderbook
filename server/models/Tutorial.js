@@ -70,7 +70,7 @@ async function insertTutorialDocument() {
     ],
   };
 
-  const count = await Tutorial.findOne({ bookSlug: 'builder-book' }).count();
+  const count = await Tutorial.findOne({ bookSlug: 'builder-book' }).countDocuments();
 
   if (count === 0) {
     Tutorial.create(Object.assign({}, tutorial));

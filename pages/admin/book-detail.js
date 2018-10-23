@@ -60,11 +60,11 @@ const MyBook = ({ book, error }) => {
         Repo on Github
       </a>
       <p />
-      <Button variant="raised" data-bookid={book._id} onClick={handleSyncAllChapters}>
+      <Button variant="contained" data-bookid={book._id} onClick={handleSyncAllChapters}>
         Sync all chapters
       </Button>
       <Link as={`/admin/edit-book/${book.slug}`} href={`/admin/edit-book?slug=${book.slug}`}>
-        <Button variant="raised" style={{ marginLeft: '20px' }}>Edit book</Button>
+        <Button variant="contained" style={{ marginLeft: '20px' }}>Edit book</Button>
       </Link>
       <ul style={{ listStyleType: 'none', padding: '10px 0px' }}>
         {chapters.map(ch => (

@@ -222,7 +222,7 @@ class BookClass {
     }
 
     const isPurchased =
-      (await Purchase.find({ userId: user._id, bookId: book._id }).count()) > 0;
+      (await Purchase.find({ userId: user._id, bookId: book._id }).countDocuments()) > 0;
     if (isPurchased) {
       throw new Error('Already bought this book');
     }
@@ -301,7 +301,7 @@ class BookClass {
       throw new Error('User ID required');
     }
 
-    const isPurchased = (await Purchase.find({ userId, bookId: id }).count()) > 0;
+    const isPurchased = (await Purchase.find({ userId, bookId: id }).countDocuments()) > 0;
     if (isPurchased) {
       throw new Error('Already bought this book');
     }

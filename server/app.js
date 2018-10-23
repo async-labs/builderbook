@@ -23,7 +23,16 @@ const ROOT_URL = dev ? `http://localhost:${port}` : 'https://builderbook.org';
 
 const MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
 
-mongoose.connect(MONGO_URL, { useNewUrlParser: true });
+const options = {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+};
+
+mongoose.connect(
+  MONGO_URL,
+  options,
+);
 
 const sessionSecret = process.env.SESSION_SECRET;
 

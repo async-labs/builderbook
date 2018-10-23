@@ -47,7 +47,8 @@ const Index = ({ user }) => (
           />
           <p>
             Open source web app (MIT License) to publish documentation and books.
-            <br /> Built with React, Material-UI, Next, Express, Mongoose, and MongoDB.
+            <br />
+            Built with React, Material-UI, Next, Express, Mongoose, and MongoDB.
           </p>
           <p style={{ textAlign: 'center' }}>
             <Link
@@ -55,7 +56,7 @@ const Index = ({ user }) => (
               as="/books/builder-book/introduction"
               href="/public/read-chapter?bookSlug=builder-book&chapterSlug=introduction"
             >
-              <Button variant="raised" color="primary" style={styleRaisedButton}>
+              <Button variant="contained" color="primary" style={styleRaisedButton}>
                 Live App
               </Button>
             </Link>
@@ -64,7 +65,7 @@ const Index = ({ user }) => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button variant="raised" color="secondary" style={styleRaisedButton}>
+              <Button variant="contained" color="secondary" style={styleRaisedButton}>
                 Github
               </Button>
             </a>
@@ -88,7 +89,8 @@ const Index = ({ user }) => (
             >
               {' '}
               boilerplate
-            </a>{' '}
+            </a>
+            {' '}
             or clone the entire project. Customize the code to build your own web app.
           </p>
         </Grid>
@@ -120,7 +122,8 @@ const Index = ({ user }) => (
               rel="noopener noreferrer"
             >
               {' '}
-              dependencies{' '}
+              dependencies
+              {' '}
             </a>
             up-to-date.
           </p>

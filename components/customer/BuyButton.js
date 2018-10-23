@@ -80,18 +80,13 @@ class BuyButton extends React.PureComponent {
       return (
         <div>
           <Button
-            variant="raised"
+            variant="contained"
             color="primary"
             style={styleBuyButton}
             onClick={this.onLoginClicked}
           >
             Buy book for ${book.price}
           </Button>
-          <Link prefetch as="/book-reviews" href="/book-reviews">
-            <Button variant="raised" color="secondary" style={styleBuyButton}>
-              See Reviews
-            </Button>
-          </Link>
           <p style={{ verticalAlign: 'middle', fontSize: '15px' }}>{book.textNearButton}</p>
           <hr />
         </div>
@@ -106,7 +101,7 @@ class BuyButton extends React.PureComponent {
         email={user.email}
         desktopShowModal={showModal || null}
       >
-        <Button variant="raised" color="primary" style={styleBuyButton}>
+        <Button variant="contained" color="primary" style={styleBuyButton}>
           Buy book for ${book.price}
         </Button>
         <p style={{ verticalAlign: 'middle', fontSize: '15px' }}>{book.textNearButton}</p>

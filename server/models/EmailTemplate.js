@@ -61,7 +61,7 @@ async function insertTemplates() {
     const t = templates[i];
 
     // eslint-disable-next-line no-await-in-loop
-    const count = await EmailTemplate.find({ name: t.name }).count();
+    const count = await EmailTemplate.find({ name: t.name }).countDocuments();
 
     if (count === 0) {
       EmailTemplate.create(Object.assign({}, t, {
