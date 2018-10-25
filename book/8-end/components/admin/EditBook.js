@@ -122,7 +122,7 @@ class EditBook extends React.Component {
           </div>
           <br />
           <br />
-          <Button variant="raised" type="submit">
+          <Button variant="contained" type="submit">
             Save
           </Button>
         </form>

@@ -9,7 +9,7 @@ const Index = () => (
       <meta name="description" content="This is a description of the Index page" />
     </Head>
     <p>Content on Index page</p>
-    <Button variant="raised">MUI button</Button>
+    <Button variant="contained">MUI button</Button>
   </div>
 );
 

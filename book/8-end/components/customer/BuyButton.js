@@ -78,7 +78,7 @@ class BuyButton extends React.Component {
       return (
         <div>
           <Button
-            variant="raised"
+            variant="contained"
             style={styleBuyButton}
             color="primary"
             onClick={this.onLoginClicked}
@@ -98,7 +98,7 @@ class BuyButton extends React.Component {
         email={user.email}
         desktopShowModal={showModal || null}
       >
-        <Button variant="raised" style={styleBuyButton} color="primary">
+        <Button variant="contained" style={styleBuyButton} color="primary">
           Buy book for ${book.price}
         </Button>
       </StripeCheckout>

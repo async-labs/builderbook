@@ -20,7 +20,7 @@ const Index = ({
     <div>
       <h2>Books</h2>
       <Link href="/admin/add-book">
-        <Button variant="raised">Add book</Button>
+        <Button variant="contained">Add book</Button>
       </Link>
       <p />
       <ul>

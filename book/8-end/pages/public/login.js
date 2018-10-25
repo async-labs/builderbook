@@ -26,7 +26,7 @@ function Login({ url }) {
       </p>
       <br />
       <Button
-        variant="raised"
+        variant="contained"
         style={styleLoginButton}
         href={`/auth/google?redirectUrl=${redirectUrl}`}
       >
