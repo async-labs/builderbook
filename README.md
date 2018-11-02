@@ -314,7 +314,7 @@ If you're interested, please fill out our [form](https://goo.gl/forms/4kk6mvowOj
 
 If you are a small team who works best in a calm environment and builds a SaaS product that solves a real problem - we want to hear from you.
 
-[Async](https://async-await.com) is the largest project in our portfolio to this date.
+[Async](https://async-await.com) is the largest project in our portfolio to this date. [Sign up](https://app.async-await.com/signup) at Async to check it out.
 
 
 ## Contributing
