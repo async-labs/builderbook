@@ -309,8 +309,9 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 
 
 ## Hire our team
-We can build a SaaS MVP from scratch in 4-6 weeks for a fixed price of $10-20K.
+We can build any functional SaaS MVP from scratch in 4-6 weeks for a fixed price of $10-20K ([example estimate](https://goo.gl/fw7YQU)).
 If you're interested, please fill out our [form](https://goo.gl/forms/4kk6mvowOjkQY21y2).
+
 
 If you are a small team who works best in a calm environment and builds a SaaS product that solves a real problem - we want to hear from you.
 
