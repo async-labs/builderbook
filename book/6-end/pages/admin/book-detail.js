@@ -34,7 +34,7 @@ const MyBook = ({ book, error }) => {
   return (
     <div style={{ padding: '10px 45px' }}>
       <h2>{book.name}</h2>
-      <a target="_blank" rel="noopener noreferrer">
+      <a href={`https://github.com/${book.githubRepo}`} target="_blank" rel="noopener noreferrer">
         Repo on Github
       </a>
       <p />
