@@ -65,7 +65,7 @@ export default async function getEmailTemplate(name, params) {
   }
 
   return {
-    message: _.template.compile(source.message)(params),
-    subject: _.template.compile(source.subject)(params),
+    message: _.template(source.message)(params),
+    subject: _.template(source.subject)(params),
   };
 }
