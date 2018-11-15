@@ -1,4 +1,5 @@
 {
+  "version": 1,
   "env": {
     "NODE_ENV": "production",
     "GA_TRACKING_ID": "xxxxxx",
