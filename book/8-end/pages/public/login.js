@@ -1,13 +1,15 @@
 import Head from 'next/head';
+import { withRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
+
 
 import withAuth from '../../lib/withAuth';
 import withLayout from '../../lib/withLayout';
 import { styleLoginButton } from '../../components/SharedStyles';
 
-function Login({ url }) {
-  const redirectUrl = (url.query && url.query.redirectUrl) || '';
+function Login({ router }) {
+  const redirectUrl = (router && router.query && router.query.redirectUrl) || '';
 
   return (
     <div style={{ textAlign: 'center', margin: '0 20px' }}>
@@ -42,11 +44,11 @@ function Login({ url }) {
 }
 
 Login.propTypes = {
-  url: PropTypes.shape({
+  router: PropTypes.shape({
     query: PropTypes.shape({
       redirectUrl: PropTypes.string,
     }),
   }).isRequired,
 };
 
-export default withAuth(withLayout(Login), { logoutRequired: true });
+export default withAuth(withLayout(withRouter(Login)), { logoutRequired: true });
