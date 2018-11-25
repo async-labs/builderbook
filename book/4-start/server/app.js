@@ -22,7 +22,7 @@ mongoose.connect(
 );
 
 const port = process.env.PORT || 8000;
-const ROOT_URL = process.env.ROOT_URL || `http://localhost:${port}`;
+const ROOT_URL = `http://localhost:${port}`;
 
 const app = next({ dev });
 const handle = app.getRequestHandler();
