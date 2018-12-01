@@ -83,7 +83,7 @@ async function insertReviewDocument() {
     ],
   };
 
-  const count = await Review.findOne({ bookSlug: 'builder-book' }).count();
+  const count = await Review.findOne({ bookSlug: 'builder-book' }).countDocuments();
 
   if (count === 0) {
     Review.create(Object.assign({}, review));

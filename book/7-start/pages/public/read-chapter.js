@@ -24,19 +24,6 @@ class ReadChapter extends React.Component {
     chapter: null,
   };
 
-  static async getInitialProps({ req, query }) {
-    const { bookSlug, chapterSlug } = query;
-
-    const headers = {};
-    if (req && req.headers && req.headers.cookie) {
-      headers.cookie = req.headers.cookie;
-    }
-
-    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
-
-    return { chapter };
-  }
-
   constructor(props) {
     super(props);
 
@@ -60,6 +47,19 @@ class ReadChapter extends React.Component {
       const { htmlContent } = chapter;
       this.setState({ chapter, htmlContent });
     }
+  }
+
+  static async getInitialProps({ req, query }) {
+    const { bookSlug, chapterSlug } = query;
+
+    const headers = {};
+    if (req && req.headers && req.headers.cookie) {
+      headers.cookie = req.headers.cookie;
+    }
+
+    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
+
+    return { chapter };
   }
 
   renderMainContent() {

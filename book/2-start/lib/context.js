@@ -8,6 +8,9 @@ const theme = createMuiTheme({
     primary: { main: blue[700] },
     secondary: { main: grey[700] },
   },
+  typography: {
+    useNextVariants: true,
+  },
 });
 
 function createPageContext() {

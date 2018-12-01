@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Error from 'next/error';
 import Head from 'next/head';
+import { withRouter } from 'next/router';
 import throttle from 'lodash/throttle';
 
 import Link from 'next/link';
@@ -27,7 +28,7 @@ class ReadChapter extends React.Component {
     user: PropTypes.shape({
       _id: PropTypes.string.isRequired,
     }),
-    url: PropTypes.shape({
+    router: PropTypes.shape({
       asPath: PropTypes.string.isRequired,
     }).isRequired,
     showStripeModal: PropTypes.bool.isRequired,
@@ -37,20 +38,6 @@ class ReadChapter extends React.Component {
     chapter: null,
     user: null,
   };
-
-  static async getInitialProps({ req, query }) {
-    const { bookSlug, chapterSlug } = query;
-
-    const headers = {};
-    if (req && req.headers && req.headers.cookie) {
-      headers.cookie = req.headers.cookie;
-    }
-
-    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
-    const showStripeModal = req ? !!req.query.buy : window.location.search.includes('buy=1');
-
-    return { chapter, showStripeModal };
-  }
 
   constructor(props, ...args) {
     super(props, ...args);
@@ -154,6 +141,20 @@ class ReadChapter extends React.Component {
       this.setState({ hideHeader });
     }
   };
+
+  static async getInitialProps({ req, query }) {
+    const { bookSlug, chapterSlug } = query;
+
+    const headers = {};
+    if (req && req.headers && req.headers.cookie) {
+      headers.cookie = req.headers.cookie;
+    }
+
+    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
+    const showStripeModal = req ? !!req.query.buy : window.location.search.includes('buy=1');
+
+    return { chapter, showStripeModal };
+  }
 
   toggleChapterList = () => {
     this.setState({ showTOC: !this.state.showTOC });
@@ -279,7 +280,7 @@ class ReadChapter extends React.Component {
   }
 
   render() {
-    const { user, url } = this.props;
+    const { user, router } = this.props;
 
     const {
       chapter, showTOC, hideHeader, isMobile,
@@ -307,7 +308,7 @@ class ReadChapter extends React.Component {
           ) : null}
         </Head>
 
-        <Header user={user} hideHeader={hideHeader} redirectUrl={url.asPath} />
+        <Header user={user} hideHeader={hideHeader} redirectUrl={router.asPath} />
 
         {this.renderSidebar()}
 
@@ -352,4 +353,4 @@ class ReadChapter extends React.Component {
   }
 }
 
-export default withAuth(withLayout(ReadChapter, { noHeader: true }), { loginRequired: false });
+export default withAuth(withLayout(withRouter(ReadChapter), { noHeader: true }), { loginRequired: false });

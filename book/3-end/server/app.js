@@ -11,10 +11,19 @@ require('dotenv').config();
 const dev = process.env.NODE_ENV !== 'production';
 const MONGO_URL = process.env.MONGO_URL_TEST;
 
-mongoose.connect(MONGO_URL, { useNewUrlParser: true });
+const options = {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+};
+
+mongoose.connect(
+  MONGO_URL,
+  options,
+);
 
 const port = process.env.PORT || 8000;
-const ROOT_URL = process.env.ROOT_URL || `http://localhost:${port}`;
+const ROOT_URL = `http://localhost:${port}`;
 
 const app = next({ dev });
 const handle = app.getRequestHandler();

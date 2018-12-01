@@ -46,7 +46,7 @@ Check out projects built with the help of this open source app. Feel free to add
 ## Run locally
 - Clone the project and run `yarn` to add packages.
 - Before you start the app, create a `.env` file at the app's root. This file must have values for some env variables specified below.
-  - To get `MONGO_URL_TEST`, we recommend a [free MongoDB at mLab](http://docs.mlab.com/).
+  - To get `MONGO_URL_TEST`, we recommend a [free MongoDB at mLab](http://docs.mlab.com/) (to be updated soon with MongoDB Atlas, see [issue](https://github.com/builderbook/builderbook/issues/138)).
   - Get `Google_clientID` and `Google_clientSecret` by following [official OAuth tutorial](https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin).
 
     Important: For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback <br/>
@@ -71,10 +71,14 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
   # Used in server/aws.js
   Amazon_accessKeyId="xxxxxx"
   Amazon_secretAccessKey="xxxxxx"
+  Amazon_region="xxxxxx"
 
   # Used in server/models/User.js
   EMAIL_SUPPORT_FROM_ADDRESS="xxxxxx"
-
+  
+  ----------
+  # All environmental variables above this line are required for successful sign up
+  
   # Used in server/github.js
   Github_Test_ClientID="xxxxxx"
   Github_Test_SecretKey="xxxxxx"
@@ -238,11 +242,13 @@ We also specified styles for all content inside a `<body>` element:
 - Create `now.json` file. Make sure to add actual values for `GA_TRACKING_ID`, `StripePublishableKey` (production-level) and `alias`. Read more about how to [configure now](https://zeit.co/docs/features/configuration).
 ```
 {
+  "version": 1
   "env": {
     "NODE_ENV": "production",
     "GA_TRACKING_ID": "xxxxxx",
     "StripePublishableKey": "xxxxxx"
   },
+  "dotenv": true
   "alias": "mydomain.com",
   "scale": {
     "sfo1": {
@@ -308,12 +314,13 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 
 
 ## Hire our team
-If you're interested in hiring our team to build custom SaaS features, fill out our [form](https://goo.gl/forms/4kk6mvowOjkQY21y2).
+We can build any functional SaaS MVP from scratch in 4-6 weeks for a fixed price of $10-20K ([example estimate](https://goo.gl/fw7YQU)).
+If you're interested, please fill out our [form](https://goo.gl/forms/4kk6mvowOjkQY21y2).
 
-We currently have 1 spot avaialble (30h/week engagement).
-We charge $100/h and are selective about the type of product and client.
 
-If you are a small team, who works best in a calm environment and builds a SaaS product that solves a real problem - we want to hear from you.
+If you are a small team who works best in a calm environment and builds a SaaS product that solves a real problem - we want to hear from you.
+
+[Async](https://async-await.com) is the largest project in our portfolio to this date. [Sign up](https://app.async-await.com/signup) at Async to check it out.
 
 
 ## Contributing

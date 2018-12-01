@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 
-import getContext from '../lib/context';
+import getContext from './context';
 import Header from '../components/Header';
 import Notifier from '../components/Notifier';
 
@@ -15,9 +15,10 @@ Router.onRouteChangeError = () => NProgress.done();
 
 function withLayout(BaseComponent) {
   class App extends React.Component {
-    constructor(props, context) {
-      super(props, context);
-      this.pageContext = this.props.pageContext || getContext();
+    constructor(props) {
+      super(props);
+      const { pageContext } = this.props;
+      this.pageContext = pageContext || getContext();
     }
 
     componentDidMount() {

@@ -45,7 +45,7 @@ class SubscribeForm extends React.Component {
             style={styleTextField}
             required
           />
-          <Button variant="raised" color="secondary" type="submit" style={styleRaisedButton}>
+          <Button variant="contained" color="secondary" type="submit" style={styleRaisedButton}>
             Get updates
           </Button>
         </form>

@@ -52,7 +52,7 @@ export default function auth({ ROOT_URL, server }) {
   server.use(passport.initialize());
   server.use(passport.session());
 
-  server.get('/auth/google', (req, res, redirectUrl) => {
+  server.get('/auth/google', (req, res, next) => {
     if (req.query && req.query.redirectUrl && req.query.redirectUrl.startsWith('/')) {
       req.session.finalUrl = req.query.redirectUrl;
     } else {
@@ -62,7 +62,7 @@ export default function auth({ ROOT_URL, server }) {
     passport.authenticate('google', {
       scope: ['profile', 'email'],
       prompt: 'select_account',
-    })(req, res, redirectUrl);
+    })(req, res, next);
   });
 
   server.get(

@@ -72,7 +72,7 @@ class BookClass {
   static async add({ name, price, githubRepo }) {
     const slug = await generateSlug(this, name);
     if (!slug) {
-      throw new Error('Error with slug generation');
+      throw new Error(`Error with slug generation for name: ${name}`);
     }
     return this.create({
       name,
@@ -161,7 +161,7 @@ class BookClass {
       }
     }));
 
-    return book.update({ githubLastCommitSha: lastCommitSha });
+    return book.updateOne({ githubLastCommitSha: lastCommitSha });
   }
 
   static async buy({ id, user, stripeToken }) {
@@ -175,7 +175,7 @@ class BookClass {
       throw new Error('Book not found');
     }
 
-    const isPurchased = (await Purchase.find({ userId: user._id, bookId: id }).count()) > 0;
+    const isPurchased = (await Purchase.find({ userId: user._id, bookId: id }).countDocuments()) > 0;
     if (isPurchased) {
       throw new Error('Already bought this book');
     }

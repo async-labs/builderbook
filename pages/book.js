@@ -51,7 +51,7 @@ const Book = ({ user, toc, reviews }) => (
               as="/books/builder-book/introduction"
               href="/public/read-chapter?bookSlug=builder-book&chapterSlug=introduction"
             >
-              <Button variant="raised" color="primary" style={styleRaisedButton}>
+              <Button variant="contained" color="primary" style={styleRaisedButton}>
                 Read Preview
               </Button>
             </Link>
@@ -60,7 +60,7 @@ const Book = ({ user, toc, reviews }) => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button variant="raised" color="secondary" style={styleRaisedButton}>
+              <Button variant="contained" color="secondary" style={styleRaisedButton}>
                 Book Code
               </Button>
             </a>

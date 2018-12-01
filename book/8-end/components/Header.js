@@ -61,7 +61,7 @@ function Header({ user, hideHeader, redirectUrl }) {
             {user && user.isAdmin && !user.isGithubConnected ? (
               <Hidden smDown>
                 <a href="/auth/github">
-                  <Button variant="raised" color="primary" style={styleRaisedButton}>
+                  <Button variant="contained" color="primary" style={styleRaisedButton}>
                     Connect Github
                   </Button>
                 </a>

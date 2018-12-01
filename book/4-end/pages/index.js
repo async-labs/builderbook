@@ -34,7 +34,7 @@ class Index extends React.Component {
         <p>List of purchased books</p>
         <p>Email: {user.email}</p>
 
-        <Button variant="raised" onClick={() => notify('success message')}>
+        <Button variant="contained" onClick={() => notify('success message')}>
           Click me to test notify()
         </Button>
 

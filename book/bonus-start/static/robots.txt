@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /books/builder-book/
-Disallow: /books/
-Disallow: /books/builder-book/MenuDrop
-Disallow: /books/builder-book/Book
-Disallow: /books/builder-book/Chapter

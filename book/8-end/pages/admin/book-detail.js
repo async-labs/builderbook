@@ -34,15 +34,15 @@ const MyBook = ({ book, error }) => {
   return (
     <div style={{ padding: '10px 45px' }}>
       <h2>{book.name}</h2>
-      <a target="_blank" rel="noopener noreferrer">
+      <a href={`https://github.com/${book.githubRepo}`} target="_blank" rel="noopener noreferrer">
         Repo on Github
       </a>
       <p />
-      <Button variant="raised" onClick={handleSyncContent(book._id)}>
+      <Button variant="contained" onClick={handleSyncContent(book._id)}>
         Sync with Github
       </Button>{' '}
       <Link as={`/admin/edit-book/${book.slug}`} href={`/admin/edit-book?slug=${book.slug}`}>
-        <Button variant="raised">Edit book</Button>
+        <Button variant="contained">Edit book</Button>
       </Link>
       <ul>
         {chapters.map(ch => (

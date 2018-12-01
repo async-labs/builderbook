@@ -61,7 +61,7 @@ function insertTemplates() {
   ];
 
   templates.forEach(async (template) => {
-    if ((await EmailTemplate.find({ name: template.name }).count()) > 0) {
+    if ((await EmailTemplate.find({ name: template.name }).countDocuments()) > 0) {
       return;
     }
 
@@ -82,7 +82,12 @@ export default async function getEmailTemplate(name, params) {
   }
 
   return {
+<<<<<<< HEAD
     message: _.template.compile(source.message)(params),
     subject: _.template.compile(source.subject)(params),
+=======
+    message: _.template(source.message)(params),
+    subject: _.template(source.subject)(params),
+>>>>>>> upstream/master
   };
 }

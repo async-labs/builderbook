@@ -7,8 +7,7 @@ let globalUser = null;
 export default (
   Page,
   { loginRequired = true, logoutRequired = false, adminRequired = false } = {},
-) =>
-  class BaseComponent extends React.Component {
+) => class BaseComponent extends React.Component {
     static propTypes = {
       user: PropTypes.shape({
         id: PropTypes.string,
@@ -20,6 +19,27 @@ export default (
     static defaultProps = {
       user: null,
     };
+
+    componentDidMount() {
+      const { user, isFromServer } = this.props;
+
+      if (isFromServer) {
+        globalUser = user;
+      }
+
+      if (loginRequired && !logoutRequired && !user) {
+        Router.push('/public/login', '/login');
+        return;
+      }
+
+      if (logoutRequired && user) {
+        Router.push('/');
+      }
+
+      if (adminRequired && (!user || !user.isAdmin)) {
+        Router.push('/');
+      }
+    }
 
     static async getInitialProps(ctx) {
       const isFromServer = !!ctx.req;
@@ -38,27 +58,6 @@ export default (
       return props;
     }
 
-    componentDidMount() {
-      const { user } = this.props;
-
-      if (this.props.isFromServer) {
-        globalUser = this.props.user;
-      }
-
-      if (loginRequired && !logoutRequired && !user) {
-        Router.push('/login');
-        return;
-      }
-
-      if (adminRequired && (!user || !user.isAdmin)) {
-        Router.push('/');
-      }
-
-      if (logoutRequired && user) {
-        Router.push('/');
-      }
-    }
-
     render() {
       const { user } = this.props;
 
@@ -66,14 +65,14 @@ export default (
         return null;
       }
 
-      if (adminRequired && (!user || !user.isAdmin)) {
+      if (logoutRequired && user) {
         return null;
       }
 
-      if (logoutRequired && user) {
+      if (adminRequired && (!user || !user.isAdmin)) {
         return null;
       }
 
       return <Page {...this.props} />;
     }
-  };
+};

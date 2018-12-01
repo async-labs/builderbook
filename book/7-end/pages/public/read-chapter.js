@@ -33,19 +33,6 @@ class ReadChapter extends React.Component {
     user: null,
   };
 
-  static async getInitialProps({ req, query }) {
-    const { bookSlug, chapterSlug } = query;
-
-    const headers = {};
-    if (req && req.headers && req.headers.cookie) {
-      headers.cookie = req.headers.cookie;
-    }
-
-    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
-
-    return { chapter };
-  }
-
   constructor(props, ...args) {
     super(props, ...args);
 
@@ -141,6 +128,19 @@ class ReadChapter extends React.Component {
       this.setState({ hideHeader });
     }
   };
+
+  static async getInitialProps({ req, query }) {
+    const { bookSlug, chapterSlug } = query;
+
+    const headers = {};
+    if (req && req.headers && req.headers.cookie) {
+      headers.cookie = req.headers.cookie;
+    }
+
+    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
+
+    return { chapter };
+  }
 
   toggleChapterList = () => {
     this.setState({ showTOC: !this.state.showTOC });

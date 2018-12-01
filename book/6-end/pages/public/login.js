@@ -21,7 +21,7 @@ const Login = () => (
       You’ll be logged in for 14 days unless you log out manually.
     </p>
     <br />
-    <Button variant="raised" style={styleLoginButton} href="/auth/google">
+    <Button variant="contained" style={styleLoginButton} href="/auth/google">
       <img
         src="https://storage.googleapis.com/builderbook/G.svg"
         alt="Log in with Google"

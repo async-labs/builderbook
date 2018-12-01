@@ -101,7 +101,7 @@ class UserClass {
     }
 
     const slug = await generateSlug(this, displayName);
-    const userCount = await this.find().count();
+    const userCount = await this.find().countDocuments();
 
     const newUser = await this.create({
       createdAt: new Date(),

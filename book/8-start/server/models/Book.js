@@ -62,7 +62,7 @@ class BookClass {
   static async add({ name, price, githubRepo }) {
     const slug = await generateSlug(this, name);
     if (!slug) {
-      throw new Error('Error with slug generation');
+      throw new Error(`Error with slug generation for name: ${name}`);
     }
     return this.create({
       name,
@@ -152,7 +152,7 @@ class BookClass {
       }
     }));
 
-    return book.update({ githubLastCommitSha: lastCommitSha });
+    return book.updateOne({ githubLastCommitSha: lastCommitSha });
   }
 }
 

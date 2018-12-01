@@ -53,7 +53,7 @@ function Header({ user }) {
             {user && user.isAdmin && !user.isGithubConnected ? (
               <Hidden smDown>
                 <a href="/auth/github">
-                  <Button variant="raised" color="primary">
+                  <Button variant="contained" color="primary">
                     Connect Github
                   </Button>
                 </a>
