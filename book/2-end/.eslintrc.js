@@ -1,14 +1,15 @@
 module.exports = {
   parser: 'babel-eslint',
-  extends: 'airbnb',
+  extends: ['airbnb', 'plugin:prettier/recommended'],
   env: {
     browser: true,
     jest: true,
   },
-  plugins: ['react', 'jsx-a11y', 'import'],
+  plugins: ['react', 'jsx-a11y', 'import', 'prettier'],
   rules: {
     'max-len': ['error', 100],
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
+    'no-mixed-operators': 'off',
     'prefer-destructuring': [
       'error',
       {
@@ -32,6 +33,15 @@ module.exports = {
       'error',
       {
         extensions: ['.js'],
+      },
+    ],
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        trailingComma: 'all',
+        arrowParens: 'always',
+        printWidth: 100,
       },
     ],
   },
