@@ -46,6 +46,9 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.10.0",
     "jest": "^23.2.0",
-    "nodemon": "^1.17.5"
+    "nodemon": "^1.17.5",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "prettier": "^1.15.3"
   }
 }
