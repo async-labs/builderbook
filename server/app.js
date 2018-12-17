@@ -36,7 +36,10 @@ mongoose.connect(
 
 const sessionSecret = process.env.SESSION_SECRET;
 
-const URL_MAP = { '/login': '/public/login', '/my-books': '/customer/my-books' };
+const URL_MAP = {
+  '/login': '/public/login',
+  '/my-books': '/customer/my-books',
+};
 
 const app = next({ dev });
 const handle = app.getRequestHandler();
