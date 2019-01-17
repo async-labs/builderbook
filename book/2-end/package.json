@@ -7,12 +7,9 @@
     "start": "next start",
     "dev": "next",
     "lint": "eslint components pages lib server",
-    "dev-express": "nodemon server/app.js --watch server --exec babel-node --presets=@babel/preset-env"
+    "dev-express": "nodemon server/app.js --watch server"
   },
   "dependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/node": "^7.0.0",
-    "@babel/preset-env": "^7.1.0",
     "@material-ui/core": "^3.3.1",
     "connect-mongo": "^2.0.1",
     "dotenv": "^6.1.0",
