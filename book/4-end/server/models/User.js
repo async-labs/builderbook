@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
-import _ from 'lodash';
+const mongoose = require('mongoose');
+const _ = require('lodash');
 
-import generateSlug from '../utils/slugify';
-import sendEmail from '../aws';
-import getEmailTemplate from './EmailTemplate';
-import logger from '../logs';
+const generateSlug = require('../utils/slugify');
+const sendEmail = require('../aws');
+const getEmailTemplate = require('./EmailTemplate');
+const logger = require('../logs');
 
 const { Schema } = mongoose;
 
@@ -117,4 +117,4 @@ mongoSchema.loadClass(UserClass);
 
 const User = mongoose.model('User', mongoSchema);
 
-export default User;
+module.exports = User;
