@@ -1,16 +1,14 @@
-import dotenv from 'dotenv';
+const express = require('express');
+const next = require('next');
 
-import express from 'express';
-import next from 'next';
+const mongoose = require('mongoose');
 
-import mongoose from 'mongoose';
+const session = require('express-session');
+const mongoSessionStore = require('connect-mongo');
 
-import session from 'express-session';
-import mongoSessionStore from 'connect-mongo';
+const User = require('../server/models/User');
 
-import User from './models/User';
-
-dotenv.config();
+require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
 const MONGO_URL = process.env.MONGO_URL_TEST;
