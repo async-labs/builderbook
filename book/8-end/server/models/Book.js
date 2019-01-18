@@ -1,19 +1,19 @@
-import mongoose from 'mongoose';
-import frontmatter from 'front-matter';
+const mongoose = require('mongoose');
+const frontmatter = require('front-matter');
 
-import getRootUrl from '../../lib/api/getRootUrl';
-import Chapter from './Chapter';
-import Purchase from './Purchase';
-import getEmailTemplate from './EmailTemplate';
-import User from './User';
+const generateSlug = require('../utils/slugify');
+const Chapter = require('./Chapter');
+const Purchase = require('./Purchase');
+const User = require('./User');
+const getEmailTemplate = require('./EmailTemplate');
 
-import { stripeCharge } from '../stripe';
-import { getCommits, getContent } from '../github';
-import sendEmail from '../aws';
-import { subscribe } from '../mailchimp';
+const getRootUrl = require('../../lib/api/getRootUrl');
+const { stripeCharge } = require('../stripe');
+const sendEmail = require('../aws');
+const { subscribe } = require('../mailchimp');
+const { getCommits, getContent } = require('../github');
 
-import generateSlug from '../utils/slugify';
-import logger from '../logs';
+const logger = require('../logs');
 
 const ROOT_URL = getRootUrl();
 
@@ -62,9 +62,9 @@ class BookClass {
 
     const book = bookDoc.toObject();
 
-    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug')
-      .sort({ order: 1 }))
-      .map(chapter => chapter.toObject());
+    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug').sort({ order: 1 })).map(
+      (chapter) => chapter.toObject(),
+    );
 
     return book;
   }
@@ -83,9 +83,7 @@ class BookClass {
     });
   }
 
-  static async edit({
-    id, name, price, githubRepo,
-  }) {
+  static async edit({ id, name, price, githubRepo }) {
     const book = await this.findById(id, 'slug name');
 
     if (!book) {
@@ -134,32 +132,34 @@ class BookClass {
       path: '',
     });
 
-    await Promise.all(mainFolder.data.map(async (f) => {
-      if (f.type !== 'file') {
-        return;
-      }
+    await Promise.all(
+      mainFolder.data.map(async (f) => {
+        if (f.type !== 'file') {
+          return;
+        }
 
-      if (f.path !== 'introduction.md' && !/chapter-([0-9]+)\.md/.test(f.path)) {
-        return;
-      }
+        if (f.path !== 'introduction.md' && !/chapter-([0-9]+)\.md/.test(f.path)) {
+          return;
+        }
 
-      const chapter = await getContent({
-        accessToken: githubAccessToken,
-        repoName: book.githubRepo,
-        path: f.path,
-      });
+        const chapter = await getContent({
+          accessToken: githubAccessToken,
+          repoName: book.githubRepo,
+          path: f.path,
+        });
 
-      const data = frontmatter(Buffer.from(chapter.data.content, 'base64').toString('utf8'));
+        const data = frontmatter(Buffer.from(chapter.data.content, 'base64').toString('utf8'));
 
-      data.path = f.path;
+        data.path = f.path;
 
-      try {
-        await Chapter.syncContent({ book, data });
-        logger.info('Content is synced', { path: f.path });
-      } catch (error) {
-        logger.error('Content sync has error', { path: f.path, error });
-      }
-    }));
+        try {
+          await Chapter.syncContent({ book, data });
+          logger.info('Content is synced', { path: f.path });
+        } catch (error) {
+          logger.error('Content sync has error', { path: f.path, error });
+        }
+      }),
+    );
 
     return book.updateOne({ githubLastCommitSha: lastCommitSha });
   }
@@ -175,7 +175,8 @@ class BookClass {
       throw new Error('Book not found');
     }
 
-    const isPurchased = (await Purchase.find({ userId: user._id, bookId: id }).countDocuments()) > 0;
+    const isPurchased =
+      (await Purchase.find({ userId: user._id, bookId: id }).countDocuments()) > 0;
     if (isPurchased) {
       throw new Error('Already bought this book');
     }
@@ -232,4 +233,4 @@ mongoSchema.loadClass(BookClass);
 
 const Book = mongoose.model('Book', mongoSchema);
 
-export default Book;
+module.exports = Book;

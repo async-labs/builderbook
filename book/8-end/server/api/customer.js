@@ -1,7 +1,6 @@
-import express from 'express';
-
-import Book from '../models/Book';
-import logger from '../logs';
+const express = require('express');
+const Book = require('../models/Book');
+const logger = require('../logs');
 
 const router = express.Router();
 
@@ -38,4 +37,4 @@ router.get('/my-books', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

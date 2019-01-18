@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -33,4 +33,4 @@ mongoSchema.index({ bookId: 1, userId: 1 }, { unique: true });
 
 const Purchase = mongoose.model('Purchase', mongoSchema);
 
-export default Purchase;
+module.exports = Purchase;
