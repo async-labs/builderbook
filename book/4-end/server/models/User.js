@@ -55,9 +55,7 @@ class UserClass {
     return ['id', 'displayName', 'email', 'avatarUrl', 'slug', 'isAdmin', 'isGithubConnected'];
   }
 
-  static async signInOrSignUp({
-    googleId, email, googleToken, displayName, avatarUrl,
-  }) {
+  static async signInOrSignUp({ googleId, email, googleToken, displayName, avatarUrl }) {
     const user = await this.findOne({ googleId }).select(UserClass.publicFields().join(' '));
 
     if (user) {

@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
 
-import generateSlug from '../utils/slugify';
-import Chapter from './Chapter';
+const mongoose = require('mongoose');
+const generateSlug = require ('../utils/slugify');
+const Chapter = require('./Chapter');
 
 const { Schema } = mongoose;
 
@@ -93,4 +93,4 @@ mongoSchema.loadClass(BookClass);
 
 const Book = mongoose.model('Book', mongoSchema);
 
-export default Book;
+module.exports = Book;

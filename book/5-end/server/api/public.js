@@ -1,8 +1,6 @@
-import express from 'express';
-
-import Book from '../models/Book';
-import Chapter from '../models/Chapter';
-// import User from '../models/User';
+const express = require('express');
+const Book = require('../models/Book');
+const Chapter = require('../models/Chapter');
 
 const router = express.Router();
 
@@ -39,4 +37,4 @@ router.get('/get-chapter-detail', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
