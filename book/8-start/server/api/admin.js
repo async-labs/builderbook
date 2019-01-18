@@ -1,10 +1,8 @@
-import express from 'express';
-
-import Book from '../models/Book';
-import { getRepos } from '../github';
-import User from '../models/User';
-import logger from '../logs';
-
+const express = require('express');
+const Book = require('../models/Book');
+const User = require('../models/User');
+const { getRepos } = require('../github');
+const logger = require('../logs');
 
 const router = express.Router();
 
@@ -92,5 +90,4 @@ router.get('/github/repos', async (req, res) => {
   }
 });
 
-
-export default router;
+module.exports = router;

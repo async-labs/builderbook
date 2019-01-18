@@ -1,8 +1,6 @@
-import stripe from 'stripe';
+const stripe = require('stripe');
 
-export function stripeCharge({
-  amount, token, buyerEmail,
-}) {
+function stripeCharge({ amount, token, buyerEmail }) {
   const dev = process.env.NODE_ENV !== 'production';
   const API_KEY = dev ? process.env.Stripe_Test_SecretKey : process.env.Stripe_Live_SecretKey;
   const client = stripe(API_KEY);
@@ -15,3 +13,5 @@ export function stripeCharge({
     description: 'Payment for the book at builderbook.org',
   });
 }
+
+exports.stripeCharge = stripeCharge;

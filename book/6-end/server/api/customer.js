@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 
 const router = express.Router();
 
@@ -15,4 +15,5 @@ router.use((req, res, next) => {
 // 1. /buy-book
 // 2. /my-books
 
-export default router;
+module.exports = router;
+

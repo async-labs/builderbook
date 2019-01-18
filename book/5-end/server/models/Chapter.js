@@ -78,4 +78,3 @@ mongoSchema.loadClass(ChapterClass);
 const Chapter = mongoose.model('Chapter', mongoSchema);
 
 module.exports = Chapter;
-

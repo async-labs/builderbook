@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import _ from 'lodash';
-import logger from '../logs';
+const mongoose = require('mongoose');
+const _ = require('lodash');
+const logger = require('../logs');
 
 const { Schema } = mongoose;
 
@@ -46,17 +46,15 @@ function insertTemplates() {
       return;
     }
 
-    EmailTemplate
-      .create(template)
-      .catch((error) => {
-        logger.error('EmailTemplate insertion error:', error);
-      });
+    EmailTemplate.create(template).catch((error) => {
+      logger.error('EmailTemplate insertion error:', error);
+    });
   });
 }
 
 insertTemplates();
 
-export default async function getEmailTemplate(name, params) {
+async function getEmailTemplate(name, params) {
   const source = await EmailTemplate.findOne({ name });
   if (!source) {
     throw new Error(`No EmailTemplates found.
@@ -69,3 +67,5 @@ export default async function getEmailTemplate(name, params) {
     subject: _.template(source.subject)(params),
   };
 }
+
+module.exports = getEmailTemplate;

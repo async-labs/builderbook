@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
-import marked from 'marked';
-import he from 'he';
-import hljs from 'highlight.js';
-import generateSlug from '../utils/slugify';
-import Book from './Book';
-import Purchase from './Purchase';
+const mongoose = require('mongoose');
+const marked = require('marked');
+const he = require('he');
+const hljs = require('highlight.js');
+const Book = require('./Book');
+const generateSlug = require('../utils/slugify');
+const Purchase = require('./Purchase');
 
 function markdownToHtml(content) {
   const renderer = new marked.Renderer();
@@ -14,7 +14,7 @@ function markdownToHtml(content) {
     return `<a target="_blank" href="${href}" rel="noopener noreferrer"${t}>${text}</a>`;
   };
 
-  renderer.image = href => `<img
+  renderer.image = (href) => `<img
     src="${href}"
     style="border: 1px solid #ddd;"
     width="100%"
@@ -160,9 +160,7 @@ const mongoSchema = new Schema({
 });
 
 class ChapterClass {
-  static async getBySlug({
-    bookSlug, chapterSlug, userId, isAdmin,
-  }) {
+  static async getBySlug({ bookSlug, chapterSlug, userId, isAdmin }) {
     const book = await Book.getBySlug({ slug: bookSlug });
     if (!book) {
       throw new Error('Book not found');
@@ -272,4 +270,4 @@ mongoSchema.loadClass(ChapterClass);
 
 const Chapter = mongoose.model('Chapter', mongoSchema);
 
-export default Chapter;
+module.exports = Chapter;
