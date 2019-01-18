@@ -1,6 +1,6 @@
-import aws from 'aws-sdk';
+const aws = require('aws-sdk');
 
-export default function sendEmail(options) {
+function sendEmail(options) {
   aws.config.update({
     region: process.env.Amazon_region,
     accessKeyId: process.env.Amazon_accessKeyId,
@@ -39,3 +39,6 @@ export default function sendEmail(options) {
     );
   });
 }
+
+module.exports = sendEmail;
+
