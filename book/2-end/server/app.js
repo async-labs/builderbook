@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const mongoSessionStore = require('connect-mongo');
 
-const User = require('../server/models/User');
+const User = require('./models/User');
 
 require('dotenv').config();
 
