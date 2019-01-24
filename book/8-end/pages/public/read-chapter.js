@@ -167,9 +167,7 @@ class ReadChapter extends React.Component {
   renderMainContent() {
     const { user, showStripeModal } = this.props;
 
-    const {
-      chapter, htmlContent, showTOC, isMobile,
-    } = this.state;
+    const { chapter, htmlContent, showTOC, isMobile } = this.state;
 
     const { book } = chapter;
 
@@ -207,7 +205,7 @@ class ReadChapter extends React.Component {
 
     return (
       <ul>
-        {sections.map(s => (
+        {sections.map((s) => (
           <li key={s.escapedText} style={{ paddingTop: '10px' }}>
             <a
               style={{
@@ -225,9 +223,7 @@ class ReadChapter extends React.Component {
   }
 
   renderSidebar() {
-    const {
-      showTOC, chapter, isMobile, hideHeader,
-    } = this.state;
+    const { showTOC, chapter, isMobile, hideHeader } = this.state;
 
     if (!showTOC) {
       return null;
@@ -282,9 +278,7 @@ class ReadChapter extends React.Component {
   render() {
     const { user, router } = this.props;
 
-    const {
-      chapter, showTOC, hideHeader, isMobile,
-    } = this.state;
+    const { chapter, showTOC, hideHeader, isMobile } = this.state;
 
     if (!chapter) {
       return <Error statusCode={404} />;
@@ -346,11 +340,13 @@ class ReadChapter extends React.Component {
             role="button"
           >
             format_list_bulleted
-            </i>
+          </i>
         </div>
       </div>
     );
   }
 }
 
-export default withAuth(withLayout(withRouter(ReadChapter), { noHeader: true }), { loginRequired: false });
+export default withAuth(withLayout(withRouter(ReadChapter), { noHeader: true }), {
+  loginRequired: false,
+});
