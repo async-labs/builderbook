@@ -84,9 +84,11 @@ class BookClass {
       modifier.slug = await generateSlug(this, name);
     }
 
-    await this.updateOne({ _id: id }, { $set: modifier });
-
-    const editedBook = await this.findById(id, 'slug');
+    const editedBook = await this.findOneAndUpdate(
+      { _id: id },
+      { $set: modifier },
+      { fields: 'slug', new: true },
+    );
 
     return editedBook;
   }
