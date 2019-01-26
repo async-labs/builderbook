@@ -9,10 +9,13 @@ import withAuth from '../../lib/withAuth';
 
 class MyBooks extends React.Component {
   static propTypes = {
-    purchasedBooks: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    })),
+    purchasedBooks: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      }),
+    ),
   };
+
   static defaultProps = {
     purchasedBooks: [],
   };
@@ -45,7 +48,7 @@ class MyBooks extends React.Component {
             <div>
               <h3>Your books</h3>
               <ul>
-                {purchasedBooks.map(book => (
+                {purchasedBooks.map((book) => (
                   <li key={book._id}>
                     <Link
                       as={`/books/${book.slug}/introduction`}

@@ -1,14 +1,12 @@
-import qs from 'qs';
-import request from 'request';
-import GithubAPI from '@octokit/rest';
-
-import User from './models/User';
+const qs = require('qs');
+const request = require('request');
+const GithubAPI = require('@octokit/rest');
+const User = require('./models/User');
 
 const AUTHORIZE_URI = 'https://github.com/login/oauth/authorize';
 const TOKEN_URI = 'https://github.com/login/oauth/access_token';
 
-
-export function setupGithub({ server }) {
+function setupGithub({ server }) {
   const dev = process.env.NODE_ENV !== 'production';
 
   const CLIENT_ID = dev ? process.env.Github_Test_ClientID : process.env.Github_Live_ClientID;
@@ -20,10 +18,12 @@ export function setupGithub({ server }) {
       return;
     }
 
-    res.redirect(`${AUTHORIZE_URI}?${qs.stringify({
-      scope: 'repo',
-      client_id: CLIENT_ID,
-    })}`);
+    res.redirect(
+      `${AUTHORIZE_URI}?${qs.stringify({
+        scope: 'repo',
+        client_id: CLIENT_ID,
+      })}`,
+    );
   });
 
   server.get('/auth/github/callback', (req, res) => {
@@ -94,22 +94,27 @@ function getAPI({ accessToken }) {
   return github;
 }
 
-export function getRepos({ accessToken }) {
+function getRepos({ accessToken }) {
   const github = getAPI({ accessToken });
 
   return github.repos.getAll({ per_page: 100 });
 }
 
-export function getContent({ accessToken, repoName, path }) {
+function getContent({ accessToken, repoName, path }) {
   const github = getAPI({ accessToken });
   const [owner, repo] = repoName.split('/');
 
   return github.repos.getContent({ owner, repo, path });
 }
 
-export function getCommits({ accessToken, repoName, limit }) {
+function getCommits({ accessToken, repoName, limit }) {
   const github = getAPI({ accessToken });
   const [owner, repo] = repoName.split('/');
 
   return github.repos.getCommits({ owner, repo, per_page: limit });
 }
+
+exports.setupGithub = setupGithub;
+exports.getRepos = getRepos;
+exports.getContent = getContent;
+exports.getCommits = getCommits;

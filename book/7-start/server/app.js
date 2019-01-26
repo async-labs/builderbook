@@ -1,15 +1,15 @@
-import express from 'express';
-import session from 'express-session';
-import mongoSessionStore from 'connect-mongo';
-import next from 'next';
-import mongoose from 'mongoose';
+const express = require('express');
+const session = require('express-session');
+const mongoSessionStore = require('connect-mongo');
+const next = require('next');
+const mongoose = require('mongoose');
 
-import auth from './google';
-import { setupGithub as github } from './github';
-import api from './api';
+const auth = require('./google');
+const { setupGithub } = require('./github');
+const api = require('./api');
 
-import logger from './logs';
-import routesWithSlug from './routesWithSlug';
+const logger = require('./logs');
+const routesWithSlug = require('./routesWithSlug');
 
 require('dotenv').config();
 
@@ -61,7 +61,7 @@ app.prepare().then(() => {
   server.use(session(sess));
 
   auth({ server, ROOT_URL });
-  github({ server });
+  setupGithub({ server });
   api(server);
   routesWithSlug({ server, app });
 
@@ -79,4 +79,3 @@ app.prepare().then(() => {
     logger.info(`> Ready on ${ROOT_URL}`);
   });
 });
-

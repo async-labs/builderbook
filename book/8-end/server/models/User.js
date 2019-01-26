@@ -1,10 +1,9 @@
-import _ from 'lodash';
-import mongoose from 'mongoose';
-
-import generateSlug from '../utils/slugify';
-import sendEmail from '../aws';
-import getEmailTemplate from './EmailTemplate';
-import logger from '../logs';
+const mongoose = require('mongoose');
+const _ = require('lodash');
+const generateSlug = require('../utils/slugify');
+const sendEmail = require('../aws');
+const getEmailTemplate = require('./EmailTemplate');
+const logger = require('../logs');
 
 const { Schema } = mongoose;
 
@@ -65,9 +64,7 @@ class UserClass {
     ];
   }
 
-  static async signInOrSignUp({
-    googleId, email, googleToken, displayName, avatarUrl,
-  }) {
+  static async signInOrSignUp({ googleId, email, googleToken, displayName, avatarUrl }) {
     const user = await this.findOne({ googleId }).select(UserClass.publicFields().join(' '));
 
     if (user) {
@@ -125,4 +122,4 @@ mongoSchema.loadClass(UserClass);
 
 const User = mongoose.model('User', mongoSchema);
 
-export default User;
+module.exports = User;

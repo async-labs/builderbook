@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
-
-import generateSlug from '../utils/slugify';
-import Chapter from './Chapter';
+const mongoose = require('mongoose');
+const generateSlug = require('../utils/slugify');
+const Chapter = require('./Chapter');
 
 const { Schema } = mongoose;
 
@@ -31,7 +30,6 @@ const mongoSchema = new Schema({
   },
 });
 
-
 class BookClass {
   static async list({ offset = 0, limit = 10 } = {}) {
     const books = await this.find({})
@@ -49,9 +47,9 @@ class BookClass {
 
     const book = bookDoc.toObject();
 
-    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug')
-      .sort({ order: 1 }))
-      .map(chapter => chapter.toObject());
+    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug').sort({ order: 1 })).map(
+      (chapter) => chapter.toObject(),
+    );
     return book;
   }
 
@@ -69,9 +67,7 @@ class BookClass {
     });
   }
 
-  static async edit({
-    id, name, price, githubRepo,
-  }) {
+  static async edit({ id, name, price, githubRepo }) {
     const book = await this.findById(id, 'slug name');
 
     if (!book) {
@@ -93,4 +89,4 @@ mongoSchema.loadClass(BookClass);
 
 const Book = mongoose.model('Book', mongoSchema);
 
-export default Book;
+module.exports = Book;

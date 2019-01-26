@@ -1,8 +1,8 @@
-import request from 'request';
+const request = require('request');
 
 require('dotenv').config();
 
-export async function subscribe({ email }) {
+async function subscribe({ email }) {
   const data = {
     email_address: email,
     status: 'subscribed',
@@ -34,3 +34,4 @@ export async function subscribe({ email }) {
   });
 }
 
+exports.subscribe = subscribe;

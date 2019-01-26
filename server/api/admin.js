@@ -8,8 +8,6 @@ const User = require('../models/User');
 
 const logger = require('../logs');
 
-const dev = process.env.NODE_ENV !== 'production';
-
 const router = express.Router();
 
 router.use((req, res, next) => {

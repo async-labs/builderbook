@@ -1,13 +1,12 @@
-import express from 'express';
-import session from 'express-session';
-import mongoSessionStore from 'connect-mongo';
-import next from 'next';
-import mongoose from 'mongoose';
+const express = require('express');
+const session = require('express-session');
+const mongoSessionStore = require('connect-mongo');
+const next = require('next');
+const mongoose = require('mongoose');
 
-import auth from './google';
-
-import logger from './logs';
-import { insertTemplates } from './models/EmailTemplate';
+const auth = require('./google');
+const logger = require('./logs');
+const { insertTemplates } = require('./models/EmailTemplate');
 
 require('dotenv').config();
 

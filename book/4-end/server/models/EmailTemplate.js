@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import _ from 'lodash';
-import logger from '../logs';
+const mongoose = require('mongoose');
+const _ = require('lodash');
+const logger = require('../logs');
 
 const { Schema } = mongoose;
 
@@ -22,7 +22,7 @@ const mongoSchema = new Schema({
 
 const EmailTemplate = mongoose.model('EmailTemplate', mongoSchema);
 
-export default async function getEmailTemplate(name, params) {
+async function getEmailTemplate(name, params) {
   const source = await EmailTemplate.findOne({ name });
   if (!source) {
     throw new Error(`No EmailTemplates found.
@@ -36,7 +36,7 @@ export default async function getEmailTemplate(name, params) {
   };
 }
 
-export async function insertTemplates() {
+async function insertTemplates() {
   const templates = [
     {
       name: 'welcome',
@@ -54,12 +54,21 @@ export async function insertTemplates() {
     },
   ];
 
-  templates.forEach(async (template) => {
-    try {
-      await EmailTemplate.updateOne({ name: template.name }, template, { upsert: true });
-    } catch (error) {
-      logger.error('EmailTemplate insertion error:', error);
-      throw error;
-    }
+  const updates = _.reduce(
+    templates,
+    (res, template) => {
+      res.push(EmailTemplate.updateOne({ name: template.name }, template, { upsert: true }));
+      return res;
+    },
+    [],
+  );
+  return Promise.all(updates).catch((error) => {
+    logger.error('EmailTemplate insertion error: ', error);
+    throw error;
   });
 }
+
+module.exports = {
+  insertTemplates,
+  getEmailTemplate,
+};

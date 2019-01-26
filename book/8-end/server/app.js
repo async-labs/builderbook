@@ -1,18 +1,19 @@
-import express from 'express';
-import session from 'express-session';
-import compression from 'compression';
-import mongoSessionStore from 'connect-mongo';
-import next from 'next';
-import mongoose from 'mongoose';
-import helmet from 'helmet';
-import getRootUrl from '../lib/api/getRootUrl';
-import sitemapAndRobots from './sitemapAndRobots';
-import auth from './google';
-import { setupGithub as github } from './github';
-import api from './api';
+const express = require('express');
+const session = require('express-session');
+const mongoSessionStore = require('connect-mongo');
+const next = require('next');
+const mongoose = require('mongoose');
+const compression = require('compression');
+const helmet = require('helmet');
 
-import logger from './logs';
-import routesWithSlug from './routesWithSlug';
+const auth = require('./google');
+const { setupGithub } = require('./github');
+const api = require('./api');
+
+const logger = require('./logs');
+const routesWithSlug = require('./routesWithSlug');
+const getRootUrl = require('../lib/api/getRootUrl');
+const sitemapAndRobots = require('./sitemapAndRobots');
 
 require('dotenv').config();
 
@@ -71,7 +72,7 @@ app.prepare().then(() => {
   server.use(session(sess));
 
   auth({ server, ROOT_URL });
-  github({ server });
+  setupGithub({ server });
   api(server);
   routesWithSlug({ server, app });
   sitemapAndRobots({ server });

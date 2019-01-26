@@ -12,9 +12,7 @@ export const addBook = ({ name, price, githubRepo }) =>
     body: JSON.stringify({ name, price, githubRepo }),
   });
 
-export const editBook = ({
-  id, name, price, githubRepo,
-}) =>
+export const editBook = ({ id, name, price, githubRepo }) =>
   sendRequest(`${BASE_PATH}/books/edit`, {
     body: JSON.stringify({
       id,
@@ -28,4 +26,3 @@ export const getBookDetail = ({ slug }) =>
   sendRequest(`${BASE_PATH}/books/detail/${slug}`, {
     method: 'GET',
   });
-
