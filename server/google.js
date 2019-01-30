@@ -1,5 +1,5 @@
 const passport = require('passport');
-const Strategy = require('passport-google-oauth').OAuth2Strategy;
+const GoogleStrategy = require('@passport-next/passport-google-oauth2').Strategy;
 const User = require('./models/User');
 
 function auth({ ROOT_URL, server }) {
@@ -29,14 +29,16 @@ function auth({ ROOT_URL, server }) {
         console.log(err); // eslint-disable-line
     }
   };
-  passport.use(new Strategy(
-    {
-      clientID: process.env.Google_clientID,
-      clientSecret: process.env.Google_clientSecret,
-      callbackURL: `${ROOT_URL}/oauth2callback`,
-    },
-    verify,
-  ));
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: process.env.Google_clientID,
+        clientSecret: process.env.Google_clientSecret,
+        callbackURL: `${ROOT_URL}/oauth2callback`,
+      },
+      verify,
+    ),
+  );
 
   passport.serializeUser((user, done) => {
     done(null, user.id);
