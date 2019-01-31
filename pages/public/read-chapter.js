@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Error from 'next/error';
 import Head from 'next/head';
+import { withRouter } from 'next/router';
 import throttle from 'lodash/throttle';
 
 import Link from 'next/link';
@@ -28,10 +29,10 @@ class ReadChapter extends React.Component {
     user: PropTypes.shape({
       _id: PropTypes.string.isRequired,
     }),
-    showStripeModal: PropTypes.bool.isRequired,
-    url: PropTypes.shape({
+    router: PropTypes.shape({
       asPath: PropTypes.string.isRequired,
     }).isRequired,
+    showStripeModal: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -180,9 +181,7 @@ class ReadChapter extends React.Component {
 
   renderMainContent() {
     const { user, showStripeModal } = this.props;
-    const {
-      chapter, htmlContent, isMobile, showTOC,
-    } = this.state;
+    const { chapter, htmlContent, isMobile, showTOC } = this.state;
 
     let padding = '20px 20%';
     if (!isMobile && showTOC) {
@@ -192,10 +191,7 @@ class ReadChapter extends React.Component {
     }
 
     return (
-      <div
-        style={{ padding }}
-        id="chapter-content"
-      >
+      <div style={{ padding }} id="chapter-content">
         <h2 style={{ fontWeight: '400', lineHeight: '1.5em' }}>
           {chapter.order > 1 ? `Chapter ${chapter.order - 1}: ` : null}
           {chapter.title}
@@ -212,7 +208,8 @@ class ReadChapter extends React.Component {
   }
 
   renderSections() {
-    const { sections } = this.state.chapter;
+    const { chapter } = this.state;
+    const { sections } = chapter;
     const { activeSection } = this.state;
 
     if (!sections || !sections.length === 0) {
@@ -221,7 +218,7 @@ class ReadChapter extends React.Component {
 
     return (
       <ul>
-        {sections.map(s => (
+        {sections.map((s) => (
           <li key={s.escapedText} style={{ paddingTop: '10px' }}>
             <a
               style={{
@@ -239,9 +236,7 @@ class ReadChapter extends React.Component {
   }
 
   renderSidebar() {
-    const {
-      showTOC, chapter, hideHeader, isMobile,
-    } = this.state;
+    const { showTOC, chapter, hideHeader, isMobile } = this.state;
 
     if (!showTOC) {
       return null;
@@ -290,12 +285,9 @@ class ReadChapter extends React.Component {
   }
 
   render() {
-    const { user, url } = this.props;
+    const { user, router } = this.props;
 
-    const {
-      chapter, showTOC, isMobile, hideHeader,
-    } = this.state;
-
+    const { chapter, showTOC, isMobile, hideHeader } = this.state;
 
     if (!chapter) {
       return <Error statusCode={404} />;
@@ -321,7 +313,7 @@ class ReadChapter extends React.Component {
           ) : null}
         </Head>
 
-        <Header user={user} hideHeader={hideHeader} next={url.asPath} />
+        <Header user={user} hideHeader={hideHeader} next={router.asPath} />
 
         {this.renderSidebar()}
 
@@ -343,7 +335,6 @@ class ReadChapter extends React.Component {
           {this.renderMainContent()}
         </div>
 
-
         <div
           style={{
             position: 'fixed',
@@ -359,7 +350,7 @@ class ReadChapter extends React.Component {
               onKeyPress={this.toggleChapterList}
               role="button"
             >
-              format_list_bulleted
+            format_list_bulleted
             </i>
 
           {book.supportURL ? (
@@ -370,10 +361,7 @@ class ReadChapter extends React.Component {
                 rel="noopener noreferrer"
                 style={{ color: '#222', opacity: '1' }}
               >
-                <i
-                  className="material-icons"
-                  style={styleIcon}
-                >
+                <i className="material-icons" style={styleIcon}>
                   help_outline
                 </i>
               </a>
@@ -394,4 +382,6 @@ class ReadChapter extends React.Component {
   }
 }
 
-export default withAuth(withLayout(ReadChapter, { noHeader: true }), { loginRequired: false });
+export default withAuth(withLayout(withRouter(ReadChapter), { noHeader: true }), {
+  loginRequired: false,
+});

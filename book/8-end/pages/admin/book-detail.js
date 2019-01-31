@@ -10,7 +10,7 @@ import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 import notify from '../../lib/notifier';
 
-const handleSyncContent = bookId => async () => {
+const handleSyncContent = (bookId) => async () => {
   try {
     await syncBookContent({ bookId });
     notify('Synced');
@@ -40,12 +40,12 @@ const MyBook = ({ book, error }) => {
       <p />
       <Button variant="contained" onClick={handleSyncContent(book._id)}>
         Sync with Github
-      </Button>{' '}
+      </Button>
       <Link as={`/admin/edit-book/${book.slug}`} href={`/admin/edit-book?slug=${book.slug}`}>
         <Button variant="contained">Edit book</Button>
       </Link>
       <ul>
-        {chapters.map(ch => (
+        {chapters.map((ch) => (
           <li key={ch._id}>
             <Link
               as={`/books/${book.slug}/${ch.slug}`}
@@ -90,7 +90,8 @@ class MyBookWithData extends React.Component {
   async componentDidMount() {
     NProgress.start();
     try {
-      const book = await getBookDetail({ slug: this.props.slug });
+      const { slug } = this.props;
+      const book = await getBookDetail({ slug });
       this.setState({ book, loading: false }); // eslint-disable-line
       NProgress.done();
     } catch (err) {

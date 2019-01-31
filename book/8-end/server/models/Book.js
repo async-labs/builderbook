@@ -1,8 +1,10 @@
+/* eslint-disable no-use-before-define */
+
 const mongoose = require('mongoose');
 const frontmatter = require('front-matter');
 
 const generateSlug = require('../utils/slugify');
-const Chapter = require('./Chapter');
+// const Chapter = require('./Chapter');
 const Purchase = require('./Purchase');
 const User = require('./User');
 const getEmailTemplate = require('./EmailTemplate');
@@ -236,3 +238,5 @@ mongoSchema.loadClass(BookClass);
 const Book = mongoose.model('Book', mongoSchema);
 
 module.exports = Book;
+
+const Chapter = require('./Chapter');

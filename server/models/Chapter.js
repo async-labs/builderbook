@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+
 const mongoose = require('mongoose');
 const marked = require('marked');
 const he = require('he');
@@ -17,7 +19,7 @@ function markdownToHtml(content) {
     return `<a target="_blank" href="${href}" rel="noopener noreferrer"${t}>${text}</a>`;
   };
 
-  renderer.image = href => `<img src="${href}" width="100%" alt="Builder Book">`;
+  renderer.image = (href) => `<img src="${href}" width="100%" alt="Builder Book">`;
 
   renderer.heading = (text, level) => {
     const escapedText = text
@@ -160,9 +162,7 @@ const mongoSchema = new Schema({
 });
 
 class ChapterClass {
-  static async addBookmark({
-    chapterId, chapterSlug, chapterOrder, hash, text, userId,
-  }) {
+  static async addBookmark({ chapterId, chapterSlug, chapterOrder, hash, text, userId }) {
     if (!userId) {
       throw new Error('User is required');
     }
@@ -171,7 +171,7 @@ class ChapterClass {
     if (!chapter) {
       throw new Error('Chapter not found');
     }
-    // eslint-disable-next-line no-use-before-define
+
     const book = await Book.findById(chapter.bookId, 'id').lean();
     if (!book) {
       throw new Error('Book not found');
@@ -200,10 +200,7 @@ class ChapterClass {
     return purchase.save();
   }
 
-  static async getBySlug({
-    bookSlug, chapterSlug, userId, isAdmin,
-  }) {
-    // eslint-disable-next-line no-use-before-define
+  static async getBySlug({ bookSlug, chapterSlug, userId, isAdmin }) {
     const book = await Book.getBySlug({ slug: bookSlug });
     if (!book) {
       throw new Error('Not found');
@@ -316,19 +313,21 @@ class ChapterClass {
     const orderForBookmark = modifier.order;
     const slugForBookmark = modifier.slug;
 
-    await Promise.all(purchasesWithBookmark.map(async (purchase) => {
-      const { chapterId } = purchase.bookmarks[0];
+    await Promise.all(
+      purchasesWithBookmark.map(async (purchase) => {
+        const { chapterId } = purchase.bookmarks[0];
 
-      const modifierForBookmark = {
-        'bookmarks.$.chapterOrder': orderForBookmark,
-        'bookmarks.$.chapterSlug': slugForBookmark,
-      };
+        const modifierForBookmark = {
+          'bookmarks.$.chapterOrder': orderForBookmark,
+          'bookmarks.$.chapterSlug': slugForBookmark,
+        };
 
-      await Purchase.updateOne(
-        { _id: purchase._id, 'bookmarks.chapterId': chapterId },
-        { $set: modifierForBookmark },
-      );
-    }));
+        await Purchase.updateOne(
+          { _id: purchase._id, 'bookmarks.chapterId': chapterId },
+          { $set: modifierForBookmark },
+        );
+      }),
+    );
 
     return this.updateOne({ _id: chapter._id }, { $set: modifier });
   }

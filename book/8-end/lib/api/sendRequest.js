@@ -1,4 +1,4 @@
-import 'isomorphic-fetch';
+import 'isomorphic-unfetch';
 import getRootUrl from './getRootUrl';
 
 export default async function sendRequest(path, options = {}) {
@@ -8,7 +8,7 @@ export default async function sendRequest(path, options = {}) {
 
   const response = await fetch(
     `${getRootUrl()}${path}`,
-    Object.assign({ method: 'POST', credentials: 'include' }, options, { headers }),
+    Object.assign({ method: 'POST', credentials: 'same-origin' }, options, { headers }),
   );
 
   const data = await response.json();

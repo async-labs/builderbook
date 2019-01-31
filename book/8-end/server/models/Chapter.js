@@ -1,8 +1,10 @@
+/* eslint-disable no-use-before-define */
+
 const mongoose = require('mongoose');
 const marked = require('marked');
 const he = require('he');
 const hljs = require('highlight.js');
-const Book = require('./Book');
+// const Book = require('./Book');
 const generateSlug = require('../utils/slugify');
 const Purchase = require('./Purchase');
 
@@ -271,3 +273,5 @@ mongoSchema.loadClass(ChapterClass);
 const Chapter = mongoose.model('Chapter', mongoSchema);
 
 module.exports = Chapter;
+
+const Book = require('./Book');

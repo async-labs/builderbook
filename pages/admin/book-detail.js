@@ -64,10 +64,12 @@ const MyBook = ({ book, error }) => {
         Sync all chapters
       </Button>
       <Link as={`/admin/edit-book/${book.slug}`} href={`/admin/edit-book?slug=${book.slug}`}>
-        <Button variant="contained" style={{ marginLeft: '20px' }}>Edit book</Button>
+        <Button variant="contained" style={{ marginLeft: '20px' }}>
+          Edit book
+        </Button>
       </Link>
       <ul style={{ listStyleType: 'none', padding: '10px 0px' }}>
-        {chapters.map(ch => (
+        {chapters.map((ch) => (
           <li key={ch._id}>
             <Button data-bookid={book._id} data-chapterid={ch._id} onClick={handleSyncOneChapter}>
               Sync
@@ -115,7 +117,8 @@ class MyBookWithData extends React.Component {
   async componentDidMount() {
     NProgress.start();
     try {
-      const book = await getBookDetail({ slug: this.props.slug });
+      const { slug } = this.props;
+      const book = await getBookDetail({ slug });
       this.setState({ book, loading: false }); // eslint-disable-line
       NProgress.done();
     } catch (err) {

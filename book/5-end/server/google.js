@@ -1,5 +1,6 @@
 const passport = require('passport');
-const Strategy = require('passport-google-oauth').OAuth2Strategy;
+// const Strategy = require('passport-google-oauth').OAuth2Strategy;
+const GoogleStrategy = require('@passport-next/passport-google-oauth2').Strategy;
 const User = require('./models/User');
 
 function auth({ ROOT_URL, server }) {
@@ -30,7 +31,7 @@ function auth({ ROOT_URL, server }) {
     }
   };
   passport.use(
-    new Strategy(
+    new GoogleStrategy(
       {
         clientID: process.env.Google_clientID,
         clientSecret: process.env.Google_clientSecret,
