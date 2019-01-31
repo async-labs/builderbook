@@ -1,4 +1,4 @@
-import 'isomorphic-fetch';
+import 'isomorphic-unfetch';
 
 const port = process.env.PORT || 8000;
 const ROOT_URL = process.env.ROOT_URL || `http://localhost:${port}`;
