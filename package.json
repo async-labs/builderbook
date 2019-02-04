@@ -19,7 +19,6 @@
   "dependencies": {
     "@material-ui/core": "3.9.1",
     "@octokit/rest": "15.15.1",
-    "@passport-next/passport-google-oauth2": "^1.0.0",
     "aws-sdk": "2.339.0",
     "compression": "1.7.3",
     "connect-mongo": "2.0.1",

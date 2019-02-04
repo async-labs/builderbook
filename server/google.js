@@ -1,5 +1,5 @@
 const passport = require('passport');
-const GoogleStrategy = require('@passport-next/passport-google-oauth2').Strategy;
+const Strategy = require('passport-google-oauth').OAuth2Strategy;
 const User = require('./models/User');
 
 function auth({ ROOT_URL, server }) {
@@ -30,11 +30,12 @@ function auth({ ROOT_URL, server }) {
     }
   };
   passport.use(
-    new GoogleStrategy(
+    new Strategy(
       {
         clientID: process.env.Google_clientID,
         clientSecret: process.env.Google_clientSecret,
         callbackURL: `${ROOT_URL}/oauth2callback`,
+        userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
       },
       verify,
     ),

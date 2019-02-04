@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@material-ui/core": "3.2.2",
-    "@passport-next/passport-google-oauth2": "^1.0.0",
     "connect-mongo": "2.0.1",
     "dotenv": "6.1.0",
     "express": "4.16.4",
