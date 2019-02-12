@@ -89,7 +89,14 @@ function Header({ user, hideHeader, redirectUrl }) {
             ) : (
               <Link
                 prefetch
-                href={{ pathname: '/public/login', asPath: '/login', query: { redirectUrl } }}
+                href={{
+                  pathname: '/public/login',
+                  query: { redirectUrl },
+                }}
+                as={{
+                  pathname: '/login',
+                  query: { redirectUrl },
+                }}
               >
                 <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
               </Link>

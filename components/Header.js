@@ -98,7 +98,14 @@ function Header({ user, hideHeader, next }) {
                 </Link>
                 <Link
                   prefetch
-                  href={{ pathname: '/public/login', asPath: '/login', query: { next } }}
+                  href={{
+                    pathname: '/public/login',
+                    query: { next },
+                  }}
+                  as={{
+                    pathname: '/login',
+                    query: { next },
+                  }}
                 >
                   <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
                 </Link>
