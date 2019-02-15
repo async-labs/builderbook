@@ -68,7 +68,5 @@ async function insertTemplates() {
   });
 }
 
-module.exports = {
-  insertTemplates,
-  getEmailTemplate,
-};
+exports.insertTemplates = insertTemplates;
+exports.getEmailTemplate = getEmailTemplate;

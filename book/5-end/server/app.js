@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const auth = require('./google');
 const api = require('./api');
 const logger = require('./logs');
+const { insertTemplates } = require('./models/EmailTemplate');
 
 require('dotenv').config();
 
@@ -33,7 +34,7 @@ const URL_MAP = {
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
+app.prepare().then(async () => {
   const server = express();
 
   const MongoStore = mongoSessionStore(session);
@@ -53,6 +54,8 @@ app.prepare().then(() => {
   };
 
   server.use(session(sess));
+
+  await insertTemplates();
 
   auth({ server, ROOT_URL });
   api(server);

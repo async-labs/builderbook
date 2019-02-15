@@ -85,4 +85,5 @@ async function getEmailTemplate(name, params) {
   };
 }
 
-module.exports = getEmailTemplate;
+exports.insertTemplates = insertTemplates;
+exports.getEmailTemplate = getEmailTemplate;

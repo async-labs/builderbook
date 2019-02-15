@@ -10,7 +10,7 @@ const User = require('./User');
 const Purchase = require('./Purchase');
 
 const sendEmail = require('../aws');
-const getEmailTemplate = require('./EmailTemplate');
+const { getEmailTemplate } = require('./EmailTemplate');
 
 const logger = require('../logs');
 

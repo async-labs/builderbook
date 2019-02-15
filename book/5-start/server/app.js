@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const auth = require('./google');
 const logger = require('./logs');
+const { insertTemplates } = require('./models/EmailTemplate');
 
 require('dotenv').config();
 
@@ -28,7 +29,7 @@ const ROOT_URL = `http://localhost:${port}`;
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
+app.prepare().then(async () => {
   const server = express();
 
   const MongoStore = mongoSessionStore(session);
@@ -48,6 +49,8 @@ app.prepare().then(() => {
   };
 
   server.use(session(sess));
+
+  await insertTemplates();
 
   auth({ server, ROOT_URL });
 

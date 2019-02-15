@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
 const generateSlug = require('../utils/slugify');
+const sendEmail = require('../aws');
+const { getEmailTemplate } = require('./EmailTemplate');
+const logger = require('../logs');
 
 const { Schema } = mongoose;
 
@@ -76,9 +79,7 @@ class UserClass {
     );
   }
 
-  static async signInOrSignUp({
-    googleId, email, googleToken, displayName, avatarUrl,
-  }) {
+  static async signInOrSignUp({ googleId, email, googleToken, displayName, avatarUrl }) {
     const user = await this.findOne({ googleId }).select(UserClass.publicFields().join(' '));
 
     if (user) {
@@ -114,7 +115,6 @@ class UserClass {
       isAdmin: userCount === 0,
     });
 
-    /*
     const template = await getEmailTemplate('welcome', {
       userName: displayName,
     });
@@ -129,7 +129,6 @@ class UserClass {
     } catch (err) {
       logger.error('Email sending error:', err);
     }
-    */
 
     return _.pick(newUser, UserClass.publicFields());
   }

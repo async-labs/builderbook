@@ -9,6 +9,7 @@ const { setupGithub } = require('./github');
 const api = require('./api');
 
 const logger = require('./logs');
+const { insertTemplates } = require('./models/EmailTemplate');
 const routesWithSlug = require('./routesWithSlug');
 
 require('dotenv').config();
@@ -37,7 +38,7 @@ const URL_MAP = {
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
+app.prepare().then(async () => {
   const server = express();
 
   server.use(express.json());
@@ -59,6 +60,8 @@ app.prepare().then(() => {
   };
 
   server.use(session(sess));
+
+  await insertTemplates();
 
   auth({ server, ROOT_URL });
   setupGithub({ server });

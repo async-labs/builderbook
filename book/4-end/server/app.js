@@ -49,7 +49,9 @@ app.prepare().then(async () => {
   };
 
   server.use(session(sess));
+
   await insertTemplates();
+
   auth({ server, ROOT_URL });
 
   server.get('*', (req, res) => handle(req, res));

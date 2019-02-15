@@ -7,7 +7,7 @@ const generateSlug = require('../utils/slugify');
 // const Chapter = require('./Chapter');
 const Purchase = require('./Purchase');
 const User = require('./User');
-const getEmailTemplate = require('./EmailTemplate');
+const { getEmailTemplate } = require('./EmailTemplate');
 
 const getRootUrl = require('../../lib/api/getRootUrl');
 const { stripeCharge } = require('../stripe');

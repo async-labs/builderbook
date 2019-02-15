@@ -3,7 +3,7 @@ const _ = require('lodash');
 
 const generateSlug = require('../utils/slugify');
 const sendEmail = require('../aws');
-const getEmailTemplate = require('./EmailTemplate');
+const { getEmailTemplate } = require('./EmailTemplate');
 const logger = require('../logs');
 
 const { Schema } = mongoose;
