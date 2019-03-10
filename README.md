@@ -28,7 +28,6 @@ We've used this `builderbook` project to build [saas](https://github.com/async-l
 - [Built with](#built-with)
   - [Core stack](#core-stack)
   - [Third party APIs](#third-party-apis)
-- [Hire our team](#hire-our-team)
 - [Contributing](#contributing)
 - [Team](#team)
 - [License](#license)
@@ -313,16 +312,6 @@ Book-detail page for Admin user:
 Check out [package.json](https://github.com/builderbook/builderbook/blob/master/package.json).
 
 
-## Hire our team
-We can build any functional SaaS MVP from scratch in 4-6 weeks for a fixed price of $10-20K ([example estimate](https://goo.gl/fw7YQU)).
-If you're interested, please fill out our [form](https://goo.gl/forms/4kk6mvowOjkQY21y2).
-
-
-If you are a small team who works best in a calm environment and builds a SaaS product that solves a real problem - we want to hear from you.
-
-[Async](https://async-await.com) is the largest project in our portfolio to this date. [Sign up](https://app.async-await.com/signup) at Async to check it out.
-
-
 ## Contributing
 We welcome suggestions and pull requests, especially for [issues](https://github.com/builderbook/builderbook/issues) labeled as `discussion` and `contributions welcome`.
 
@@ -335,6 +324,8 @@ Want to support this project? Sign up at [async](https://async-await.com) and/or
 - [Kelly Burke](https://github.com/klyburke)
 - [Delgermurun Purevkhuu](https://github.com/delgermurun)
 - [Timur Zhiyentayev](https://github.com/tima101)
+
+You can contact us at team@builderbook.org
 
 
 ## License
