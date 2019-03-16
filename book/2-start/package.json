@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
+    "dev": "next",
     "build": "next build",
     "start": "next start",
-    "dev": "next",
     "lint": "eslint components pages lib"
   },
   "dependencies": {

@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "build": "next build",
-    "start": "next start",
     "dev": "next",
     "dev-express": "nodemon server/app.js --watch server",
+    "build": "next build",
+    "start": "next start",
     "lint": "eslint components pages lib server"
   },
   "dependencies": {

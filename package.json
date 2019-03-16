@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon server/app.js --watch server",
-    "build": "next build",
+    "build": "NODE_ENV=production next build",
     "start": "node server/app.js",
     "lint": "eslint components pages lib server",
     "test": "jest --coverage",

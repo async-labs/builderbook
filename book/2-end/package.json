@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
+    "dev": "next",
+    "dev-express": "nodemon server/app.js --watch server",
     "build": "next build",
     "start": "next start",
-    "dev": "next",
-    "lint": "eslint components pages lib server",
-    "dev-express": "nodemon server/app.js --watch server"
+    "lint": "eslint components pages lib server"
   },
   "dependencies": {
     "@material-ui/core": "3.9.1",
