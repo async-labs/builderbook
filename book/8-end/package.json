@@ -38,7 +38,7 @@
     "next": "7.0.2",
     "nprogress": "0.2.0",
     "passport": "0.4.0",
-    "passport-google-oauth": "1.0.0",
+    "passport-google-oauth": "2.0.0",
     "prop-types": "15.6.2",
     "qs": "6.5.2",
     "react": "16.6.0",
