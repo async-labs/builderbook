@@ -72,6 +72,7 @@ class ReadChapter extends React.Component {
       htmlContent,
       isMobile: false,
       hideHeader: false,
+      darkTheme: true,
     };
   }
 
@@ -82,6 +83,16 @@ class ReadChapter extends React.Component {
 
     if (this.state.isMobile !== isMobile) {
       this.setState({ isMobile }); // eslint-disable-line
+    }
+
+    if (typeof localStorage !== 'undefined') {
+      if (localStorage.getItem('darkTheme') === 'true') {
+        this.loadDarkTheme();
+        this.setState({ darkTheme: true });
+      } else if (localStorage.getItem('darkTheme') === 'false') {
+        this.loadLightTheme();
+        this.setState({ darkTheme: false });
+      }
     }
   }
 
@@ -175,13 +186,107 @@ class ReadChapter extends React.Component {
     });
   };
 
+  changeThemeType = () => {
+    const { darkTheme } = this.state;
+
+    if (darkTheme === true) {
+      this.loadLightTheme();
+      localStorage.setItem('darkTheme', false);
+      this.setState({ darkTheme: false });
+    } else if (darkTheme === false) {
+      this.loadDarkTheme();
+      localStorage.setItem('darkTheme', true);
+      this.setState({ darkTheme: true });
+    }
+  };
+
+  loadLightTheme = () => {
+    const $ = document.querySelectorAll.bind(document);
+
+    const changeColors = (color, background) => (e) => {
+      e.style.backgroundColor = background;
+      e.style.color = color;
+    };
+
+    const elements = [
+      $('body'),
+      $('ol li a'),
+      $('h1'),
+      $('h2'),
+      $('h3'),
+      $('h4'),
+      $('h5'),
+      $('h6'),
+      $('i.material-icons'),
+      $('p code'),
+      $('#__next div'),
+    ];
+
+    const black = 'black';
+    const white = 'white';
+    const blue = '#2289d1';
+
+    elements.forEach((e) => e.forEach(changeColors(black, white)));
+    $('p a').forEach(changeColors(blue, white));
+
+    const style = document.createElement('style');
+    const link = document.createElement('link');
+
+    link.setAttribute('href', 'https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i');
+    link.setAttribute('rel', 'stylesheet');
+
+    document.head.appendChild(style);
+    document.head.appendChild(link);
+  };
+
+  loadDarkTheme = () => {
+    const $ = document.querySelectorAll.bind(document);
+
+    const changeColors = (color, background) => (e) => {
+      e.style.backgroundColor = background;
+      e.style.color = color;
+    };
+
+    const elements = [
+      $('body'),
+      $('ol li a'),
+      $('h1'),
+      $('h2'),
+      $('h3'),
+      $('h4'),
+      $('h5'),
+      $('h6'),
+      $('i.material-icons'),
+      $('p code'),
+      $('#__next div'),
+    ];
+
+    const black = 'black';
+    const white = 'white';
+    const blue = '#2289d1';
+
+    elements.forEach((e) => e.forEach(changeColors(white, black)));
+    $('p a').forEach(changeColors(blue, white));
+
+    const style = document.createElement('style');
+    const link = document.createElement('link');
+
+    link.setAttribute('href', 'https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i');
+    link.setAttribute('rel', 'stylesheet');
+
+    document.head.appendChild(style);
+    document.head.appendChild(link);
+  };
+
   closeTocWhenMobile = () => {
     this.setState({ showTOC: !this.state.isMobile });
   };
 
   renderMainContent() {
     const { user, showStripeModal } = this.props;
-    const { chapter, htmlContent, isMobile, showTOC } = this.state;
+    const { chapter, htmlContent, isMobile, showTOC, darkTheme } = this.state;
+
+    console.log('rendered', darkTheme);
 
     let padding = '20px 20%';
     if (!isMobile && showTOC) {
@@ -343,15 +448,15 @@ class ReadChapter extends React.Component {
             left: '15px',
           }}
         >
-            <i //eslint-disable-line
-              className="material-icons"
-              style={styleIcon}
-              onClick={this.toggleChapterList}
-              onKeyPress={this.toggleChapterList}
-              role="button"
-            >
+          <i //eslint-disable-line
+            className="material-icons"
+            style={styleIcon}
+            onClick={this.toggleChapterList}
+            onKeyPress={this.toggleChapterList}
+            role="button"
+          >
             format_list_bulleted
-            </i>
+          </i>
 
           {book.supportURL ? (
             <div>
@@ -376,6 +481,29 @@ class ReadChapter extends React.Component {
               activeSection={this.state.activeSection}
             />
           ) : null}
+          <div>
+            {this.state.darkTheme ? (
+              <i
+                className="material-icons"
+                style={{ opacity: '0.75', fontSize: '24px', cursor: 'pointer', color: 'white' }}
+                onClick={this.changeThemeType}
+                onKeyPress={this.changeThemeType}
+                role="none"
+              >
+                lens
+              </i>
+            ) : (
+              <i
+                className="material-icons"
+                style={{ opacity: '0.75', fontSize: '24px', cursor: 'pointer', color: 'black' }}
+                onClick={this.changeThemeType}
+                onKeyPress={this.changeThemeType}
+                role="none"
+              >
+                lens
+              </i>
+            )}
+          </div>
         </div>
       </div>
     );
