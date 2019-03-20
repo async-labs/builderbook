@@ -228,15 +228,6 @@ class ReadChapter extends React.Component {
 
     elements.forEach((e) => e.forEach(changeColors(black, white)));
     $('p a').forEach(changeColors(blue, white));
-
-    const style = document.createElement('style');
-    const link = document.createElement('link');
-
-    link.setAttribute('href', 'https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i');
-    link.setAttribute('rel', 'stylesheet');
-
-    document.head.appendChild(style);
-    document.head.appendChild(link);
   };
 
   loadDarkTheme = () => {
@@ -267,15 +258,6 @@ class ReadChapter extends React.Component {
 
     elements.forEach((e) => e.forEach(changeColors(white, black)));
     $('p a').forEach(changeColors(blue, white));
-
-    const style = document.createElement('style');
-    const link = document.createElement('link');
-
-    link.setAttribute('href', 'https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i');
-    link.setAttribute('rel', 'stylesheet');
-
-    document.head.appendChild(style);
-    document.head.appendChild(link);
   };
 
   closeTocWhenMobile = () => {
