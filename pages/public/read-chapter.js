@@ -254,10 +254,9 @@ class ReadChapter extends React.Component {
 
     const black = 'black';
     const white = 'white';
-    const blue = '#2289d1';
 
     elements.forEach((e) => e.forEach(changeColors(white, black)));
-    $('p a').forEach(changeColors(blue, white));
+    $('p a').forEach(changeColors(white, black));
   };
 
   closeTocWhenMobile = () => {
@@ -266,9 +265,7 @@ class ReadChapter extends React.Component {
 
   renderMainContent() {
     const { user, showStripeModal } = this.props;
-    const { chapter, htmlContent, isMobile, showTOC, darkTheme } = this.state;
-
-    console.log('rendered', darkTheme);
+    const { chapter, htmlContent, isMobile, showTOC } = this.state;
 
     let padding = '20px 20%';
     if (!isMobile && showTOC) {

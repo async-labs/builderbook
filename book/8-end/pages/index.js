@@ -5,18 +5,17 @@ import Head from 'next/head';
 import withAuth from '../lib/withAuth';
 import withLayout from '../lib/withLayout';
 
-
 class Index extends React.Component {
   static propTypes = {
     user: PropTypes.shape({
       displayName: PropTypes.string,
       email: PropTypes.string.isRequired,
     }),
-  }
+  };
 
   static defaultProps = {
     user: null,
-  }
+  };
 
   render() {
     const { user } = this.props;
@@ -24,13 +23,10 @@ class Index extends React.Component {
       <div style={{ padding: '10px 45px' }}>
         <Head>
           <title>Settings</title>
-          <meta
-            name="description"
-            content="List of purchased books."
-          />
+          <meta name="description" content="List of purchased books." />
         </Head>
         <p>List of purchased books</p>
-        <p>Email: {user.email}</p>
+        <p>Email: {user.email}        </p>
       </div>
     );
   }
