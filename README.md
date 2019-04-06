@@ -45,7 +45,7 @@ Check out projects built with the help of this open source app. Feel free to add
 ## Run locally
 - Clone the project and run `yarn` to add packages.
 - Before you start the app, create a `.env` file at the app's root. This file must have values for some env variables specified below.
-  - To get `MONGO_URL_TEST`, we recommend a [free MongoDB at mLab](http://docs.mlab.com/) (to be updated soon with MongoDB Atlas, see [issue](https://github.com/builderbook/builderbook/issues/138)).
+  - To get `MONGO_URL_TEST`, we recommend a [free MongoDB at MongoDB Atlas](https://docs.mongodb.com/manual/tutorial/atlas-free-tier-setup/) (to be updated soon with MongoDB Atlas, see [issue](https://github.com/builderbook/builderbook/issues/138)).
   - Get `Google_clientID` and `Google_clientSecret` by following [official OAuth tutorial](https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin).
 
     Important: For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback <br/>
