@@ -1,0 +1,30 @@
+version: "2.1"
+
+services:
+  app-db-dev:
+    container_name: app-db
+    image: mongo
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: exit 0
+
+  app-service-dev:
+    container_name: app
+    build:
+      context: ./
+      dockerfile: Dockerfile-dev
+    volumes:
+      - "./:/usr/src/app"
+      - "./package.json:/usr/src/package.json"
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URL="mongodb://app-db:27017/SampleDB"
+      - MONGO_URL_TEST="mongodb://app-db:27017/SampleDB"
+      - SESSION_SECRET="xxxxxxx"
+    links:
+      - app-db-dev
+    depends_on:
+      app-db-dev:
+        condition: service_healthy
