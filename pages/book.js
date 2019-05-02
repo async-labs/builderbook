@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import Header from '../components/HomeHeader';
 import Footer from '../components/HomeFooter';
 import TOC from '../components/TOC';
-import BookReviews from '../components/BookReviews';
 
 import {
   styleBigAvatar,
@@ -18,20 +17,22 @@ import {
 } from '../lib/SharedStyles';
 import withLayout from '../lib/withLayout';
 import withAuth from '../lib/withAuth';
-import { getTableOfContents, getBookReviews } from '../lib/api/public';
+import { getTableOfContents } from '../lib/api/public';
 
 const styleAuthor = {
   textAlign: 'center',
   padding: '10px 10%',
 };
 
-const Book = ({ user, toc, reviews }) => (
+const Book = ({ user, toc }) => (
   <div>
     <Head>
       <title>Learn how to build a JavaScript web app from scratch</title>
       <meta
         name="description"
-        content="Learn how to build a complete web app with a modern JavaScript stack. React, Material UI, Next, Express, Mongoose, and MongoDB. Integrated with AWS SES, Github, Google OAuth, Stripe, and MailChimp."
+        content="Learn how to build a complete web app with a modern JavaScript stack.
+        React, Material UI, Next, Express, Mongoose, and MongoDB. Integrated with
+        AWS SES, Github, Google OAuth, Stripe, and MailChimp."
       />
     </Head>
     <Header user={user} />
@@ -41,7 +42,8 @@ const Book = ({ user, toc, reviews }) => (
           <br />
           <p style={{ margin: '45px auto', fontSize: '44px', fontWeight: '400' }}>Our Book</p>
           <p>
-            Learn how to build a full-stack JavaScript web application from scratch.<br />
+            Learn how to build a full-stack JavaScript web application from scratch.
+            <br />
             You&apos;ll go from 0 lines of code in Chapter 1 to over 12,000 lines of code by Chapter
             8.
           </p>
@@ -94,12 +96,6 @@ const Book = ({ user, toc, reviews }) => (
       <br />
 
       <div>
-        <BookReviews reviewsArray={reviews} numberOfReviews={8} />
-      </div>
-
-      <br />
-
-      <div>
         <TOC toc={toc} bookSlug="builder-book" />
       </div>
 
@@ -120,11 +116,17 @@ const Book = ({ user, toc, reviews }) => (
         <a href="https://findharbor.com" target="_blank" rel="noopener noreferrer">
           {' '}
           Harbor
-        </a>. Stay tuned for
-        <a href="https://github.com/async-labs/async-saas" target="_blank" rel="noopener noreferrer">
+        </a>
+        . Stay tuned for
+        <a
+          href="https://github.com/async-labs/async-saas"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {' '}
           Async
-        </a>.
+        </a>
+        .
       </div>
       <br />
       <Grid container direction="row" justify="space-around" align="flex-start">
@@ -176,11 +178,11 @@ Book.propTypes = {
   user: PropTypes.shape({
     _id: PropTypes.string.isRequired,
   }),
-  toc: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-  })).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.object)
-    .isRequired,
+  toc: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 Book.defaultProps = {
@@ -189,18 +191,12 @@ Book.defaultProps = {
 
 Book.getInitialProps = async function getInitialProps() {
   let toc = [];
-  let reviews = [];
   try {
     toc = await getTableOfContents({ slug: 'builder-book' });
   } catch (error) {
     console.log(error); // eslint-disable-line
   }
-  try {
-    reviews = await getBookReviews({ slug: 'builder-book' });
-  } catch (error) {
-    console.log(error); // eslint-disable-line
-  }
-  return { toc, reviews };
+  return { toc };
 };
 
 export default withAuth(withLayout(Book, { noHeader: true }), { loginRequired: false });
