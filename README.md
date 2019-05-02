@@ -23,6 +23,7 @@ We've used this `builderbook` project to build [saas](https://github.com/async-l
 - [Add a new book](#add-a-new-book)
 - [Add your own styles](#add-your-own-styles)
 - [Deploy](#deploy)
+- [Deploy to Heroku](#deploy-to-heroku)
 - [Scaling](#scaling)
 - [Screenshots](#screenshots)
 - [Built with](#built-with)
@@ -236,6 +237,9 @@ We also specified styles for all content inside a `<body>` element:
 
 
 ## Deploy
+
+IMPORTANT: Now v1 is depreciated for new users. See the next section about deploying to Heroku.
+
 - Install now: `npm install -g now`.
 - Point your domain to Zeit world nameservers: [three steps](https://zeit.co/world#get-started).
 - Create `now.json` file. Make sure to add actual values for `GA_TRACKING_ID`, `StripePublishableKey` (production-level) and `alias`. Read more about how to [configure now](https://zeit.co/docs/features/configuration).
@@ -262,6 +266,120 @@ We also specified styles for all content inside a `<body>` element:
 - In your terminal, deploy the app by running `now`.
 - Now outputs your deployment's URL, for example: `builderbook-zomcvzgtvc.now.sh`.
 - Point successful deployment to your domain with `now alias` or `now ln NOW_URL mydomain.com` (`NOW_URL` is URL of your deployment).
+
+## Deploy to Heroku
+
+In this section we will learn how to deploy our app to [Heroku cloud](https://www.heroku.com/home). We will deploy our React-Next-Express app to lightweight Heroku container called [dyno](https://www.heroku.com/dynos).
+
+Instructions are for app located at `/book/8-end`.
+Adjust route if you are deploying app from the root of this public repo.
+
+We will discuss the following topics in this section:
+1. installing Heroku on Linux-based OS
+2. creating app on Heroku dashboard
+3. preparing app for deployment
+4. configuring env variables
+5. deploying app
+6. checking logs
+7. adding custom domain
+
+Let's go step by step.
+
+1. Install Heroku CLI (command-line interface) on your OS. Follow the [official guide](https://devcenter.heroku.com/articles/heroku-cli). In this book we provide instructions for Linux-based systems, in particular, a Ubuntu OS. For Ubuntu OS, run in your terminal:
+  <pre>sudo snap install --classic heroku</pre>
+  To confirm a successful installation, run:
+  <pre>heroku --version</pre>
+  As example, my output that confirms successful installation, looks like:
+  <pre>heroku/7.22.7 linux-x64 node-v11.10.1</pre>
+
+2. [Sign up](https://signup.heroku.com/) for Heroku, go to your Heroku dashboard and click purple <b>New</b> button on the right:
+  ![image](https://user-images.githubusercontent.com/10218864/54558094-12b1f100-497a-11e9-94dd-d36399052931.png)
+
+    On the next screen, give a name to your app and select a region. Click purple <b>Create app</b> button at the bottom:
+    ![image](https://user-images.githubusercontent.com/10218864/54558276-8eac3900-497a-11e9-9026-25aa5047af87.png)
+
+    You will be redirected to `Deploy` tab of your newly created Heroku app:
+    ![image](https://user-images.githubusercontent.com/10218864/54558544-417c9700-497b-11e9-8885-6fdfde21c747.png)
+
+3. As you can see from the above screenshot, you have two options. You can deploy the app directly from your local machine using Heroku CLI or directly from GitHub.
+    In this tutorial, we will deploy a `builderbook/builderbook/book/8-end` app from our public [builderbook/builderbook](https://github.com/builderbook/builderbook) repo hosted on GitHub. Deploying from a private repo will be a similar process.
+    
+    Deploying from GitHub has a few advantages. Heroku uses git to track changes in a codebase. It's possible to deploy app from the local machine using Heroku CLI, however you have to create a [Git repo](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository) for `builderbook/builderbook/book/8-end` with `package.json` file at the root level. A first advantage is that we can deploy from a non-root folder using GitHub instead of Heroku CLI.
+    
+    A second advantage is automation, later on you can create a branch that automatically deploy every new commit to Heroku. For example, we have a [deploy branch](https://github.com/async-labs/saas/tree/deploy) for our demo for [SaaS boilerplate](https://github.com/async-labs/saas/). When we commit to `master` branch - there is no new deployment, when we commit to `deploy` branch - new change is automatically deployed to Heroku app.
+
+    Let's set up deploying from GitHub. On `Deploy` tab of your Heroku app at Heroku dashboard, click <b>Connect to GitHub</b>, then search for your repo, then click <b>Connect</b> next to the name of the proper repo:
+    ![image](https://user-images.githubusercontent.com/10218864/54560210-09775300-497f-11e9-9027-2e3850ec7ff1.png)
+
+    If successful, you will see green text `Connected` and be offered to select a branch and deploy app automatically or manually. Automatic deployment will deploy every new commit, manual deployment requires you to manually click on <b>Deploy Branch</b> button. For simplicity, we will deploy manually from `master` branch of our `builderbook/builderbook` repo.
+
+    Before we perform a manual deployment via GitHub, we need Heroku to run some additional code while app is being deploying. Firstly, we need to tell Heroku that `8-end` app in the `builderbook/builderbook` repo is not at the root level, it's actually nested at `/book/8-end`. Secondly, Heroku needs to know that our app is Node.js app so Heroku finds `package.json` file, properly installs dependencies and runs proper scripts (such as `build` and `start` scripts from `package.json`). To achieve this, we need to add so called `buildpacks` to our Heroku app. Click `Settings` tab, scroll to `Buildpacks` section and click purple <b>Add buildpack</b> button:
+    ![image](https://user-images.githubusercontent.com/10218864/54561192-50fede80-4981-11e9-976a-c3d7c88527ec.png)
+
+    Add two buildpacks, first is `https://github.com/timanovsky/subdir-heroku-buildpack` and second is `heroku/nodejs`:
+    ![image](https://user-images.githubusercontent.com/10218864/54561577-30835400-4982-11e9-997f-4711d999808e.png)
+
+    Next, scroll up while on `Settings` tab and click purple <b>Reveal Config Vars</b> button, create a new environmental variable `PROJECT_PATH` with value `book/8-end`:
+    ![image](https://user-images.githubusercontent.com/10218864/54561775-a5568e00-4982-11e9-9561-2e5827873779.png)
+
+    The above variable will be used by the first buildpack `subdir-heroku-buildpack` to deploy app from repo's subdirectory.
+
+4. If we deploy app at this point, our app will deploy with errors since we did not add environmental variables. Similar to how you added `PROJECT_PATH` variable, add all environmental variables from `book/8-end/.env` file to your Heroku app. Remember to add:
+  - `MONGO_URL`,
+  - `Google_clientID`, 
+  - `Google_clientSecret`,
+  - `EMAIL_SUPPORT_FROM_ADDRESS`,
+  - `Github_Test_ClientID`,
+  - `Github_Test_SecretKey`,
+  - `Github_Live_ClientID`,
+  - `Github_Live_SecretKey`,
+  - `Stripe_Test_SecretKey`,
+  - `Stripe_Live_SecretKey`,
+  - `MAILCHIMP_API_KEY`,
+  - `MAILCHIMP_PURCHASED_LIST_ID`,
+  - `SESSION_SECRET`.
+
+
+5. While on `Settings` tab, scroll to `Domains and certificates` section and note your app's URL. My app's URL is: https://builderbook-8-end.herokuapp.com
+    Let's deploy, go to `Deploy` tab, scroll to `Manual deploy` section and click <b>Deploy branch</b> button.
+    After deployment process is complete , navigate to your app's URL:
+    ![image](https://user-images.githubusercontent.com/10218864/54564053-10569380-4988-11e9-87dd-f81a28dd6406.png)
+
+6. Server logs are not available on Heroku dashboard. To see logs, you have to use Heroku CLI.
+    In your terminal, run:
+    <pre>heroku login</pre>
+
+    Follow instructions to log in to Heroku CLI.
+
+    After successful login, terminal will print:
+    <pre>Logged in as email@domain.com</pre>
+
+    Where `email@domain.com` is an email address that you used to create your Heroku account.
+
+    To see logs, in your terminal run:
+    <pre>heroku logs --app builderbook-8-end --tail</pre>
+
+    In your terminal, you will see your most recent logs and be able to see a real-time logs. 
+
+    You can output certain number of lines (N) for retrieved logs by adding `--num N` to the `heroku logs` command.
+    You can print only app's logs by adding `--source app` or system's logs by adding `--source heroku`.  
+
+7. Time to add a custom domain. The Heroku app that we created is deployed on `free dyno`. Free dyno plan does not let you to add a custom domain to your app. To add custom domain, go to `Resources` tab and click purple <b>Change Dyno Type</b> button:
+    ![image](https://user-images.githubusercontent.com/10218864/54622849-983faa80-4a27-11e9-957f-54fe5aa742ca.png)
+
+    Select a `Hobby` plan and click <b>Save</b> button.
+
+    Navigate to `Settings` tab and scroll to the `Domains and certificates` and click purple <b>Add domain</b> button:
+    ![image](https://user-images.githubusercontent.com/10218864/54623152-36cc0b80-4a28-11e9-974b-8a14fb56a86a.png)
+
+    Type your custom domain name, I added `heroku.builderbook.org` as a custom domain, click <b>Save changes</b> button.
+
+    Heroku will displa you a value for CNAME record that you have to create for your custom domain. For me, custom domain is `heroku.builderbook.org and I manage DNS records at Now by Zeit.
+    
+    After you create a CNAME, ACM status on Heroku's dashboard will change to `Ok`:
+    ![image](https://user-images.githubusercontent.com/10218864/54624195-2452d180-4a2a-11e9-999d-a6a771cde73c.png)
+
+It's important that you remember to manually add your custom domain to the settings of your Google OAuth app (Chapter 3) and GitHub OAuth app (Chapter 6). If you forget to do it, you will see errors when you try to log in to your app or when you try to connect GitHub to your app.
 
 ## Scaling
 
