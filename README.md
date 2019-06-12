@@ -29,6 +29,7 @@ We've used this `builderbook` project to build [saas](https://github.com/async-l
 - [Built with](#built-with)
   - [Core stack](#core-stack)
   - [Third party APIs](#third-party-apis)
+- [Docker](#docker)
 - [Contributing](#contributing)
 - [Team](#team)
 - [License](#license)
@@ -429,6 +430,11 @@ Book-detail page for Admin user:
 
 Check out [package.json](https://github.com/builderbook/builderbook/blob/master/package.json).
 
+## Docker
+- Install Docker (Ubuntu instructions: https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04)
+- Modify `docker-compose-dev.yml` file
+- If using Ubuntu, follow these steps: https://stackoverflow.com/questions/38775954/sudo-docker-compose-command-not-found
+- Start app with `docker-compose -f docker-compose-dev.yml up`
 
 ## Contributing
 We welcome suggestions and pull requests, especially for [issues](https://github.com/builderbook/builderbook/issues) labeled as `discussion` and `contributions welcome`.
