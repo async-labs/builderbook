@@ -431,7 +431,7 @@ Book-detail page for Admin user:
 Check out [package.json](https://github.com/builderbook/builderbook/blob/master/package.json).
 
 ## Docker
-- Install Docker (Ubuntu instructions: https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04)
+- Install Docker and Docker Compose
 - Modify `docker-compose-dev.yml` file
 - If using Ubuntu, follow these steps: https://stackoverflow.com/questions/38775954/sudo-docker-compose-command-not-found
 - Start app with `docker-compose -f docker-compose-dev.yml up`
