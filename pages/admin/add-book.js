@@ -3,7 +3,6 @@ import Router from 'next/router';
 import Head from 'next/head';
 import NProgress from 'nprogress';
 
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 import EditBook from '../../components/admin/EditBook';
 import { addBook, syncAllChapters } from '../../lib/api/admin';
@@ -45,4 +44,4 @@ class AddBook extends React.Component {
   }
 }
 
-export default withAuth(withLayout(AddBook));
+export default withAuth(AddBook);

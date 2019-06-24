@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid';
 
 import notify from '../../lib/notifier';
 
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 import { getBookList } from '../../lib/api/admin';
 
@@ -25,7 +24,7 @@ const Index = ({ books }) => (
             <Button variant="contained">Add book</Button>
           </Link>
           <ul>
-            {books.map(b => (
+            {books.map((b) => (
               <li key={b._id}>
                 <Link
                   prefetch
@@ -44,9 +43,11 @@ const Index = ({ books }) => (
 );
 
 Index.propTypes = {
-  books: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  })).isRequired,
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 class IndexWithData extends React.Component {
@@ -69,4 +70,4 @@ class IndexWithData extends React.Component {
   }
 }
 
-export default withAuth(withLayout(IndexWithData), { adminRequired: true });
+export default withAuth(IndexWithData, { adminRequired: true });

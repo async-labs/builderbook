@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Head from 'next/head';
+
 import Error from 'next/error';
 import NProgress from 'nprogress';
 
 import { getMyBookList, getMyBookmarksList } from '../../lib/api/customer';
 import notify from '../../lib/notifier';
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
+
+// import Header from '../../components/Header';
 
 function renderBookRow(book) {
   return (
@@ -40,14 +42,20 @@ function renderFreeBookRow(book) {
 function renderBookmarkListItem(bookmark) {
   return (
     <div key={bookmark.bookSlug}>
-      <p>Book: {bookmark.bookName}</p>
+      <p>
+        Book: &nbsp;
+        {bookmark.bookName}
+      </p>
       <ul>
-        {bookmark.bookmarksArray.map(bookmarkItem => (
+        {bookmark.bookmarksArray.map((bookmarkItem) => (
           <li key={bookmarkItem._id}>
             <a
               href={`/books/${bookmark.bookSlug}/${bookmarkItem.chapterSlug}#${bookmarkItem.hash}`}
             >
-              Chapter {bookmarkItem.chapterOrder - 1}, section {bookmarkItem.text}
+              Chapter &nbsp;
+              {bookmarkItem.chapterOrder - 1},
+              section &nbsp;
+              {bookmarkItem.text}
             </a>
           </li>
         ))}
@@ -56,9 +64,7 @@ function renderBookmarkListItem(bookmark) {
   );
 }
 
-function MyBooks({
-  purchasedBooks, freeBooks, otherBooks, bookmarks, error, loading,
-}) {
+function MyBooks({ purchasedBooks, freeBooks, otherBooks, bookmarks, error, loading }) {
   if (error) {
     notify(error);
     return <Error statusCode={500} />;
@@ -82,7 +88,7 @@ function MyBooks({
         {purchasedBooks && purchasedBooks.length > 0 ? (
           <div>
             <h3>Your books</h3>
-            <ul>{purchasedBooks.map(book => renderBookRow(book))}</ul>
+            <ul>{purchasedBooks.map((book) => renderBookRow(book))}</ul>
           </div>
         ) : (
           <div>
@@ -92,20 +98,20 @@ function MyBooks({
         )}
 
         {freeBooks && freeBooks.length > 0 ? (
-          <ul>{freeBooks.map(book => renderFreeBookRow(book))}</ul>
+          <ul>{freeBooks.map((book) => renderFreeBookRow(book))}</ul>
         ) : null}
 
         {otherBooks && otherBooks.length > 0 ? (
           <div>
             <h3>Books available for purchase</h3>
-            <ul>{otherBooks.map(book => renderBookRow(book))}</ul>
+            <ul>{otherBooks.map((book) => renderBookRow(book))}</ul>
           </div>
         ) : null}
 
         {bookmarks && bookmarks.length > 0 ? (
           <div>
             <h3>Your bookmarks</h3>
-            {bookmarks.map(bookmark => renderBookmarkListItem(bookmark))}
+            {bookmarks.map((bookmark) => renderBookmarkListItem(bookmark))}
           </div>
         ) : null}
       </div>
@@ -114,18 +120,26 @@ function MyBooks({
 }
 
 MyBooks.propTypes = {
-  purchasedBooks: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  })),
-  freeBooks: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  })),
-  otherBooks: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  })),
-  bookmarks: PropTypes.arrayOf(PropTypes.shape({
-    bookName: PropTypes.string.isRequired,
-  })),
+  purchasedBooks: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  ),
+  freeBooks: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  ),
+  otherBooks: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  ),
+  bookmarks: PropTypes.arrayOf(
+    PropTypes.shape({
+      bookName: PropTypes.string.isRequired,
+    }),
+  ),
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
 };
@@ -174,4 +188,4 @@ class MyBooksWithData extends React.Component {
   }
 }
 
-export default withAuth(withLayout(MyBooksWithData));
+export default withAuth(MyBooksWithData);

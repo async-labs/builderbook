@@ -87,7 +87,7 @@ function Header({ user }) {
                   <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
                 </Link>
               </div>
-              )}
+            )}
           </Grid>
         </Grid>
       </Toolbar>
@@ -99,6 +99,9 @@ Header.propTypes = {
   user: PropTypes.shape({
     displayName: PropTypes.string,
     email: PropTypes.string.isRequired,
+    isAdmin: PropTypes.bool,
+    avatarUrl: PropTypes.string,
+    isGithubConnected: PropTypes.bool,
   }),
 };
 

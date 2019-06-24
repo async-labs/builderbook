@@ -72,7 +72,7 @@ function Header({ user, hideHeader, next }) {
           </Grid>
           <Grid item sm={4} xs={9} style={{ textAlign: 'right' }}>
             {user ? (
-              <div style={{ whiteSpace: ' nowrap' }}>
+              <div style={{ whiteSpace: 'nowrap' }}>
                 {!user.isAdmin ? (
                   <MenuDrop
                     options={optionsMenuCustomer}
@@ -122,6 +122,9 @@ Header.propTypes = {
   user: PropTypes.shape({
     displayName: PropTypes.string,
     email: PropTypes.string.isRequired,
+    isAdmin: PropTypes.bool,
+    avatarUrl: PropTypes.string,
+    isGithubConnected: PropTypes.bool,
   }),
   hideHeader: PropTypes.bool,
   next: PropTypes.string,

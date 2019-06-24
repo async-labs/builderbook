@@ -15,7 +15,9 @@ function getItemElm(i, chapter, bookSlug) {
         </a>
       </b>
       <br />
-      {chapter.sections.map(s => <li key={s._id}>{s.text}</li>)}
+      {chapter.sections.map((s) => (
+        <li key={s._id}>{s.text}</li>
+      ))}
       <br />
     </div>
   );
@@ -29,7 +31,7 @@ export default function TOC({ toc, bookSlug }) {
   const left = [];
   const right = [];
 
-  const middle = Math.floor(toc.length / 2) + toc.length % 2 + 1;
+  const middle = Math.floor(toc.length / 2) + (toc.length % 2) + 1;
   for (let i = 1; i < middle; i += 1) {
     left.push(getItemElm(i, toc[i - 1], bookSlug));
   }
@@ -69,8 +71,10 @@ export default function TOC({ toc, bookSlug }) {
 }
 
 TOC.propTypes = {
-  toc: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-  })).isRequired,
+  toc: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   bookSlug: PropTypes.string.isRequired,
 };

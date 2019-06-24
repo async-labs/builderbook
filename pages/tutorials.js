@@ -5,7 +5,6 @@ import Header from '../components/HomeHeader';
 import Footer from '../components/HomeFooter';
 import SubscribeForm from '../components/SubscribeForm';
 
-import withLayout from '../lib/withLayout';
 import withAuth from '../lib/withAuth';
 import { getTutorials } from '../lib/api/public';
 
@@ -20,9 +19,10 @@ const styleExcerpt = {
 function renderTutorials(tutorialItem) {
   return (
     <li style={{ padding: '20px 0px' }} key={tutorialItem.order}>
-      <a href={tutorialItem.link} target="_blank">
+      <a href={tutorialItem.link} target="_blank" rel="noopener noreferrer">
         {tutorialItem.title}
-      </a>{' '}
+      </a>
+      &nbsp;
       <span style={{ fontSize: '12px', fontWeight: '400' }}>({tutorialItem.domain})</span>
       <p style={styleExcerpt}>{tutorialItem.excerpt}</p>
     </li>
@@ -46,7 +46,7 @@ const Tutorials = ({ user, tutorials }) => (
       <SubscribeForm />
       {tutorials && tutorials.length > 0 ? (
         <div style={{ margin: '20px 0px 400px 0px' }}>
-          {tutorials.map(tutorialItem => renderTutorials(tutorialItem))}
+          {tutorials.map((tutorialItem) => renderTutorials(tutorialItem))}
         </div>
       ) : null}
       <br />
@@ -76,4 +76,4 @@ Tutorials.getInitialProps = async function getInitialProps() {
   return { tutorials };
 };
 
-export default withAuth(withLayout(Tutorials, { noHeader: true }), { loginRequired: false });
+export default withAuth(Tutorials, { loginRequired: false, noHeader: true });

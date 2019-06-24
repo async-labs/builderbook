@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import StripeCheckout from 'react-stripe-checkout';
 import NProgress from 'nprogress';
 import Button from '@material-ui/core/Button';
-import Link from 'next/link';
 
 import { buyBook } from '../../lib/api/customer';
 import notify from '../../lib/notifier';
@@ -22,9 +21,13 @@ class BuyButton extends React.PureComponent {
   static propTypes = {
     book: PropTypes.shape({
       _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      textNearButton: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
     }),
     user: PropTypes.shape({
       _id: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
     }),
     showModal: PropTypes.bool,
   };

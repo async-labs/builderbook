@@ -15,7 +15,6 @@ import {
   styleHomepageFeature,
   styleH1,
 } from '../lib/SharedStyles';
-import withLayout from '../lib/withLayout';
 import withAuth from '../lib/withAuth';
 import { getTableOfContents } from '../lib/api/public';
 
@@ -111,8 +110,8 @@ const Book = ({ user, toc }) => (
         >
           {' '}
           Builder Book
-        </a>{' '}
-        and
+        </a>
+        &nbsp;and
         <a href="https://findharbor.com" target="_blank" rel="noopener noreferrer">
           {' '}
           Harbor
@@ -199,4 +198,4 @@ Book.getInitialProps = async function getInitialProps() {
   return { toc };
 };
 
-export default withAuth(withLayout(Book, { noHeader: true }), { loginRequired: false });
+export default withAuth(Book, { loginRequired: false, noHeader: true });

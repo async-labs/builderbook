@@ -9,9 +9,11 @@ import notify from '../../lib/notifier';
 
 class GiveFreeBook extends Component {
   static propTypes = {
-    books: PropTypes.arrayOf(PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-    })),
+    books: PropTypes.arrayOf(
+      PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+      }),
+    ),
   };
 
   static defaultProps = {
@@ -43,12 +45,12 @@ class GiveFreeBook extends Component {
     const { books } = this.props;
 
     const purchasedBooks =
-      (user.purchasedBookIds && books.filter(b => user.purchasedBookIds.includes(b._id))) || [];
+      (user.purchasedBookIds && books.filter((b) => user.purchasedBookIds.includes(b._id))) || [];
 
     const freeBooks =
-      (user.freeBookIds && books.filter(b => user.freeBookIds.includes(b._id))) || [];
+      (user.freeBookIds && books.filter((b) => user.freeBookIds.includes(b._id))) || [];
 
-    const userBookIds = purchasedBooks.map(b => b._id).concat(freeBooks.map(b => b._id));
+    const userBookIds = purchasedBooks.map((b) => b._id).concat(freeBooks.map((b) => b._id));
 
     return (
       <div>
@@ -65,12 +67,14 @@ class GiveFreeBook extends Component {
           }}
         >
           <option value="">- select book -</option>
-          {books.filter(b => !userBookIds.includes(b._id)).map(book => (
-            <option value={book._id} key={book._id}>
-              {book.name}
-            </option>
+          {books
+            .filter((b) => !userBookIds.includes(b._id))
+            .map((book) => (
+              <option value={book._id} key={book._id}>
+                {book.name}
+              </option>
           ))}
-        </select>{' '}
+        </select>
         <br />
         <br />
         <Button
@@ -112,7 +116,7 @@ class GiveFreeBook extends Component {
         </form>
         <br />
         <br />
-        <div>{users.map(user => this.renderUser(user))}</div>
+        <div>{users.map((user) => this.renderUser(user))}</div>
         <br />
         <br />
         <br />

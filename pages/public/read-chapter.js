@@ -12,7 +12,6 @@ import BuyButton from '../../components/customer/BuyButton';
 import Bookmark from '../../components/customer/Bookmark';
 
 import { getChapterDetail } from '../../lib/api/public';
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 
 const styleIcon = {
@@ -25,6 +24,10 @@ class ReadChapter extends React.Component {
   static propTypes = {
     chapter: PropTypes.shape({
       _id: PropTypes.string.isRequired,
+      isPurchased: PropTypes.bool.isRequired,
+      isFree: PropTypes.bool.isRequired,
+      htmlContent: PropTypes.string,
+      htmlExcerpt: PropTypes.string,
     }),
     user: PropTypes.shape({
       _id: PropTypes.string.isRequired,
@@ -260,7 +263,8 @@ class ReadChapter extends React.Component {
   };
 
   closeTocWhenMobile = () => {
-    this.setState({ showTOC: !this.state.isMobile });
+    const { isMobile } = this.state;
+    this.setState({ showTOC: !isMobile });
   };
 
   renderMainContent() {
@@ -371,7 +375,7 @@ class ReadChapter extends React.Component {
   render() {
     const { user, router } = this.props;
 
-    const { chapter, showTOC, isMobile, hideHeader } = this.state;
+    const { chapter, showTOC, isMobile, hideHeader, darkTheme, activeSection } = this.state;
 
     if (!chapter) {
       return <Error statusCode={404} />;
@@ -457,11 +461,11 @@ class ReadChapter extends React.Component {
               chapter={chapter}
               bookmark={bookmark}
               changeBookmark={this.changeBookmark}
-              activeSection={this.state.activeSection}
+              activeSection={activeSection}
             />
           ) : null}
           <div>
-            {this.state.darkTheme ? (
+            {darkTheme ? (
               <i
                 className="material-icons"
                 style={{ opacity: '0.75', fontSize: '24px', cursor: 'pointer', color: 'white' }}
@@ -489,6 +493,7 @@ class ReadChapter extends React.Component {
   }
 }
 
-export default withAuth(withLayout(withRouter(ReadChapter), { noHeader: true }), {
+export default withAuth(withRouter(ReadChapter), {
   loginRequired: false,
+  noHeader: true,
 });

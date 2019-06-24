@@ -14,7 +14,6 @@ import {
   styleHomepageFeature,
   styleH1,
 } from '../lib/SharedStyles';
-import withLayout from '../lib/withLayout';
 import withAuth from '../lib/withAuth';
 
 const styleTeamMember = {
@@ -28,7 +27,9 @@ const Index = ({ user }) => (
       <title>Open source (MIT License) web app to publish documentation and books</title>
       <meta
         name="description"
-        content="Open source web app built with modern JavaScript stack: React, Material UI, Next, Express, Mongoose, and MongoDB. Integrated with AWS SES, Github, Google OAuth, Stripe, and MailChimp."
+        content="Open source web app built with modern JavaScript stack: 
+        React, Material UI, Next, Express, Mongoose, and MongoDB. 
+        Integrated with AWS SES, Github, Google OAuth, Stripe, and MailChimp."
       />
     </Head>
     <Header user={user} />
@@ -38,6 +39,7 @@ const Index = ({ user }) => (
           <br />
           <h1 style={styleH1}>Open source app</h1>
           <iframe
+            // eslint-disable-next-line max-len
             src="https://ghbtns.com/github-btn.html?user=builderbook&repo=builderbook&type=star&count=true&size=large"
             frameBorder="0"
             scrolling="0"
@@ -90,8 +92,7 @@ const Index = ({ user }) => (
               {' '}
               boilerplate
             </a>
-            {' '}
-            or clone the entire project. Customize the code to build your own web app.
+            &nbsp;or clone the entire project. Customize the code to build your own web app.
           </p>
         </Grid>
         <Grid item sm={6} xs={12} style={styleHomepageFeature}>
@@ -121,9 +122,7 @@ const Index = ({ user }) => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              {' '}
-              dependencies
-              {' '}
+              &nbsp;dependencies&nbsp;
             </a>
             up-to-date.
           </p>
@@ -159,7 +158,8 @@ const Index = ({ user }) => (
             >
               {' '}
               our book
-            </a>. You are welcome to use this app as a boilerplate.
+            </a>
+            . You are welcome to use this app as a boilerplate.
             <a
               href="https://github.com/builderbook/builderbook#deploy"
               target="_blank"
@@ -167,12 +167,13 @@ const Index = ({ user }) => (
             >
               {' '}
               Deploy
-            </a>{' '}
-            it to your own domain in under 60 seconds using
+            </a>
+            &nbsp;it to your own domain in under 60 seconds using
             <a href="https://zeit.co/now" target="_blank" rel="noopener noreferrer">
               {' '}
               Now
-            </a>.
+            </a>
+            .
           </p>
         </Grid>
       </Grid>
@@ -189,16 +190,21 @@ const Index = ({ user }) => (
         >
           {' '}
           Builder Book
-        </a>{' '}
-        and
+        </a>
+        &nbsp;and
         <a href="https://findharbor.com" target="_blank" rel="noopener noreferrer">
-          {' '}
-          Harbor
-        </a>. Stay tuned for
-        <a href="https://github.com/async-labs/async-saas" target="_blank" rel="noopener noreferrer">
+          &nbsp;Harbor
+        </a>
+        . Stay tuned for
+        <a
+          href="https://github.com/async-labs/async-saas"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {' '}
           Async
-        </a>.
+        </a>
+        .
       </div>
       <br />
       <Grid container direction="row" justify="space-around" align="flex-start">
@@ -274,4 +280,4 @@ Index.defaultProps = {
   user: null,
 };
 
-export default withAuth(withLayout(Index, { noHeader: true }), { loginRequired: false });
+export default withAuth(Index, { loginRequired: false, noHeader: true });

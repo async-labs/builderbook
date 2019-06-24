@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
 import withAuth from '../../lib/withAuth';
-import withLayout from '../../lib/withLayout';
 import { styleLoginButton } from '../../lib/SharedStyles';
 
 function Login({ router }) {
@@ -44,4 +43,4 @@ Login.propTypes = {
   }).isRequired,
 };
 
-export default withAuth(withLayout(withRouter(Login)), { logoutRequired: true });
+export default withAuth(withRouter(Login), { logoutRequired: true });

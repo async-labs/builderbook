@@ -12,6 +12,7 @@ export default class Bookmark extends React.PureComponent {
     chapter: PropTypes.shape({
       _id: PropTypes.string.isRequired,
       slug: PropTypes.string.isRequired,
+      order: PropTypes.number.isRequired,
     }).isRequired,
     bookmark: PropTypes.shape({
       hash: PropTypes.string.isRequired,
@@ -40,7 +41,7 @@ export default class Bookmark extends React.PureComponent {
   addBookmark = async () => {
     this.setState({ anchorEl: null });
 
-    const { chapter, activeSection } = this.props;
+    const { chapter, activeSection, changeBookmark } = this.props;
 
     if (!activeSection) {
       notify('To bookmark a new section, scroll to that section.');
@@ -62,7 +63,7 @@ export default class Bookmark extends React.PureComponent {
           activeSection.text
         }".`,
       );
-      this.props.changeBookmark(activeSection);
+      changeBookmark(activeSection);
     } catch (err) {
       NProgress.done();
       notify(err);
