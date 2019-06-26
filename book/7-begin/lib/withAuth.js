@@ -6,7 +6,7 @@ let globalUser = null;
 
 export default (
   Page,
-  { loginRequired = true, logoutRequired = false, adminRequired = false, noHeader = false } = {},
+  { loginRequired = true, logoutRequired = false, adminRequired = false } = {},
 ) =>
   class BaseComponent extends React.Component {
     static propTypes = {
@@ -50,7 +50,7 @@ export default (
         user._id = user._id.toString();
       }
 
-      const props = { user, isFromServer, noHeader };
+      const props = { user, isFromServer };
 
       if (Page.getInitialProps) {
         Object.assign(props, (await Page.getInitialProps(ctx)) || {});

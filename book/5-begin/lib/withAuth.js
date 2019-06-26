@@ -4,7 +4,7 @@ import Router from 'next/router';
 
 let globalUser = null;
 
-export default (Page, { loginRequired = true, logoutRequired = false, noHeader = false } = {}) =>
+export default (Page, { loginRequired = true, logoutRequired = false } = {}) =>
   class BaseComponent extends React.Component {
     static propTypes = {
       user: PropTypes.shape({
@@ -43,7 +43,7 @@ export default (Page, { loginRequired = true, logoutRequired = false, noHeader =
         user._id = user._id.toString();
       }
 
-      const props = { user, isFromServer, noHeader };
+      const props = { user, isFromServer };
 
       if (Page.getInitialProps) {
         Object.assign(props, (await Page.getInitialProps(ctx)) || {});
