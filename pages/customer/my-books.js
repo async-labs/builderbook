@@ -10,8 +10,6 @@ import { getMyBookList, getMyBookmarksList } from '../../lib/api/customer';
 import notify from '../../lib/notifier';
 import withAuth from '../../lib/withAuth';
 
-// import Header from '../../components/Header';
-
 function renderBookRow(book) {
   return (
     <li key={book._id}>

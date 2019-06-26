@@ -11,7 +11,6 @@ import Header from '../../components/Header';
 import BuyButton from '../../components/customer/BuyButton';
 
 import { getChapterDetail } from '../../lib/api/public';
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 
 const styleIcon = {
@@ -24,6 +23,10 @@ class ReadChapter extends React.Component {
   static propTypes = {
     chapter: PropTypes.shape({
       _id: PropTypes.string.isRequired,
+      isPurchased: PropTypes.bool.isRequired,
+      isFree: PropTypes.bool.isRequired,
+      htmlContent: PropTypes.string,
+      htmlExcerpt: PropTypes.string,
     }),
     user: PropTypes.shape({
       _id: PropTypes.string.isRequired,
@@ -348,6 +351,7 @@ class ReadChapter extends React.Component {
   }
 }
 
-export default withAuth(withLayout(withRouter(ReadChapter), { noHeader: true }), {
+export default withAuth(withRouter(ReadChapter), {
   loginRequired: false,
+  noHeader: true,
 });

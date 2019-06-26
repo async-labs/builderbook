@@ -1,6 +1,5 @@
 import React from 'react';
 
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 
 const MyBooks = () => (
@@ -9,4 +8,4 @@ const MyBooks = () => (
   </div>
 );
 
-export default withAuth(withLayout(MyBooks));
+export default withAuth(MyBooks);

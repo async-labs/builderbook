@@ -30,10 +30,7 @@ const options = {
   useFindAndModify: false,
 };
 
-mongoose.connect(
-  MONGO_URL,
-  options,
-);
+mongoose.connect(MONGO_URL, options);
 
 const sessionSecret = process.env.SESSION_SECRET;
 

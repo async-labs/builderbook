@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Button from '@material-ui/core/Button';
-import withLayout from '../lib/withLayout';
 
 const Index = () => (
   <div style={{ padding: '10px 45px' }}>
@@ -13,4 +12,4 @@ const Index = () => (
   </div>
 );
 
-export default withLayout(Index);
+export default Index;

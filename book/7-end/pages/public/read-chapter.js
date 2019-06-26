@@ -9,7 +9,6 @@ import Link from 'next/link';
 import Header from '../../components/Header';
 
 import { getChapterDetail } from '../../lib/api/public';
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 
 const styleIcon = {
@@ -22,6 +21,8 @@ class ReadChapter extends React.Component {
   static propTypes = {
     chapter: PropTypes.shape({
       _id: PropTypes.string.isRequired,
+      htmlContent: PropTypes.string,
+      htmlExcerpt: PropTypes.string,
     }),
     user: PropTypes.shape({
       _id: PropTypes.string.isRequired,
@@ -151,9 +152,7 @@ class ReadChapter extends React.Component {
   };
 
   renderMainContent() {
-    const {
-      chapter, htmlContent, showTOC, isMobile,
-    } = this.state;
+    const { chapter, htmlContent, showTOC, isMobile } = this.state;
 
     let padding = '20px 20%';
     if (!isMobile && showTOC) {
@@ -177,7 +176,8 @@ class ReadChapter extends React.Component {
   }
 
   renderSections() {
-    const { sections } = this.state.chapter;
+    const { chapter } = this.state;
+    const { sections } = chapter;
     const { activeSection } = this.state;
 
     if (!sections || !sections.length === 0) {
@@ -186,7 +186,7 @@ class ReadChapter extends React.Component {
 
     return (
       <ul>
-        {sections.map(s => (
+        {sections.map((s) => (
           <li key={s.escapedText} style={{ paddingTop: '10px' }}>
             <a
               style={{
@@ -204,9 +204,7 @@ class ReadChapter extends React.Component {
   }
 
   renderSidebar() {
-    const {
-      showTOC, chapter, isMobile, hideHeader,
-    } = this.state;
+    const { showTOC, chapter, isMobile, hideHeader } = this.state;
 
     if (!showTOC) {
       return null;
@@ -261,10 +259,7 @@ class ReadChapter extends React.Component {
   render() {
     const { user } = this.props;
 
-    const {
-      chapter, showTOC, hideHeader, isMobile,
-    } = this.state;
-
+    const { chapter, showTOC, hideHeader, isMobile } = this.state;
 
     if (!chapter) {
       return <Error statusCode={404} />;
@@ -328,9 +323,9 @@ class ReadChapter extends React.Component {
             format_list_bulleted
           </i>
         </div>
-      </div >
+      </div>
     );
   }
 }
 
-export default withAuth(withLayout(ReadChapter, { noHeader: true }), { loginRequired: false });
+export default withAuth(ReadChapter, { loginRequired: false, noHeader: true });

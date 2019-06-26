@@ -5,7 +5,6 @@ import Head from 'next/head';
 import Grid from '@material-ui/core/Grid';
 
 import { getChapterDetail } from '../../lib/api/public';
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 
 const styleGrid = {
@@ -16,6 +15,7 @@ class ReadChapter extends React.Component {
   static propTypes = {
     chapter: PropTypes.shape({
       _id: PropTypes.string.isRequired,
+      htmlContent: PropTypes.string,
     }),
   };
 
@@ -66,9 +66,15 @@ class ReadChapter extends React.Component {
 
     return (
       <div>
-        <h3>Chapter: {chapter.title}</h3>
-
-        <div className="main-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
+        <h3>
+          Chapter:
+          {chapter.title}
+        </h3>
+        <div
+          className="main-content"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: htmlContent }}
+        />
       </div>
     );
   }
@@ -105,7 +111,10 @@ class ReadChapter extends React.Component {
               paddingLeft: '25px',
             }}
           >
-            <h2>Book: {book.name}</h2>
+            <h2>
+              Book:
+              {book.name}
+            </h2>
 
             {this.renderMainContent()}
           </Grid>
@@ -115,4 +124,4 @@ class ReadChapter extends React.Component {
   }
 }
 
-export default withAuth(withLayout(ReadChapter), { loginRequired: false });
+export default withAuth(ReadChapter, { loginRequired: false });

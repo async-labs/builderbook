@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 
 import notify from '../../lib/notifier';
 
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 import { getBookList } from '../../lib/api/admin';
 
@@ -60,4 +59,4 @@ class IndexWithData extends React.Component {
   }
 }
 
-export default withAuth(withLayout(IndexWithData), { adminRequired: true });
+export default withAuth(IndexWithData, { adminRequired: true });

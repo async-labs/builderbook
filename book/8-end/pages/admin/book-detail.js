@@ -6,7 +6,6 @@ import Link from 'next/link';
 import Button from '@material-ui/core/Button';
 
 import { getBookDetail, syncBookContent } from '../../lib/api/admin';
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 import notify from '../../lib/notifier';
 
@@ -63,6 +62,10 @@ const MyBook = ({ book, error }) => {
 MyBook.propTypes = {
   book: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    chapters: PropTypes.arrayOf.isRequired,
+    slug: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+    githubRepo: PropTypes.string.isRequired,
   }),
   error: PropTypes.string,
 };
@@ -105,4 +108,4 @@ class MyBookWithData extends React.Component {
   }
 }
 
-export default withAuth(withLayout(MyBookWithData));
+export default withAuth(MyBookWithData);

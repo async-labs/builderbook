@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Head from 'next/head';
 
 import { getMyBookList } from '../../lib/api/customer';
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 
 class MyBooks extends React.Component {
@@ -72,4 +71,6 @@ class MyBooks extends React.Component {
   }
 }
 
-export default withAuth(withLayout(MyBooks));
+// Potential TODO: add otherBooks to see list of books that are available for purchase
+
+export default withAuth(MyBooks);

@@ -6,7 +6,6 @@ import Error from 'next/error';
 
 import EditBookComp from '../../components/admin/EditBook';
 import { getBookDetail, editBook } from '../../lib/api/admin';
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 import notify from '../../lib/notifier';
 
@@ -28,7 +27,8 @@ class EditBook extends React.Component {
     NProgress.start();
 
     try {
-      const book = await getBookDetail({ slug: this.props.slug });
+      const { slug } = this.props;
+      const book = await getBookDetail({ slug });
       this.setState({ book }); // eslint-disable-line
       NProgress.done();
     } catch (err) {
@@ -45,7 +45,10 @@ class EditBook extends React.Component {
       const editedBook = await editBook({ ...data, id: book._id });
       notify('Saved');
       NProgress.done();
-      Router.push(`/admin/book-detail?slug=${editedBook.slug}`, `/admin/book-detail/${editedBook.slug}`);
+      Router.push(
+        `/admin/book-detail?slug=${editedBook.slug}`,
+        `/admin/book-detail/${editedBook.slug}`,
+      );
     } catch (err) {
       notify(err);
       NProgress.done();
@@ -72,4 +75,4 @@ class EditBook extends React.Component {
   }
 }
 
-export default withAuth(withLayout(EditBook));
+export default withAuth(EditBook);

@@ -6,11 +6,10 @@ import Link from 'next/link';
 import Button from '@material-ui/core/Button';
 
 import { getBookDetail, syncBookContent } from '../../lib/api/admin';
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 import notify from '../../lib/notifier';
 
-const handleSyncContent = bookId => async () => {
+const handleSyncContent = (bookId) => async () => {
   try {
     await syncBookContent({ bookId });
     notify('Synced');
@@ -40,12 +39,12 @@ const MyBook = ({ book, error }) => {
       <p />
       <Button variant="contained" onClick={handleSyncContent(book._id)}>
         Sync with Github
-      </Button>{' '}
+      </Button>
       <Link as={`/admin/edit-book/${book.slug}`} href={`/admin/edit-book?slug=${book.slug}`}>
         <Button variant="contained">Edit book</Button>
       </Link>
       <ul>
-        {chapters.map(ch => (
+        {chapters.map((ch) => (
           <li key={ch._id}>
             <Link
               as={`/books/${book.slug}/${ch.slug}`}
@@ -63,6 +62,10 @@ const MyBook = ({ book, error }) => {
 MyBook.propTypes = {
   book: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    chapters: PropTypes.arrayOf.isRequired,
+    slug: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+    githubRepo: PropTypes.string.isRequired,
   }),
   error: PropTypes.string,
 };
@@ -90,7 +93,8 @@ class MyBookWithData extends React.Component {
   async componentDidMount() {
     NProgress.start();
     try {
-      const book = await getBookDetail({ slug: this.props.slug });
+      const { slug } = this.props;
+      const book = await getBookDetail({ slug });
       this.setState({ book, loading: false }); // eslint-disable-line
       NProgress.done();
     } catch (err) {
@@ -104,4 +108,4 @@ class MyBookWithData extends React.Component {
   }
 }
 
-export default withAuth(withLayout(MyBookWithData));
+export default withAuth(MyBookWithData);

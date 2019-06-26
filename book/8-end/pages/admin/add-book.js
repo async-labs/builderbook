@@ -2,7 +2,6 @@ import React from 'react';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 
-import withLayout from '../../lib/withLayout';
 import withAuth from '../../lib/withAuth';
 import EditBook from '../../components/admin/EditBook';
 import { addBook, syncBookContent } from '../../lib/api/admin';
@@ -31,7 +30,6 @@ class AddBook extends React.Component {
     }
   };
 
-
   render() {
     return (
       <div style={{ padding: '10px 45px' }}>
@@ -41,4 +39,4 @@ class AddBook extends React.Component {
   }
 }
 
-export default withAuth(withLayout(AddBook));
+export default withAuth(AddBook);

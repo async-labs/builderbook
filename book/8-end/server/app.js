@@ -26,10 +26,7 @@ const options = {
   useCreateIndex: true,
   useFindAndModify: false,
 };
-mongoose.connect(
-  MONGO_URL,
-  options,
-);
+mongoose.connect(MONGO_URL, options);
 
 const port = process.env.PORT || 8000;
 const ROOT_URL = getRootUrl();
