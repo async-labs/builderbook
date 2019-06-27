@@ -20,4 +20,3 @@ function routesWithSlug({ server, app }) {
 }
 
 module.exports = routesWithSlug;
-

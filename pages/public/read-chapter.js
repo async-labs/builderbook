@@ -495,5 +495,4 @@ class ReadChapter extends React.Component {
 
 export default withAuth(withRouter(ReadChapter), {
   loginRequired: false,
-  noHeader: true,
 });

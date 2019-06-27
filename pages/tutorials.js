@@ -76,4 +76,4 @@ Tutorials.getInitialProps = async function getInitialProps() {
   return { tutorials };
 };
 
-export default withAuth(Tutorials, { loginRequired: false, noHeader: true });
+export default withAuth(Tutorials, { loginRequired: false });

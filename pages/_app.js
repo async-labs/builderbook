@@ -41,8 +41,7 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
 
-    // console.log(pageProps);
-    // console.log(pageProps.noHeader);
+    console.log(pageProps);
 
     return (
       <Container>
@@ -51,7 +50,12 @@ class MyApp extends App {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          {pageProps.noHeader ? null : <Header {...pageProps} />}
+          {pageProps.chapter ||
+          pageProps.toc ||
+          pageProps.tutorials ||
+          pageProps.indexPage ? null : (
+            <Header {...pageProps} />
+          )}
           <Component {...pageProps} />
           <Notifier />
         </ThemeProvider>

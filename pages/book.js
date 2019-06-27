@@ -49,8 +49,8 @@ const Book = ({ user, toc }) => (
           <p style={{ textAlign: 'center' }}>
             <Link
               prefetch
-              as="/books/builder-book/introduction"
-              href="/public/read-chapter?bookSlug=builder-book&chapterSlug=introduction"
+              as="/books/demo-book/introduction"
+              href="/public/read-chapter?bookSlug=demo-book&chapterSlug=introduction"
             >
               <Button variant="contained" color="primary" style={styleRaisedButton}>
                 Read Preview
@@ -198,4 +198,4 @@ Book.getInitialProps = async function getInitialProps() {
   return { toc };
 };
 
-export default withAuth(Book, { loginRequired: false, noHeader: true });
+export default withAuth(Book, { loginRequired: false });

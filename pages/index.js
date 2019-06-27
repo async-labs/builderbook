@@ -280,4 +280,9 @@ Index.defaultProps = {
   user: null,
 };
 
-export default withAuth(Index, { loginRequired: false, noHeader: true });
+Index.getInitialProps = function getInitialProps() {
+  const indexPage = true;
+  return { indexPage };
+};
+
+export default withAuth(Index, { loginRequired: false });
