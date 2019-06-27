@@ -65,4 +65,4 @@ export default (Page, { loginRequired = true, logoutRequired = false } = {}) =>
 
       return <Page {...this.props} />;
     }
-};
+  };

@@ -23,7 +23,7 @@ class ReadChapter extends React.Component {
   static propTypes = {
     chapter: PropTypes.shape({
       _id: PropTypes.string.isRequired,
-      isPurchased: PropTypes.bool.isRequired,
+      isPurchased: PropTypes.bool,
       isFree: PropTypes.bool.isRequired,
       htmlContent: PropTypes.string,
       htmlExcerpt: PropTypes.string,
@@ -35,11 +35,13 @@ class ReadChapter extends React.Component {
       asPath: PropTypes.string.isRequired,
     }).isRequired,
     showStripeModal: PropTypes.bool.isRequired,
+    noHeader: PropTypes.bool,
   };
 
   static defaultProps = {
     chapter: null,
     user: null,
+    noHeader: true,
   };
 
   constructor(props, ...args) {
@@ -353,5 +355,4 @@ class ReadChapter extends React.Component {
 
 export default withAuth(withRouter(ReadChapter), {
   loginRequired: false,
-  noHeader: true,
 });

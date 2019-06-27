@@ -328,4 +328,4 @@ class ReadChapter extends React.Component {
   }
 }
 
-export default withAuth(ReadChapter, { loginRequired: false, noHeader: true });
+export default withAuth(ReadChapter, { loginRequired: false });
