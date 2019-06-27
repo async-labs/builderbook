@@ -16,7 +16,7 @@ const Index = ({ user }) => (
   </div>
 );
 
-Index.getInitialProps = async ({ query }) => ({ user: query.user });
+Index.getInitialProps = async (ctx) => ({ user: ctx.query.user });
 
 Index.propTypes = {
   user: PropTypes.shape({

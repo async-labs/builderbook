@@ -40,7 +40,7 @@ class MyApp extends App {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          {pageProps.noHeader ? null : <Header {...pageProps} />}
+          <Header {...pageProps} />
           <Component {...pageProps} />
         </ThemeProvider>
       </Container>
