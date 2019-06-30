@@ -13,7 +13,7 @@ We've used this `builderbook` project to build [saas](https://github.com/async-l
 ## How can you use this app?
 - As learning material for React/Material-UI/Next/Express/Mongoose/MongoDB stack
 - As learning material for Google/Github/AWS SES/Mailchimp/Stripe APIs.<br> 
-- As starting point for your own project. Start from our [boilerplate](https://github.com/builderbook/builderbook/tree/master/boilerplate) or modify the final app.<br>
+- As starting point for your own project. Use the code in [book/1-begin](https://github.com/builderbook/builderbook/tree/master/book/1-begin) or [book/1-end](https://github.com/builderbook/builderbook/tree/master/book/1-end) as a lean boilerplate or modify the final app.<br>
 - As a production-ready web app to publish documentation or sell content on your own website (we sell our own book).
 
 
@@ -460,7 +460,6 @@ All code in this repository is provided under the [MIT License](https://github.c
 
 ```
 .
-├── boilerplate                         # Boilerplate with React, Material-UI, Next, Express, Mongoose, MongoDB 
 ├── book                                # Codebases for each chapter of our book
 ├── components                          # React components
 │   ├── admin                           # Components used on Admin pages
