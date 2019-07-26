@@ -77,19 +77,7 @@ function setupGithub({ server }) {
 }
 
 function getAPI({ accessToken }) {
-  const github = new GithubAPI({
-    timeout: 5000,
-    baseUrl: 'https://api.github.com',
-    headers: {
-      accept: 'application/json',
-    },
-    requestMedia: 'application/json',
-  });
-
-  github.authenticate({
-    type: 'oauth',
-    token: accessToken,
-  });
+  const github = new GithubAPI({ auth: accessToken, request: { timeout: 10000 } });
 
   return github;
 }
