@@ -441,7 +441,7 @@ We welcome suggestions and pull requests, especially for [issues](https://github
 
 By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook/blob/master/CODE-OF-CONDUCT.md).
 
-Want to support this project? Sign up at [async](https://async-await.com) and/or buy our [book](https://builderbook.org/book). Also check out our open source [SaaS boilerplate app](https://github.com/async-labs/saas).
+Want to support this project? Sign up at [async](https://async-await.com) and/or buy our [book](https://builderbook.org), which teaches you how to build this project from scratch. Also check out our open source [SaaS boilerplate app](https://github.com/async-labs/saas).
 
 
 ## Team
