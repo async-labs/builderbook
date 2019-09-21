@@ -1,14 +1,14 @@
-## Open source web app (Builder Book)
-[![apm](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/builderbook/builderbook/blob/master/LICENSE.md)
-[![apm](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/builderbook/builderbook#contributing)
+## Builder Book
 
-Builder Book is an open source web app to publish documentation or books. The app is built with React/Material-UI/Next/Express/Mongoose/MongoDB and includes these third party APIs: Google, Github, AWS SES, Mailchimp, Stripe.
+Open source web app to publish documentation or books.
 
-- Live app: https://builderbook.org/books/builder-book/introduction.
-- Learn how to build this app from scratch with our [book](https://builderbook.org/book)
+We've used this `builderbook` project to build:
+- [Async](https://async-await.com) - communication tool for small teams of software developers
+- [Builder Book](https://builderbook.org) - learn how to build full-stack web apps from scratch
+- [SaaS Boilerplate](https://github.com/async-labs/saas) - open source web app to build your own SaaS product
 
-We've used this `builderbook` project to build [saas](https://github.com/async-labs/saas), [async](https://async-await.com), and other real-world web apps.
-
+## Live app:
+- https://builderbook.org/books/builder-book/introduction.
 
 ## How can you use this app?
 - As learning material for React/Material-UI/Next/Express/Mongoose/MongoDB stack
