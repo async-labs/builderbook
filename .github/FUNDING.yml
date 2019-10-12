@@ -1,5 +1,2 @@
 # These are supported funding model platforms
-
-https://builderbook.org
-
-When you buy a book, you support maintainers of this repository.
+custom: ['https://builderbook.org']
