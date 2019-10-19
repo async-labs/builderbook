@@ -46,6 +46,15 @@ app.prepare().then(async () => {
   server.use(compression());
   server.use(express.json());
 
+  // give all Nextjs's request to Nextjs server
+  server.get('/_next/*', (req, res) => {
+    handle(req, res);
+  });
+
+  server.get('/static/*', (req, res) => {
+    handle(req, res);
+  });
+
   const MongoStore = mongoSessionStore(session);
   const sess = {
     name: 'builderbook.sid',

@@ -47,6 +47,8 @@ function auth({ ROOT_URL, server }) {
   passport.deserializeUser((id, done) => {
     User.findById(id, User.publicFields(), (err, user) => {
       done(err, user);
+      // eslint-disable-next-line no-console
+      console.log('deserializeUser', id);
     });
   });
 
