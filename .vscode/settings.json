@@ -1,0 +1,7 @@
+{
+  "window.zoomLevel": -1,
+  "files.autoSave": "afterDelay",
+  "git.enableSmartCommit": true,
+  "editor.formatOnSave": true,
+  "eslint.autoFixOnSave": true,
+}
