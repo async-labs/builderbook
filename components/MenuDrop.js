@@ -19,7 +19,7 @@ class MenuDrop extends React.Component {
   button = undefined;
 
   handleClick = (event) => {
-    this.setState({ anchorEl: event.currentTarget, open: true, });
+    this.setState({ anchorEl: event.currentTarget, open: true });
   };
 
   handleClose = () => {
@@ -52,7 +52,7 @@ class MenuDrop extends React.Component {
           <p />
           {options.map((option) => (
             <div id="wrappingLink" key={option.text}>
-              <Link prefetch={!option.noPrefetch} href={option.href} as={option.as || option.href}>
+              <Link href={option.href} as={option.as || option.href}>
                 <a style={{ padding: '0px 20px' }}>{option.text}</a>
               </Link>
               <p />

@@ -17,7 +17,6 @@ const optionsMenuCustomer = [
   {
     text: 'Log out',
     href: '/logout',
-    noPrefetch: true,
   },
 ];
 
@@ -29,7 +28,6 @@ const optionsMenuAdmin = [
   {
     text: 'Log out',
     href: '/logout',
-    noPrefetch: true,
   },
 ];
 
@@ -40,7 +38,7 @@ function Header({ user }) {
         <Grid container direction="row" justify="space-around" alignItems="center">
           <Grid item sm={6} xs={3} style={{ textAlign: 'left' }}>
             {!user ? (
-              <Link prefetch href="/">
+              <Link href="/">
                 <Avatar
                   src="https://storage.googleapis.com/builderbook/logo.svg"
                   alt="Builder Book logo"
@@ -54,10 +52,10 @@ function Header({ user }) {
               <div style={{ whiteSpace: 'nowrap' }}>
                 {!user.isAdmin ? (
                   <div>
-                    <Link prefetch href="/book" as="/book">
+                    <Link href="/book" as="/book">
                       <a style={{ margin: '20px 30px 0px auto', verticalAlign: 'middle' }}>Book</a>
                     </Link>
-                    <Link prefetch href="/tutorials">
+                    <Link href="/tutorials">
                       <a style={{ margin: '20px 30px 0px auto' }}>Tutorials</a>
                     </Link>
                     <MenuDrop
@@ -77,13 +75,13 @@ function Header({ user }) {
               </div>
             ) : (
               <div>
-                <Link prefetch href="/book" as="/book">
+                <Link href="/book" as="/book">
                   <a style={{ margin: '20px 20px 0px auto' }}>Book</a>
                 </Link>
-                <Link prefetch href="/tutorials">
+                <Link href="/tutorials">
                   <a style={{ margin: '20px 20px 0px auto' }}>Tutorials</a>
                 </Link>
-                <Link prefetch href="/public/login" as="/login">
+                <Link href="/public/login" as="/login">
                   <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
                 </Link>
               </div>

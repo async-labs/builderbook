@@ -19,7 +19,6 @@ const optionsMenuCustomer = [
   {
     text: 'Log out',
     href: '/logout',
-    noPrefetch: true,
   },
 ];
 
@@ -31,7 +30,6 @@ const optionsMenuAdmin = [
   {
     text: 'Log out',
     href: '/logout',
-    noPrefetch: true,
   },
 ];
 
@@ -50,7 +48,7 @@ function Header({ user, hideHeader, next }) {
         <Grid container direction="row" justify="space-around" alignItems="center">
           <Grid item sm={6} xs={1} style={{ textAlign: 'left' }}>
             {!user ? (
-              <Link prefetch href="/">
+              <Link href="/">
                 <Avatar
                   src="https://storage.googleapis.com/builderbook/logo.svg"
                   alt="Builder Book logo"
@@ -90,14 +88,13 @@ function Header({ user, hideHeader, next }) {
               </div>
             ) : (
               <div>
-                <Link prefetch href="/book">
+                <Link href="/book">
                   <a style={{ margin: '20px 20px 0px auto' }}>Book</a>
                 </Link>
-                <Link prefetch href="/tutorials">
+                <Link href="/tutorials">
                   <a style={{ margin: '20px 20px 0px auto' }}>Tutorials</a>
                 </Link>
                 <Link
-                  prefetch
                   href={{
                     pathname: '/public/login',
                     query: { next },

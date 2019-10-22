@@ -21,7 +21,7 @@ function Header() {
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justify="space-around" alignItems="center">
           <Grid item sm={9} xs={8} style={{ textAlign: 'left' }}>
-            <Link prefetch href="/send-email" as="/send-email">
+            <Link href="/send-email" as="/send-email">
               <a>Send email with AWS SES</a>
             </Link>
           </Grid>

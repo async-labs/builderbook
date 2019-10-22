@@ -262,7 +262,6 @@ class ReadChapter extends React.Component {
               style={{ listStyle: i === 0 ? 'none' : 'decimal', paddingBottom: '10px' }}
             >
               <Link
-                prefetch
                 as={`/books/${book.slug}/${ch.slug}`}
                 href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
               >

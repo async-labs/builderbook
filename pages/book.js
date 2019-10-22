@@ -48,7 +48,6 @@ const Book = ({ user, toc }) => (
           </p>
           <p style={{ textAlign: 'center' }}>
             <Link
-              prefetch
               as="/books/demo-book/introduction"
               href="/public/read-chapter?bookSlug=demo-book&chapterSlug=introduction"
             >

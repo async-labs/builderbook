@@ -1,6 +1,6 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import React from 'react';
 import Router from 'next/router';
 import NProgress from 'nprogress';
@@ -39,16 +39,13 @@ class MyApp extends App {
     // console.log(pageProps.noHeader);
 
     return (
-      <Container>
-        {/* ThemeProvider makes the theme available down the React
-              tree thanks to React context. */}
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Header {...pageProps} />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </Container>
+      <ThemeProvider theme={theme}>
+        {/* ThemeProvider makes the theme available down the React tree thanks to React context. */}
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <Header {...pageProps} />
+        <Component {...pageProps} />
+      </ThemeProvider>
     );
   }
 }

@@ -358,7 +358,6 @@ class ReadChapter extends React.Component {
               onClick={this.closeTocWhenMobile}
             >
               <Link
-                prefetch
                 as={`/books/${book.slug}/${ch.slug}`}
                 href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
               >

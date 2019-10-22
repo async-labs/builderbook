@@ -48,7 +48,7 @@ function Header({ user, hideHeader, redirectUrl }) {
         <Grid container direction="row" justify="space-around" alignItems="center">
           <Grid item sm={8} xs={7} style={{ textAlign: 'left' }}>
             {!user ? (
-              <Link prefetch href="/">
+              <Link href="/">
                 <Avatar
                   src="https://storage.googleapis.com/builderbook/logo.svg"
                   alt="Builder Book logo"
@@ -88,7 +88,6 @@ function Header({ user, hideHeader, redirectUrl }) {
               </div>
             ) : (
               <Link
-                prefetch
                 href={{
                   pathname: '/public/login',
                   query: { redirectUrl },

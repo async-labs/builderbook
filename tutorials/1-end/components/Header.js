@@ -21,8 +21,8 @@ function Header() {
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justify="space-around" alignItems="center">
           <Grid item sm={10} xs={9} style={{ textAlign: 'left' }}>
-            <Link prefetch href="/">
-              <Link prefetch href="/subscribe" as="/subscribe">
+            <Link href="/">
+              <Link href="/subscribe" as="/subscribe">
                 <a>Add email to Mailchimp list</a>
               </Link>
             </Link>

@@ -19,7 +19,7 @@ function Header() {
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justify="space-around" alignItems="center">
           <Grid item sm={10} xs={9} style={{ textAlign: 'left' }}>
-            <Link prefetch href="/" as="/">
+            <Link href="/" as="/">
               <a>
                 <Avatar
                   src="https://storage.googleapis.com/builderbook/logo.svg"
@@ -30,7 +30,7 @@ function Header() {
             </Link>
           </Grid>
           <Grid item sm={1} xs={3} style={{ textAlign: 'right' }}>
-            <Link prefetch href="/login" as="/login">
+            <Link href="/login" as="/login">
               <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
             </Link>
           </Grid>

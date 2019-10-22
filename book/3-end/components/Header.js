@@ -29,13 +29,13 @@ function Header({ user }) {
             {user ? (
               <div>
                 <Hidden smDown>
-                  <Link prefetch href="/">
+                  <Link href="/">
                     <a style={{ marginRight: '20px' }}>Settings</a>
                   </Link>
                 </Hidden>
               </div>
             ) : (
-              <Link prefetch href="/">
+              <Link href="/">
                 <Avatar
                   src="https://storage.googleapis.com/builderbook/logo.svg"
                   alt="Builder Book logo"
@@ -52,7 +52,7 @@ function Header({ user }) {
                 ) : null}
               </div>
             ) : (
-              <Link prefetch href="/login">
+              <Link href="/login">
                 <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
               </Link>
             )}
