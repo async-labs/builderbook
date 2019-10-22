@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
 import htmlescape from 'htmlescape';
 
@@ -11,7 +11,7 @@ const env = { GA_TRACKING_ID, StripePublishableKey };
 class MyDocument extends Document {
   render() {
     return (
-      <html
+      <Html
         lang="en"
         style={{
           height: '100%',
@@ -99,7 +99,7 @@ class MyDocument extends Document {
           <script dangerouslySetInnerHTML={{ __html: `__ENV__ = ${htmlescape(env)}` }} />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
