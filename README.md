@@ -441,7 +441,7 @@ We welcome suggestions and pull requests, especially for [issues](https://github
 
 By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook/blob/master/CODE-OF-CONDUCT.md).
 
-Want to support this project? Sign up at [async](https://async-await.com) and/or buy our [book](https://builderbook.org), which teaches you how to build this project from scratch. Also check out our open source [SaaS boilerplate app](https://github.com/async-labs/saas).
+Want to support this project? Sign up at [async](https://async-await.com) and/or buy our [books](https://builderbook.org), which teach you how to build web apps from scratch. Also check out our open source [SaaS boilerplate](https://github.com/async-labs/saas).
 
 
 ## Team
@@ -451,7 +451,7 @@ Want to support this project? Sign up at [async](https://async-await.com) and/or
 
 You can contact us at team@builderbook.org
 
-If you want to hire us to customize or build features on top of our [SaaS boilerplate](https://github.com/async-labs/saas), please fill out our [form](https://forms.gle/vaLHem6Ccmp3hics6).
+If you want to hire us to add custom features on top of our [SaaS boilerplate](https://github.com/async-labs/saas), please fill out our [form](https://builderbook.org/custom-saas-boilerplate).
 
 ## License
 All code in this repository is provided under the [MIT License](https://github.com/builderbook/builderbook/blob/master/LICENSE.md).
