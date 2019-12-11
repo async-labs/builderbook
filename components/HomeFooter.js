@@ -8,7 +8,7 @@ function Footer() {
     <div>
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justify="space-around" alignItems="center">
-          <span>© 2018 Builder Book</span>
+          <span>{`© ${new Date().getFullYear()} Builder Book`}</span>
           <a
             style={{ padding: '0px 20px' }}
             href="https://github.com/builderbook"
