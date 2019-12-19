@@ -64,7 +64,8 @@ async function insertTemplates() {
     const count = await EmailTemplate.find({ name: t.name }).countDocuments();
 
     if (count === 0) {
-      EmailTemplate.create(Object.assign({}, t, {
+      EmailTemplate.create(
+        Object.assign({}, t, {
           message: t.message.replace(/\n/g, '').replace(/[ ]+/g, ' '),
         }),
       );
