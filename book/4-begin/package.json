@@ -20,7 +20,7 @@
     "googleapis": "40.0.0",
     "handlebars": "4.1.2",
     "lodash": "4.17.11",
-    "mongoose": "5.6.1",
+    "mongoose": "5.7.5",
     "next": "9.1.1",
     "nprogress": "0.2.0",
     "passport": "0.4.0",
