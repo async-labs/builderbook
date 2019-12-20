@@ -16,7 +16,7 @@
     "dotenv": "8.0.0",
     "express": "4.17.1",
     "express-session": "1.16.2",
-    "mongoose": "5.6.1",
+    "mongoose": "5.7.5",
     "next": "9.1.1",
     "prop-types": "15.7.2",
     "react": "16.10.2",
