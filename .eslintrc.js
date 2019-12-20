@@ -35,6 +35,7 @@ module.exports = {
         extensions: ['.js'],
       },
     ],
+    'prefer-arrow-callback': 'error',
     'prettier/prettier': [
       'error',
       {
