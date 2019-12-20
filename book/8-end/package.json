@@ -35,7 +35,7 @@
     "isomorphic-unfetch": "^3.0.0",
     "lodash": "4.17.11",
     "marked": "0.6.2",
-    "mongoose": "5.6.1",
+    "mongoose": "5.7.5",
     "next": "9.1.1",
     "nprogress": "0.2.0",
     "passport": "0.4.0",
