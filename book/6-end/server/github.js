@@ -16,6 +16,8 @@ function setupGithub({ server }) {
   server.get('/auth/github', (req, res) => {
     if (!req.user || !req.user.isAdmin) {
       res.redirect('/login');
+      console.log(res);
+      console.log('above is res');
       return;
     }
 

@@ -91,7 +91,7 @@ function MyBooks({ purchasedBooks, freeBooks, otherBooks, bookmarks, error, load
         ) : (
           <div>
             <h3>Your books</h3>
-            <p>You have not purchased any book.</p>
+            <p>You have not purchased any book sandeep.</p>
           </div>
         )}
 
