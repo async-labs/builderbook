@@ -375,7 +375,7 @@ Let's go step by step.
 
     Type your custom domain name, I added `heroku.builderbook.org` as a custom domain, click <b>Save changes</b> button.
 
-    Heroku will displa you a value for CNAME record that you have to create for your custom domain. For me, custom domain is `heroku.builderbook.org and I manage DNS records at Now by Zeit.
+    Heroku will display you a value for CNAME record that you have to create for your custom domain. For me, custom domain is `heroku.builderbook.org and I manage DNS records at Now by Zeit.
     
     After you create a CNAME, ACM status on Heroku's dashboard will change to `Ok`:
     ![image](https://user-images.githubusercontent.com/10218864/54624195-2452d180-4a2a-11e9-999d-a6a771cde73c.png)
