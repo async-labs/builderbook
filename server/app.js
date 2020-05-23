@@ -21,7 +21,7 @@ require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
 const port = process.env.PORT || 8000;
-const ROOT_URL = dev ? `http://localhost:${port}` : 'https://builderbook.org';
+const ROOT_URL = dev ? `http://localhost:${port}` : 'https://ancient-reaches-14182.herokuapp.com';
 
 const MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
 
