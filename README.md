@@ -51,6 +51,7 @@ Check out projects built with the help of this open source app. Feel free to add
   - Get `Google_clientID` and `Google_clientSecret` by following [official OAuth tutorial](https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin).
 
     Important: For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback <br/>
+    Important: For Facebook OAuth app, callback URL is: http://localhost:8000/auth/facebook/callback <br/>
     Important: You have to enable Google+ API in your Google Cloud Platform account.
 
   - Specify your own secret key for Express session `SESSION_SECRET`: https://github.com/expressjs/session#secret
@@ -68,6 +69,10 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
   # Used in server/google.js
   Google_clientID="xxxxxx"
   Google_clientSecret="xxxxxx"
+
+  # Used in server/facebook.js
+  FACEBOOK_CLIENT_ID="xxxxxxxxxx"
+  FACEBOOK_CLIENT_SECRET="xxxxxxxx"
 
   # Used in server/aws.js
   Amazon_accessKeyId="xxxxxx"

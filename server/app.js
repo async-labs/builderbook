@@ -9,6 +9,7 @@ const routesWithSlug = require('./routesWithSlug');
 const routesWithCache = require('./routesWithCache');
 const sitemapAndRobots = require('./sitemapAndRobots');
 
+const authFace = require('./facebook');
 const auth = require('./google');
 const { setupGithub } = require('./github');
 const api = require('./api');
@@ -92,6 +93,7 @@ app.prepare().then(async () => {
   await insertTemplates();
 
   auth({ server, ROOT_URL });
+  authFace({ server, ROOT_URL });
   setupGithub({ server });
   api(server);
 

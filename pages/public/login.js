@@ -21,6 +21,18 @@ function Login({ router }) {
       <br />
       <Button
         variant="contained"
+        style={{...styleLoginButton,backgroundColor:"darkblue",marginRight:"10px",color:"white"}}
+        href={`/auth/facebook?redirectUrl=${redirectUrl}`}
+      >
+        <img
+          src="/favicon-16x16.png"
+          alt="Log in with Facebook"
+          style={{ marginRight: '10px'}}
+        />
+        Log in with Facebook
+      </Button>
+      <Button
+        variant="contained"
         style={styleLoginButton}
         href={`/auth/google?redirectUrl=${redirectUrl}`}
       >
