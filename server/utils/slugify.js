@@ -1,4 +1,4 @@
-const slugify = text =>
+const slugify = (text) =>
   text
     .toString()
     .toLowerCase()
@@ -29,7 +29,7 @@ async function createUniqueSlug(Model, slug, count) {
 async function generateSlug(Model, name, filter = {}) {
   const origSlug = slugify(name);
 
-  const obj = await Model.findOne(Object.assign({ slug: origSlug }, filter), 'id');
+  const obj = await Model.findOne({ slug: origSlug, ...filter }, 'id');
 
   if (!obj) {
     return origSlug;
