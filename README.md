@@ -437,7 +437,7 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 - Start app with `docker-compose -f docker-compose-dev.yml up`
 
 ## Contributing
-We welcome suggestions and pull requests, especially for [issues](https://github.com/builderbook/builderbook/issues) labeled as `discussion` and `contributions welcome`.
+We welcome suggestions and bug reports via issues and and pull requests.
 
 By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook/blob/master/CODE-OF-CONDUCT.md).
 
@@ -450,8 +450,6 @@ Want to support this project? Sign up at [async](https://async-await.com) and/or
 - [Timur Zhiyentayev](https://github.com/tima101)
 
 You can contact us at team@builderbook.org
-
-If you want to hire us to add custom features on top of our [SaaS boilerplate](https://github.com/async-labs/saas), please fill out our [form](https://builderbook.org/custom-saas-boilerplate).
 
 ## License
 All code in this repository is provided under the [MIT License](https://github.com/builderbook/builderbook/blob/master/LICENSE.md).
