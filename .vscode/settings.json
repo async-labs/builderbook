@@ -1,8 +1,7 @@
 {
-  "window.zoomLevel": -1,
-  "files.autoSave": "afterDelay",
+  "window.zoomLevel": 1,
+  "files.autoSave": "off",
   "git.enableSmartCommit": true,
-  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   }

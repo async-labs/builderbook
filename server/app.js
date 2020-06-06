@@ -9,6 +9,7 @@ const routesWithSlug = require('./routesWithSlug');
 const routesWithCache = require('./routesWithCache');
 const sitemapAndRobots = require('./sitemapAndRobots');
 
+const authFace = require('./facebook');
 const auth = require('./google');
 const { setupGithub } = require('./github');
 const api = require('./api');
@@ -20,7 +21,7 @@ require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
 const port = process.env.PORT || 8000;
-const ROOT_URL = dev ? `http://localhost:${port}` : 'https://builderbook.org';
+const ROOT_URL = dev ? `http://localhost:${port}` : 'https://ancient-reaches-14182.herokuapp.com';
 
 const MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
 
@@ -92,6 +93,7 @@ app.prepare().then(async () => {
   await insertTemplates();
 
   auth({ server, ROOT_URL });
+  authFace({ server, ROOT_URL });
   setupGithub({ server });
   api(server);
 
