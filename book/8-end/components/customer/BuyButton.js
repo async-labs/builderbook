@@ -1,59 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StripeCheckout from 'react-stripe-checkout';
 import NProgress from 'nprogress';
-
 import Button from '@material-ui/core/Button';
+import Link from 'next/link';
+import { loadStripe } from '@stripe/stripe-js';
 
-import { buyBook } from '../../lib/api/customer';
+import { fetchCheckoutSession } from '../../lib/api/customer';
+import getRootUrl from '../lib/api/getRootUrl';
+
 import notify from '../../lib/notifier';
-import env from '../../lib/env';
 
-const { StripePublishableKey } = env;
+const dev = process.env.NODE_ENV !== 'production';
+
+// console.log('StripePublishableKey', StripePublishableKey);
+
+const stripePromise = loadStripe(process.env.StripePublishableKey);
+const ROOT_URL = getRootUrl();
 
 const styleBuyButton = {
-  margin: '20px 20px 20px 0px',
-  font: '14px Muli',
+  margin: '10px 20px 0px 0px',
+  font: '14px Roboto',
 };
 
-class BuyButton extends React.Component {
-  static propTypes = {
-    book: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-    }),
-    user: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-    }),
-    showModal: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    book: null,
-    user: null,
-    showModal: false,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      showModal: !!props.showModal,
-    };
+class BuyButton extends React.PureComponent {
+  componentDidMount() {
+    if (this.props.redirectToCheckout) {
+      this.handleCheckoutClick();
+    }
   }
 
-  onToken = async (token) => {
+  handleCheckoutClick = async () => {
     NProgress.start();
-    const { book } = this.props;
-    this.setState({ showModal: false });
 
     try {
-      await buyBook({ stripeToken: token, id: book._id });
-      notify('Success!');
-      window.location.reload(true);
-      NProgress.done();
+      const { book } = this.props;
+      const { sessionId } = await fetchCheckoutSession({ bookId: book._id, nextUrl: document.location.pathname });
+
+      // When the customer clicks on the button, redirect them to Checkout.
+      const stripe = await stripePromise;
+      const { error } = await stripe.redirectToCheckout({ sessionId });
+
+      if (error) {
+        notify(error);
+      }
     } catch (err) {
-      NProgress.done();
       notify(err);
+    } finally {
+      NProgress.done();
     }
   };
 
@@ -62,13 +55,12 @@ class BuyButton extends React.Component {
 
     if (!user) {
       const redirectUrl = `${window.location.pathname}?buy=1`;
-      window.location.href = `/auth/google?redirectUrl=${redirectUrl}`;
+      window.location.href = `${ROOT_URL}/auth/google?redirectUrl=${redirectUrl}`;
     }
   };
 
   render() {
     const { book, user } = this.props;
-    const { showModal } = this.state;
 
     if (!book) {
       return null;
@@ -79,63 +71,60 @@ class BuyButton extends React.Component {
         <div>
           <Button
             variant="contained"
-            style={styleBuyButton}
             color="primary"
+            style={styleBuyButton}
             onClick={this.onLoginClicked}
           >
-            Buy book for ${book.price}
+            {`Buy book for $${book.price}`}
           </Button>
+          {book.slug === 'builder-book' ? (
+            <Link as="/book-reviews" href="/book-reviews">
+              <Button variant="outlined" style={styleBuyButton}>
+                See Reviews
+              </Button>
+            </Link>
+          ) : null}
+          <p style={{ verticalAlign: 'middle', fontSize: '15px' }}>{book.textNearButton}</p>
+          <hr />
         </div>
       );
     }
-
     return (
-      <StripeCheckout
-        stripeKey={StripePublishableKey}
-        token={this.onToken}
-        name={book.name}
-        amount={book.price * 100}
-        email={user.email}
-        desktopShowModal={showModal || null}
-      >
-        <Button variant="contained" style={styleBuyButton} color="primary">
-          Buy book for ${book.price}
+      <div>
+        <Button
+          variant="contained"
+          color="primary"
+          style={styleBuyButton}
+          onClick={this.handleCheckoutClick}
+        >
+          {`Buy book for $${book.price}`}
         </Button>
-      </StripeCheckout>
+        <p style={{ verticalAlign: 'middle', fontSize: '15px' }}>{book.textNearButton}</p>
+        <hr />
+      </div>
     );
   }
 }
 
+BuyButton.propTypes = {
+  book: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    textNearButton: PropTypes.string,
+  }),
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }),
+  redirectToCheckout: PropTypes.bool,
+};
+
+BuyButton.defaultProps = {
+  book: null,
+  user: null,
+  redirectToCheckout: false,
+};
+
 export default BuyButton;
-
-
-// new Stripe API
-// apiVersion: '2020-03-02'
-// import { loadStripe } from '@stripe/stripe-js';
-
-
-// private handleCheckoutClick = async (mode: 'subscription' | 'setup') => {
-//   try {
-//     const { currentTeam } = this.props.store;
-
-//     NProgress.start();
-//     this.setState({ disabled: true });
-
-//     const { sessionId } = await fetchCheckoutSessionApiMethod({ mode, teamId: currentTeam._id });
-
-//     // When the customer clicks on the button, redirect them to Checkout.
-//     const stripe = await stripePromise;
-//     const { error } = await stripe.redirectToCheckout({ sessionId });
-
-//     if (error) {
-//       notify(error);
-//       console.error(error);
-//     }
-//   } catch (err) {
-//     notify(err);
-//     console.error(err);
-//   } finally {
-//     this.setState({ disabled: false });
-//     NProgress.done();
-//   }
-// };

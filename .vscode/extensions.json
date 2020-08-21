@@ -1,5 +1,4 @@
 {
-    "recommendations": [
-        "dbaeumer.vscode-eslint"
-    ]
+    "recommendations": ["dbaeumer.vscode-eslint"]
 }
+  

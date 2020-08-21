@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
-const logger = require('../logs');
+const logger = require('../logger');
 
 const { Schema } = mongoose;
 

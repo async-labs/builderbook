@@ -2,11 +2,6 @@ import sendRequest from './sendRequest';
 
 const BASE_PATH = '/api/v1/customer';
 
-export const buyBook = ({ id, stripeToken }) =>
-  sendRequest(`${BASE_PATH}/buy-book`, {
-    body: JSON.stringify({ id, stripeToken }),
-  });
-
 export const getMyBookList = (options = {}) =>
   sendRequest(
     `${BASE_PATH}/my-books`,
@@ -17,3 +12,8 @@ export const getMyBookList = (options = {}) =>
       options,
     ),
   );
+
+  export const fetchCheckoutSession = ({ bookId, nextUrl }) =>
+  sendRequestAndGetResponse(`${BASE_PATH}/stripe/fetch-checkout-session`, {
+    body: JSON.stringify({ bookId, nextUrl }),
+  });

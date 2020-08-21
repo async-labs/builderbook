@@ -1,26 +1,102 @@
-const stripe = require('stripe');
+const Stripe = require('stripe');
+const lodash = require('lodash');
 
-function stripeCharge({ amount, token, buyerEmail }) {
-  const dev = process.env.NODE_ENV !== 'production';
-  const API_KEY = dev ? process.env.Stripe_Test_SecretKey : process.env.Stripe_Live_SecretKey;
-  const client = stripe(API_KEY);
+const Book = require('./models/Book');
+const User = require('./models/User');
+const logger = require('./logger');
 
-  return client.charges.create({
-    amount,
-    currency: 'usd',
-    source: token,
-    receipt_email: buyerEmail,
-    description: 'Payment for the book at builderbook.org',
+const getRootUrl = require('../lib/api/getRootUrl');
+
+const dev = process.env.NODE_ENV !== 'production';
+const API_KEY = dev ? process.env.Stripe_Test_SecretKey : process.env.Stripe_Live_SecretKey;
+const ROOT_URL = getRootUrl();
+
+const stripeInstance = new Stripe(API_KEY, { apiVersion: '2020-03-02' });
+
+function getBookPriceId(bookSlug) {
+  let priceId;
+  if (bookSlug === 'builder-book') {
+    priceId = dev
+      ? process.env.STRIPE_TEST_BUILDER_BOOK_PRICE_ID
+      : process.env.STRIPE_LIVE_BUILDER_BOOK_PRICE_ID;
+  } else if (bookSlug === 'saas-boilerplate') {
+    priceId = dev
+      ? process.env.STRIPE_TEST_SAAS_BOOK_PRICE_ID
+      : process.env.STRIPE_LIVE_SAAS_BOOK_PRICE_ID;
+  } else {
+    throw new Error('Wrong book');
+  }
+
+  return priceId;
+}
+
+function createSession({ userId, bookId, bookSlug, userEmail, redirectUrl }) {
+  return stripeInstance.checkout.sessions.create({
+    customer_email: userEmail,
+    payment_method_types: ['card'],
+    mode: 'payment',
+    line_items: [{ price: getBookPriceId(bookSlug), quantity: 1 }],
+    success_url: `${ROOT_URL}/stripe/checkout-completed/{CHECKOUT_SESSION_ID}`,
+    cancel_url: `${ROOT_URL}${redirectUrl}?checkout_canceled=1`,
+    metadata: { userId, bookId, redirectUrl },
   });
 }
 
-exports.stripeCharge = stripeCharge;
+function retrieveSession({ sessionId }) {
+  return stripeInstance.checkout.sessions.retrieve(sessionId, {
+    expand: ['payment_intent', 'payment_intent.payment_method'],
+  });
+}
 
-// add session with redirect to Checkout
-// apiVersion: '2020-03-02'
+function stripeCheckoutCallback({ server }) {
+  server.get('/stripe/checkout-completed/:sessionId', async (req, res) => {
+    const { sessionId } = req.params;
+    const session = await retrieveSession({ sessionId });
 
+    try {
+      if (
+        !session ||
+        !session.metadata ||
+        !session.metadata.userId ||
+        !session.metadata.bookId ||
+        !session.metadata.redirectUrl
+      ) {
+        throw new Error('Wrong session.');
+      }
 
-// const stripeInstance = new Stripe(
-//   dev ? process.env.STRIPE_TEST_SECRETKEY : process.env.STRIPE_LIVE_SECRETKEY,
-//   { apiVersion: '2020-03-02' },
-// );
+      const user = await User.findById(
+        session.metadata.userId,
+        '_id email purchasedBookIds freeBookIds',
+      ).lean();
+
+      const book = await Book.findById(session.metadata.bookId, 'name slug price').lean();
+
+      if (!user) {
+        throw new Error('User not found.');
+      }
+
+      if (!book) {
+        throw new Error('Book not found.');
+      }
+
+      if (session.mode === 'payment') {
+        await Book.buy({
+          book,
+          user,
+          stripeCharge: lodash.get(session, 'payment_intent.charges.data.0'),
+        });
+      } else {
+        throw new Error('Wrong session.');
+      }
+
+      res.redirect(`${ROOT_URL}${session.metadata.redirectUrl}`);
+    } catch (err) {
+      logger.error(err);
+      res.redirect(`${ROOT_URL}${session.metadata.redirectUrl}?error=${err.message || err.toString()}`);
+    }
+  });
+}
+
+exports.createSession = createSession;
+exports.retrieveSession = retrieveSession;
+exports.stripeCheckoutCallback = stripeCheckoutCallback;

@@ -10,13 +10,13 @@ const auth = require('./google');
 const { setupGithub } = require('./github');
 const api = require('./api');
 
-const logger = require('./logs');
+const logger = require('./logger');
 // const { insertTemplates } = require('./models/EmailTemplate');
 const routesWithSlug = require('./routesWithSlug');
 const getRootUrl = require('../lib/api/getRootUrl');
 const setupSitemapAndRobots = require('./sitemapAndRobots');
 
-require('./env');
+require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
 const MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;

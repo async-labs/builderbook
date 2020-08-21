@@ -15,7 +15,7 @@ const sendEmail = require('../aws');
 const { addToMailchimp } = require('../mailchimp');
 const { getCommits, getContent } = require('../github');
 
-const logger = require('../logs');
+const logger = require('../logger');
 
 const ROOT_URL = getRootUrl();
 
