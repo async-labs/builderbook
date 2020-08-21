@@ -25,7 +25,7 @@ function Login({ router }) {
         href={`/auth/google?redirectUrl=${redirectUrl}`}
       >
         <img
-          src="https://storage.googleapis.com/builderbook/G.svg"
+          src="https://builderbook-public.s3.amazonaws.com/G.svg"
           alt="Log in with Google"
           style={{ marginRight: '10px' }}
         />

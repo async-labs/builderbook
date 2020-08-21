@@ -21,6 +21,11 @@ const options = {
 };
 mongoose.connect(MONGO_URL, options);
 
+// mongoose
+//   .connect(MONGO_URL, options)
+//   .then(() => console.log('Connected')) // eslint-disable-line no-console
+//   .catch((err) => console.log('Caught', err.stack)); // eslint-disable-line no-console
+
 const port = process.env.PORT || 8000;
 const ROOT_URL = `http://localhost:${port}`;
 

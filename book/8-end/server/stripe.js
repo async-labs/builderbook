@@ -15,3 +15,12 @@ function stripeCharge({ amount, token, buyerEmail }) {
 }
 
 exports.stripeCharge = stripeCharge;
+
+// add session with redirect to Checkout
+// apiVersion: '2020-03-02'
+
+
+// const stripeInstance = new Stripe(
+//   dev ? process.env.STRIPE_TEST_SECRETKEY : process.env.STRIPE_LIVE_SECRETKEY,
+//   { apiVersion: '2020-03-02' },
+// );

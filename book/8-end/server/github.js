@@ -106,3 +106,22 @@ exports.setupGithub = setupGithub;
 exports.getRepos = getRepos;
 exports.getContent = getContent;
 exports.getCommits = getCommits;
+
+
+
+// review if there are any breaking changes in GitHub API
+// for example
+
+
+// import { Octokit } from '@octokit/rest';
+
+// function getAPI({ user, previews = [], request }) {
+
+//   const github = new Octokit({
+//     auth: decrypt(user.githubAccessToken),
+//     previews,
+//     request: { timeout: 10000 },
+//   });
+
+//   return github;
+// }

@@ -11,10 +11,10 @@ const { setupGithub } = require('./github');
 const api = require('./api');
 
 const logger = require('./logs');
-const { insertTemplates } = require('./models/EmailTemplate');
+// const { insertTemplates } = require('./models/EmailTemplate');
 const routesWithSlug = require('./routesWithSlug');
 const getRootUrl = require('../lib/api/getRootUrl');
-const sitemapAndRobots = require('./sitemapAndRobots');
+const setupSitemapAndRobots = require('./sitemapAndRobots');
 
 require('dotenv').config();
 
@@ -43,7 +43,7 @@ const handle = app.getRequestHandler();
 app.prepare().then(async () => {
   const server = express();
 
-  server.use(helmet());
+  server.use(helmet({ contentSecurityPolicy: false }));
   server.use(compression());
   server.use(express.json());
 
@@ -79,13 +79,13 @@ app.prepare().then(async () => {
 
   server.use(session(sess));
 
-  await insertTemplates();
+  // await insertTemplates();
 
   auth({ server, ROOT_URL });
   setupGithub({ server });
   api(server);
   routesWithSlug({ server, app });
-  sitemapAndRobots({ server });
+  setupSitemapAndRobots({ server });
 
   server.get('*', (req, res) => {
     const url = URL_MAP[req.path];

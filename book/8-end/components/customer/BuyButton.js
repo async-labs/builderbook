@@ -107,3 +107,35 @@ class BuyButton extends React.Component {
 }
 
 export default BuyButton;
+
+
+// new Stripe API
+// apiVersion: '2020-03-02'
+// import { loadStripe } from '@stripe/stripe-js';
+
+
+// private handleCheckoutClick = async (mode: 'subscription' | 'setup') => {
+//   try {
+//     const { currentTeam } = this.props.store;
+
+//     NProgress.start();
+//     this.setState({ disabled: true });
+
+//     const { sessionId } = await fetchCheckoutSessionApiMethod({ mode, teamId: currentTeam._id });
+
+//     // When the customer clicks on the button, redirect them to Checkout.
+//     const stripe = await stripePromise;
+//     const { error } = await stripe.redirectToCheckout({ sessionId });
+
+//     if (error) {
+//       notify(error);
+//       console.error(error);
+//     }
+//   } catch (err) {
+//     notify(err);
+//     console.error(err);
+//   } finally {
+//     this.setState({ disabled: false });
+//     NProgress.done();
+//   }
+// };

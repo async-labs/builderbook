@@ -93,3 +93,7 @@ function auth({ ROOT_URL, server }) {
 }
 
 module.exports = auth;
+
+
+
+// Check if need googleToken as field for User data model
