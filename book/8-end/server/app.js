@@ -16,7 +16,7 @@ const routesWithSlug = require('./routesWithSlug');
 const getRootUrl = require('../lib/api/getRootUrl');
 const setupSitemapAndRobots = require('./sitemapAndRobots');
 
-require('dotenv').config();
+require('./env');
 
 const dev = process.env.NODE_ENV !== 'production';
 const MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
