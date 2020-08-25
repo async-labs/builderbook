@@ -6,19 +6,19 @@ import Head from 'next/head';
 import { getMyBookList } from '../../lib/api/customer';
 import withAuth from '../../lib/withAuth';
 
+const propTypes = {
+  purchasedBooks: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }),
+  ),
+};
+
+const defaultProps = {
+  purchasedBooks: [],
+};
+
 class MyBooks extends React.Component {
-  static propTypes = {
-    purchasedBooks: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-      }),
-    ),
-  };
-
-  static defaultProps = {
-    purchasedBooks: [],
-  };
-
   static async getInitialProps({ req, res }) {
     if (req && !req.user) {
       res.redirect('/login');
@@ -71,6 +71,7 @@ class MyBooks extends React.Component {
   }
 }
 
-// Potential TODO: add otherBooks to see list of books that are available for purchase
+MyBooks.propTypes = propTypes;
+MyBooks.defaultProps = defaultProps;
 
 export default withAuth(MyBooks);

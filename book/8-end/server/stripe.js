@@ -92,7 +92,9 @@ function stripeCheckoutCallback({ server }) {
       res.redirect(`${ROOT_URL}${session.metadata.redirectUrl}`);
     } catch (err) {
       logger.error(err);
-      res.redirect(`${ROOT_URL}${session.metadata.redirectUrl}?error=${err.message || err.toString()}`);
+      res.redirect(
+        `${ROOT_URL}${session.metadata.redirectUrl}?error=${err.message || err.toString()}`,
+      );
     }
   });
 }

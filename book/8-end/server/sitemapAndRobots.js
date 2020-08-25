@@ -39,14 +39,15 @@
 
 // module.exports = setup;
 
-
-
-
 // NEW VERSION
 
 const { SitemapStream, streamToPromise } = require('sitemap');
 const path = require('path');
+const zlib = require('zlib');
 const Chapter = require('./models/Chapter');
+const logger = require('./logger');
+
+const dev = process.env.NODE_ENV !== 'production';
 
 function setupSitemapAndRobots({ server }) {
   let sitemap;
@@ -67,6 +68,8 @@ function setupSitemapAndRobots({ server }) {
       const gzip = zlib.createGzip();
 
       const chapters = Chapter.find({}, 'slug'); // check value
+
+      // eslint-disable-next-line
       for (const chapter of chapters) {
         smStream.write({
           url: `/books/builder-book/${chapter.slug}`,
@@ -81,7 +84,7 @@ function setupSitemapAndRobots({ server }) {
         priority: 0.9,
       });
 
-      streamToPromise(smStream.pipe(gzip)).then((sm) => (sitemap = sm));
+      streamToPromise(smStream.pipe(gzip)).then((sm) => (sitemap = sm)); // eslint-disable-line
 
       smStream.end();
 
@@ -92,7 +95,7 @@ function setupSitemapAndRobots({ server }) {
           throw err;
         });
     } catch (err) {
-      console.error(err);
+      logger.debug(err);
       res.status(500).end();
     }
   });

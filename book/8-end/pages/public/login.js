@@ -6,6 +6,14 @@ import Button from '@material-ui/core/Button';
 import withAuth from '../../lib/withAuth';
 import { styleLoginButton } from '../../components/SharedStyles';
 
+const propTypes = {
+  router: PropTypes.shape({
+    query: PropTypes.shape({
+      redirectUrl: PropTypes.string,
+    }),
+  }).isRequired,
+};
+
 function Login({ router }) {
   const redirectUrl = (router && router.query && router.query.redirectUrl) || '';
 
@@ -35,12 +43,6 @@ function Login({ router }) {
   );
 }
 
-Login.propTypes = {
-  router: PropTypes.shape({
-    query: PropTypes.shape({
-      redirectUrl: PropTypes.string,
-    }),
-  }).isRequired,
-};
+Login.propTypes = propTypes;
 
 export default withAuth(withRouter(Login), { logoutRequired: true });

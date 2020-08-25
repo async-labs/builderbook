@@ -31,7 +31,7 @@ const Index = ({ books }) => (
   </div>
 );
 
-Index.propTypes = {
+const propTypes = {
   books: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -40,7 +40,10 @@ Index.propTypes = {
   ).isRequired,
 };
 
+Index.propTypes = propTypes;
+
 class IndexWithData extends React.Component {
+  // eslint-disable-next-line
   state = {
     books: [],
   };
@@ -48,7 +51,7 @@ class IndexWithData extends React.Component {
   async componentDidMount() {
     try {
       const { books } = await getBookList();
-      this.setState({ books }); // eslint-disable-line
+      this.setState({ books });
     } catch (err) {
       notify(err);
     }

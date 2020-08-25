@@ -6,11 +6,9 @@ import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 
 import { fetchCheckoutSession } from '../../lib/api/customer';
-import getRootUrl from '../lib/api/getRootUrl';
+import getRootUrl from '../../lib/api/getRootUrl';
 
 import notify from '../../lib/notifier';
-
-const dev = process.env.NODE_ENV !== 'production';
 
 // console.log('StripePublishableKey', StripePublishableKey);
 
@@ -34,7 +32,10 @@ class BuyButton extends React.PureComponent {
 
     try {
       const { book } = this.props;
-      const { sessionId } = await fetchCheckoutSession({ bookId: book._id, nextUrl: document.location.pathname });
+      const { sessionId } = await fetchCheckoutSession({
+        bookId: book._id,
+        nextUrl: document.location.pathname,
+      });
 
       // When the customer clicks on the button, redirect them to Checkout.
       const stripe = await stripePromise;

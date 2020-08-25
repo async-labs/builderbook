@@ -59,7 +59,7 @@ const MyBook = ({ book, error }) => {
   );
 };
 
-MyBook.propTypes = {
+const propTypes = {
   book: PropTypes.shape({
     name: PropTypes.string.isRequired,
     chapters: PropTypes.arrayOf.isRequired,
@@ -70,25 +70,26 @@ MyBook.propTypes = {
   error: PropTypes.string,
 };
 
-MyBook.defaultProps = {
+const defaultProps = {
   book: null,
   error: null,
 };
 
+MyBook.propTypes = propTypes;
+
+MyBook.defaultProps = defaultProps;
+
 class MyBookWithData extends React.Component {
-  static propTypes = {
-    slug: PropTypes.string.isRequired,
-  };
-
-  static getInitialProps({ query }) {
-    return { slug: query.slug };
-  }
-
+  // eslint-disable-next-line
   state = {
     loading: true,
     error: null,
     book: null,
   };
+
+  static getInitialProps({ query }) {
+    return { slug: query.slug };
+  }
 
   async componentDidMount() {
     NProgress.start();
@@ -107,5 +108,9 @@ class MyBookWithData extends React.Component {
     return <MyBook {...this.props} {...this.state} />;
   }
 }
+
+MyBookWithData.propTypes = {
+  slug: PropTypes.string.isRequired,
+};
 
 export default withAuth(MyBookWithData);

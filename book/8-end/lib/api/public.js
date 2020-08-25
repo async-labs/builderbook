@@ -13,12 +13,7 @@ export const getBookDetail = ({ slug }) =>
   });
 
 export const getChapterDetail = ({ bookSlug, chapterSlug }, options = {}) =>
-  sendRequest(
-    `${BASE_PATH}/get-chapter-detail?bookSlug=${bookSlug}&chapterSlug=${chapterSlug}`,
-    Object.assign(
-      {
-        method: 'GET',
-      },
-      options,
-    ),
-  );
+  sendRequest(`${BASE_PATH}/get-chapter-detail?bookSlug=${bookSlug}&chapterSlug=${chapterSlug}`, {
+    method: 'GET',
+    ...options,
+  });

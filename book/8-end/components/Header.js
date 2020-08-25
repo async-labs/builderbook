@@ -33,6 +33,8 @@ const optionsMenuAdmin = [
   },
 ];
 
+
+
 function Header({ user, hideHeader, redirectUrl }) {
   return (
     <div
@@ -107,19 +109,24 @@ function Header({ user, hideHeader, redirectUrl }) {
   );
 }
 
-Header.propTypes = {
+const propTypes = {
   user: PropTypes.shape({
     avatarUrl: PropTypes.string,
     displayName: PropTypes.string,
+    isAdmin: PropTypes.bool,
+    isGithubConnected: PropTypes.bool,
   }),
   hideHeader: PropTypes.bool,
   redirectUrl: PropTypes.string,
 };
 
-Header.defaultProps = {
+const defaultProps = {
   user: null,
   hideHeader: false,
   redirectUrl: '',
 };
+
+Header.propTypes = propTypes;
+Header.defaultProps = defaultProps;
 
 export default Header;

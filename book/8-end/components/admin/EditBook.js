@@ -7,21 +7,21 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import { getGithubRepos } from '../../lib/api/admin';
-import { styleTextField } from '../../components/SharedStyles';
+import { styleTextField } from '../SharedStyles';
 import notify from '../../lib/notifier';
 
+const propTypes = {
+  book: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+  }),
+  onSave: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  book: null,
+};
+
 class EditBook extends React.Component {
-  static propTypes = {
-    book: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-    }),
-    onSave: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    book: null,
-  };
-
   constructor(props) {
     super(props);
 
@@ -70,9 +70,9 @@ class EditBook extends React.Component {
           <div>
             <TextField
               onChange={(event) => {
-                this.setState({
-                  book: Object.assign({}, this.state.book, { name: event.target.value }),
-                });
+                this.setState((prevState) => ({
+                  book: { ...prevState.book, name: event.target.value },
+                }));
               }}
               value={this.state.book.name}
               type="text"
@@ -85,9 +85,9 @@ class EditBook extends React.Component {
           <br />
           <TextField
             onChange={(event) => {
-              this.setState({
-                book: Object.assign({}, this.state.book, { price: Number(event.target.value) }),
-              });
+              this.setState((prevState) => ({
+                book: { ...prevState.book, price: Number(event.target.value) },
+              }));
             }}
             value={this.state.book.price}
             type="number"
@@ -105,15 +105,15 @@ class EditBook extends React.Component {
               value={this.state.book.githubRepo || ''}
               input={<Input />}
               onChange={(event) => {
-                this.setState({
-                  book: Object.assign({}, this.state.book, { githubRepo: event.target.value }),
-                });
+                this.setState((prevState) => ({
+                  book: { ...prevState.book, githubRepo: event.target.value },
+                }));
               }}
             >
               <MenuItem value="">
                 <em>-- choose github repo --</em>
               </MenuItem>
-              {this.state.repos.map(r => (
+              {this.state.repos.map((r) => (
                 <MenuItem value={r.full_name} key={r.id}>
                   {r.full_name}
                 </MenuItem>
@@ -130,5 +130,8 @@ class EditBook extends React.Component {
     );
   }
 }
+
+EditBook.propTypes = propTypes;
+EditBook.defaultProps = defaultProps;
 
 export default EditBook;

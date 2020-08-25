@@ -1251,6 +1251,11 @@
     "@octokit/types" "^5.0.0"
     universal-user-agent "^6.0.0"
 
+"@octokit/oauth-login-url@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@octokit/oauth-login-url/-/oauth-login-url-2.1.2.tgz#364ef24a0aa4191f0f6ea6dfc64a999e460f9adf"
+  integrity sha512-ryDOt47Rno7+PG5XbdwoFTlADrH/f+XFf//keJngEeBNAe6gKrdcLL4vofa5005nl1ZIcIlgSnbKtKQhiKefMA==
+
 "@octokit/plugin-paginate-rest@^2.2.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-2.3.0.tgz#7d1073e56cfd15d3f99dcfe81fa5d2b466f3a6f6"
@@ -1294,7 +1299,7 @@
     once "^1.4.0"
     universal-user-agent "^6.0.0"
 
-"@octokit/rest@18.0.3":
+"@octokit/rest@^18.0.3":
   version "18.0.3"
   resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-18.0.3.tgz#96a15ddb3a38dca5de9d75121378d6aa4a234fa5"
   integrity sha512-GubgemnLvUJlkhouTM2BtX+g/voYT/Mqh0SASGwTnLvSkW1irjt14N911/ABb6m1Hru0TwScOgFgMFggp3igfQ==

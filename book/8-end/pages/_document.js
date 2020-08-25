@@ -40,9 +40,12 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#1976D2" />
 
           {/* new meta tag */}
-          <meta httpEquiv="Content-Security-Policy" content="
+          <meta
+            httpEquiv="Content-Security-Policy"
+            content="
             default-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com *.amazonaws.com;
-          "/>
+          "
+          />
 
           <link
             rel="shortcut icon"

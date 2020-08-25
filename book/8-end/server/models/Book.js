@@ -13,7 +13,7 @@ const getRootUrl = require('../../lib/api/getRootUrl');
 const { stripeCharge } = require('../stripe');
 const sendEmail = require('../aws');
 const { addToMailchimp } = require('../mailchimp');
-const { getCommits, getContent } = require('../github');
+const { getCommits, getRepoDetail } = require('../github');
 
 const logger = require('../logger');
 
@@ -49,10 +49,7 @@ const mongoSchema = new Schema({
 
 class BookClass {
   static async list({ offset = 0, limit = 10 } = {}) {
-    const books = await this.find({})
-      .sort({ createdAt: -1 })
-      .skip(offset)
-      .limit(limit);
+    const books = await this.find({}).sort({ createdAt: -1 }).skip(offset).limit(limit);
     return { books };
   }
 
@@ -64,9 +61,9 @@ class BookClass {
 
     const book = bookDoc.toObject();
 
-    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug').sort({ order: 1 })).map(
-      (chapter) => chapter.toObject(),
-    );
+    book.chapters = (
+      await Chapter.find({ bookId: book._id }, 'title slug').sort({ order: 1 })
+    ).map((chapter) => chapter.toObject());
 
     return book;
   }
@@ -130,7 +127,7 @@ class BookClass {
       throw new Error('No change in content!');
     }
 
-    const mainFolder = await getContent({
+    const mainFolder = await getRepoDetail({
       accessToken: githubAccessToken,
       repoName: book.githubRepo,
       path: '',
@@ -146,7 +143,7 @@ class BookClass {
           return;
         }
 
-        const chapter = await getContent({
+        const chapter = await getRepoDetail({
           accessToken: githubAccessToken,
           repoName: book.githubRepo,
           path: f.path,

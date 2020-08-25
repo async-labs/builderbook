@@ -19,31 +19,29 @@ const styleIcon = {
   cursor: 'pointer',
 };
 
+const propTypes = {
+  chapter: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    isPurchased: PropTypes.bool,
+    isFree: PropTypes.bool.isRequired,
+    htmlContent: PropTypes.string,
+    htmlExcerpt: PropTypes.string,
+  }),
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+  }),
+  router: PropTypes.shape({
+    asPath: PropTypes.string.isRequired,
+  }).isRequired,
+  showStripeModal: PropTypes.bool.isRequired,
+};
+
+const defaultProps = {
+  chapter: null,
+  user: null,
+};
+
 class ReadChapter extends React.Component {
-  static propTypes = {
-    chapter: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      isPurchased: PropTypes.bool,
-      isFree: PropTypes.bool.isRequired,
-      htmlContent: PropTypes.string,
-      htmlExcerpt: PropTypes.string,
-    }),
-    user: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-    }),
-    router: PropTypes.shape({
-      asPath: PropTypes.string.isRequired,
-    }).isRequired,
-    showStripeModal: PropTypes.bool.isRequired,
-    noHeader: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    chapter: null,
-    user: null,
-    noHeader: true,
-  };
-
   constructor(props, ...args) {
     super(props, ...args);
 
@@ -75,18 +73,18 @@ class ReadChapter extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { chapter } = nextProps;
-
-    if (chapter && chapter._id !== this.props.chapter._id) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.chapter && prevProps.chapter._id !== this.props.chapter._id) {
       document.getElementById('chapter-content').scrollIntoView();
       let htmlContent = '';
-      if (chapter && (chapter.isPurchased || chapter.isFree)) {
-        htmlContent = chapter.htmlContent;
+      if (prevProps.chapter && (prevProps.chapter.isPurchased || prevProps.chapter.isFree)) {
+        htmlContent = prevProps.chapter.htmlContent;
       } else {
-        htmlContent = chapter.htmlExcerpt;
+        htmlContent = prevProps.chapter.htmlExcerpt;
       }
-      this.setState({ chapter, htmlContent });
+
+      // eslint-disable-next-line
+      this.setState({ chapter: prevProps.chapter, htmlContent });
     }
   }
 
@@ -162,11 +160,13 @@ class ReadChapter extends React.Component {
   }
 
   toggleChapterList = () => {
-    this.setState({ showTOC: !this.state.showTOC });
+    // this.setState({ showTOC: !this.state.showTOC });
+    this.setState((prevState) => ({ showTOC: !prevState.showTOC }));
   };
 
   closeTocWhenMobile = () => {
-    this.setState({ showTOC: !this.state.isMobile });
+    // this.setState({ showTOC: !this.state.isMobile });
+    this.setState((prevState) => ({ showTOC: !prevState.isMobile }));
   };
 
   renderMainContent() {
@@ -351,6 +351,9 @@ class ReadChapter extends React.Component {
     );
   }
 }
+
+ReadChapter.propTypes = propTypes;
+ReadChapter.defaultProps = defaultProps;
 
 export default withAuth(withRouter(ReadChapter), {
   loginRequired: false,

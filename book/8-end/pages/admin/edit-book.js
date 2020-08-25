@@ -9,19 +9,20 @@ import { getBookDetail, editBook } from '../../lib/api/admin';
 import withAuth from '../../lib/withAuth';
 import notify from '../../lib/notifier';
 
+const propTypes = {
+  slug: PropTypes.string.isRequired,
+};
+
 class EditBook extends React.Component {
-  static propTypes = {
-    slug: PropTypes.string.isRequired,
+  // eslint-disable-next-line
+    state = {
+    error: null,
+    book: null,
   };
 
   static getInitialProps({ query }) {
     return { slug: query.slug };
   }
-
-  state = {
-    error: null,
-    book: null,
-  };
 
   async componentDidMount() {
     NProgress.start();
@@ -75,5 +76,7 @@ class EditBook extends React.Component {
     );
   }
 }
+
+EditBook.propTypes = propTypes;
 
 export default withAuth(EditBook);

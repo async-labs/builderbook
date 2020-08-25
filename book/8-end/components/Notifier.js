@@ -4,6 +4,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 let openSnackbarFn;
 
 class Notifier extends React.Component {
+  // eslint-disable-next-line
   state = {
     open: false,
     message: '',
