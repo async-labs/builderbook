@@ -1,46 +1,3 @@
-// OLD VERSION
-
-// const sm = require('sitemap');
-// const path = require('path');
-// const Chapter = require('./models/Chapter');
-
-// const sitemap = sm.createSitemap({
-//   hostname: 'https://builderbook.org',
-//   cacheTime: 600000, // 600 sec - cache purge period
-// });
-
-// export default function setup({ server }) {
-//   Chapter.find({}, 'slug').then((chapters) => {
-//     chapters.forEach((chapter) => {
-//       sitemap.add({
-//         url: `/books/builder-book/${chapter.slug}`,
-//         changefreq: 'daily',
-//         priority: 1,
-//       });
-//     });
-//   });
-
-//   server.get('/sitemap.xml', (req, res) => {
-//     sitemap.toXML((err, xml) => {
-//       if (err) {
-//         res.status(500).end();
-//         return;
-//       }
-
-//       res.header('Content-Type', 'application/xml');
-//       res.send(xml);
-//     });
-//   });
-
-//   server.get('/robots.txt', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../static', 'robots.txt'));
-//   });
-// }
-
-// module.exports = setup;
-
-// NEW VERSION
-
 const { SitemapStream, streamToPromise } = require('sitemap');
 const path = require('path');
 const zlib = require('zlib');
@@ -67,21 +24,29 @@ function setupSitemapAndRobots({ server }) {
       });
       const gzip = zlib.createGzip();
 
-      const chapters = Chapter.find({}, 'slug'); // check value
+      const chapters = Chapter.find({}, 'slug').sort({ order: 1 }).setOptions({ lean: true });
 
-      // eslint-disable-next-line
-      for (const chapter of chapters) {
-        smStream.write({
-          url: `/books/builder-book/${chapter.slug}`,
-          changefreq: 'daily',
-          priority: 1,
-        });
+      if (chapters && chapters.length > 0) {
+        // eslint-disable-next-line
+        for (const chapter of chapters) {
+          smStream.write({
+            url: `/books/builder-book/${chapter.slug}`,
+            changefreq: 'daily',
+            priority: 1,
+          });
+        }
       }
 
       smStream.write({
         url: '/',
         changefreq: 'weekly',
-        priority: 0.9,
+        priority: 1,
+      });
+
+      smStream.write({
+        url: '/login',
+        changefreq: 'weekly',
+        priority: 1,
       });
 
       streamToPromise(smStream.pipe(gzip)).then((sm) => (sitemap = sm)); // eslint-disable-line
@@ -101,7 +66,7 @@ function setupSitemapAndRobots({ server }) {
   });
 
   server.get('/robots.txt', (_, res) => {
-    res.sendFile(path.join(__dirname, '../static', 'robots.txt'));
+    res.sendFile(path.join(__dirname, '../public', 'robots.txt'));
   });
 }
 

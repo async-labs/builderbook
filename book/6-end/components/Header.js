@@ -62,7 +62,7 @@ function Header({ user }) {
           </Grid>
           <Grid item sm={1} xs={2} style={{ textAlign: 'right' }}>
             {user ? (
-              <div style={{ whiteSpace: ' nowrap' }}>
+              <div style={{ whiteSpace: 'nowrap' }}>
                 {!user.isAdmin ? (
                   <MenuDrop
                     options={optionsMenuCustomer}

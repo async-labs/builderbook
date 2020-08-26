@@ -105,7 +105,7 @@ class BookClass {
     return editedBook;
   }
 
-  static async syncContent({ id, githubAccessToken }) {
+  static async syncContent({ id, user, request }) {
     const book = await this.findById(id, 'githubRepo githubLastCommitSha');
 
     if (!book) {
@@ -113,9 +113,9 @@ class BookClass {
     }
 
     const lastCommit = await getCommits({
-      accessToken: githubAccessToken,
+      user,
       repoName: book.githubRepo,
-      limit: 1,
+      request,
     });
 
     if (!lastCommit || !lastCommit.data || !lastCommit.data[0]) {
@@ -128,8 +128,9 @@ class BookClass {
     }
 
     const mainFolder = await getRepoDetail({
-      accessToken: githubAccessToken,
+      user,
       repoName: book.githubRepo,
+      request,
       path: '',
     });
 
@@ -144,8 +145,9 @@ class BookClass {
         }
 
         const chapter = await getRepoDetail({
-          accessToken: githubAccessToken,
+          user,
           repoName: book.githubRepo,
+          request,
           path: f.path,
         });
 

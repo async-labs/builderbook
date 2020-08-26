@@ -43,7 +43,7 @@ class MyDocument extends Document {
           <meta
             httpEquiv="Content-Security-Policy"
             content="
-            default-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com *.amazonaws.com;
+            default-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com *.amazonaws.com *.googleusercontent.com;
           "
           />
 
@@ -53,7 +53,7 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Muli:300,400:latin"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400:latin"
           />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <link
@@ -97,7 +97,7 @@ class MyDocument extends Document {
         </Head>
         <body
           style={{
-            font: '16px Muli',
+            font: '16px Roboto',
             color: '#222',
             margin: '0px auto',
             fontWeight: '300',

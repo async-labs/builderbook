@@ -65,7 +65,7 @@ router.post('/books/sync-content', async (req, res) => {
   }
 
   try {
-    await Book.syncContent({ id: bookId, githubAccessToken: user.githubAccessToken });
+    await Book.syncContent({ id: bookId, user, request: req });
     res.json({ done: 1 });
   } catch (err) {
     logger.error(err);
@@ -82,7 +82,7 @@ router.get('/github/repos', async (req, res) => {
   }
 
   try {
-    const response = await getRepos({ accessToken: user.githubAccessToken });
+    const response = await getRepos({ user, request: req });
     res.json({ repos: response.data });
   } catch (err) {
     logger.error(err);

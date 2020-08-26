@@ -82,7 +82,7 @@ app.prepare().then(async () => {
   // await insertTemplates();
 
   auth({ server, ROOT_URL });
-  setupGithub({ server });
+  setupGithub({ server, ROOT_URL });
   api(server);
   routesWithSlug({ server, app });
   setupSitemapAndRobots({ server });

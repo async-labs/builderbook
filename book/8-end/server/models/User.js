@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
+
+const { addToMailchimp } = require('../mailchimp');
 const generateSlug = require('../utils/slugify');
 const sendEmail = require('../aws');
 const { getEmailTemplate } = require('./EmailTemplate');
@@ -46,6 +48,10 @@ const mongoSchema = new Schema({
   },
   githubAccessToken: {
     type: String,
+  },
+  githubId: {
+    type: String,
+    unique: true,
   },
   purchasedBookIds: [String],
 });
@@ -112,6 +118,12 @@ class UserClass {
       });
     } catch (err) {
       logger.error('Email sending error:', err);
+    }
+
+    try {
+      await addToMailchimp({ email, listName: 'signedup' });
+    } catch (error) {
+      logger.error('Mailchimp error:', error);
     }
 
     return _.pick(newUser, UserClass.publicFields());

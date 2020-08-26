@@ -1,6 +1,9 @@
 const fetch = require('node-fetch');
 
+require('dotenv').config();
+
 const LIST_IDS = {
+  signedup: process.env.MAILCHIMP_SIGNEDUP_LIST_ID,
   purchased: process.env.MAILCHIMP_PURCHASED_LIST_ID,
 };
 
@@ -28,7 +31,10 @@ async function addToMailchimp({ email, listName }) {
 
   const path = `/lists/${LIST_IDS[listName]}/members/`;
 
-  return callAPI({ path, method: 'POST', data });
+  // eslint-disable-next-line
+  console.log(path, data.email_address)
+
+  await callAPI({ path, method: 'POST', data });
 }
 
 exports.addToMailchimp = addToMailchimp;

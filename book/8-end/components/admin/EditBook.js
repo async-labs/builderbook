@@ -70,9 +70,9 @@ class EditBook extends React.Component {
           <div>
             <TextField
               onChange={(event) => {
-                this.setState((prevState) => ({
-                  book: { ...prevState.book, name: event.target.value },
-                }));
+                this.setState({
+                  book: { ...this.state.book, name: event.target.value },
+                });
               }}
               value={this.state.book.name}
               type="text"
@@ -85,9 +85,9 @@ class EditBook extends React.Component {
           <br />
           <TextField
             onChange={(event) => {
-              this.setState((prevState) => ({
-                book: { ...prevState.book, price: Number(event.target.value) },
-              }));
+              this.setState({
+                book: { ...this.state.book, price: Number(event.target.value) },
+              });
             }}
             value={this.state.book.price}
             type="number"
@@ -105,9 +105,9 @@ class EditBook extends React.Component {
               value={this.state.book.githubRepo || ''}
               input={<Input />}
               onChange={(event) => {
-                this.setState((prevState) => ({
-                  book: { ...prevState.book, githubRepo: event.target.value },
-                }));
+                this.setState({
+                  book: { ...this.state.book, githubRepo: event.target.value },
+                });
               }}
             >
               <MenuItem value="">

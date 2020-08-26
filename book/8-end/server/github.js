@@ -3,9 +3,10 @@ const fetch = require('node-fetch');
 const { oauthLoginUrl } = require('@octokit/oauth-login-url');
 const _ = require('lodash');
 
-const { decrypt, encrypt } = require('./encrypt');
 const logger = require('./logger');
 const User = require('./models/User');
+
+require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
 const CLIENT_ID = dev ? process.env.Github_Test_ClientID : process.env.Github_Live_ClientID;
@@ -13,7 +14,7 @@ const API_KEY = dev ? process.env.Github_Test_SecretKey : process.env.Github_Liv
 
 function getAPI({ user, previews = [], request }) {
   const github = new Octokit({
-    auth: decrypt(user.githubAccessToken),
+    auth: user.githubAccessToken,
     previews,
     request: { timeout: 10000 },
     log: {
@@ -33,29 +34,36 @@ function getAPI({ user, previews = [], request }) {
 function getRepos({ user, request }) {
   const github = getAPI({ user, request });
 
-  return github.repos.list({ per_page: 100 });
+  // octokit.repos.listForAuthenticatedUser();
+
+  return github.repos.listForAuthenticatedUser({
+    visibility: 'private',
+    per_page: 100,
+    affiliation: 'owner',
+  });
 }
 
-function getRepoDetail({ user, repoName, request }) {
+function getRepoDetail({ user, repoName, request, path }) {
   const github = getAPI({ user, request });
   const [owner, repo] = repoName.split('/');
 
-  return github.repos.get({ owner, repo });
+  return github.repos.getContent({ owner, repo, path });
 }
 
-function getCommits({ user, repoName, branch, limit, request }) {
+function getCommits({ user, repoName, request }) {
   const github = getAPI({ user, request });
   const [owner, repo] = repoName.split('/');
 
-  return github.repos.listCommits({ owner, repo, sha: branch, per_page: limit });
+  return github.repos.listCommits({ owner, repo });
 }
 
 function setupGithub({ server, ROOT_URL }) {
   const verify = async ({ user, accessToken, profile }) => {
     const modifier = {
       githubId: profile.id,
-      githubAccessToken: encrypt(accessToken),
+      githubAccessToken: accessToken,
       githubUsername: profile.login,
+      isGithubConnected: true,
     };
 
     if (!user.displayName) {
@@ -70,20 +78,21 @@ function setupGithub({ server, ROOT_URL }) {
   };
 
   server.get('/auth/github', (req, res) => {
-    if (!req.user) {
-      res.redirect(ROOT_URL);
+    if (!req.user || !req.user.isAdmin) {
+      res.redirect(`${ROOT_URL}/login`);
+      return;
     }
 
     const { url, state } = oauthLoginUrl({
-      clientId: decrypt(CLIENT_ID),
+      clientId: CLIENT_ID,
       redirectUrl: `${ROOT_URL}/auth/github/callback`,
       scopes: ['repo', 'user:email'],
       log: { warn: (message) => logger.warn(message) },
     });
 
     req.session.githubAuthState = state;
-    if (req.query && req.query.next && req.query.next.startsWith('/')) {
-      req.session.next_url = req.query.next;
+    if (req.query && req.query.redirectUrl && req.query.redirectUrl.startsWith('/')) {
+      req.session.next_url = req.query.redirectUrl;
     } else {
       req.session.next_url = null;
     }
@@ -106,7 +115,7 @@ function setupGithub({ server, ROOT_URL }) {
     }
 
     if (githubAuthState !== req.query.state) {
-      res.redirect(`${redirectUrl}?error=Wrong request`);
+      res.redirect(`${redirectUrl}/admin?error=Wrong request`);
     }
 
     try {
@@ -114,8 +123,8 @@ function setupGithub({ server, ROOT_URL }) {
         method: 'POST',
         headers: { 'Content-type': 'application/json;', Accept: 'application/json' },
         body: JSON.stringify({
-          client_id: decrypt(CLIENT_ID),
-          client_secret: decrypt(API_KEY),
+          client_id: CLIENT_ID,
+          client_secret: API_KEY,
           code: req.query.code,
           state: req.query.state,
           redirect_uri: `${ROOT_URL}/auth/github/callback`,
@@ -139,10 +148,10 @@ function setupGithub({ server, ROOT_URL }) {
     } catch (error) {
       logger.error(error.toString());
 
-      res.redirect(`${redirectUrl}?error=${error.toString()}`);
+      res.redirect(`${redirectUrl}/admin?error=${error.toString()}`);
     }
 
-    res.redirect(redirectUrl);
+    res.redirect(`${redirectUrl}/admin`);
   });
 }
 
