@@ -17,5 +17,9 @@
       "directory": "./book/8-end/",
       "changeProcessCWD": true
     },
+    {
+      "directory": "./builderbook/",
+      "changeProcessCWD": true
+    },
   ],
 }
