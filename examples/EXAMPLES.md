@@ -1,1 +1,0 @@
-The content of this `examples` folder is contributions from public. We, as a core maintainers, may review contributions but will not maintain them.

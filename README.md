@@ -1,28 +1,27 @@
 ## Builder Book
 
-Open source web app to publish documentation or books.
+Open source web app to self-publish and sell books or other online content (`builderbook` directory of this repository). If you are book's reader, you will work `book` directory.
 
 We've used this `builderbook` project to build:
-- [Async](https://async-await.com) - communication tool for small teams of software developers
 - [Builder Book](https://builderbook.org) - learn how to build full-stack web apps from scratch
 - [SaaS Boilerplate](https://github.com/async-labs/saas) - open source web app to build your own SaaS product
+- [Async](https://async-await.com) - team communication tool for software developers
 
 ## Live app:
 - https://builderbook.org/books/builder-book/introduction.
 
-## How can you use this app?
+## How can you use this project?
 - As learning material for React/Material-UI/Next/Express/Mongoose/MongoDB stack
-- As learning material for Google/Github/AWS SES/Mailchimp/Stripe APIs.<br> 
-- As starting point for your own project. Use the code in [book/1-begin](https://github.com/builderbook/builderbook/tree/master/book/1-begin) or [book/1-end](https://github.com/builderbook/builderbook/tree/master/book/1-end) as a lean boilerplate or modify the final app.<br>
-- As a production-ready web app to publish documentation or sell content on your own website (we sell our own book).
-
+- As learning material for Google/Github/AWS SES/Mailchimp/Stripe APIs
+- As starting point for your own project.
+- As a production-ready web app to publish and sell content on your own website (we sell two books at builderbook.org).
+- You tell us
 
 ## Contents
 - [Showcase](#showcase)
 - [Run locally](#run-locally)
 - [Add a new book](#add-a-new-book)
 - [Add your own styles](#add-your-own-styles)
-- [Deploy](#deploy)
 - [Deploy to Heroku](#deploy-to-heroku)
 - [Scaling](#scaling)
 - [Screenshots](#screenshots)
@@ -38,11 +37,9 @@ We've used this `builderbook` project to build:
 
 ## Showcase
 Check out projects built with the help of this open source app. Feel free to add your own project by creating a pull request.
-- [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee) : Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
 - [SaaS boilerplate app](https://github.com/async-labs/saas-by-async): Open source web app that saves you weeks of work when building your own SaaS product. 
-- [Harbor](https://github.com/builderbook/harbor): Open source web app that allows anyone with a Gmail account to automatically charge for advice sent via email.
 - [Async](https://async-await.com/): asynchronous communication and project management tool for small teams of software engineers.
-
+- [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee) : Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
 
 ## Run locally
 - Clone the project and run `yarn` to add packages.
@@ -61,50 +58,53 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
   `.env` :
   ```
   # Used in server/app.js
-  MONGO_URL="xxxxxx"
-  MONGO_URL_TEST="xxxxxx"
-  SESSION_SECRET="xxxxxx"
+  MONGO_URL=
+  MONGO_URL_TEST=
+  SESSION_SECRET=
 
   # Used in server/google.js
-  Google_clientID="xxxxxx"
-  Google_clientSecret="xxxxxx"
+  Google_clientID=
+  Google_clientSecret=
 
   # Used in server/aws.js
-  Amazon_accessKeyId="xxxxxx"
-  Amazon_secretAccessKey="xxxxxx"
-  Amazon_region="xxxxxx"
+  Amazon_accessKeyId=
+  Amazon_secretAccessKey=
 
   # Used in server/models/User.js
-  EMAIL_SUPPORT_FROM_ADDRESS="xxxxxx"
+  EMAIL_SUPPORT_FROM_ADDRESS=
   
   ----------
   # All environmental variables above this line are required for successful sign up
   
   # Used in server/github.js
-  Github_Test_ClientID="xxxxxx"
-  Github_Test_SecretKey="xxxxxx"
-  Github_Live_ClientID="xxxxxx"
-  Github_Live_SecretKey="xxxxxx"
+  Github_Test_ClientID=
+  Github_Test_SecretKey=
+  Github_Live_ClientID=
+  Github_Live_SecretKey=
 
   # Used in server/stripe.js
-  Stripe_Test_SecretKey="xxxxxx"
-  Stripe_Live_SecretKey="xxxxxx"
+  Stripe_Test_SecretKey=
+  Stripe_Live_SecretKey=
+  Stripe_Test_PublishableKey=
+  Stripe_Live_PublishableKey=
+  STRIPE_TEST_BUILDER_BOOK_PRICE_ID=
+  STRIPE_LIVE_BUILDER_BOOK_PRICE_ID=
+  STRIPE_TEST_SAAS_BOOK_PRICE_ID=
+  STRIPE_LIVE_SAAS_BOOK_PRICE_ID=
 
   # Used in server/mailchimp.js
-  MAILCHIMP_API_KEY="xxxxxx"
-  MAILCHIMP_REGION="xxxxxx"
-  MAILCHIMP_SIGNUPS_LIST_ID="xxxxxx"
-  MAILCHIMP_PURCHASED_LIST_ID="xxxxxx"
-  MAILCHIMP_TUTORIALS_LIST_ID="xxxxxx"
+  MAILCHIMP_API_KEY=
+  MAILCHIMP_REGION=
+  MAILCHIMP_PURCHASED_LIST_ID=
+  MAILCHIMP_SIGNEDUP_LIST_ID=
 
   ```
 
 - Start the app with `GA_TRACKING_ID=xxxxxx StripePublishableKey=xxxxxx yarn dev`.
   - To get `GA_TRACKING_ID`, set up Google Analytics and follow [these instructions](https://support.google.com/analytics/answer/1008080?hl=en) to find your tracking ID.
   - To get `StripePublishableKey`, set up Stripe and find your key [here](https://dashboard.stripe.com/account/apikeys).
-
-  Env keys `GA_TRACKING_ID` and `StripePublishableKey` are universally available (client and server). Env keys inside `.env` file are used in server code only.
-- The _first registered user_ in the app becomes an Admin user (user document gets parameters`"isAdmin": true`).
+- Env keys `GA_TRACKING_ID` and `StripePublishableKey` are universally available (client and server). Env keys inside `.env` file are used in server code only. To make env vars universally available, add them to `next.config.js` file.
+- To make user a book's owner, set `"isAdmin": true` on corresponding MongoDB document in your database (default value is `false` for any new user).
 
 
 ## Add a new book
@@ -237,37 +237,6 @@ We also specified styles for all content inside a `<body>` element:
 [See usage](https://github.com/builderbook/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/_document.js#L96)
 
 
-## Deploy
-
-IMPORTANT: Now v1 is depreciated for new users. See the next section about deploying to Heroku.
-
-- Install now: `npm install -g now`.
-- Point your domain to Zeit world nameservers: [three steps](https://zeit.co/world#get-started).
-- Create `now.json` file. Make sure to add actual values for `GA_TRACKING_ID`, `StripePublishableKey` (production-level) and `alias`. Read more about how to [configure now](https://zeit.co/docs/features/configuration).
-```
-{
-  "version": 1
-  "env": {
-    "NODE_ENV": "production",
-    "GA_TRACKING_ID": "xxxxxx",
-    "StripePublishableKey": "xxxxxx"
-  },
-  "dotenv": true
-  "alias": "mydomain.com",
-  "scale": {
-    "sfo1": {
-      "min": 1,
-      "max": 1
-    }
-  }
-}
-```
-- Make sure you updated `ROOT_URL` value in `package.json` and `lib/getRootURL.js`.
-- Check that you have all production-level env variables in `.env`. 
-- In your terminal, deploy the app by running `now`.
-- Now outputs your deployment's URL, for example: `builderbook-zomcvzgtvc.now.sh`.
-- Point successful deployment to your domain with `now alias` or `now ln NOW_URL mydomain.com` (`NOW_URL` is URL of your deployment).
-
 ## Deploy to Heroku
 
 In this section we will learn how to deploy our app to [Heroku cloud](https://www.heroku.com/home). We will deploy our React-Next-Express app to lightweight Heroku container called [dyno](https://www.heroku.com/dynos).
@@ -325,21 +294,7 @@ Let's go step by step.
 
     The above variable will be used by the first buildpack `subdir-heroku-buildpack` to deploy app from repo's subdirectory.
 
-4. If we deploy app at this point, our app will deploy with errors since we did not add environmental variables. Similar to how you added `PROJECT_PATH` variable, add all environmental variables from `book/8-end/.env` file to your Heroku app. Remember to add:
-  - `MONGO_URL`,
-  - `Google_clientID`, 
-  - `Google_clientSecret`,
-  - `EMAIL_SUPPORT_FROM_ADDRESS`,
-  - `Github_Test_ClientID`,
-  - `Github_Test_SecretKey`,
-  - `Github_Live_ClientID`,
-  - `Github_Live_SecretKey`,
-  - `Stripe_Test_SecretKey`,
-  - `Stripe_Live_SecretKey`,
-  - `MAILCHIMP_API_KEY`,
-  - `MAILCHIMP_PURCHASED_LIST_ID`,
-  - `SESSION_SECRET`.
-
+4. If we deploy app at this point, our app will deploy with errors since we did not add environmental variables. Similar to how you added `PROJECT_PATH` variable, add all environmental variables from `book/8-end/.env` file to your Heroku app. Remember to add the rest of env variables for all features to work, including signup event.
 
 5. While on `Settings` tab, scroll to `Domains and certificates` section and note your app's URL. My app's URL is: https://builderbook-8-end.herokuapp.com
     Let's deploy, go to `Deploy` tab, scroll to `Manual deploy` section and click <b>Deploy branch</b> button.
@@ -428,7 +383,7 @@ Book-detail page for Admin user:
 - Stripe
 - MailChimp
 
-Check out [package.json](https://github.com/builderbook/builderbook/blob/master/package.json).
+Check out [package.json](https://github.com/builderbook/builderbook/builderbook/blob/master/package.json).
 
 ## Docker
 - Install Docker and Docker Compose
