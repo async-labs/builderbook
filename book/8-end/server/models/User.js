@@ -51,7 +51,6 @@ const mongoSchema = new Schema({
   },
   githubId: {
     type: String,
-    unique: true,
   },
   purchasedBookIds: [String],
 });

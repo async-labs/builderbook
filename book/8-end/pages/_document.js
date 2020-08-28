@@ -43,7 +43,12 @@ class MyDocument extends Document {
           <meta
             httpEquiv="Content-Security-Policy"
             content="
-            default-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com *.amazonaws.com *.googleusercontent.com;
+            default-src 'self' 'unsafe-inline'
+            *.googleapis.com
+            *.gstatic.com
+            *.googleusercontent.com
+            *.amazonaws.com
+            *.stripe.com;
           "
           />
 

@@ -31,6 +31,8 @@ function getAPI({ user, previews = [], request }) {
   return github;
 }
 
+// https://octokit.github.io/rest.js/v18#repos
+
 function getRepos({ user, request }) {
   const github = getAPI({ user, request });
 

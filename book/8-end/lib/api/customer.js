@@ -8,7 +8,7 @@ export const getMyBookList = (options = {}) =>
     ...options,
   });
 
-export const fetchCheckoutSession = ({ bookId, nextUrl }) =>
+export const fetchCheckoutSession = ({ bookId, redirectUrl }) =>
   sendRequest(`${BASE_PATH}/stripe/fetch-checkout-session`, {
-    body: JSON.stringify({ bookId, nextUrl }),
+    body: JSON.stringify({ bookId, redirectUrl }),
   });

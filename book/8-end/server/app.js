@@ -15,6 +15,7 @@ const logger = require('./logger');
 const routesWithSlug = require('./routesWithSlug');
 const getRootUrl = require('../lib/api/getRootUrl');
 const setupSitemapAndRobots = require('./sitemapAndRobots');
+const { stripeCheckoutCallback } = require('./stripe');
 
 require('dotenv').config();
 
@@ -85,6 +86,7 @@ app.prepare().then(async () => {
   setupGithub({ server, ROOT_URL });
   api(server);
   routesWithSlug({ server, app });
+  stripeCheckoutCallback({ server });
   setupSitemapAndRobots({ server });
 
   server.get('*', (req, res) => {

@@ -29,7 +29,7 @@ router.get('/my-books', async (req, res) => {
 
 router.post('/stripe/fetch-checkout-session', async (req, res) => {
   try {
-    const { bookId, nextUrl } = req.body;
+    const { bookId, redirectUrl } = req.body;
 
     const book = await Book.findById(bookId).select(['slug']).setOptions({ lean: true });
 
@@ -48,7 +48,7 @@ router.post('/stripe/fetch-checkout-session', async (req, res) => {
       userEmail: req.user.email,
       bookId,
       bookSlug: book.slug,
-      nextUrl,
+      redirectUrl,
     });
 
     res.json({ sessionId: session.id });

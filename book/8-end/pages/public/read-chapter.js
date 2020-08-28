@@ -12,6 +12,7 @@ import BuyButton from '../../components/customer/BuyButton';
 
 import { getChapterDetail } from '../../lib/api/public';
 import withAuth from '../../lib/withAuth';
+import notify from '../../lib/notifier';
 
 const styleIcon = {
   opacity: '0.75',
@@ -33,12 +34,16 @@ const propTypes = {
   router: PropTypes.shape({
     asPath: PropTypes.string.isRequired,
   }).isRequired,
-  showStripeModal: PropTypes.bool.isRequired,
+  redirectToCheckout: PropTypes.bool.isRequired,
+  checkoutCanceled: PropTypes.bool,
+  error: PropTypes.string,
 };
 
 const defaultProps = {
   chapter: null,
   user: null,
+  checkoutCanceled: false,
+  error: '',
 };
 
 class ReadChapter extends React.Component {
@@ -63,6 +68,39 @@ class ReadChapter extends React.Component {
     };
   }
 
+  static getDerivedStateFromProps(props) {
+    const { chapter } = props;
+
+    if (chapter) {
+      let htmlContent;
+
+      if (chapter.isPurchased || chapter.isFree) {
+        htmlContent = chapter.htmlContent;
+      } else {
+        htmlContent = chapter.htmlExcerpt;
+      }
+
+      return { chapter, htmlContent };
+    }
+
+    return null;
+  }
+
+  static async getInitialProps({ req, query }) {
+    const { bookSlug, chapterSlug, buy, checkout_canceled, error } = query;
+
+    const headers = {};
+    if (req && req.headers && req.headers.cookie) {
+      headers.cookie = req.headers.cookie;
+    }
+
+    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
+    // console.log(`buy:${query.bookSlug}, ${buy}, ${!!buy}`);
+    const redirectToCheckout = !!buy;
+
+    return { chapter, redirectToCheckout, checkoutCanceled: !!checkout_canceled, error };
+  }
+
   componentDidMount() {
     document.getElementById('main-content').addEventListener('scroll', this.onScroll);
 
@@ -70,6 +108,14 @@ class ReadChapter extends React.Component {
 
     if (this.state.isMobile !== isMobile) {
       this.setState({ isMobile }); // eslint-disable-line
+    }
+
+    if (this.props.checkoutCanceled) {
+      notify('Checkout canceled');
+    }
+
+    if (this.props.error) {
+      notify(this.props.error);
     }
   }
 
@@ -145,20 +191,6 @@ class ReadChapter extends React.Component {
     }
   };
 
-  static async getInitialProps({ req, query }) {
-    const { bookSlug, chapterSlug } = query;
-
-    const headers = {};
-    if (req && req.headers && req.headers.cookie) {
-      headers.cookie = req.headers.cookie;
-    }
-
-    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
-    const showStripeModal = req ? !!req.query.buy : window.location.search.includes('buy=1');
-
-    return { chapter, showStripeModal };
-  }
-
   toggleChapterList = () => {
     // this.setState({ showTOC: !this.state.showTOC });
     this.setState((prevState) => ({ showTOC: !prevState.showTOC }));
@@ -170,7 +202,7 @@ class ReadChapter extends React.Component {
   };
 
   renderMainContent() {
-    const { user, showStripeModal } = this.props;
+    const { user, redirectToCheckout } = this.props;
 
     const { chapter, htmlContent, showTOC, isMobile } = this.state;
 
@@ -189,12 +221,15 @@ class ReadChapter extends React.Component {
           {chapter.order > 1 ? `Chapter ${chapter.order - 1}: ` : null}
           {chapter.title}
         </h2>
+        {!chapter.isPurchased && !chapter.isFree ? (
+          <BuyButton user={user} book={book} redirectToCheckout={redirectToCheckout} />
+        ) : null}
         <div
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
         {!chapter.isPurchased && !chapter.isFree ? (
-          <BuyButton user={user} book={book} showModal={showStripeModal} />
+          <BuyButton user={user} book={book} redirectToCheckout={redirectToCheckout} />
         ) : null}
       </div>
     );

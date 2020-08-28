@@ -7,17 +7,11 @@ const generateSlug = require('../utils/slugify');
 // const Chapter = require('./Chapter');
 const Purchase = require('./Purchase');
 const User = require('./User');
-const { getEmailTemplate } = require('./EmailTemplate');
 
-const getRootUrl = require('../../lib/api/getRootUrl');
-const { stripeCharge } = require('../stripe');
-const sendEmail = require('../aws');
 const { addToMailchimp } = require('../mailchimp');
 const { getCommits, getRepoDetail } = require('../github');
 
 const logger = require('../logger');
-
-const ROOT_URL = getRootUrl();
 
 const { Schema } = mongoose;
 
@@ -167,52 +161,27 @@ class BookClass {
     return book.updateOne({ githubLastCommitSha: lastCommitSha });
   }
 
-  static async buy({ id, user, stripeToken }) {
-    if (!user) {
-      throw new Error('User required');
-    }
-
-    const book = await this.findById(id, 'name slug price');
-
+  static async buy({ book, user, stripeCharge }) {
     if (!book) {
       throw new Error('Book not found');
     }
 
+    if (!user) {
+      throw new Error('User required');
+    }
+
     const isPurchased =
-      (await Purchase.find({ userId: user._id, bookId: id }).countDocuments()) > 0;
+      (await Purchase.find({ userId: user._id, bookId: book._id }).countDocuments()) > 0;
     if (isPurchased) {
       throw new Error('Already bought this book');
     }
 
-    const chargeObj = await stripeCharge({
-      amount: book.price * 100,
-      token: stripeToken.id,
-      buyerEmail: user.email,
-    });
-
-    User.findByIdAndUpdate(user.id, { $addToSet: { purchasedBookIds: book.id } }).exec();
-
-    const template = await getEmailTemplate('purchase', {
-      userName: user.displayName,
-      bookTitle: book.name,
-      bookUrl: `${ROOT_URL}/books/${book.slug}/introduction`,
-    });
-
-    try {
-      await sendEmail({
-        from: `Kelly from builderbook.org <${process.env.EMAIL_SUPPORT_FROM_ADDRESS}>`,
-        to: [user.email],
-        subject: template.subject,
-        body: template.message,
-      });
-    } catch (error) {
-      logger.error('Email sending error:', error);
-    }
+    User.findByIdAndUpdate(user._id, { $addToSet: { purchasedBookIds: book._id } }).exec();
 
     try {
       await addToMailchimp({ email: user.email, listName: 'purchased' });
     } catch (error) {
-      logger.error('Mailchimp error:', error);
+      logger.error('buy error:', error);
     }
 
     return Purchase.create({
@@ -220,7 +189,7 @@ class BookClass {
       bookId: book._id,
       amount: book.price * 100,
       createdAt: new Date(),
-      stripeCharge: chargeObj,
+      stripeCharge,
     });
   }
 

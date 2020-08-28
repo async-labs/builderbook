@@ -35,6 +35,7 @@ function auth({ ROOT_URL, server }) {
         clientID: process.env.Google_clientID,
         clientSecret: process.env.Google_clientSecret,
         callbackURL: `${ROOT_URL}/oauth2callback`,
+        userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
       },
       verify,
     ),
@@ -48,27 +49,29 @@ function auth({ ROOT_URL, server }) {
     User.findById(id, User.publicFields(), (err, user) => {
       done(err, user);
       // eslint-disable-next-line no-console
-      console.log('deserializeUser', id);
+      // console.log('deserializeUser', id);
     });
   });
 
   server.use(passport.initialize());
   server.use(passport.session());
 
-  server.get(
-    '/auth/google',
-    passport.authenticate('google', {
+  server.get('/auth/google', (req, res, next) => {
+    const options = {
       scope: ['profile', 'email'],
       prompt: 'select_account',
-    }),
-    (req) => {
-      if (req.query && req.query.redirectUrl && req.query.redirectUrl.startsWith('/')) {
-        req.session.finalUrl = req.query.redirectUrl;
-      } else {
-        req.session.finalUrl = null;
-      }
-    },
-  );
+    };
+    // eslint-disable-next-line
+      console.log(`req.query.redirectUrl:${req.query.redirectUrl}`);
+
+    if (req.query && req.query.redirectUrl && req.query.redirectUrl.startsWith('/')) {
+      req.session.finalUrl = req.query.redirectUrl;
+    } else {
+      req.session.finalUrl = null;
+    }
+
+    passport.authenticate('google', options)(req, res, next);
+  });
 
   server.get(
     '/oauth2callback',
@@ -76,10 +79,13 @@ function auth({ ROOT_URL, server }) {
       failureRedirect: '/login',
     }),
     (req, res) => {
+      // eslint-disable-next-line
+      console.log(`req.session.finalUrl:${req.session.finalUrl}`);
+
       if (req.user && req.user.isAdmin) {
         res.redirect('/admin');
       } else if (req.session.finalUrl) {
-        res.redirect(req.session.finalUrl);
+        res.redirect(`${ROOT_URL}${req.session.finalUrl}`);
       } else {
         res.redirect('/my-books');
       }

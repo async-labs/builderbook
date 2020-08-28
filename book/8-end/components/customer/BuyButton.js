@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NProgress from 'nprogress';
 import Button from '@material-ui/core/Button';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 
 import { fetchCheckoutSession } from '../../lib/api/customer';
@@ -10,9 +10,13 @@ import getRootUrl from '../../lib/api/getRootUrl';
 
 import notify from '../../lib/notifier';
 
-// console.log('StripePublishableKey', StripePublishableKey);
+const dev = process.env.NODE_ENV !== 'production';
 
-const stripePromise = loadStripe(process.env.StripePublishableKey);
+// console.log(process.env.Stripe_Test_PublishableKey);
+
+const stripePromise = loadStripe(
+  dev ? process.env.Stripe_Test_PublishableKey : process.env.Stripe_Live_PublishableKey,
+);
 const ROOT_URL = getRootUrl();
 
 const styleBuyButton = {
@@ -34,7 +38,7 @@ class BuyButton extends React.PureComponent {
       const { book } = this.props;
       const { sessionId } = await fetchCheckoutSession({
         bookId: book._id,
-        nextUrl: document.location.pathname,
+        redirectUrl: document.location.pathname,
       });
 
       // When the customer clicks on the button, redirect them to Checkout.
@@ -63,6 +67,8 @@ class BuyButton extends React.PureComponent {
   render() {
     const { book, user } = this.props;
 
+    // console.log(redirectToCheckout);
+
     if (!book) {
       return null;
     }
@@ -78,13 +84,6 @@ class BuyButton extends React.PureComponent {
           >
             {`Buy book for $${book.price}`}
           </Button>
-          {book.slug === 'builder-book' ? (
-            <Link as="/book-reviews" href="/book-reviews">
-              <Button variant="outlined" style={styleBuyButton}>
-                See Reviews
-              </Button>
-            </Link>
-          ) : null}
           <p style={{ verticalAlign: 'middle', fontSize: '15px' }}>{book.textNearButton}</p>
           <hr />
         </div>
