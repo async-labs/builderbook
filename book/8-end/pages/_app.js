@@ -10,9 +10,21 @@ import { theme } from '../lib/theme';
 import Notifier from '../components/Notifier';
 import Header from '../components/Header';
 
-Router.onRouteChangeStart = () => NProgress.start();
-Router.onRouteChangeComplete = () => NProgress.done();
-Router.onRouteChangeError = () => NProgress.done();
+Router.events.on('routeChangeStart', () => {
+  NProgress.start();
+});
+
+Router.events.on('routeChangeComplete', (url) => {
+  if (window && process.env.GA_MEASUREMENT_ID) {
+    window.gtag('config', process.env.GA_MEASUREMENT_ID, {
+      page_path: url,
+    });
+  }
+
+  NProgress.done();
+});
+
+Router.events.on('routeChangeError', () => NProgress.done());
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {

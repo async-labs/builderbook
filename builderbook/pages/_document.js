@@ -38,7 +38,6 @@ class MyDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />{' '}
           <meta name="google" content="notranslate" />
           <meta name="theme-color" content="#1976D2" />
-          {/* new meta tag */}
           <meta
             httpEquiv="Content-Security-Policy"
             content="
@@ -48,6 +47,7 @@ class MyDocument extends Document {
             *.googleusercontent.com
             *.amazonaws.com
             *.stripe.com;
+            *.googletagmanager.com;
           "
           />
           <link
@@ -96,6 +96,22 @@ class MyDocument extends Document {
               }
             `}
           </style>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_MEASUREMENT_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.GA_MEASUREMENT_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+            }}
+          />
         </Head>
         <body
           style={{
