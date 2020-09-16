@@ -34,12 +34,12 @@ We've used this `builderbook` project to build:
 - [License](#license)
 - [Project structure](#project-structure)
 
-
 ## Showcase
 Check out projects built with the help of this open source app. Feel free to add your own project by creating a pull request.
 - [SaaS boilerplate app](https://github.com/async-labs/saas-by-async): Open source web app that saves you weeks of work when building your own SaaS product. 
 - [Async](https://async-await.com/): asynchronous communication and project management tool for small teams of software engineers.
 - [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee) : Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
+- https://michaelstromer.nyc by [Michael Stromer](https://github.com/Maelstroms38): Books and articles by Michael Stromer.
 
 ## Run locally
 - Clone the project and run `yarn` to add packages.
