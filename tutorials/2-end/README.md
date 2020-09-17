@@ -9,7 +9,7 @@ This folder contains the ending code for our tutorial on how to add transactiona
 - Clone the builderbook repo to your local machine: `git clone git@github.com:builderbook/builderbook.git`
 - Inside the `tutorials/2-end` folder, run `yarn` to add packages
 - Start the app with `yarn dev`
-- _Important note_: You will need to add your own `Amazon_accessKeyId` and `Amazon_secretAccessKey` values from AWS SES in `server/aws.js`
+- _Important note_: You will need to add your own `AWS_ACCESSKEYID` and `AWS_SECRETACCESSKEY` values from AWS SES in `server/aws.js`
 
 
 ## Project structure

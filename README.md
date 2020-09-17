@@ -67,8 +67,8 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
   Google_clientSecret=
 
   # Used in server/aws.js
-  Amazon_accessKeyId=
-  Amazon_secretAccessKey=
+  AWS_ACCESSKEYID=
+  AWS_SECRETACCESSKEY=
 
   # Used in server/models/User.js
   EMAIL_SUPPORT_FROM_ADDRESS=

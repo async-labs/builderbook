@@ -1,13 +1,12 @@
 const aws = require('aws-sdk');
 
 function sendEmail(options) {
-  aws.config.update({
-    region: process.env.Amazon_region,
-    accessKeyId: process.env.Amazon_accessKeyId,
-    secretAccessKey: process.env.Amazon_secretAccessKey,
+  const ses = new aws.SES({
+    apiVersion: 'latest',
+    region: 'us-east-1',
+    accessKeyId: process.env.AWS_ACCESSKEYID,
+    secretAccessKey: process.env.AWS_SECRETACCESSKEY,
   });
-
-  const ses = new aws.SES({ apiVersion: 'latest' });
 
   return new Promise((resolve, reject) => {
     ses.sendEmail(

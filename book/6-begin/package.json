@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon server/app.js --watch server",
+    "dev": "nodemon server/server.js --watch server",
     "build": "next build",
     "start": "next start",
     "lint": "eslint components pages lib server",

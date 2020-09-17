@@ -3,7 +3,7 @@ const _ = require('lodash');
 
 const { addToMailchimp } = require('../mailchimp');
 const generateSlug = require('../utils/slugify');
-const sendEmail = require('../aws');
+const sendEmail = require('../aws-ses');
 const { getEmailTemplate } = require('./EmailTemplate');
 const logger = require('../logger');
 
