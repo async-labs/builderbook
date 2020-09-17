@@ -3,8 +3,9 @@ const path = require('path');
 const zlib = require('zlib');
 const Chapter = require('./models/Chapter');
 const logger = require('./logger');
+const getRootUrl = require('../lib/api/getRootUrl');
 
-const dev = process.env.NODE_ENV !== 'production';
+const ROOT_URL = getRootUrl();
 
 function setupSitemapAndRobots({ server }) {
   let sitemap;
@@ -20,7 +21,7 @@ function setupSitemapAndRobots({ server }) {
 
     try {
       const smStream = new SitemapStream({
-        hostname: dev ? process.env.URL_APP : process.env.PRODUCTION_URL_APP,
+        hostname: ROOT_URL,
       });
       const gzip = zlib.createGzip();
 

@@ -10,10 +10,8 @@ const auth = require('./google');
 const { setupGithub } = require('./github');
 const api = require('./api');
 
-const logger = require('./logger');
 // const { insertTemplates } = require('./models/EmailTemplate');
 const routesWithSlug = require('./routesWithSlug');
-const setupSitemapAndRobots = require('./sitemapAndRobots');
 const { stripeCheckoutCallback } = require('./stripe');
 
 require('dotenv').config();
@@ -86,7 +84,6 @@ app.prepare().then(async () => {
   api(server);
   routesWithSlug({ server, app });
   stripeCheckoutCallback({ server });
-  setupSitemapAndRobots({ server });
 
   server.get('*', (req, res) => {
     const url = URL_MAP[req.path];
@@ -99,6 +96,6 @@ app.prepare().then(async () => {
 
   server.listen(port, (err) => {
     if (err) throw err;
-    logger.info(`> Ready on ${ROOT_URL}`);
+    console.log(`> Ready on ${ROOT_URL}`);
   });
 });

@@ -1,6 +1,6 @@
 branch-defaults:
   default:
-    environment: builderbook-8-end
+    environment: builderbook-public
 environment-defaults:
   async-github1-env:
     branch: null
