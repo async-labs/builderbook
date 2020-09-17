@@ -5,11 +5,11 @@ const Book = require('./models/Book');
 const User = require('./models/User');
 const logger = require('./logger');
 
-const getRootUrl = require('../lib/api/getRootUrl');
-
 const dev = process.env.NODE_ENV !== 'production';
 const API_KEY = dev ? process.env.Stripe_Test_SecretKey : process.env.Stripe_Live_SecretKey;
-const ROOT_URL = getRootUrl();
+
+const port = process.env.PORT || 8000;
+const ROOT_URL = `http://localhost:${port}`;
 
 const stripeInstance = new Stripe(API_KEY, { apiVersion: '2020-03-02' });
 

@@ -1,7 +1,6 @@
 function getRootUrl() {
-  const port = process.env.PORT || 8000;
   const dev = process.env.NODE_ENV !== 'production';
-  const ROOT_URL = dev ? `http://localhost:${port}` : 'https://builderbook.org';
+  const ROOT_URL = dev ? process.env.URL_APP : process.env.PRODUCTION_URL_APP;
 
   return ROOT_URL;
 }

@@ -62,6 +62,10 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
   MONGO_URL_TEST=
   SESSION_SECRET=
 
+  # Used in lib/getRootUrl.js
+  URL_APP=
+  PRODUCTION_URL_APP=
+
   # Used in server/google.js
   Google_clientID=
   Google_clientSecret=

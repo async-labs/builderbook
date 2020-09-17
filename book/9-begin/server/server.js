@@ -13,7 +13,6 @@ const api = require('./api');
 const logger = require('./logger');
 // const { insertTemplates } = require('./models/EmailTemplate');
 const routesWithSlug = require('./routesWithSlug');
-const getRootUrl = require('../lib/api/getRootUrl');
 const setupSitemapAndRobots = require('./sitemapAndRobots');
 const { stripeCheckoutCallback } = require('./stripe');
 
@@ -22,6 +21,9 @@ require('dotenv').config();
 const dev = process.env.NODE_ENV !== 'production';
 const MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
 
+const port = process.env.PORT || 8000;
+const ROOT_URL = `http://localhost:${port}`;
+
 const options = {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -29,9 +31,6 @@ const options = {
   useUnifiedTopology: true,
 };
 mongoose.connect(MONGO_URL, options);
-
-const port = process.env.PORT || 8000;
-const ROOT_URL = getRootUrl();
 
 const URL_MAP = {
   '/login': '/public/login',

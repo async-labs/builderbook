@@ -6,18 +6,18 @@ import Button from '@material-ui/core/Button';
 import { loadStripe } from '@stripe/stripe-js';
 
 import { fetchCheckoutSession } from '../../lib/api/customer';
-import getRootUrl from '../../lib/api/getRootUrl';
 
 import notify from '../../lib/notifier';
 
 const dev = process.env.NODE_ENV !== 'production';
+const port = process.env.PORT || 8000;
+const ROOT_URL = `http://localhost:${port}`;
 
 // console.log(process.env.Stripe_Test_PublishableKey);
 
 const stripePromise = loadStripe(
   dev ? process.env.Stripe_Test_PublishableKey : process.env.Stripe_Live_PublishableKey,
 );
-const ROOT_URL = getRootUrl();
 
 const styleBuyButton = {
   margin: '10px 20px 0px 0px',

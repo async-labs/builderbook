@@ -13,7 +13,6 @@ const api = require('./api');
 const logger = require('./logger');
 // const { insertTemplates } = require('./models/EmailTemplate');
 const routesWithSlug = require('./routesWithSlug');
-const getRootUrl = require('../lib/api/getRootUrl');
 const setupSitemapAndRobots = require('./sitemapAndRobots');
 const { stripeCheckoutCallback } = require('./stripe');
 
@@ -31,7 +30,7 @@ const options = {
 mongoose.connect(MONGO_URL, options);
 
 const port = process.env.PORT || 8000;
-const ROOT_URL = getRootUrl();
+const ROOT_URL = `http://localhost:${port}`;
 
 const URL_MAP = {
   '/login': '/public/login',
