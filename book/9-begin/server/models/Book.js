@@ -11,7 +11,7 @@ const User = require('./User');
 const { addToMailchimp } = require('../mailchimp');
 const { getCommits, getRepoDetail } = require('../github');
 
-const logger = require('../logger');
+// const logger = require('../logger');
 
 const { Schema } = mongoose;
 
@@ -151,9 +151,9 @@ class BookClass {
 
         try {
           await Chapter.syncContent({ book, data });
-          logger.info('Content is synced', { path: f.path });
+          console.log('Content is synced', { path: f.path });
         } catch (error) {
-          logger.error('Content sync has error', { path: f.path, error });
+          console.error('Content sync has error', { path: f.path, error });
         }
       }),
     );
@@ -181,7 +181,7 @@ class BookClass {
     try {
       await addToMailchimp({ email: user.email, listName: 'purchased' });
     } catch (error) {
-      logger.error('buy error:', error);
+      console.error('buy error:', error);
     }
 
     return Purchase.create({

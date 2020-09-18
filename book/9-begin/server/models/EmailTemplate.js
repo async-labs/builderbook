@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
-const logger = require('../logger');
+// const logger = require('../logger');
 
 const { Schema } = mongoose;
 
@@ -66,7 +66,7 @@ function insertTemplates() {
     }
 
     EmailTemplate.create(template).catch((error) => {
-      logger.error('EmailTemplate insertion error:', error);
+      console.error('EmailTemplate insertion error:', error);
     });
   });
 }
