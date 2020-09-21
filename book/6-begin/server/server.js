@@ -4,7 +4,7 @@ const mongoSessionStore = require('connect-mongo');
 const next = require('next');
 const mongoose = require('mongoose');
 
-const auth = require('./google');
+const setupGoogle = require('./google');
 const api = require('./api');
 const logger = require('./logs');
 const { insertTemplates } = require('./models/EmailTemplate');
@@ -55,7 +55,7 @@ app.prepare().then(async () => {
 
   await insertTemplates();
 
-  auth({ server, ROOT_URL });
+  setupGoogle({ server, ROOT_URL });
   api(server);
 
   server.get('/books/:bookSlug/:chapterSlug', (req, res) => {

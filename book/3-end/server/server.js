@@ -4,7 +4,7 @@ const mongoSessionStore = require('connect-mongo');
 const next = require('next');
 const mongoose = require('mongoose');
 
-const auth = require('./google');
+const setupGoogle = require('./google');
 
 require('dotenv').config();
 
@@ -49,7 +49,7 @@ app.prepare().then(() => {
 
   server.use(session(sess));
 
-  auth({ server, ROOT_URL });
+  setupGoogle({ server, ROOT_URL });
 
   server.get('*', (req, res) => handle(req, res));
 

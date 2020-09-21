@@ -6,14 +6,13 @@ const mongoose = require('mongoose');
 const compression = require('compression');
 const helmet = require('helmet');
 
-const auth = require('./google');
+const setupGoogle = require('./google');
 const { setupGithub } = require('./github');
 const api = require('./api');
 
 const logger = require('./logger');
 // const { insertTemplates } = require('./models/EmailTemplate');
 const routesWithSlug = require('./routesWithSlug');
-const setupSitemapAndRobots = require('./sitemapAndRobots');
 const { stripeCheckoutCallback } = require('./stripe');
 
 require('dotenv').config();
@@ -81,12 +80,11 @@ app.prepare().then(async () => {
 
   // await insertTemplates();
 
-  auth({ server, ROOT_URL });
+  setupGoogle({ server, ROOT_URL });
   setupGithub({ server, ROOT_URL });
   api(server);
   routesWithSlug({ server, app });
   stripeCheckoutCallback({ server });
-  setupSitemapAndRobots({ server });
 
   server.get('*', (req, res) => {
     const url = URL_MAP[req.path];

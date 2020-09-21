@@ -4,7 +4,7 @@ const mongoSessionStore = require('connect-mongo');
 const next = require('next');
 const mongoose = require('mongoose');
 
-const auth = require('./google');
+const setupGoogle = require('./google');
 const { setupGithub } = require('./github');
 const api = require('./api');
 
@@ -61,7 +61,7 @@ app.prepare().then(async () => {
 
   await insertTemplates();
 
-  auth({ server, ROOT_URL });
+  setupGoogle({ server, ROOT_URL });
   setupGithub({ server });
   api(server);
   routesWithSlug({ server, app });

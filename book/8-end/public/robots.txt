@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-Allow: /book
-Allow: /login
-Allow: /books/*
-Disallow: /*
-Disallow: /*/*
-Sitemap: https://builderbook.org/sitemap.xml
