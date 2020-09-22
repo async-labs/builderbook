@@ -14,11 +14,75 @@
   },
   "eslint.workingDirectories": [
     {
+      "directory": "./builderbook/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/9-end/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/9-begin/",
+      "changeProcessCWD": true
+    },
+    {
       "directory": "./book/8-end/",
       "changeProcessCWD": true
     },
     {
-      "directory": "./builderbook/",
+      "directory": "./book/8-begin/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/7-end/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/7-begin/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/6-end/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/6-begin/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/5-end/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/5-begin/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/4-end/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/4-begin/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/3-end/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/3-begin/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/2-end/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/2-begin/",
+      "changeProcessCWD": true
+    },
+    {
+      "directory": "./book/1-end/",
       "changeProcessCWD": true
     },
   ],

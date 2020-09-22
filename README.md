@@ -435,13 +435,13 @@ All code in this repository is provided under the [MIT License](https://github.c
 │   │   ├── config.yml
 │   ├── components
 │   │   ├── admin
-│   │   │   ├── EditBook.js
+│   │   │   ├── EditBook.jsx
 │   │   ├── customer
-│   │   │   ├── BuyButton.js
-│   │   ├── Header.js
-│   │   ├── MenuDrop.js                     
-│   │   ├── Notifier.js
-│   │   ├── SubscribeForm.js
+│   │   │   ├── BuyButton.jsx
+│   │   ├── Header.jsx
+│   │   ├── MenuDrop.jsx                   
+│   │   ├── Notifier.jsx
+│   │   ├── SharedStyles.jsx
 ├── lib
 │   ├── api
 │   │   ├── admin.js
@@ -452,21 +452,21 @@ All code in this repository is provided under the [MIT License](https://github.c
 │   ├── env.js
 │   ├── notifier.js
 │   ├── theme.js
-│   ├── withAuth.js
+│   ├── withAuth.jsx
 ├── pages
 │   ├── admin
-│   │   ├── add-book.js
-│   │   ├── book-detail.js
-│   │   ├── edit-book.js
-│   │   ├── index.js
+│   │   ├── add-book.jsx
+│   │   ├── book-detail.jsx
+│   │   ├── edit-book.jsx
+│   │   ├── index.jsx
 │   ├── customer
-│   │   ├── my-books.js
+│   │   ├── my-books.jsx
 │   ├── public
-│   │   ├── login.js
-│   │   ├── read-chapter.js
-│   ├── _app.js
-│   ├── _document.js
-│   ├── index.js
+│   │   ├── login.jsx
+│   │   ├── read-chapter.jsx
+│   ├── _app.jsx
+│   ├── _document.jsx
+│   ├── index.jsx
 ├── public
 │   ├── robots.txt
 ├── server

@@ -33,8 +33,6 @@ const optionsMenuAdmin = [
   },
 ];
 
-
-
 function Header({ user, hideHeader, redirectUrl }) {
   return (
     <div

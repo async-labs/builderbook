@@ -1,6 +1,6 @@
 const { Octokit } = require('@octokit/rest');
 const fetch = require('node-fetch');
-const { oauthLoginUrl } = require('@octokit/oauth-login-url');
+const { oauthLoginUrl } = require('@octokit/oauth-authorization-url');
 const _ = require('lodash');
 
 // const logger = require('./logger');
