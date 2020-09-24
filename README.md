@@ -104,6 +104,7 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
 
   # Used in pages/_document.js and pages/_app.js
   GA_MEASUREMENT_ID=
+  COOKIE_DOMAIN=
 
   ```
 
