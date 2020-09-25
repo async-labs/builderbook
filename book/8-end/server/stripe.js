@@ -97,7 +97,7 @@ function stripeCheckoutCallback({ server }) {
 
       res.redirect(`${ROOT_URL}${session.metadata.redirectUrl}`);
     } catch (err) {
-      logger.error(err);
+      console.error(err);
       res.redirect(
         `${ROOT_URL}${session.metadata.redirectUrl}?error=${err.message || err.toString()}`,
       );

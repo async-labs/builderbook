@@ -63,7 +63,7 @@ async function insertTemplates() {
     [],
   );
   return Promise.all(updates).catch((error) => {
-    logger.error('EmailTemplate insertion error: ', error);
+    console.error('EmailTemplate insertion error: ', error);
     throw error;
   });
 }

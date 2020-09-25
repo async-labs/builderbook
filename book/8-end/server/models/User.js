@@ -116,13 +116,13 @@ class UserClass {
         body: template.message,
       });
     } catch (err) {
-      logger.error('Email sending error:', err);
+      console.error('Email sending error:', err);
     }
 
     try {
       await addToMailchimp({ email, listName: 'signedup' });
     } catch (error) {
-      logger.error('Mailchimp error:', error);
+      console.error('Mailchimp error:', error);
     }
 
     return _.pick(newUser, UserClass.publicFields());

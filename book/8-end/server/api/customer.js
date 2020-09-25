@@ -53,7 +53,7 @@ router.post('/stripe/fetch-checkout-session', async (req, res) => {
 
     res.json({ sessionId: session.id });
   } catch (err) {
-    logger.error(err);
+    console.error(err);
     res.json({ error: err.message || err.toString() });
   }
 });

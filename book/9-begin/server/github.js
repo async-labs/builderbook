@@ -3,7 +3,6 @@ const fetch = require('node-fetch');
 const { oauthLoginUrl } = require('@octokit/oauth-authorization-url');
 const _ = require('lodash');
 
-// const logger = require('./logger');
 const User = require('./models/User');
 
 require('dotenv').config();
@@ -35,8 +34,6 @@ function getAPI({ user, previews = [], request }) {
 
 function getRepos({ user, request }) {
   const github = getAPI({ user, request });
-
-  // octokit.repos.listForAuthenticatedUser();
 
   return github.repos.listForAuthenticatedUser({
     visibility: 'private',

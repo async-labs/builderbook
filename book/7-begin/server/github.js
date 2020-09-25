@@ -1,108 +1,160 @@
-const qs = require('qs');
-const request = require('request');
-const GithubAPI = require('@octokit/rest');
+const { Octokit } = require('@octokit/rest');
+const fetch = require('node-fetch');
+const { oauthLoginUrl } = require('@octokit/oauth-authorization-url');
+const _ = require('lodash');
+
 const User = require('./models/User');
 
-const AUTHORIZE_URI = 'https://github.com/login/oauth/authorize';
-const TOKEN_URI = 'https://github.com/login/oauth/access_token';
+require('dotenv').config();
 
-function setupGithub({ server }) {
-  const dev = process.env.NODE_ENV !== 'production';
+const dev = process.env.NODE_ENV !== 'production';
+const CLIENT_ID = dev ? process.env.Github_Test_ClientID : process.env.Github_Live_ClientID;
+const API_KEY = dev ? process.env.Github_Test_SecretKey : process.env.Github_Live_SecretKey;
 
-  const CLIENT_ID = dev ? process.env.Github_Test_ClientID : process.env.Github_Live_ClientID;
-  const API_KEY = dev ? process.env.Github_Test_SecretKey : process.env.Github_Live_SecretKey;
-
-  server.get('/auth/github', (req, res) => {
-    if (!req.user || !req.user.isAdmin) {
-      res.redirect('/login');
-      return;
-    }
-
-    res.redirect(
-      `${AUTHORIZE_URI}?${qs.stringify({
-        scope: 'repo',
-        client_id: CLIENT_ID,
-      })}`,
-    );
-  });
-
-  server.get('/auth/github/callback', (req, res) => {
-    if (!req.user || !req.user.isAdmin) {
-      res.redirect('/login');
-      return;
-    }
-
-    if (req.query.error) {
-      res.redirect(`/admin?error=${req.query.error_description}`);
-      return;
-    }
-
-    const { code } = req.query;
-
-    request.post(
-      {
-        url: TOKEN_URI,
-        headers: { Accept: 'application/json' },
-        form: {
-          client_id: CLIENT_ID,
-          code,
-          client_secret: API_KEY,
-        },
+function getAPI({ user, previews = [], request }) {
+  const github = new Octokit({
+    auth: user.githubAccessToken,
+    previews,
+    request: { timeout: 10000 },
+    log: {
+      info(msg, info) {
+        console.log(`Github API log: ${msg}`, {
+          ..._.omit(info, 'headers', 'request', 'body'),
+          user: _.pick(user, '_id', 'githubUsername', 'githubId'),
+          ..._.pick(request, 'ip', 'hostname'),
+        });
       },
-      async (err, response, body) => {
-        if (err) {
-          res.redirect(`/admin?error=${err.message || err.toString()}`);
-          return;
-        }
-
-        const result = JSON.parse(body);
-
-        if (result.error) {
-          res.redirect(`/admin?error=${result.error_description}`);
-          return;
-        }
-
-        try {
-          await User.updateOne(
-            { _id: req.user.id },
-            { $set: { isGithubConnected: true, githubAccessToken: result.access_token } },
-          );
-          res.redirect('/admin');
-        } catch (err2) {
-          res.redirect(`/admin?error=${err2.message || err2.toString()}`);
-        }
-      },
-    );
+    },
   });
-}
-
-function getAPI({ accessToken }) {
-  const github = new GithubAPI({ auth: accessToken, request: { timeout: 10000 } });
 
   return github;
 }
 
-function getRepos({ accessToken }) {
-  const github = getAPI({ accessToken });
+// https://octokit.github.io/rest.js/v18#repos
 
-  return github.repos.list({ per_page: 100 });
+function getRepos({ user, request }) {
+  const github = getAPI({ user, request });
+
+  return github.repos.listForAuthenticatedUser({
+    visibility: 'private',
+    per_page: 100,
+    affiliation: 'owner',
+  });
 }
 
-function getContent({ accessToken, repoName, path }) {
-  const github = getAPI({ accessToken });
+function getRepoDetail({ user, repoName, request, path }) {
+  const github = getAPI({ user, request });
   const [owner, repo] = repoName.split('/');
 
-  return github.repos.getContents({ owner, repo, path });
+  return github.repos.getContent({ owner, repo, path });
 }
 
-function getCommits({ accessToken, repoName, limit }) {
-  const github = getAPI({ accessToken });
+function getCommits({ user, repoName, request }) {
+  const github = getAPI({ user, request });
   const [owner, repo] = repoName.split('/');
 
-  return github.repos.listCommits({ owner, repo, per_page: limit });
+  return github.repos.listCommits({ owner, repo });
 }
 
-exports.setupGithub = setupGithub;
+function setupGithub({ server, ROOT_URL }) {
+  const verify = async ({ user, accessToken, profile }) => {
+    const modifier = {
+      githubId: profile.id,
+      githubAccessToken: accessToken,
+      githubUsername: profile.login,
+      isGithubConnected: true,
+    };
+
+    if (!user.displayName) {
+      modifier.displayName = profile.name || profile.login;
+    }
+
+    if (!user.avatarUrl && profile.avatar_url) {
+      modifier.avatarUrl = profile.avatar_url;
+    }
+
+    await User.updateOne({ _id: user._id }, modifier);
+  };
+
+  server.get('/auth/github', (req, res) => {
+    if (!req.user || !req.user.isAdmin) {
+      res.redirect(`${ROOT_URL}/login`);
+      return;
+    }
+
+    const { url, state } = oauthLoginUrl({
+      clientId: CLIENT_ID,
+      redirectUrl: `${ROOT_URL}/auth/github/callback`,
+      scopes: ['repo', 'user:email'],
+      log: { warn: (message) => console.log(message) },
+    });
+
+    req.session.githubAuthState = state;
+    if (req.query && req.query.redirectUrl && req.query.redirectUrl.startsWith('/')) {
+      req.session.next_url = req.query.redirectUrl;
+    } else {
+      req.session.next_url = null;
+    }
+
+    res.redirect(url);
+  });
+
+  server.get('/auth/github/callback', async (req, res) => {
+    if (!req.user) {
+      res.redirect(ROOT_URL);
+    }
+
+    const { next_url, githubAuthState } = req.session;
+
+    let redirectUrl = ROOT_URL;
+
+    if (next_url && next_url.startsWith('/')) {
+      req.session.next_url = null;
+      redirectUrl = `${ROOT_URL}${next_url}`;
+    }
+
+    if (githubAuthState !== req.query.state) {
+      res.redirect(`${redirectUrl}/admin?error=Wrong request`);
+    }
+
+    try {
+      const response = await fetch('https://github.com/login/oauth/access_token', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json;', Accept: 'application/json' },
+        body: JSON.stringify({
+          client_id: CLIENT_ID,
+          client_secret: API_KEY,
+          code: req.query.code,
+          state: req.query.state,
+          redirect_uri: `${ROOT_URL}/auth/github/callback`,
+        }),
+      });
+
+      const resData = await response.json();
+
+      const githubWithAccessToken = new Octokit({
+        auth: resData.access_token,
+        request: { timeout: 10000 },
+      });
+
+      const profile = await githubWithAccessToken.users.getAuthenticated();
+
+      await verify({
+        user: req.user,
+        accessToken: resData.access_token,
+        profile: profile.data,
+      });
+    } catch (error) {
+      console.error(error.toString());
+
+      res.redirect(`${redirectUrl}/admin?error=${error.toString()}`);
+    }
+
+    res.redirect(`${redirectUrl}/admin`);
+  });
+}
+
 exports.getRepos = getRepos;
-exports.getContent = getContent;
+exports.getRepoDetail = getRepoDetail;
 exports.getCommits = getCommits;
+exports.setupGithub = setupGithub;

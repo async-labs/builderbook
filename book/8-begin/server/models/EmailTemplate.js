@@ -47,7 +47,7 @@ function insertTemplates() {
     }
 
     EmailTemplate.create(template).catch((error) => {
-      logger.error('EmailTemplate insertion error:', error);
+      console.error('EmailTemplate insertion error:', error);
     });
   });
 }

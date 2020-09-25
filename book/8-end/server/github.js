@@ -3,7 +3,6 @@ const fetch = require('node-fetch');
 const { oauthLoginUrl } = require('@octokit/oauth-authorization-url');
 const _ = require('lodash');
 
-const logger = require('./logger');
 const User = require('./models/User');
 
 require('dotenv').config();
@@ -19,7 +18,7 @@ function getAPI({ user, previews = [], request }) {
     request: { timeout: 10000 },
     log: {
       info(msg, info) {
-        logger.info(`Github API log: ${msg}`, {
+        console.log(`Github API log: ${msg}`, {
           ..._.omit(info, 'headers', 'request', 'body'),
           user: _.pick(user, '_id', 'githubUsername', 'githubId'),
           ..._.pick(request, 'ip', 'hostname'),
@@ -35,8 +34,6 @@ function getAPI({ user, previews = [], request }) {
 
 function getRepos({ user, request }) {
   const github = getAPI({ user, request });
-
-  // octokit.repos.listForAuthenticatedUser();
 
   return github.repos.listForAuthenticatedUser({
     visibility: 'private',
@@ -89,7 +86,7 @@ function setupGithub({ server, ROOT_URL }) {
       clientId: CLIENT_ID,
       redirectUrl: `${ROOT_URL}/auth/github/callback`,
       scopes: ['repo', 'user:email'],
-      log: { warn: (message) => logger.warn(message) },
+      log: { warn: (message) => console.log(message) },
     });
 
     req.session.githubAuthState = state;
@@ -148,7 +145,7 @@ function setupGithub({ server, ROOT_URL }) {
         profile: profile.data,
       });
     } catch (error) {
-      logger.error(error.toString());
+      console.error(error.toString());
 
       res.redirect(`${redirectUrl}/admin?error=${error.toString()}`);
     }

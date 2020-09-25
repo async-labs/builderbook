@@ -97,6 +97,6 @@ app.prepare().then(async () => {
 
   server.listen(port, (err) => {
     if (err) throw err;
-    logger.info(`> Ready on ${ROOT_URL}`);
+    console.log(`> Ready on ${ROOT_URL}`);
   });
 });

@@ -36,8 +36,6 @@ function getAPI({ user, previews = [], request }) {
 function getRepos({ user, request }) {
   const github = getAPI({ user, request });
 
-  // octokit.repos.listForAuthenticatedUser();
-
   return github.repos.listForAuthenticatedUser({
     visibility: 'private',
     per_page: 100,

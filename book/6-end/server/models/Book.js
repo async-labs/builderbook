@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const frontmatter = require('front-matter');
 const generateSlug = require('../utils/slugify');
 // const Chapter = require('./Chapter');
-const { getCommits, getContent } = require('../github');
+const { getCommits, getRepoDetail } = require('../github');
 const logger = require('../logs');
 
 const { Schema } = mongoose;
@@ -52,9 +52,9 @@ class BookClass {
 
     const book = bookDoc.toObject();
 
-    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug').sort({ order: 1 })).map(
-      (chapter) => chapter.toObject(),
-    );
+    book.chapters = (
+      await Chapter.find({ bookId: book._id }, 'title slug').sort({ order: 1 })
+    ).map((chapter) => chapter.toObject());
     return book;
   }
 
@@ -95,7 +95,7 @@ class BookClass {
     return editedBook;
   }
 
-  static async syncContent({ id, githubAccessToken }) {
+  static async syncContent({ id, user, request }) {
     const book = await this.findById(id, 'githubRepo githubLastCommitSha');
 
     if (!book) {
@@ -103,9 +103,9 @@ class BookClass {
     }
 
     const lastCommit = await getCommits({
-      accessToken: githubAccessToken,
+      user,
       repoName: book.githubRepo,
-      limit: 1,
+      request,
     });
 
     if (!lastCommit || !lastCommit.data || !lastCommit.data[0]) {
@@ -117,9 +117,10 @@ class BookClass {
       throw new Error('No change in content!');
     }
 
-    const mainFolder = await getContent({
-      accessToken: githubAccessToken,
+    const mainFolder = await getRepoDetail({
+      user,
       repoName: book.githubRepo,
+      request,
       path: '',
     });
 
@@ -133,9 +134,10 @@ class BookClass {
           return;
         }
 
-        const chapter = await getContent({
-          accessToken: githubAccessToken,
+        const chapter = await getRepoDetail({
+          user,
           repoName: book.githubRepo,
+          request,
           path: f.path,
         });
 
@@ -145,9 +147,9 @@ class BookClass {
 
         try {
           await Chapter.syncContent({ book, data });
-          logger.info('Content is synced', { path: f.path });
+          console.log('Content is synced', { path: f.path });
         } catch (error) {
-          logger.error('Content sync has error', { path: f.path, error });
+          console.error('Content sync has error', { path: f.path, error });
         }
       }),
     );

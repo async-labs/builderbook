@@ -57,6 +57,6 @@ app.prepare().then(async () => {
   // starting express server
   server.listen(port, (err) => {
     if (err) throw err;
-    logger.info(`> Ready on ${ROOT_URL}`);
+    console.log(`> Ready on ${ROOT_URL}`);
   });
 });

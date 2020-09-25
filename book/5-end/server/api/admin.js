@@ -27,7 +27,7 @@ router.post('/books/add', async (req, res) => {
     const book = await Book.add(Object.assign({ userId: req.user.id }, req.body));
     res.json(book);
   } catch (err) {
-    logger.error(err);
+    console.error(err);
     res.json({ error: err.message || err.toString() });
   }
 });

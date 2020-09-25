@@ -26,10 +26,10 @@ router.get('/books', async (req, res) => {
 
 router.post('/books/add', async (req, res) => {
   try {
-    const book = await Book.add({ userId: req.user.id, ...req.body });
+    const book = await Book.add(req.body);
     res.json(book);
   } catch (err) {
-    logger.error(err);
+    console.error(err);
     res.json({ error: err.message || err.toString() });
   }
 });
@@ -68,7 +68,7 @@ router.post('/books/sync-content', async (req, res) => {
     await Book.syncContent({ id: bookId, user, request: req });
     res.json({ done: 1 });
   } catch (err) {
-    logger.error(err);
+    console.error(err);
     res.json({ error: err.message || err.toString() });
   }
 });
@@ -85,7 +85,7 @@ router.get('/github/repos', async (req, res) => {
     const response = await getRepos({ user, request: req });
     res.json({ repos: response.data });
   } catch (err) {
-    logger.error(err);
+    console.error(err);
     res.json({ error: err.message || err.toString() });
   }
 });
