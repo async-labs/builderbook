@@ -2,27 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NProgress from 'nprogress';
 import Button from '@material-ui/core/Button';
-// import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 
-import { fetchCheckoutSession } from '../../lib/api/customer';
+import { fetchCheckoutSessionApiMethod } from '../../lib/api/customer';
 
 import notify from '../../lib/notifier';
-
-const dev = process.env.NODE_ENV !== 'production';
-const port = process.env.PORT || 8000;
-const ROOT_URL = `http://localhost:${port}`;
-
-// console.log(process.env.Stripe_Test_PublishableKey);
-
-const stripePromise = loadStripe(
-  dev ? process.env.Stripe_Test_PublishableKey : process.env.Stripe_Live_PublishableKey,
-);
 
 const styleBuyButton = {
   margin: '10px 20px 0px 0px',
   font: '14px Roboto',
 };
+
+const dev = process.env.NODE_ENV !== 'production';
+const port = process.env.PORT || 8000;
+const ROOT_URL = `http://localhost:${port}`;
+
+const stripePromise = loadStripe(
+  dev ? process.env.Stripe_Test_PublishableKey : process.env.Stripe_Live_PublishableKey,
+);
 
 class BuyButton extends React.PureComponent {
   componentDidMount() {
@@ -31,12 +28,21 @@ class BuyButton extends React.PureComponent {
     }
   }
 
+  onLoginClicked = () => {
+    const { user } = this.props;
+
+    if (!user) {
+      const redirectUrl = `${window.location.pathname}?buy=1`;
+      window.location.href = `${ROOT_URL}/auth/google?redirectUrl=${redirectUrl}`;
+    }
+  };
+
   handleCheckoutClick = async () => {
     NProgress.start();
 
     try {
       const { book } = this.props;
-      const { sessionId } = await fetchCheckoutSession({
+      const { sessionId } = await fetchCheckoutSessionApiMethod({
         bookId: book._id,
         redirectUrl: document.location.pathname,
       });
@@ -52,15 +58,6 @@ class BuyButton extends React.PureComponent {
       notify(err);
     } finally {
       NProgress.done();
-    }
-  };
-
-  onLoginClicked = () => {
-    const { user } = this.props;
-
-    if (!user) {
-      const redirectUrl = `${window.location.pathname}?buy=1`;
-      window.location.href = `${ROOT_URL}/auth/google?redirectUrl=${redirectUrl}`;
     }
   };
 

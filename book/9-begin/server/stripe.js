@@ -3,7 +3,6 @@ const lodash = require('lodash');
 
 const Book = require('./models/Book');
 const User = require('./models/User');
-// const logger = require('./logger');
 
 const dev = process.env.NODE_ENV !== 'production';
 const API_KEY = dev ? process.env.Stripe_Test_SecretKey : process.env.Stripe_Live_SecretKey;

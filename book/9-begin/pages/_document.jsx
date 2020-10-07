@@ -2,13 +2,6 @@
 import React from 'react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
-// import htmlescape from 'htmlescape';
-
-// const { StripePublishableKey } = process.env;
-// // console.log(StripePublishableKey);
-
-// const env = { StripePublishableKey };
-// // console.log(env);
 
 class MyDocument extends Document {
   static getInitialProps = async (ctx) => {
@@ -126,9 +119,6 @@ class MyDocument extends Document {
           }}
         >
           <Main />
-          {/* Added next.config.js
-          {/* eslint-disable-next-line react/no-danger */}
-          {/* <script dangerouslySetInnerHTML={{ __html: `__ENV__ = ${htmlescape(env)}` }} /> */}
           <NextScript />
         </body>
       </Html>

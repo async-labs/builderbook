@@ -31,6 +31,15 @@ class BuyButton extends React.PureComponent {
     }
   }
 
+  onLoginClicked = () => {
+    const { user } = this.props;
+
+    if (!user) {
+      const redirectUrl = `${window.location.pathname}?buy=1`;
+      window.location.href = `${ROOT_URL}/auth/google?redirectUrl=${redirectUrl}`;
+    }
+  };
+
   handleCheckoutClick = async () => {
     NProgress.start();
 
@@ -52,15 +61,6 @@ class BuyButton extends React.PureComponent {
       notify(err);
     } finally {
       NProgress.done();
-    }
-  };
-
-  onLoginClicked = () => {
-    const { user } = this.props;
-
-    if (!user) {
-      const redirectUrl = `${window.location.pathname}?buy=1`;
-      window.location.href = `${ROOT_URL}/auth/google?redirectUrl=${redirectUrl}`;
     }
   };
 
