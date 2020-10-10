@@ -2,7 +2,6 @@ const express = require('express');
 const Book = require('../models/Book');
 const User = require('../models/User');
 const { getRepos } = require('../github');
-const logger = require('../logger');
 
 const router = express.Router();
 

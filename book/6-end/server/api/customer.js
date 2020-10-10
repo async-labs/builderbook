@@ -11,9 +11,4 @@ router.use((req, res, next) => {
   next();
 });
 
-// List of API:
-// 1. /buy-book
-// 2. /my-books
-
 module.exports = router;
-

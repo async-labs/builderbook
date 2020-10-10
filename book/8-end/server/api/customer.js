@@ -2,7 +2,6 @@ const express = require('express');
 const Book = require('../models/Book');
 const Purchase = require('../models/Purchase');
 const { createSession } = require('../stripe');
-const logger = require('../logger');
 
 const router = express.Router();
 

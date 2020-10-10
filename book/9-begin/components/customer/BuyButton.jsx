@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 // import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 
-import { fetchCheckoutSession } from '../../lib/api/customer';
+import { fetchCheckoutSessionApiMethod } from '../../lib/api/customer';
 
 import notify from '../../lib/notifier';
 
@@ -45,7 +45,7 @@ class BuyButton extends React.PureComponent {
 
     try {
       const { book } = this.props;
-      const { sessionId } = await fetchCheckoutSession({
+      const { sessionId } = await fetchCheckoutSessionApiMethod({
         bookId: book._id,
         redirectUrl: document.location.pathname,
       });

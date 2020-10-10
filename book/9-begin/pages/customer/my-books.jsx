@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Head from 'next/head';
 
-import { getMyBookList } from '../../lib/api/customer';
+import { getMyBookListApiMethod } from '../../lib/api/customer';
 import withAuth from '../../lib/withAuth';
 
 const propTypes = {
@@ -30,7 +30,7 @@ class MyBooks extends React.Component {
       headers.cookie = req.headers.cookie;
     }
 
-    const { purchasedBooks } = await getMyBookList({ headers });
+    const { purchasedBooks } = await getMyBookListApiMethod({ headers });
     return { purchasedBooks };
   }
 

@@ -43,6 +43,9 @@ app.prepare().then(async () => {
 
   server.use(helmet({ contentSecurityPolicy: false }));
   server.use(compression());
+
+  stripeCheckoutCallback({ server });
+
   server.use(express.json());
 
   // give all Nextjs's request to Nextjs server
@@ -83,7 +86,6 @@ app.prepare().then(async () => {
   setupGithub({ server, ROOT_URL });
   api(server);
   routesWithSlug({ server, app });
-  stripeCheckoutCallback({ server });
 
   server.get('*', (req, res) => {
     const url = URL_MAP[req.path];

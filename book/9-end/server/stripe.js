@@ -31,8 +31,7 @@ function getBookPriceId(bookSlug) {
 }
 
 function createSession({ userId, bookId, bookSlug, userEmail, redirectUrl }) {
-  // console.log(`redirectUrl at createSession: ${redirectUrl}`);
-  console.log(userId, bookId, bookSlug, userEmail, redirectUrl);
+  logger.info(userId, bookId, bookSlug, userEmail, redirectUrl);
   return stripeInstance.checkout.sessions.create({
     customer_email: userEmail,
     payment_method_types: ['card'],
@@ -71,11 +70,7 @@ function stripeCheckoutCallback({ server }) {
         '_id email purchasedBookIds freeBookIds',
       ).lean();
 
-      console.log(user);
-
       const book = await Book.findOne({ _id: session.metadata.bookId }, 'name slug price').lean();
-
-      console.log(book);
 
       if (!user) {
         throw new Error('User not found.');

@@ -30,7 +30,6 @@ function getBookPriceId(bookSlug) {
 }
 
 function createSession({ userId, bookId, bookSlug, userEmail, redirectUrl }) {
-  // console.log(`redirectUrl at createSession: ${redirectUrl}`);
   console.log(userId, bookId, bookSlug, userEmail, redirectUrl);
   return stripeInstance.checkout.sessions.create({
     customer_email: userEmail,
