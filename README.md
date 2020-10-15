@@ -87,14 +87,14 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
   Github_Live_SecretKey=
 
   # Used in server/stripe.js
-  Stripe_Test_SecretKey=
-  Stripe_Live_SecretKey=
-  Stripe_Test_PublishableKey=
-  Stripe_Live_PublishableKey=
-  STRIPE_TEST_BUILDER_BOOK_PRICE_ID=
-  STRIPE_LIVE_BUILDER_BOOK_PRICE_ID=
-  STRIPE_TEST_SAAS_BOOK_PRICE_ID=
-  STRIPE_LIVE_SAAS_BOOK_PRICE_ID=
+  STRIPE_TEST_PUBLISHABLEKEY=
+  STRIPE_LIVE_PUBLISHABLEKEY=
+  STRIPE_TEST_SECRETKEY=
+  STRIPE_LIVE_SECRETKEY=
+  STRIPE_TEST_DEMO_BOOK_PRICE_ID=
+  STRIPE_LIVE_DEMO_BOOK_PRICE_ID=
+  STRIPE_TEST_SECOND_BOOK_PRICE_ID=
+  STRIPE_LIVE_SECOND_BOOK_PRICE_ID=
 
   # Used in server/mailchimp.js
   MAILCHIMP_API_KEY=
@@ -111,7 +111,7 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
 - Start the app with `yarn dev`.
   - To get `GA_MEASUREMENT_ID`, set up Google Analytics and follow [these instructions](https://support.google.com/analytics/answer/1008080?hl=en) to find your tracking ID.
   - To get Stripe-related API keys, set up or log into your Stripe account and find your key [here](https://dashboard.stripe.com/account/apikeys).
-- Env keys `GA_MEASUREMENT_ID` and `Stripe_Test_PublishableKey`/`Stripe_Live_PublishableKey` are universally available (client and server). Env keys inside `.env` file are used in server code only. To make env vars universally available, add them to `next.config.js` file.
+- Env keys `GA_MEASUREMENT_ID` and `STRIPE_TEST_PUBLISHABLEKEY`/`STRIPE_LIVE_PUBLISHABLEKEY` are universally available (client and server). Env keys inside `.env` file are used in server code only. To make env vars universally available, add them to `next.config.js` file.
 - To make user a book's owner, set `"isAdmin": true` on corresponding MongoDB document in your database (default value is `false` for any new user).
 
 **Important: if you don't add values for environmental variables to `.env` file, corresponding functionality will not work. For example, login with Google account, purchasing book, getting repo information via GitHub API and other third-party API infrastructures.**

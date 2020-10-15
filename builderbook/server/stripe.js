@@ -8,21 +8,22 @@ const logger = require('./logger');
 const getRootUrl = require('../lib/api/getRootUrl');
 
 const dev = process.env.NODE_ENV !== 'production';
-const API_KEY = dev ? process.env.Stripe_Test_SecretKey : process.env.Stripe_Live_SecretKey;
+const API_KEY = dev ? process.env.STRIPE_TEST_SECRETKEY : process.env.STRIPE_LIVE_SECRETKEY;
 const ROOT_URL = getRootUrl();
 
 const stripeInstance = new Stripe(API_KEY, { apiVersion: '2020-03-02' });
 
 function getBookPriceId(bookSlug) {
   let priceId;
-  if (bookSlug === 'builder-book') {
+
+  if (bookSlug === 'demo-book') {
     priceId = dev
-      ? process.env.STRIPE_TEST_BUILDER_BOOK_PRICE_ID
-      : process.env.STRIPE_LIVE_BUILDER_BOOK_PRICE_ID;
-  } else if (bookSlug === 'saas-boilerplate') {
+      ? process.env.STRIPE_TEST_DEMO_BOOK_PRICE_ID
+      : process.env.STRIPE_LIVE_DEMO_BOOK_PRICE_ID;
+  } else if (bookSlug === 'second-book') {
     priceId = dev
-      ? process.env.STRIPE_TEST_SAAS_BOOK_PRICE_ID
-      : process.env.STRIPE_LIVE_SAAS_BOOK_PRICE_ID;
+      ? process.env.STRIPE_TEST_SECOND_BOOK_PRICE_ID
+      : process.env.STRIPE_LIVE_SECOND_BOOK_PRICE_ID;
   } else {
     throw new Error('Wrong book');
   }
@@ -31,8 +32,7 @@ function getBookPriceId(bookSlug) {
 }
 
 function createSession({ userId, bookId, bookSlug, userEmail, redirectUrl }) {
-  // console.log(`redirectUrl at createSession: ${redirectUrl}`);
-  console.log(userId, bookId, bookSlug, userEmail, redirectUrl);
+  logger.info(userId, bookId, bookSlug, userEmail, redirectUrl);
   return stripeInstance.checkout.sessions.create({
     customer_email: userEmail,
     payment_method_types: ['card'],
@@ -71,11 +71,7 @@ function stripeCheckoutCallback({ server }) {
         '_id email purchasedBookIds freeBookIds',
       ).lean();
 
-      console.log(user);
-
       const book = await Book.findOne({ _id: session.metadata.bookId }, 'name slug price').lean();
-
-      console.log(book);
 
       if (!user) {
         throw new Error('User not found.');

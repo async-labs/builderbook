@@ -2,7 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   env: {
-    Stripe_Test_PublishableKey: process.env.Stripe_Test_PublishableKey,
-    Stripe_Live_PublishableKey: process.env.Stripe_Live_PublishableKey,
+    STRIPE_TEST_PUBLISHABLEKEY: process.env.STRIPE_TEST_PUBLISHABLEKEY,
+    STRIPE_LIVE_PUBLISHABLEKEY: process.env.STRIPE_LIVE_PUBLISHABLEKEY,
   },
 };

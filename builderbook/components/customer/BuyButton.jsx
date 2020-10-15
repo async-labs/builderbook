@@ -15,8 +15,9 @@ const dev = process.env.NODE_ENV !== 'production';
 // console.log(process.env.Stripe_Test_PublishableKey);
 
 const stripePromise = loadStripe(
-  dev ? process.env.Stripe_Test_PublishableKey : process.env.Stripe_Live_PublishableKey,
+  dev ? process.env.STRIPE_TEST_PUBLISHABLEKEY : process.env.STRIPE_LIVE_PUBLISHABLEKEY,
 );
+
 const ROOT_URL = getRootUrl();
 
 const styleBuyButton = {

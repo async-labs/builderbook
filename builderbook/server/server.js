@@ -87,7 +87,9 @@ app.prepare().then(async () => {
   setupGithub({ server, ROOT_URL });
   api(server);
   routesWithSlug({ server, app });
+
   stripeCheckoutCallback({ server });
+
   setupSitemapAndRobots({ server });
 
   server.get('*', (req, res) => {

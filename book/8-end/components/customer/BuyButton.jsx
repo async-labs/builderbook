@@ -18,7 +18,7 @@ const port = process.env.PORT || 8000;
 const ROOT_URL = `http://localhost:${port}`;
 
 const stripePromise = loadStripe(
-  dev ? process.env.Stripe_Test_PublishableKey : process.env.Stripe_Live_PublishableKey,
+  dev ? process.env.STRIPE_TEST_PUBLISHABLEKEY : process.env.STRIPE_LIVE_PUBLISHABLEKEY,
 );
 
 class BuyButton extends React.PureComponent {

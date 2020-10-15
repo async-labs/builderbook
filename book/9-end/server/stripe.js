@@ -8,21 +8,22 @@ const logger = require('./logger');
 const getRootUrl = require('../lib/api/getRootUrl');
 
 const dev = process.env.NODE_ENV !== 'production';
-const API_KEY = dev ? process.env.Stripe_Test_SecretKey : process.env.Stripe_Live_SecretKey;
+const API_KEY = dev ? process.env.STRIPE_TEST_SECRETKEY : process.env.STRIPE_LIVE_SECRETKEY;
 const ROOT_URL = getRootUrl();
 
 const stripeInstance = new Stripe(API_KEY, { apiVersion: '2020-03-02' });
 
 function getBookPriceId(bookSlug) {
   let priceId;
+
   if (bookSlug === 'demo-book') {
     priceId = dev
-      ? process.env.STRIPE_TEST_BUILDER_BOOK_PRICE_ID
-      : process.env.STRIPE_LIVE_BUILDER_BOOK_PRICE_ID;
-  } else if (bookSlug === 'saas-boilerplate') {
+      ? process.env.STRIPE_TEST_DEMO_BOOK_PRICE_ID
+      : process.env.STRIPE_LIVE_DEMO_BOOK_PRICE_ID;
+  } else if (bookSlug === 'second-book') {
     priceId = dev
-      ? process.env.STRIPE_TEST_SAAS_BOOK_PRICE_ID
-      : process.env.STRIPE_LIVE_SAAS_BOOK_PRICE_ID;
+      ? process.env.STRIPE_TEST_SECOND_BOOK_PRICE_ID
+      : process.env.STRIPE_LIVE_SECOND_BOOK_PRICE_ID;
   } else {
     throw new Error('Wrong book');
   }
