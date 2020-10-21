@@ -39,7 +39,7 @@ router.post('/stripe/fetch-checkout-session', async (req, res) => {
     const isPurchased =
       (await Purchase.find({ userId: req.user._id, bookId: book._id }).countDocuments()) > 0;
     if (isPurchased) {
-      throw new Error('Already bought this book');
+      throw new Error('You already bought this book.');
     }
 
     const session = await createSession({

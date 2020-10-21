@@ -4,14 +4,11 @@ const mongoose = require('mongoose');
 const frontmatter = require('front-matter');
 
 const generateSlug = require('../utils/slugify');
-// const Chapter = require('./Chapter');
-const Purchase = require('./Purchase');
 const User = require('./User');
+const Purchase = require('./Purchase');
 
-const { addToMailchimp } = require('../mailchimp');
 const { getCommits, getRepoDetail } = require('../github');
-
-// const logger = require('../logger');
+const { addToMailchimp } = require('../mailchimp');
 
 const { Schema } = mongoose;
 
@@ -173,7 +170,7 @@ class BookClass {
     const isPurchased =
       (await Purchase.find({ userId: user._id, bookId: book._id }).countDocuments()) > 0;
     if (isPurchased) {
-      throw new Error('Already bought this book');
+      throw new Error('You already bought this book.');
     }
 
     User.findByIdAndUpdate(user._id, { $addToSet: { purchasedBookIds: book._id } }).exec();
@@ -181,7 +178,7 @@ class BookClass {
     try {
       await addToMailchimp({ email: user.email, listName: 'purchased' });
     } catch (error) {
-      console.error('buy error:', error);
+      console.error('Buy book error:', error);
     }
 
     return Purchase.create({
