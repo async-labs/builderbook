@@ -55,6 +55,22 @@ class ReadChapter extends React.Component {
     };
   }
 
+  static getDerivedStateFromProps(props) {
+    const { chapter } = props;
+
+    if (chapter) {
+      let htmlContent = '';
+      if (chapter) {
+        htmlContent = chapter.htmlContent;
+      }
+  
+
+      return { chapter, htmlContent };
+    }
+
+    return null;
+  }
+
   componentDidMount() {
     document.getElementById('main-content').addEventListener('scroll', this.onScroll);
 

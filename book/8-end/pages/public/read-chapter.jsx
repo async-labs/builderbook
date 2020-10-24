@@ -68,6 +68,21 @@ class ReadChapter extends React.Component {
     };
   }
 
+  static async getInitialProps({ req, query }) {
+    const { bookSlug, chapterSlug, buy, checkout_canceled, error } = query;
+
+    const headers = {};
+    if (req && req.headers && req.headers.cookie) {
+      headers.cookie = req.headers.cookie;
+    }
+
+    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
+
+    const redirectToCheckout = !!buy;
+
+    return { chapter, redirectToCheckout, checkoutCanceled: !!checkout_canceled, error };
+  }
+
   static getDerivedStateFromProps(props) {
     const { chapter } = props;
 
@@ -86,21 +101,6 @@ class ReadChapter extends React.Component {
     return null;
   }
 
-  static async getInitialProps({ req, query }) {
-    const { bookSlug, chapterSlug, buy, checkout_canceled, error } = query;
-
-    const headers = {};
-    if (req && req.headers && req.headers.cookie) {
-      headers.cookie = req.headers.cookie;
-    }
-
-    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
-    // console.log(`buy:${query.bookSlug}, ${buy}, ${!!buy}`);
-    const redirectToCheckout = !!buy;
-
-    return { chapter, redirectToCheckout, checkoutCanceled: !!checkout_canceled, error };
-  }
-
   componentDidMount() {
     document.getElementById('main-content').addEventListener('scroll', this.onScroll);
 
@@ -111,7 +111,7 @@ class ReadChapter extends React.Component {
     }
 
     if (this.props.checkoutCanceled) {
-      notify('Checkout canceled');
+      notify('Checkout canceled.');
     }
 
     if (this.props.error) {
