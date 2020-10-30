@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import notify from '../../lib/notifier';
 
 import withAuth from '../../lib/withAuth';
-import { getBookList } from '../../lib/api/admin';
+import { getBookListApiMethod } from '../../lib/api/admin';
 
 const Index = ({ books }) => (
   <div style={{ padding: '10px 45px' }}>
@@ -47,7 +47,7 @@ class IndexWithData extends React.Component {
 
   async componentDidMount() {
     try {
-      const { books } = await getBookList();
+      const { books } = await getBookListApiMethod();
       this.setState({ books }); // eslint-disable-line
     } catch (err) {
       notify(err);

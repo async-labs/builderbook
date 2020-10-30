@@ -2,19 +2,17 @@ import sendRequest from './sendRequest';
 
 const BASE_PATH = '/api/v1/admin';
 
-export const getBookList = () =>
+export const getBookListApiMethod = () =>
   sendRequest(`${BASE_PATH}/books`, {
     method: 'GET',
   });
 
-export const addBook = ({ name, price, githubRepo }) =>
+export const addBookApiMethod = ({ name, price, githubRepo }) =>
   sendRequest(`${BASE_PATH}/books/add`, {
     body: JSON.stringify({ name, price, githubRepo }),
   });
 
-export const editBook = ({
-  id, name, price, githubRepo,
-}) =>
+export const editBookApiMethod = ({ id, name, price, githubRepo }) =>
   sendRequest(`${BASE_PATH}/books/edit`, {
     body: JSON.stringify({
       id,
@@ -24,20 +22,19 @@ export const editBook = ({
     }),
   });
 
-export const getBookDetail = ({ slug }) =>
+export const getBookDetailApiMethod = ({ slug }) =>
   sendRequest(`${BASE_PATH}/books/detail/${slug}`, {
     method: 'GET',
   });
 
 // github methods
 
-export const syncBookContent = ({ bookId }) =>
+export const syncBookContentApiMethod = ({ bookId }) =>
   sendRequest(`${BASE_PATH}/books/sync-content`, {
     body: JSON.stringify({ bookId }),
   });
 
-export const getGithubRepos = () =>
+export const getGithubReposApiMethod = () =>
   sendRequest(`${BASE_PATH}/github/repos`, {
     method: 'GET',
   });
-

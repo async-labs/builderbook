@@ -10,7 +10,7 @@ import Link from 'next/link';
 import Header from '../../components/Header';
 import BuyButton from '../../components/customer/BuyButton';
 
-import { getChapterDetail } from '../../lib/api/public';
+import { getChapterDetailApiMethod } from '../../lib/api/public';
 import withAuth from '../../lib/withAuth';
 import notify from '../../lib/notifier';
 
@@ -76,7 +76,7 @@ class ReadChapter extends React.Component {
       headers.cookie = req.headers.cookie;
     }
 
-    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
+    const chapter = await getChapterDetailApiMethod({ bookSlug, chapterSlug }, { headers });
 
     const redirectToCheckout = !!buy;
 

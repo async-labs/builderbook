@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Error from 'next/error';
 import Head from 'next/head';
 
-import { getChapterDetail } from '../../lib/api/public';
+import { getChapterDetailApiMethod } from '../../lib/api/public';
 import withAuth from '../../lib/withAuth';
 
 class ReadChapter extends React.Component {
@@ -51,7 +51,7 @@ class ReadChapter extends React.Component {
       headers.cookie = req.headers.cookie;
     }
 
-    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
+    const chapter = await getChapterDetailApiMethod({ bookSlug, chapterSlug }, { headers });
 
     return { chapter };
   }

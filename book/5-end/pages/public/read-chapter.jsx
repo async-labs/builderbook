@@ -4,7 +4,7 @@ import Error from 'next/error';
 import Head from 'next/head';
 import Grid from '@material-ui/core/Grid';
 
-import { getChapterDetail } from '../../lib/api/public';
+import { getChapterDetailApiMethod } from '../../lib/api/public';
 import withAuth from '../../lib/withAuth';
 
 const styleGrid = {
@@ -56,7 +56,7 @@ class ReadChapter extends React.Component {
       headers.cookie = req.headers.cookie;
     }
 
-    const chapter = await getChapterDetail({ bookSlug, chapterSlug }, { headers });
+    const chapter = await getChapterDetailApiMethod({ bookSlug, chapterSlug }, { headers });
 
     return { chapter };
   }

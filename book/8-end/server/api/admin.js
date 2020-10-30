@@ -14,7 +14,7 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get('/books', async (req, res) => {
+router.get('/books', async (_, res) => {
   try {
     const books = await Book.list();
     res.json(books);
