@@ -39,12 +39,12 @@ class ReadChapter extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { chapter } = nextProps;
+  componentDidUpdate(prevProps) {
+    if (prevProps.chapter && prevProps.chapter._id !== this.props.chapter._id) {
+      const { htmlContent } = prevProps.chapter;
 
-    if (chapter && chapter._id !== this.props.chapter._id) {
-      const { htmlContent } = chapter;
-      this.setState({ chapter, htmlContent });
+      // eslint-disable-next-line
+      this.setState({ chapter: prevProps.chapter, htmlContent });
     }
   }
 

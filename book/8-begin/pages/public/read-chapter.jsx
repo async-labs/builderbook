@@ -17,25 +17,23 @@ const styleIcon = {
   cursor: 'pointer',
 };
 
+const propTypes = {
+  chapter: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    htmlContent: PropTypes.string,
+    htmlExcerpt: PropTypes.string,
+  }),
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+  }),
+};
+
+const defaultProps = {
+  chapter: null,
+  user: null,
+};
+
 class ReadChapter extends React.Component {
-  static propTypes = {
-    chapter: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      isPurchased: PropTypes.bool,
-      isFree: PropTypes.bool.isRequired,
-      htmlContent: PropTypes.string,
-      htmlExcerpt: PropTypes.string,
-    }),
-    user: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-    }),
-  };
-
-  static defaultProps = {
-    chapter: null,
-    user: null,
-  };
-
   constructor(props, ...args) {
     super(props, ...args);
 
@@ -63,7 +61,6 @@ class ReadChapter extends React.Component {
       if (chapter) {
         htmlContent = chapter.htmlContent;
       }
-  
 
       return { chapter, htmlContent };
     }
@@ -81,13 +78,14 @@ class ReadChapter extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { chapter } = nextProps;
-
-    if (chapter && chapter._id !== this.props.chapter._id) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.chapter && prevProps.chapter._id !== this.props.chapter._id) {
       document.getElementById('chapter-content').scrollIntoView();
-      const { htmlContent } = chapter;
-      this.setState({ chapter, htmlContent });
+
+      const { htmlContent } = prevProps.chapter;
+
+      // eslint-disable-next-line
+      this.setState({ chapter: prevProps.chapter, htmlContent });
     }
   }
 
@@ -162,11 +160,11 @@ class ReadChapter extends React.Component {
   }
 
   toggleChapterList = () => {
-    this.setState({ showTOC: !this.state.showTOC });
+    this.setState((prevState) => ({ showTOC: !prevState.showTOC }));
   };
 
   closeTocWhenMobile = () => {
-    this.setState({ showTOC: !this.state.isMobile });
+    this.setState((prevState) => ({ showTOC: !prevState.isMobile }));
   };
 
   renderMainContent() {
@@ -344,5 +342,8 @@ class ReadChapter extends React.Component {
     );
   }
 }
+
+ReadChapter.propTypes = propTypes;
+ReadChapter.defaultProps = defaultProps;
 
 export default withAuth(ReadChapter, { loginRequired: false });
