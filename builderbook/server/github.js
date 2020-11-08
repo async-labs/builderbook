@@ -9,8 +9,8 @@ const User = require('./models/User');
 require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
-const CLIENT_ID = dev ? process.env.Github_Test_ClientID : process.env.Github_Live_ClientID;
-const API_KEY = dev ? process.env.Github_Test_SecretKey : process.env.Github_Live_SecretKey;
+const CLIENT_ID = dev ? process.env.GITHUB_TEST_CLIENTID : process.env.GITHUB_LIVE_CLIENTID;
+const API_KEY = dev ? process.env.GITHUB_TEST_SECRETKEY : process.env.GITHUB_LIVE_SECRETKEY;
 
 function getAPI({ user, previews = [], request }) {
   const github = new Octokit({

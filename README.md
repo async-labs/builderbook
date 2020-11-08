@@ -81,10 +81,10 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
   # All environmental variables above this line are required for successful sign up
   
   # Used in server/github.js
-  Github_Test_ClientID=
-  Github_Test_SecretKey=
-  Github_Live_ClientID=
-  Github_Live_SecretKey=
+  GITHUB_TEST_CLIENTID=
+  GITHUB_LIVE_CLIENTID=
+  GITHUB_TEST_SECRETKEY=
+  GITHUB_LIVE_SECRETKEY=
 
   # Used in server/stripe.js
   STRIPE_TEST_PUBLISHABLEKEY=
