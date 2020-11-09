@@ -2,27 +2,44 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NProgress from 'nprogress';
 import Button from '@material-ui/core/Button';
-// import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 
 import { fetchCheckoutSessionApiMethod } from '../../lib/api/customer';
-import getRootUrl from '../../lib/api/getRootUrl';
 
 import notify from '../../lib/notifier';
 
-const dev = process.env.NODE_ENV !== 'production';
+const styleBuyButton = {
+  margin: '10px 20px 0px 0px',
+  font: '14px Roboto',
+};
 
-// console.log(process.env.Stripe_Test_PublishableKey);
+const dev = process.env.NODE_ENV !== 'production';
+const port = process.env.PORT || 8000;
+const ROOT_URL = `http://localhost:${port}`;
 
 const stripePromise = loadStripe(
   dev ? process.env.STRIPE_TEST_PUBLISHABLEKEY : process.env.STRIPE_LIVE_PUBLISHABLEKEY,
 );
 
-const ROOT_URL = getRootUrl();
+const propTypes = {
+  book: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    textNearButton: PropTypes.string,
+  }),
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }),
+  redirectToCheckout: PropTypes.bool,
+};
 
-const styleBuyButton = {
-  margin: '10px 20px 0px 0px',
-  font: '14px Roboto',
+const defaultProps = {
+  book: null,
+  user: null,
+  redirectToCheckout: false,
 };
 
 class BuyButton extends React.PureComponent {
@@ -31,6 +48,15 @@ class BuyButton extends React.PureComponent {
       this.handleCheckoutClick();
     }
   }
+
+  onLoginClicked = () => {
+    const { user } = this.props;
+
+    if (!user) {
+      const redirectUrl = `${window.location.pathname}?buy=1`;
+      window.location.href = `${ROOT_URL}/auth/google?redirectUrl=${redirectUrl}`;
+    }
+  };
 
   handleCheckoutClick = async () => {
     NProgress.start();
@@ -53,15 +79,6 @@ class BuyButton extends React.PureComponent {
       notify(err);
     } finally {
       NProgress.done();
-    }
-  };
-
-  onLoginClicked = () => {
-    const { user } = this.props;
-
-    if (!user) {
-      const redirectUrl = `${window.location.pathname}?buy=1`;
-      window.location.href = `${ROOT_URL}/auth/google?redirectUrl=${redirectUrl}`;
     }
   };
 
@@ -107,25 +124,7 @@ class BuyButton extends React.PureComponent {
   }
 }
 
-BuyButton.propTypes = {
-  book: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    textNearButton: PropTypes.string,
-  }),
-  user: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-  }),
-  redirectToCheckout: PropTypes.bool,
-};
-
-BuyButton.defaultProps = {
-  book: null,
-  user: null,
-  redirectToCheckout: false,
-};
+BuyButton.propTypes = propTypes;
+BuyButton.defaultProps = defaultProps;
 
 export default BuyButton;

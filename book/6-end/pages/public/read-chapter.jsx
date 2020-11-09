@@ -11,18 +11,18 @@ const styleGrid = {
   flexGrow: '1',
 };
 
+const propTypes = {
+  chapter: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    htmlContent: PropTypes.string,
+  }),
+};
+
+const defaultProps = {
+  chapter: null,
+};
+
 class ReadChapter extends React.Component {
-  static propTypes = {
-    chapter: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      htmlContent: PropTypes.string,
-    }),
-  };
-
-  static defaultProps = {
-    chapter: null,
-  };
-
   constructor(props) {
     super(props);
 

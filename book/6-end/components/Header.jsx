@@ -9,7 +9,6 @@ import Button from '@material-ui/core/Button';
 import MenuDrop from './MenuDrop';
 import { styleToolbar } from './SharedStyles';
 
-
 const optionsMenuCustomer = [
   {
     text: 'My books',
@@ -32,6 +31,19 @@ const optionsMenuAdmin = [
     href: '/logout',
   },
 ];
+
+const propTypes = {
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    displayName: PropTypes.string,
+    isAdmin: PropTypes.bool,
+    isGithubConnected: PropTypes.bool,
+  }),
+};
+
+const defaultProps = {
+  user: null,
+};
 
 function Header({ user }) {
   return (
@@ -90,15 +102,7 @@ function Header({ user }) {
   );
 }
 
-Header.propTypes = {
-  user: PropTypes.shape({
-    avatarUrl: PropTypes.string,
-    displayName: PropTypes.string,
-  }),
-};
-
-Header.defaultProps = {
-  user: null,
-};
+Header.propTypes = propTypes;
+Header.defaultProps = defaultProps;
 
 export default Header;

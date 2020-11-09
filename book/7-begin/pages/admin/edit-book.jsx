@@ -5,30 +5,34 @@ import PropTypes from 'prop-types';
 import Error from 'next/error';
 
 import EditBookComp from '../../components/admin/EditBook';
-import { getBookDetail, editBook } from '../../lib/api/admin';
+import { getBookDetailApiMethod, editBookApiMethod } from '../../lib/api/admin';
 import withAuth from '../../lib/withAuth';
 import notify from '../../lib/notifier';
 
+const propTypes = {
+  slug: PropTypes.string.isRequired,
+};
+
 class EditBook extends React.Component {
-  static propTypes = {
-    slug: PropTypes.string.isRequired,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      book: null,
+      error: null,
+    };
+  }
 
   static getInitialProps({ query }) {
     return { slug: query.slug };
   }
-
-  state = {
-    error: null,
-    book: null,
-  };
 
   async componentDidMount() {
     NProgress.start();
 
     try {
       const { slug } = this.props;
-      const book = await getBookDetail({ slug });
+      const book = await getBookDetailApiMethod({ slug });
       this.setState({ book }); // eslint-disable-line
       NProgress.done();
     } catch (err) {
@@ -42,7 +46,7 @@ class EditBook extends React.Component {
     NProgress.start();
 
     try {
-      const editedBook = await editBook({ ...data, id: book._id });
+      const editedBook = await editBookApiMethod({ ...data, id: book._id });
       notify('Saved');
       NProgress.done();
       Router.push(
@@ -74,5 +78,7 @@ class EditBook extends React.Component {
     );
   }
 }
+
+EditBook.propTypes = propTypes;
 
 export default withAuth(EditBook);

@@ -9,6 +9,15 @@ import notify from '../../lib/notifier';
 import withAuth from '../../lib/withAuth';
 import { getBookListApiMethod } from '../../lib/api/admin';
 
+const propTypes = {
+  books: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
+
 const Index = ({ books }) => (
   <div style={{ padding: '10px 45px' }}>
     <div>
@@ -31,19 +40,16 @@ const Index = ({ books }) => (
   </div>
 );
 
-Index.propTypes = {
-  books: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-};
+Index.propTypes = propTypes;
 
 class IndexWithData extends React.Component {
-  state = {
-    books: [],
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      books: [],
+    };
+  }
 
   async componentDidMount() {
     try {

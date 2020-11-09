@@ -21,6 +21,27 @@ const stripePromise = loadStripe(
   dev ? process.env.STRIPE_TEST_PUBLISHABLEKEY : process.env.STRIPE_LIVE_PUBLISHABLEKEY,
 );
 
+const propTypes = {
+  book: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    textNearButton: PropTypes.string,
+  }),
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }),
+  redirectToCheckout: PropTypes.bool,
+};
+
+const defaultProps = {
+  book: null,
+  user: null,
+  redirectToCheckout: false,
+};
+
 class BuyButton extends React.PureComponent {
   componentDidMount() {
     if (this.props.redirectToCheckout) {
@@ -103,25 +124,7 @@ class BuyButton extends React.PureComponent {
   }
 }
 
-BuyButton.propTypes = {
-  book: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    textNearButton: PropTypes.string,
-  }),
-  user: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-  }),
-  redirectToCheckout: PropTypes.bool,
-};
-
-BuyButton.defaultProps = {
-  book: null,
-  user: null,
-  redirectToCheckout: false,
-};
+BuyButton.propTypes = propTypes;
+BuyButton.defaultProps = defaultProps;
 
 export default BuyButton;

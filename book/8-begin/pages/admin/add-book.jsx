@@ -4,7 +4,7 @@ import NProgress from 'nprogress';
 
 import withAuth from '../../lib/withAuth';
 import EditBook from '../../components/admin/EditBook';
-import { addBook, syncBookContent } from '../../lib/api/admin';
+import { addBookApiMethod, syncBookContentApiMethod } from '../../lib/api/admin';
 import notify from '../../lib/notifier';
 
 class AddBook extends React.Component {
@@ -12,11 +12,11 @@ class AddBook extends React.Component {
     NProgress.start();
 
     try {
-      const book = await addBook(data);
+      const book = await addBookApiMethod(data);
       notify('Saved');
       try {
         const bookId = book._id;
-        await syncBookContent({ bookId });
+        await syncBookContentApiMethod({ bookId });
         notify('Synced');
         NProgress.done();
         Router.push(`/admin/book-detail?slug=${book.slug}`, `/admin/book-detail/${book.slug}`);

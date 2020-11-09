@@ -5,13 +5,29 @@ import Error from 'next/error';
 import Link from 'next/link';
 import Button from '@material-ui/core/Button';
 
-import { getBookDetail, syncBookContent } from '../../lib/api/admin';
+import { getBookDetailApiMethod, syncBookContentApiMethod } from '../../lib/api/admin';
 import withAuth from '../../lib/withAuth';
 import notify from '../../lib/notifier';
 
+const propTypes1 = {
+  book: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    chapters: PropTypes.arrayOf.isRequired,
+    slug: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
+    githubRepo: PropTypes.string.isRequired,
+  }),
+  error: PropTypes.string,
+};
+
+const defaultProps1 = {
+  book: null,
+  error: null,
+};
+
 const handleSyncContent = (bookId) => async () => {
   try {
-    await syncBookContent({ bookId });
+    await syncBookContentApiMethod({ bookId });
     notify('Synced');
   } catch (err) {
     notify(err);
@@ -59,43 +75,33 @@ const MyBook = ({ book, error }) => {
   );
 };
 
-const propTypes = {
-  book: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    chapters: PropTypes.arrayOf.isRequired,
-    slug: PropTypes.string.isRequired,
-    _id: PropTypes.string.isRequired,
-    githubRepo: PropTypes.string.isRequired,
-  }),
-  error: PropTypes.string,
+MyBook.propTypes = propTypes1;
+MyBook.defaultProps = defaultProps1;
+
+const propTypes2 = {
+  slug: PropTypes.string.isRequired,
 };
-
-const defaultProps = {
-  book: null,
-  error: null,
-};
-
-MyBook.propTypes = propTypes;
-
-MyBook.defaultProps = defaultProps;
 
 class MyBookWithData extends React.Component {
-  // eslint-disable-next-line
-  state = {
-    loading: true,
-    error: null,
-    book: null,
-  };
-
   static getInitialProps({ query }) {
     return { slug: query.slug };
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      book: null,
+      error: null,
+      loading: true,
+    };
   }
 
   async componentDidMount() {
     NProgress.start();
     try {
       const { slug } = this.props;
-      const book = await getBookDetail({ slug });
+      const book = await getBookDetailApiMethod({ slug });
       this.setState({ book, loading: false }); // eslint-disable-line
       NProgress.done();
     } catch (err) {
@@ -109,8 +115,6 @@ class MyBookWithData extends React.Component {
   }
 }
 
-MyBookWithData.propTypes = {
-  slug: PropTypes.string.isRequired,
-};
+MyBookWithData.propTypes = propTypes2;
 
 export default withAuth(MyBookWithData);

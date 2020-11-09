@@ -6,7 +6,7 @@ import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import { getGithubRepos } from '../../lib/api/admin';
+import { getGithubReposApiMethod } from '../../lib/api/admin';
 import { styleTextField } from '../SharedStyles';
 import notify from '../../lib/notifier';
 
@@ -33,7 +33,7 @@ class EditBook extends React.Component {
 
   async componentDidMount() {
     try {
-      const { repos } = await getGithubRepos();
+      const { repos } = await getGithubReposApiMethod();
       this.setState({ repos }); // eslint-disable-line
     } catch (err) {
       console.log(err); // eslint-disable-line
@@ -71,6 +71,7 @@ class EditBook extends React.Component {
             <TextField
               onChange={(event) => {
                 this.setState({
+                  // eslint-disable-next-line
                   book: { ...this.state.book, name: event.target.value },
                 });
               }}
@@ -86,6 +87,7 @@ class EditBook extends React.Component {
           <TextField
             onChange={(event) => {
               this.setState({
+                // eslint-disable-next-line
                 book: { ...this.state.book, price: Number(event.target.value) },
               });
             }}
@@ -106,6 +108,7 @@ class EditBook extends React.Component {
               input={<Input />}
               onChange={(event) => {
                 this.setState({
+                  // eslint-disable-next-line
                   book: { ...this.state.book, githubRepo: event.target.value },
                 });
               }}

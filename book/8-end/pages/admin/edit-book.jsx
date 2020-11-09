@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Error from 'next/error';
 
 import EditBookComp from '../../components/admin/EditBook';
-import { getBookDetail, editBook } from '../../lib/api/admin';
+import { getBookDetailApiMethod, editBookApiMethod } from '../../lib/api/admin';
 import withAuth from '../../lib/withAuth';
 import notify from '../../lib/notifier';
 
@@ -14,11 +14,14 @@ const propTypes = {
 };
 
 class EditBook extends React.Component {
-  // eslint-disable-next-line
-    state = {
-    error: null,
-    book: null,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      book: null,
+      error: null,
+    };
+  }
 
   static getInitialProps({ query }) {
     return { slug: query.slug };
@@ -27,10 +30,9 @@ class EditBook extends React.Component {
   async componentDidMount() {
     NProgress.start();
 
-    const { slug } = this.props;
-
     try {
-      const book = await getBookDetail({ slug });
+      const { slug } = this.props;
+      const book = await getBookDetailApiMethod({ slug });
       this.setState({ book }); // eslint-disable-line
       NProgress.done();
     } catch (err) {
@@ -44,7 +46,7 @@ class EditBook extends React.Component {
     NProgress.start();
 
     try {
-      const editedBook = await editBook({ ...data, id: book._id });
+      const editedBook = await editBookApiMethod({ ...data, id: book._id });
       notify('Saved');
       NProgress.done();
       Router.push(
