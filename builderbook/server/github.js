@@ -12,53 +12,6 @@ const dev = process.env.NODE_ENV !== 'production';
 const CLIENT_ID = dev ? process.env.GITHUB_TEST_CLIENTID : process.env.GITHUB_LIVE_CLIENTID;
 const API_KEY = dev ? process.env.GITHUB_TEST_SECRETKEY : process.env.GITHUB_LIVE_SECRETKEY;
 
-function getAPI({ user, previews = [], request }) {
-  const github = new Octokit({
-    auth: user.githubAccessToken,
-    previews,
-    request: { timeout: 10000 },
-    log: {
-      info(msg, info) {
-        logger.info(`Github API log: ${msg}`, {
-          ..._.omit(info, 'headers', 'request', 'body'),
-          user: _.pick(user, '_id', 'githubUsername', 'githubId'),
-          ..._.pick(request, 'ip', 'hostname'),
-        });
-      },
-    },
-  });
-
-  return github;
-}
-
-// https://octokit.github.io/rest.js/v18#repos
-
-function getRepos({ user, request }) {
-  const github = getAPI({ user, request });
-
-  // octokit.repos.listForAuthenticatedUser();
-
-  return github.repos.listForAuthenticatedUser({
-    visibility: 'private',
-    per_page: 100,
-    affiliation: 'owner',
-  });
-}
-
-function getRepoDetail({ user, repoName, request, path }) {
-  const github = getAPI({ user, request });
-  const [owner, repo] = repoName.split('/');
-
-  return github.repos.getContent({ owner, repo, path });
-}
-
-function getCommits({ user, repoName, request }) {
-  const github = getAPI({ user, request });
-  const [owner, repo] = repoName.split('/');
-
-  return github.repos.listCommits({ owner, repo });
-}
-
 function setupGithub({ server, ROOT_URL }) {
   const verify = async ({ user, accessToken, profile }) => {
     const modifier = {
@@ -157,7 +110,52 @@ function setupGithub({ server, ROOT_URL }) {
   });
 }
 
+function getAPI({ user, previews = [], request }) {
+  const github = new Octokit({
+    auth: user.githubAccessToken,
+    previews,
+    request: { timeout: 10000 },
+    log: {
+      info(msg, info) {
+        logger.info(`Github API log: ${msg}`, {
+          ..._.omit(info, 'headers', 'request', 'body'),
+          user: _.pick(user, '_id', 'githubUsername', 'githubId'),
+          ..._.pick(request, 'ip', 'hostname'),
+        });
+      },
+    },
+  });
+
+  return github;
+}
+
+// https://octokit.github.io/rest.js/v18#repos
+
+function getRepos({ user, request }) {
+  const github = getAPI({ user, request });
+
+  return github.repos.listForAuthenticatedUser({
+    visibility: 'private',
+    per_page: 100,
+    affiliation: 'owner',
+  });
+}
+
+function getRepoDetail({ user, repoName, request, path }) {
+  const github = getAPI({ user, request });
+  const [owner, repo] = repoName.split('/');
+
+  return github.repos.getContent({ owner, repo, path });
+}
+
+function getCommits({ user, repoName, request }) {
+  const github = getAPI({ user, request });
+  const [owner, repo] = repoName.split('/');
+
+  return github.repos.listCommits({ owner, repo });
+}
+
+exports.setupGithub = setupGithub;
 exports.getRepos = getRepos;
 exports.getRepoDetail = getRepoDetail;
 exports.getCommits = getCommits;
-exports.setupGithub = setupGithub;

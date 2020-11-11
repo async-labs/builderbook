@@ -62,7 +62,7 @@ app.prepare().then(async () => {
   await insertTemplates();
 
   setupGoogle({ server, ROOT_URL });
-  setupGithub({ server });
+  setupGithub({ server, ROOT_URL });
   api(server);
   routesWithSlug({ server, app });
 
