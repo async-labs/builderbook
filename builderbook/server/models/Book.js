@@ -105,17 +105,17 @@ class BookClass {
       throw new Error('Book not found');
     }
 
-    const lastCommit = await getCommits({
+    const repoCommits = await getCommits({
       user,
       repoName: book.githubRepo,
       request,
     });
 
-    if (!lastCommit || !lastCommit.data || !lastCommit.data[0]) {
+    if (!repoCommits || !repoCommits.data || !repoCommits.data[0]) {
       throw new Error('No change in content!');
     }
 
-    const lastCommitSha = lastCommit.data[0].sha;
+    const lastCommitSha = repoCommits.data[0].sha;
     if (lastCommitSha === book.githubLastCommitSha) {
       throw new Error('No change in content!');
     }
