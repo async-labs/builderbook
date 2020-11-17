@@ -54,6 +54,23 @@ router.get('/books/detail/:slug', async (req, res) => {
 
 // github-related
 
+router.get('/github/repos', async (req, res) => {
+  const user = await User.findById(req.user._id, 'isGithubConnected githubAccessToken');
+
+  if (!user.isGithubConnected || !user.githubAccessToken) {
+    res.json({ error: 'Github not connected' });
+    return;
+  }
+
+  try {
+    const response = await getRepos({ user, request: req });
+    res.json({ repos: response.data });
+  } catch (err) {
+    console.error(err);
+    res.json({ error: err.message || err.toString() });
+  }
+});
+
 router.post('/books/sync-content', async (req, res) => {
   const { bookId } = req.body;
 
@@ -67,23 +84,6 @@ router.post('/books/sync-content', async (req, res) => {
   try {
     await Book.syncContent({ id: bookId, user, request: req });
     res.json({ done: 1 });
-  } catch (err) {
-    console.error(err);
-    res.json({ error: err.message || err.toString() });
-  }
-});
-
-router.get('/github/repos', async (req, res) => {
-  const user = await User.findById(req.user._id, 'isGithubConnected githubAccessToken');
-
-  if (!user.isGithubConnected || !user.githubAccessToken) {
-    res.json({ error: 'Github not connected' });
-    return;
-  }
-
-  try {
-    const response = await getRepos({ user, request: req });
-    res.json({ repos: response.data });
   } catch (err) {
     console.error(err);
     res.json({ error: err.message || err.toString() });

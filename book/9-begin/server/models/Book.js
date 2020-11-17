@@ -110,7 +110,7 @@ class BookClass {
     });
 
     if (!repoCommits || !repoCommits.data || !repoCommits.data[0]) {
-      throw new Error('No change in content!');
+      throw new Error('No commits!');
     }
 
     const lastCommitSha = repoCommits.data[0].sha;
