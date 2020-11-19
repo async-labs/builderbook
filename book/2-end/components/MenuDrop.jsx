@@ -4,19 +4,23 @@ import Link from 'next/link';
 import Menu from '@material-ui/core/Menu';
 import Avatar from '@material-ui/core/Avatar';
 
+const propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(String).isRequired,
+};
+
 class MenuDrop extends React.Component {
-  static propTypes = {
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-    options: PropTypes.arrayOf(String).isRequired,
-  };
-
-  state = {
-    open: false,
-    anchorEl: undefined,
-  };
-
   button = undefined;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      open: false,
+      anchorEl: undefined,
+    };
+  }
 
   handleClick = (event) => {
     this.setState({ open: true, anchorEl: event.currentTarget });
@@ -48,7 +52,7 @@ class MenuDrop extends React.Component {
           onClose={this.handleClose}
         >
           <p />
-          {options.map(option => (
+          {options.map((option) => (
             <div id="wrappingLink" key={option.text}>
               <Link href={option.href} as={option.as || option.href}>
                 <a style={{ padding: '0px 20px' }}>{option.text}</a>
@@ -61,5 +65,7 @@ class MenuDrop extends React.Component {
     );
   }
 }
+
+MenuDrop.propTypes = propTypes;
 
 export default MenuDrop;

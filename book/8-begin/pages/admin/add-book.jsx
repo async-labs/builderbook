@@ -21,11 +21,11 @@ class AddBook extends React.Component {
         NProgress.done();
         Router.push(`/admin/book-detail?slug=${book.slug}`, `/admin/book-detail/${book.slug}`);
       } catch (err) {
-        notify(err);
+        notify(err.message || err.toString());
         NProgress.done();
       }
     } catch (err) {
-      notify(err);
+      notify(err.message || err.toString());
       NProgress.done();
     }
   };

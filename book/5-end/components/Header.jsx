@@ -26,7 +26,7 @@ function Header({ user }) {
     <div>
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justify="space-around" alignItems="center">
-          <Grid item sm={10} xs={9} style={{ textAlign: 'left' }}>
+          <Grid item sm={11} xs={9} style={{ textAlign: 'left' }}>
             {user ? (
               <div>
                 <Hidden smDown>

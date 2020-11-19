@@ -11,13 +11,16 @@ const propTypes = {
 };
 
 class MenuDrop extends React.Component {
-  // eslint-disable-next-line
-  state = {
-    open: false,
-    anchorEl: undefined,
-  };
-
   button = undefined;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      open: false,
+      anchorEl: undefined,
+    };
+  }
 
   handleClick = (event) => {
     this.setState({ open: true, anchorEl: event.currentTarget });
@@ -35,7 +38,6 @@ class MenuDrop extends React.Component {
         <Avatar
           role="presentation"
           aria-owns="simple-menu"
-          // aria-haspopup="true"
           onClick={this.handleClick}
           onKeyPress={this.handleClick}
           src={src}

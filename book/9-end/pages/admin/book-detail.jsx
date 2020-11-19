@@ -34,7 +34,7 @@ const handleSyncContent = (bookId) => async () => {
   }
 };
 
-const MyBook = ({ book, error }) => {
+const BookDetail = ({ book, error }) => {
   if (error) {
     notify(error);
     return <Error statusCode={500} />;
@@ -56,7 +56,7 @@ const MyBook = ({ book, error }) => {
       <Button variant="contained" onClick={handleSyncContent(book._id)}>
         Sync with Github
       </Button>
-      <Link as={`/admin/edit-book/${book.slug}`} href={`/admin/edit-book?slug=${book.slug}`}>
+      <Link href={`/admin/edit-book?slug=${book.slug}`} as={`/admin/edit-book/${book.slug}`}>
         <Button variant="contained">Edit book</Button>
       </Link>
       <ul>
@@ -75,14 +75,14 @@ const MyBook = ({ book, error }) => {
   );
 };
 
-MyBook.propTypes = propTypes1;
-MyBook.defaultProps = defaultProps1;
+BookDetail.propTypes = propTypes1;
+BookDetail.defaultProps = defaultProps1;
 
 const propTypes2 = {
   slug: PropTypes.string.isRequired,
 };
 
-class MyBookWithData extends React.Component {
+class BookDetailWithData extends React.Component {
   static getInitialProps({ query }) {
     return { slug: query.slug };
   }
@@ -111,10 +111,10 @@ class MyBookWithData extends React.Component {
   }
 
   render() {
-    return <MyBook {...this.props} {...this.state} />;
+    return <BookDetail {...this.props} {...this.state} />;
   }
 }
 
-MyBookWithData.propTypes = propTypes2;
+BookDetailWithData.propTypes = propTypes2;
 
-export default withAuth(MyBookWithData);
+export default withAuth(BookDetailWithData);

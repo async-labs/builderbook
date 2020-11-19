@@ -2,9 +2,9 @@ import React from 'react';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import PropTypes from 'prop-types';
-import Error from 'next/error';
+// import Error from 'next/error';
 
-import EditBookComp from '../../components/admin/EditBook';
+import EditBook from '../../components/admin/EditBook';
 import { getBookDetailApiMethod, editBookApiMethod } from '../../lib/api/admin';
 import withAuth from '../../lib/withAuth';
 import notify from '../../lib/notifier';
@@ -13,13 +13,12 @@ const propTypes = {
   slug: PropTypes.string.isRequired,
 };
 
-class EditBook extends React.Component {
+class EditBookPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       book: null,
-      error: null,
     };
   }
 
@@ -36,12 +35,12 @@ class EditBook extends React.Component {
       this.setState({ book }); // eslint-disable-line
       NProgress.done();
     } catch (err) {
-      this.setState({ error: err.message || err.toString() }); // eslint-disable-line
+      notify(err.message || err.toString());
       NProgress.done();
     }
   }
 
-  editBook = async (data) => {
+  editBookOnSave = async (data) => {
     const { book } = this.state;
     NProgress.start();
 
@@ -60,25 +59,21 @@ class EditBook extends React.Component {
   };
 
   render() {
-    const { book, error } = this.state;
-
-    if (error) {
-      notify(error);
-      return <Error statusCode={500} />;
-    }
+    const { book } = this.state;
 
     if (!book) {
+      // return <Error statusCode={500} />;
       return null;
     }
 
     return (
       <div>
-        <EditBookComp onSave={this.editBook} book={book} />
+        <EditBook onSave={this.editBookOnSave} book={book} />
       </div>
     );
   }
 }
 
-EditBook.propTypes = propTypes;
+EditBookPage.propTypes = propTypes;
 
-export default withAuth(EditBook);
+export default withAuth(EditBookPage);
