@@ -76,4 +76,4 @@ class EditBookPage extends React.Component {
 
 EditBookPage.propTypes = propTypes;
 
-export default withAuth(EditBookPage);
+export default withAuth(EditBookPage, { adminRequired: true });

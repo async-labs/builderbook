@@ -39,7 +39,7 @@ export default function withAuth(
       }
 
       if (adminRequired && (!user || !user.isAdmin)) {
-        Router.push('/');
+        Router.push('/customer/my-books', '/my-books');
       }
 
       if (logoutRequired && user) {

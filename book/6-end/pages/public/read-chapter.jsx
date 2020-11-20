@@ -124,4 +124,7 @@ class ReadChapter extends React.Component {
   }
 }
 
+ReadChapter.propTypes = propTypes;
+ReadChapter.defaultProps = defaultProps;
+
 export default withAuth(ReadChapter, { loginRequired: false });

@@ -64,11 +64,11 @@ function Header({ user }) {
           <Grid item sm={2} xs={2} style={{ textAlign: 'right' }}>
             {user && user.isAdmin && !user.isGithubConnected ? (
               <Hidden smDown>
-                <a href="/auth/github">
+                <Link href="/auth/github">
                   <Button variant="contained" color="primary">
                     Connect Github
                   </Button>
-                </a>
+                </Link>
               </Hidden>
             ) : null}
           </Grid>

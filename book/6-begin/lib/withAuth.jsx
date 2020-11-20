@@ -4,19 +4,27 @@ import Router from 'next/router';
 
 let globalUser = null;
 
-export default (Page, { loginRequired = true, logoutRequired = false } = {}) =>
-  class BaseComponent extends React.Component {
-    static propTypes = {
-      user: PropTypes.shape({
-        id: PropTypes.string,
-        isAdmin: PropTypes.bool,
-      }),
-      isFromServer: PropTypes.bool.isRequired,
-    };
+export default function withAuth(
+  BaseComponent,
+  { loginRequired = true, logoutRequired = false } = {},
+) {
+  class App extends React.PureComponent {
+    static async getInitialProps(ctx) {
+      const isFromServer = !!ctx.req;
+      const user = ctx.req ? ctx.req.user && ctx.req.user.toObject() : globalUser;
 
-    static defaultProps = {
-      user: null,
-    };
+      if (isFromServer && user) {
+        user._id = user._id.toString();
+      }
+
+      const props = { user, isFromServer };
+
+      if (BaseComponent.getInitialProps) {
+        Object.assign(props, (await BaseComponent.getInitialProps(ctx)) || {});
+      }
+
+      return props;
+    }
 
     componentDidMount() {
       const { user, isFromServer } = this.props;
@@ -35,23 +43,6 @@ export default (Page, { loginRequired = true, logoutRequired = false } = {}) =>
       }
     }
 
-    static async getInitialProps(ctx) {
-      const isFromServer = !!ctx.req;
-      const user = ctx.req ? ctx.req.user && ctx.req.user.toObject() : globalUser;
-
-      if (isFromServer && user) {
-        user._id = user._id.toString();
-      }
-
-      const props = { user, isFromServer };
-
-      if (Page.getInitialProps) {
-        Object.assign(props, (await Page.getInitialProps(ctx)) || {});
-      }
-
-      return props;
-    }
-
     render() {
       const { user } = this.props;
 
@@ -63,6 +54,28 @@ export default (Page, { loginRequired = true, logoutRequired = false } = {}) =>
         return null;
       }
 
-      return <Page {...this.props} />;
+      return (
+        <>
+          <BaseComponent {...this.props} />
+        </>
+      );
     }
-};
+  }
+
+  const propTypes = {
+    user: PropTypes.shape({
+      id: PropTypes.string,
+      isAdmin: PropTypes.bool,
+    }),
+    isFromServer: PropTypes.bool.isRequired,
+  };
+
+  const defaultProps = {
+    user: null,
+  };
+
+  App.propTypes = propTypes;
+  App.defaultProps = defaultProps;
+
+  return App;
+}

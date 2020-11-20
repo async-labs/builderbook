@@ -9,80 +9,11 @@ import { getBookDetailApiMethod, syncBookContentApiMethod } from '../../lib/api/
 import withAuth from '../../lib/withAuth';
 import notify from '../../lib/notifier';
 
-const propTypes1 = {
-  book: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    chapters: PropTypes.arrayOf.isRequired,
-    slug: PropTypes.string.isRequired,
-    _id: PropTypes.string.isRequired,
-    githubRepo: PropTypes.string.isRequired,
-  }),
-  error: PropTypes.string,
-};
-
-const defaultProps1 = {
-  book: null,
-  error: null,
-};
-
-const handleSyncContent = (bookId) => async () => {
-  try {
-    await syncBookContentApiMethod({ bookId });
-    notify('Synced');
-  } catch (err) {
-    notify(err);
-  }
-};
-
-const BookDetail = ({ book, error }) => {
-  if (error) {
-    notify(error);
-    return <Error statusCode={500} />;
-  }
-
-  if (!book) {
-    return null;
-  }
-
-  const { chapters = [] } = book;
-
-  return (
-    <div style={{ padding: '10px 45px' }}>
-      <h2>{book.name}</h2>
-      <a href={`https://github.com/${book.githubRepo}`} target="_blank" rel="noopener noreferrer">
-        Repo on Github
-      </a>
-      <p />
-      <Button variant="contained" onClick={handleSyncContent(book._id)}>
-        Sync with Github
-      </Button>
-      <Link href={`/admin/edit-book?slug=${book.slug}`} as={`/admin/edit-book/${book.slug}`}>
-        <Button variant="contained">Edit book</Button>
-      </Link>
-      <ul>
-        {chapters.map((ch) => (
-          <li key={ch._id}>
-            <Link
-              as={`/books/${book.slug}/${ch.slug}`}
-              href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
-            >
-              <a>{ch.title}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-BookDetail.propTypes = propTypes1;
-BookDetail.defaultProps = defaultProps1;
-
-const propTypes2 = {
+const propTypes = {
   slug: PropTypes.string.isRequired,
 };
 
-class BookDetailWithData extends React.Component {
+class BookDetail extends React.Component {
   static getInitialProps({ query }) {
     return { slug: query.slug };
   }
@@ -93,7 +24,6 @@ class BookDetailWithData extends React.Component {
     this.state = {
       book: null,
       error: null,
-      loading: true,
     };
   }
 
@@ -102,19 +32,69 @@ class BookDetailWithData extends React.Component {
     try {
       const { slug } = this.props;
       const book = await getBookDetailApiMethod({ slug });
-      this.setState({ book, loading: false }); // eslint-disable-line
+      this.setState({ book }); // eslint-disable-line
       NProgress.done();
     } catch (err) {
-      this.setState({ loading: false, error: err.message || err.toString() }); // eslint-disable-line
+      this.setState({ error: err.message || err.toString() }); // eslint-disable-line
       NProgress.done();
     }
   }
 
+  async handleSyncContent() {
+    const bookId = this.state.book._id;
+
+    try {
+      await syncBookContentApiMethod({ bookId });
+      notify('Synced');
+    } catch (err) {
+      notify(err);
+    }
+  }
+
   render() {
-    return <BookDetail {...this.props} {...this.state} />;
+    const { book, error } = this.state;
+
+    if (error) {
+      notify(error);
+      return <Error statusCode={500} />;
+    }
+
+    if (!book) {
+      return null;
+    }
+
+    const { chapters = [] } = book;
+
+    return (
+      <div style={{ padding: '10px 45px' }}>
+        <h2>{book.name}</h2>
+        <a href={`https://github.com/${book.githubRepo}`} target="_blank" rel="noopener noreferrer">
+          Repo on Github
+        </a>
+        <p />
+        <Button variant="contained" onClick={this.handleSyncContent()}>
+          Sync with Github
+        </Button>
+        <Link href={`/admin/edit-book?slug=${book.slug}`} as={`/admin/edit-book/${book.slug}`}>
+          <Button variant="contained">Edit book</Button>
+        </Link>
+        <ul>
+          {chapters.map((ch) => (
+            <li key={ch._id}>
+              <Link
+                as={`/books/${book.slug}/${ch.slug}`}
+                href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
+              >
+                <a>{ch.title}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
   }
 }
 
-BookDetailWithData.propTypes = propTypes2;
+BookDetail.propTypes = propTypes;
 
-export default withAuth(BookDetailWithData);
+export default withAuth(BookDetail, { adminRequired: true });

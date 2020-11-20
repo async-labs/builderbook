@@ -39,4 +39,4 @@ class AddBook extends React.Component {
   }
 }
 
-export default withAuth(AddBook);
+export default withAuth(AddBook, { adminRequired: true });
