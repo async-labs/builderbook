@@ -34,14 +34,6 @@ const mongoSchema = new Schema({
   },
   displayName: String,
   avatarUrl: String,
-
-  isGithubConnected: {
-    type: Boolean,
-    default: false,
-  },
-  githubAccessToken: {
-    type: String,
-  },
 });
 
 const User = mongoose.model('User', mongoSchema);

@@ -2,11 +2,6 @@ import sendRequest from './sendRequest';
 
 const BASE_PATH = '/api/v1/public';
 
-export const getBookListApiMethod = () =>
-  sendRequest(`${BASE_PATH}/books`, {
-    method: 'GET',
-  });
-
 export const getBookDetailApiMethod = ({ slug }) =>
   sendRequest(`${BASE_PATH}/books/${slug}`, {
     method: 'GET',
