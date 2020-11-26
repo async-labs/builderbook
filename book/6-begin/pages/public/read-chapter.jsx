@@ -2,27 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Error from 'next/error';
 import Head from 'next/head';
-import Grid from '@material-ui/core/Grid';
 
 import { getChapterDetailApiMethod } from '../../lib/api/public';
 import withAuth from '../../lib/withAuth';
 
-const styleGrid = {
-  flexGrow: '1',
+const propTypes = {
+  chapter: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    htmlContent: PropTypes.string,
+  }),
+};
+
+const defaultProps = {
+  chapter: null,
 };
 
 class ReadChapter extends React.Component {
-  static propTypes = {
-    chapter: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      htmlContent: PropTypes.string,
-    }),
-  };
-
-  static defaultProps = {
-    chapter: null,
-  };
-
   constructor(props) {
     super(props);
 
@@ -48,8 +43,8 @@ class ReadChapter extends React.Component {
     }
   }
 
-  static async getInitialProps({ req, query }) {
-    const { bookSlug, chapterSlug } = query;
+  static async getInitialProps({ req }) {
+    const { bookSlug, chapterSlug } = req.query;
 
     const headers = {};
     if (req && req.headers && req.headers.cookie) {
@@ -61,15 +56,16 @@ class ReadChapter extends React.Component {
     return { chapter };
   }
 
-  renderChapterContent() {
+  renderMainContent() {
     const { chapter, htmlContent } = this.state;
 
     return (
       <div>
-        <h3>
-          Chapter:&nbsp;
+        <h2>
+          Chapter:
           {chapter.title}
-        </h3>
+        </h2>
+
         <div
           className="main-content"
           // eslint-disable-next-line react/no-danger
@@ -86,10 +82,8 @@ class ReadChapter extends React.Component {
       return <Error statusCode={404} />;
     }
 
-    const { book } = chapter;
-
     return (
-      <div style={{ padding: '10px 45px' }}>
+      <div>
         <Head>
           <title>
             {chapter.title === 'Introduction'
@@ -101,27 +95,34 @@ class ReadChapter extends React.Component {
           ) : null}
         </Head>
 
-        <Grid style={styleGrid} container direction="row" justify="space-around" align="flex-start">
-          <Grid
-            item
-            sm={10}
-            xs={12}
+        <div
+          style={{
+            textAlign: 'left',
+            padding: '0px 10px 20px 30px',
+            position: 'fixed',
+            right: 0,
+            bottom: 0,
+            top: '64px',
+            left: '320px',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+          }}
+        >
+          <div
             style={{
-              textAlign: 'left',
-              paddingLeft: '25px',
+              position: 'fixed',
+              top: '80px',
+              left: '15px',
             }}
-          >
-            <h2>
-              Book:&nbsp;
-              {book.name}
-            </h2>
-
-            {this.renderChapterContent()}
-          </Grid>
-        </Grid>
+          />
+          {this.renderMainContent()}
+        </div>
       </div>
     );
   }
 }
+
+ReadChapter.propTypes = propTypes;
+ReadChapter.defaultProps = defaultProps;
 
 export default withAuth(ReadChapter, { loginRequired: false });

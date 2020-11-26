@@ -43,8 +43,8 @@ class ReadChapter extends React.Component {
     }
   }
 
-  static async getInitialProps({ req, query }) {
-    const { bookSlug, chapterSlug } = query;
+  static async getInitialProps({ req }) {
+    const { bookSlug, chapterSlug } = req.query;
 
     const headers = {};
     if (req && req.headers && req.headers.cookie) {

@@ -13,9 +13,9 @@ const propTypes = {
 class MenuDrop extends React.Component {
   button = undefined;
 
-  constructor(props) {
-    super(props);
-
+  constructor() {
+    super();
+  
     this.state = {
       open: false,
       anchorEl: undefined,
