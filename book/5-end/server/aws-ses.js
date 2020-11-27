@@ -3,7 +3,7 @@ const aws = require('aws-sdk');
 function sendEmail(options) {
   const ses = new aws.SES({
     apiVersion: 'latest',
-    region: 'us-east-1',
+    region: process.env.AWS_REGION,
     accessKeyId: process.env.AWS_ACCESSKEYID,
     secretAccessKey: process.env.AWS_SECRETACCESSKEY,
   });

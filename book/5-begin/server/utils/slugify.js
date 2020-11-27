@@ -17,7 +17,7 @@ async function createUniqueSlug(Model, slug, count) {
 async function generateSlug(Model, name, filter = {}) {
   const origSlug = slugify(name);
 
-  const user = await Model.findOne(Object.assign({ slug: origSlug }, filter), 'id');
+  const user = await Model.findOne({ slug: origSlug, ...filter }, 'id');
 
   if (!user) {
     return origSlug;

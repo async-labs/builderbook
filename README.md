@@ -73,6 +73,7 @@ To use all features and third-party integrations (such as Stripe, Google OAuth, 
   # Used in server/aws.js
   AWS_ACCESSKEYID=
   AWS_SECRETACCESSKEY=
+  AWS_REGION=
 
   # Used in server/models/User.js
   EMAIL_SUPPORT_FROM_ADDRESS=

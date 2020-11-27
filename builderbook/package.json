@@ -22,7 +22,6 @@
     "compression": "1.7.4",
     "connect-mongo": "3.2.0",
     "dotenv": "8.2.0",
-    "email-addresses": "3.1.0",
     "express": "4.17.1",
     "express-session": "1.17.1",
     "front-matter": "4.0.2",

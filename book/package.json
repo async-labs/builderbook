@@ -23,7 +23,7 @@
     "upgrade-6": "cd 6-begin && yarn upgrade $PACKAGE$VERSION && cd .. && cd 6-end && yarn upgrade $PACKAGE$VERSION && cd ..",
     "upgrade-7": "cd 7-begin && yarn upgrade $PACKAGE$VERSION && cd .. && cd 7-end && yarn upgrade $PACKAGE$VERSION && cd ..",
     "upgrade-8": "cd 8-begin && yarn upgrade $PACKAGE$VERSION && cd .. && cd 8-end && yarn upgrade $PACKAGE$VERSION && cd ..",
-    "remove-package": "cross-env PACKAGE=react-jss yarn remove-all",
+    "remove-package": "cross-env PACKAGE=email-addresses yarn remove-all",
     "remove-all": "yarn remove-1 && yarn remove-2 && yarn remove-3 && yarn remove-4 && yarn remove-5 && yarn remove-6 && yarn remove-7 && yarn remove-8",
     "remove-1": "cross-env-shell && cd 1-begin && yarn remove $PACKAGE && cd .. && cd 1-end && yarn remove $PACKAGE && cd ..",
     "remove-2": "cross-env-shell && cd 2-begin && yarn remove $PACKAGE && cd .. && cd 2-end && yarn remove $PACKAGE && cd ..",
