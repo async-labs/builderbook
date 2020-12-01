@@ -7,13 +7,12 @@ function sendEmail(options) {
     accessKeyId: process.env.AWS_ACCESSKEYID,
     secretAccessKey: process.env.AWS_SECRETACCESSKEY,
   });
-  
+
   return new Promise((resolve, reject) => {
     ses.sendEmail(
       {
         Source: options.from,
         Destination: {
-          CcAddresses: options.cc,
           ToAddresses: options.to,
         },
         Message: {

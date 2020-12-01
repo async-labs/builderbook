@@ -4,7 +4,6 @@ const _ = require('lodash');
 const generateSlug = require('../utils/slugify');
 const sendEmail = require('../aws-ses');
 const { getEmailTemplate } = require('./EmailTemplate');
-const logger = require('../logs');
 
 const { Schema } = mongoose;
 
@@ -90,7 +89,7 @@ class UserClass {
 
     try {
       await sendEmail({
-        from: `Kelly from Builder Book <${process.env.EMAIL_SUPPORT_FROM_ADDRESS}>`,
+        from: `Kelly from Builder Book <${process.env.EMAIL_ADDRESS_FROM}>`,
         to: [email],
         subject: template.subject,
         body: template.message,

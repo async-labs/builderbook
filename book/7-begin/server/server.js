@@ -8,7 +8,6 @@ const setupGoogle = require('./google');
 const { setupGithub } = require('./github');
 const api = require('./api');
 
-const logger = require('./logs');
 const { insertTemplates } = require('./models/EmailTemplate');
 const routesWithSlug = require('./routesWithSlug');
 

@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 
 const setupGoogle = require('./google');
 const api = require('./api');
-const logger = require('./logs');
 const { insertTemplates } = require('./models/EmailTemplate');
 
 require('dotenv').config();

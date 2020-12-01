@@ -15,13 +15,12 @@ class MenuDrop extends React.Component {
 
   constructor() {
     super();
-  
+
     this.state = {
       open: false,
       anchorEl: undefined,
     };
   }
-
 
   handleClick = (event) => {
     this.setState({ open: true, anchorEl: event.currentTarget });

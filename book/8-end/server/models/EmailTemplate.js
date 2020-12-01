@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
-const logger = require('../logger');
 
 const { Schema } = mongoose;
 
@@ -22,7 +21,7 @@ const mongoSchema = new Schema({
 
 const EmailTemplate = mongoose.model('EmailTemplate', mongoSchema);
 
-function insertTemplates() {
+async function insertTemplates() {
   const templates = [
     {
       name: 'welcome',
@@ -41,18 +40,18 @@ function insertTemplates() {
     },
   ];
 
-  templates.forEach(async (template) => {
-    if ((await EmailTemplate.find({ name: template.name }).countDocuments()) > 0) {
-      return;
+  for (const t of templates) { // eslint-disable-line
+    const et = await EmailTemplate.findOne({ name: t.name }); // eslint-disable-line
+
+    const message = t.message.replace(/\n/g, '').replace(/[ ]+/g, ' ').trim();
+
+    if (!et) {
+      EmailTemplate.create({ ...t, message });
+    } else if (et.subject !== t.subject || et.message !== message) {
+      EmailTemplate.updateOne({ _id: et._id }, { $set: { message, subject: t.subject } }).exec();
     }
-
-    EmailTemplate.create(template).catch((error) => {
-      console.error('EmailTemplate insertion error:', error);
-    });
-  });
+  }
 }
-
-insertTemplates();
 
 async function getEmailTemplate(name, params) {
   const source = await EmailTemplate.findOne({ name });

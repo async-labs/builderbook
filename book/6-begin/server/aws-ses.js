@@ -13,7 +13,6 @@ function sendEmail(options) {
       {
         Source: options.from,
         Destination: {
-          CcAddresses: options.cc,
           ToAddresses: options.to,
         },
         Message: {

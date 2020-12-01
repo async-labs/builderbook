@@ -32,8 +32,8 @@ function setupGoogle({ server, ROOT_URL }) {
   passport.use(
     new Strategy(
       {
-        clientID: process.env.Google_clientID,
-        clientSecret: process.env.Google_clientSecret,
+        clientID: process.env.GOOGLE_CLIENTID,
+        clientSecret: process.env.GOOGLE_CLIENTSECRET,
         callbackURL: `${ROOT_URL}/oauth2callback`,
       },
       verify,
