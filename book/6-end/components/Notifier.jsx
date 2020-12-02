@@ -36,10 +36,10 @@ class Notifier extends React.Component {
     return (
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={this.state.open}
         message={message}
         autoHideDuration={5000}
         onClose={this.handleSnackbarRequestClose}
-        open={this.state.open}
         ContentProps={{
           'aria-describedby': 'snackbar-message-id',
         }}
@@ -48,7 +48,7 @@ class Notifier extends React.Component {
   }
 }
 
-export function openSnackbar({ message }) {
+export function openSnackbarExported({ message }) {
   openSnackbarFn({ message });
 }
 

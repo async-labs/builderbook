@@ -5,7 +5,7 @@ import NProgress from 'nprogress';
 import withAuth from '../../lib/withAuth';
 import EditBook from '../../components/admin/EditBook';
 import { addBookApiMethod, syncBookContentApiMethod } from '../../lib/api/admin';
-import notify from '../../lib/notifier';
+import notify from '../../lib/notify';
 
 class AddBook extends React.Component {
   addBookOnSave = async (data) => {

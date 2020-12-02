@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import Button from '@material-ui/core/Button';
 
-import notify from '../../lib/notifier';
+import notify from '../../lib/notify';
 
 import withAuth from '../../lib/withAuth';
 import { getBookListApiMethod } from '../../lib/api/admin';

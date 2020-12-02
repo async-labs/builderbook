@@ -49,7 +49,7 @@ class MenuDrop extends React.Component {
         <Menu
           id="simple-menu"
           anchorEl={this.state.anchorEl}
-          open={this.state.open}
+    
           onClose={this.handleClose}
         >
           <p />

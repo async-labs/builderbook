@@ -451,8 +451,7 @@ All code in this repository is provided under the [MIT License](https://github.c
 │   │   ├── getRootURL.js
 │   │   ├── public.js
 │   │   ├── sendRequest.js
-│   ├── env.js
-│   ├── notifier.js
+│   ├── notify.js
 │   ├── theme.js
 │   ├── withAuth.jsx
 ├── pages

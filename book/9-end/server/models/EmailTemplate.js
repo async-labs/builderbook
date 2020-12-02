@@ -55,16 +55,15 @@ async function insertTemplates() {
 }
 
 async function getEmailTemplate(name, params) {
-  const source = await EmailTemplate.findOne({ name });
-  if (!source) {
-    throw new Error(`No EmailTemplates found.
-      Please check that at least one is generated at server startup,
-      restart your server and try again.`);
+  const et = await EmailTemplate.findOne({ name });
+
+  if (!et) {
+    throw new Error(`No EmailTemplates found.`);
   }
 
   return {
-    message: _.template(source.message)(params),
-    subject: _.template(source.subject)(params),
+    message: _.template(et.message)(params),
+    subject: _.template(et.subject)(params),
   };
 }
 

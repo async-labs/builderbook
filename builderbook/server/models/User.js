@@ -104,10 +104,20 @@ class UserClass {
       slug,
     });
 
-    const template = await getEmailTemplate('welcome', {
-      userName: displayName,
-    });
+    try {
+      const template = await getEmailTemplate('welcome', {
+        userName: displayName,
+      });
 
+      await sendEmail({
+        from: `Kelly from Builder Book <${process.env.EMAIL_ADDRESS_FROM}>`,
+        to: [email],
+        subject: template.subject,
+        body: template.message,
+      });
+    } catch (err) {
+      console.error('Email sending error:', err);
+    }
     try {
       await sendEmail({
         from: `Kelly from Builder Book <${process.env.EMAIL_ADDRESS_FROM}>`,

@@ -88,11 +88,11 @@ class UserClass {
       slug,
     });
 
-    const template = await getEmailTemplate('welcome', {
-      userName: displayName,
-    });
-
     try {
+      const template = await getEmailTemplate('welcome', {
+        userName: displayName,
+      });
+
       await sendEmail({
         from: `Kelly from Builder Book <${process.env.EMAIL_ADDRESS_FROM}>`,
         to: [email],

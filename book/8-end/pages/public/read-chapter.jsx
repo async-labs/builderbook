@@ -12,7 +12,7 @@ import BuyButton from '../../components/customer/BuyButton';
 
 import { getChapterDetailApiMethod } from '../../lib/api/public';
 import withAuth from '../../lib/withAuth';
-import notify from '../../lib/notifier';
+import notify from '../../lib/notify';
 
 const styleIcon = {
   opacity: '0.75',

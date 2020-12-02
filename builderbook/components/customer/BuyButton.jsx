@@ -6,7 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 import { fetchCheckoutSessionApiMethod } from '../../lib/api/customer';
 
-import notify from '../../lib/notifier';
+import notify from '../../lib/notify';
 
 const styleBuyButton = {
   margin: '10px 20px 0px 0px',
