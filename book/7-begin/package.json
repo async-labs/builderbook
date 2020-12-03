@@ -23,7 +23,6 @@
     "express": "4.17.1",
     "express-session": "1.17.0",
     "front-matter": "3.0.2",
-    "googleapis": "46.0.0",
     "handlebars": "4.5.3",
     "he": "1.2.0",
     "highlight.js": "9.17.1",

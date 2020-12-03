@@ -8,9 +8,21 @@ export default function withAuth(
   BaseComponent,
   { loginRequired = true, logoutRequired = false } = {},
 ) {
-  class App extends React.PureComponent {
+  const propTypes = {
+    user: PropTypes.shape({
+      id: PropTypes.string,
+      isAdmin: PropTypes.bool,
+    }),
+    isFromServer: PropTypes.bool.isRequired,
+  };
+
+  const defaultProps = {
+    user: null,
+  };
+
+  class App extends React.Component {
     static async getInitialProps(ctx) {
-      const isFromServer = !!ctx.req;
+      const isFromServer = typeof window === 'undefined';
       const user = ctx.req ? ctx.req.user && ctx.req.user.toObject() : globalUser;
 
       if (isFromServer && user) {
@@ -61,18 +73,6 @@ export default function withAuth(
       );
     }
   }
-
-  const propTypes = {
-    user: PropTypes.shape({
-      id: PropTypes.string,
-      isAdmin: PropTypes.bool,
-    }),
-    isFromServer: PropTypes.bool.isRequired,
-  };
-
-  const defaultProps = {
-    user: null,
-  };
 
   App.propTypes = propTypes;
   App.defaultProps = defaultProps;

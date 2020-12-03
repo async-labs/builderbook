@@ -25,9 +25,9 @@ export default function withAuth(
   BaseComponent,
   { loginRequired = true, logoutRequired = false, adminRequired = false } = {},
 ) {
-  class App extends React.PureComponent {
+  class App extends React.Component {
     static async getInitialProps(ctx) {
-      const isFromServer = !!ctx.req;
+      const isFromServer = typeof window === 'undefined';
       const user = ctx.req ? ctx.req.user && ctx.req.user.toObject() : globalUser;
 
       if (isFromServer && user) {
