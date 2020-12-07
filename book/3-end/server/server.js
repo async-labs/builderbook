@@ -49,6 +49,11 @@ app.prepare().then(() => {
 
   server.use(session(sess));
 
+  // server.get('/', async (req, res) => {
+  //   const user = await User.findOne({ slug: 'team-builder-book' });
+  //   app.render(req, res, '/', { user });
+  // });
+
   setupGoogle({ server, ROOT_URL });
 
   server.get('*', (req, res) => handle(req, res));

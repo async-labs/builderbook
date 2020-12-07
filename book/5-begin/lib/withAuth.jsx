@@ -34,7 +34,7 @@ export default function withAuth(
       }
 
       if (loginRequired && !logoutRequired && !user) {
-        Router.push('/public/login', '/login');
+        Router.push('/login');
         return;
       }
 

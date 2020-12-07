@@ -1,6 +1,5 @@
 const _ = require('lodash');
 
-// https://devdocs.io/lodash~4/index#kebabCase
 
 const slugify = text => _.kebabCase(text);
 

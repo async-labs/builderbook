@@ -26,9 +26,10 @@ function setupGoogle({ server, ROOT_URL }) {
       verified(null, user);
     } catch (err) {
       verified(err);
-      console.log(err); // eslint-disable-line
+      console.log(err);
     }
   };
+
   passport.use(
     new Strategy(
       {
@@ -66,7 +67,7 @@ function setupGoogle({ server, ROOT_URL }) {
     passport.authenticate('google', {
       failureRedirect: '/login',
     }),
-    (req, res) => {
+    (_, res) => {
       res.redirect('/');
     },
   );
