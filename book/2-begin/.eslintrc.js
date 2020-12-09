@@ -51,6 +51,5 @@ module.exports = {
         extensions: ['.jsx'],
       },
     ],
-    'no-console': 'off',
   },
 };

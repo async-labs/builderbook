@@ -42,8 +42,8 @@ app.prepare().then(async () => {
 
   const MongoStore = mongoSessionStore(session);
   const sess = {
-    name: 'builderbook.sid',
-    secret: 'HD2w.)q*VqRT4/#NK2M/,E^B)}FED5fWU!dKe[wk',
+    name: process.env.SESSION_NAME,
+    secret: process.env.SESSION_SECRET,
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       ttl: 14 * 24 * 60 * 60, // expires in 14 days

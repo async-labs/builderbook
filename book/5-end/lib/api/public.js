@@ -7,4 +7,3 @@ export const getChapterDetailApiMethod = ({ bookSlug, chapterSlug }, options = {
     method: 'GET',
     ...options,
   });
-

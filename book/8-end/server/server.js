@@ -57,8 +57,8 @@ app.prepare().then(async () => {
 
   const MongoStore = mongoSessionStore(session);
   const sess = {
-    name: 'builderbook.sid',
-    secret: 'HD2w.)q*VqRT4/#NK2M/,E^B)}FED5fWU!dKe[wk',
+    name: process.env.SESSION_NAME,
+    secret: process.env.SESSION_SECRET,
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       ttl: 14 * 24 * 60 * 60, // expires in 14 days
@@ -70,11 +70,6 @@ app.prepare().then(async () => {
       maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
     },
   };
-
-  if (!dev) {
-    server.set('trust proxy', 1); // sets req.hostname, req.ip
-    sess.cookie.secure = true; // sets cookie over HTTPS only
-  }
 
   server.use(session(sess));
 
