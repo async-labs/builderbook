@@ -6,7 +6,7 @@ import Hidden from '@material-ui/core/Hidden';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 
-import MenuDrop from './MenuDrop';
+import MenuWithAvatar from './MenuWithAvatar';
 
 import { styleToolbar } from './SharedStyles';
 
@@ -32,6 +32,19 @@ const optionsMenuAdmin = [
     href: '/logout',
   },
 ];
+
+const propTypes = {
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    displayName: PropTypes.string,
+    isAdmin: PropTypes.bool,
+    isGithubConnected: PropTypes.bool,
+  }),
+};
+
+const defaultProps = {
+  user: null,
+};
 
 function Header({ user }) {
   return (
@@ -64,14 +77,14 @@ function Header({ user }) {
             {user ? (
               <div style={{ whiteSpace: ' nowrap' }}>
                 {!user.isAdmin ? (
-                  <MenuDrop
+                  <MenuWithAvatar
                     options={optionsMenuCustomer}
                     src={user.avatarUrl}
                     alt={user.displayName}
                   />
                 ) : null}
                 {user.isAdmin ? (
-                  <MenuDrop
+                  <MenuWithAvatar
                     options={optionsMenuAdmin}
                     src={user.avatarUrl}
                     alt={user.displayName}
@@ -90,15 +103,7 @@ function Header({ user }) {
   );
 }
 
-Header.propTypes = {
-  user: PropTypes.shape({
-    avatarUrl: PropTypes.string,
-    displayName: PropTypes.string,
-  }),
-};
-
-Header.defaultProps = {
-  user: null,
-};
+Header.propTypes = propTypes;
+Header.defaultProps = defaultProps;
 
 export default Header;

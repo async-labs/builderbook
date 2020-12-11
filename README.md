@@ -441,7 +441,7 @@ All code in this repository is provided under the [MIT License](https://github.c
 │   │   ├── customer
 │   │   │   ├── BuyButton.jsx
 │   │   ├── Header.jsx
-│   │   ├── MenuDrop.jsx                   
+│   │   ├── MenuWithAvatar.jsx                   
 │   │   ├── Notifier.jsx
 │   │   ├── SharedStyles.jsx
 ├── lib

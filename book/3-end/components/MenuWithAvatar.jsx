@@ -10,35 +10,32 @@ const propTypes = {
   options: PropTypes.arrayOf(String).isRequired,
 };
 
-class MenuDrop extends React.Component {
-  button = undefined;
-
+class MenuWithAvatar extends React.Component {
   constructor() {
     super();
-  
+
     this.state = {
-      open: false,
       anchorEl: undefined,
     };
   }
 
-
   handleClick = (event) => {
-    this.setState({ open: true, anchorEl: event.currentTarget });
+    this.setState({ anchorEl: event.currentTarget });
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ anchorEl: null });
   };
 
   render() {
     const { options, src, alt } = this.props;
+    const { anchorEl } = this.state;
 
     return (
       <div>
         <Avatar
-          role="presentation"
-          aria-owns="simple-menu"
+          aria-controls={anchorEl ? 'simple-menu' : null}
+          aria-haspopup="true"
           onClick={this.handleClick}
           onKeyPress={this.handleClick}
           src={src}
@@ -47,9 +44,10 @@ class MenuDrop extends React.Component {
         />
         <Menu
           id="simple-menu"
-          anchorEl={this.state.anchorEl}
-    
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
           onClose={this.handleClose}
+          keepMounted
         >
           <p />
           {options.map((option) => (
@@ -66,6 +64,6 @@ class MenuDrop extends React.Component {
   }
 }
 
-MenuDrop.propTypes = propTypes;
+MenuWithAvatar.propTypes = propTypes;
 
-export default MenuDrop;
+export default MenuWithAvatar;

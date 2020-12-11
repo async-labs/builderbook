@@ -2,11 +2,10 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 
-import MenuDrop from './MenuDrop';
+import MenuWithAvatar from './MenuWithAvatar';
 
 import { styleToolbar, styleRaisedButton } from './SharedStyles';
 
@@ -32,6 +31,23 @@ const optionsMenuAdmin = [
     href: '/logout',
   },
 ];
+
+const propTypes = {
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    displayName: PropTypes.string,
+    isAdmin: PropTypes.bool,
+    isGithubConnected: PropTypes.bool,
+  }),
+  hideHeader: PropTypes.bool,
+  redirectUrl: PropTypes.string,
+};
+
+const defaultProps = {
+  user: null,
+  hideHeader: false,
+  redirectUrl: '',
+};
 
 function Header({ user, hideHeader, redirectUrl }) {
   return (
@@ -72,14 +88,14 @@ function Header({ user, hideHeader, redirectUrl }) {
             {user ? (
               <div style={{ whiteSpace: ' nowrap' }}>
                 {!user.isAdmin ? (
-                  <MenuDrop
+                  <MenuWithAvatar
                     options={optionsMenuCustomer}
                     src={user.avatarUrl}
                     alt={user.displayName}
                   />
                 ) : null}
                 {user.isAdmin ? (
-                  <MenuDrop
+                  <MenuWithAvatar
                     options={optionsMenuAdmin}
                     src={user.avatarUrl}
                     alt={user.displayName}
@@ -106,23 +122,6 @@ function Header({ user, hideHeader, redirectUrl }) {
     </div>
   );
 }
-
-const propTypes = {
-  user: PropTypes.shape({
-    avatarUrl: PropTypes.string,
-    displayName: PropTypes.string,
-    isAdmin: PropTypes.bool,
-    isGithubConnected: PropTypes.bool,
-  }),
-  hideHeader: PropTypes.bool,
-  redirectUrl: PropTypes.string,
-};
-
-const defaultProps = {
-  user: null,
-  hideHeader: false,
-  redirectUrl: '',
-};
 
 Header.propTypes = propTypes;
 Header.defaultProps = defaultProps;

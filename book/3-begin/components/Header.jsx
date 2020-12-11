@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import Avatar from '@material-ui/core/Avatar';
 
-import MenuDrop from './MenuDrop';
+import MenuWithAvatar from './MenuWithAvatar';
 
 import { styleToolbar } from './SharedStyles';
 
@@ -20,21 +20,24 @@ const optionsMenu = [
   },
 ];
 
+const propTypes = {
+  user: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    displayName: PropTypes.string,
+  }),
+};
+
+const defaultProps = {
+  user: null,
+};
+
 function Header({ user }) {
   return (
     <div>
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justify="space-around" alignItems="center">
           <Grid item sm={11} xs={9} style={{ textAlign: 'left' }}>
-            {user ? (
-              <div>
-                <Hidden smDown>
-                  <Link href="/">
-                    <a style={{ marginRight: '20px' }}>Settings</a>
-                  </Link>
-                </Hidden>
-              </div>
-            ) : (
+            {user ? null : (
               <Link href="/">
                 <Avatar
                   src="https://storage.googleapis.com/builderbook/logo.svg"
@@ -48,7 +51,7 @@ function Header({ user }) {
             {user ? (
               <div style={{ whiteSpace: ' nowrap' }}>
                 {user.avatarUrl ? (
-                  <MenuDrop options={optionsMenu} src={user.avatarUrl} alt={user.displayName} />
+                  <MenuWithAvatar options={optionsMenu} src={user.avatarUrl} alt={user.displayName} />
                 ) : null}
               </div>
             ) : (
@@ -63,15 +66,7 @@ function Header({ user }) {
   );
 }
 
-Header.propTypes = {
-  user: PropTypes.shape({
-    avatarUrl: PropTypes.string,
-    displayName: PropTypes.string,
-  }),
-};
-
-Header.defaultProps = {
-  user: null,
-};
+Header.propTypes = propTypes;
+Header.defaultProps = defaultProps;
 
 export default Header;

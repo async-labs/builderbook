@@ -6,7 +6,7 @@ import Hidden from '@material-ui/core/Hidden';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 
-import MenuDrop from './MenuDrop';
+import MenuWithAvatar from './MenuWithAvatar';
 import { styleToolbar } from './SharedStyles';
 
 const optionsMenuCustomer = [
@@ -76,14 +76,14 @@ function Header({ user }) {
             {user ? (
               <div style={{ whiteSpace: 'nowrap' }}>
                 {!user.isAdmin ? (
-                  <MenuDrop
+                  <MenuWithAvatar
                     options={optionsMenuCustomer}
                     src={user.avatarUrl}
                     alt={user.displayName}
                   />
                 ) : null}
                 {user.isAdmin ? (
-                  <MenuDrop
+                  <MenuWithAvatar
                     options={optionsMenuAdmin}
                     src={user.avatarUrl}
                     alt={user.displayName}
