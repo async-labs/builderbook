@@ -18,7 +18,6 @@ module.exports = {
       },
     ],
     'camelcase': 'off',
-    'max-len': ['error', 100],
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
     'no-mixed-operators': 'off',
     'prefer-destructuring': [

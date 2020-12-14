@@ -34,7 +34,7 @@
     "lodash": "4.17.20",
     "marked": "1.1.1",
     "mongoose": "5.10.0",
-    "next": "9.1.2",
+    "next": "9.1.6",
     "node-fetch": "^2.6.0",
     "nprogress": "0.2.0",
     "passport": "0.4.1",
@@ -43,7 +43,6 @@
     "qs": "6.9.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-stripe-checkout": "2.6.3",
     "sitemap": "6.2.0",
     "stripe": "8.89.0",
     "winston": "3.3.3"

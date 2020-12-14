@@ -6,15 +6,15 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint components pages lib"
+    "lint": "eslint '**/*.js' '**/*.jsx'"
   },
   "dependencies": {
-    "@material-ui/core": "4.8.0",
-    "@material-ui/styles": "4.7.1",
+    "@material-ui/core": "4.11.0",
+    "@material-ui/styles": "4.10.0",
     "next": "9.1.6",
     "prop-types": "15.7.2",
-    "react": "16.12.0",
-    "react-dom": "16.12.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
@@ -26,7 +26,6 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "nodemon": "2.0.6",
     "prettier": "^2.2.1"
   }
 }
