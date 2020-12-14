@@ -21,7 +21,7 @@
     "express": "4.17.1",
     "express-session": "1.17.1",
     "handlebars": "4.7.6",
-    "lodash": "4.17.20",
+    "lodash": "4.17.19",
     "mongoose": "5.10.0",
     "next": "9.1.6",
     "nprogress": "0.2.0",
