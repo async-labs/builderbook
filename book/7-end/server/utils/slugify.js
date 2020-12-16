@@ -1,7 +1,6 @@
 const _ = require('lodash');
 
-
-const slugify = text => _.kebabCase(text);
+const slugify = (text) => _.kebabCase(text);
 
 async function createUniqueSlug(Model, slug, count) {
   const user = await Model.findOne({ slug: `${slug}-${count}` }, 'id');

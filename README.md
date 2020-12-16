@@ -443,7 +443,7 @@ All code in this repository is provided under the [MIT License](https://github.c
 │   │   ├── Header.jsx
 │   │   ├── MenuWithAvatar.jsx                   
 │   │   ├── Notifier.jsx
-│   │   ├── SharedStyles.jsx
+│   │   ├── SharedStyles.js
 ├── lib
 │   ├── api
 │   │   ├── admin.js

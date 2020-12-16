@@ -50,7 +50,11 @@ function Header({ user }) {
             {user ? (
               <div style={{ whiteSpace: ' nowrap' }}>
                 {user.avatarUrl ? (
-                  <MenuWithAvatar options={optionsMenu} src={user.avatarUrl} alt={user.displayName} />
+                  <MenuWithAvatar
+                    options={optionsMenu}
+                    src={user.avatarUrl}
+                    alt={user.displayName}
+                  />
                 ) : null}
               </div>
             ) : (

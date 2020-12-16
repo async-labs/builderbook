@@ -30,7 +30,7 @@
     "lodash": "4.17.20",
     "marked": "1.1.1",
     "mongoose": "5.10.0",
-    "next": "9.1.6",
+    "next": "^9.1.2",
     "node-fetch": "^2.6.0",
     "nprogress": "0.2.0",
     "passport": "0.4.1",

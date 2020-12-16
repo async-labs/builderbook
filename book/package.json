@@ -61,7 +61,16 @@
     "upgrade-5-latest": "cd 5-begin && yarn upgrade --latest && cd .. && cd 5-end && yarn upgrade --latest && cd ..",
     "upgrade-6-latest": "cd 6-begin && yarn upgrade --latest && cd .. && cd 6-end && yarn upgrade --latest && cd ..",
     "upgrade-7-latest": "cd 7-begin && yarn upgrade --latest && cd .. && cd 7-end && yarn upgrade --latest && cd ..",
-    "upgrade-8-latest": "cd 8-begin && yarn upgrade --latest && cd .. && cd 8-end && yarn upgrade --latest && cd .."
+    "upgrade-8-latest": "cd 8-begin && yarn upgrade --latest && cd .. && cd 8-end && yarn upgrade --latest && cd ..",
+    "yarn-all": "yarn yarn-1 && yarn yarn-2 && yarn yarn-3 && yarn yarn-4 && yarn yarn-5 && yarn yarn-6 && yarn yarn-7 && yarn yarn-8",
+    "yarn-1": "cross-env-shell && cd 1-begin && yarn && cd .. && cd 1-end && yarn && cd ..",
+    "yarn-2": "cross-env-shell && cd 2-begin && yarn && cd .. && cd 2-end && yarn && cd ..",
+    "yarn-3": "cross-env-shell && cd 3-begin && yarn && cd .. && cd 3-end && yarn && cd ..",
+    "yarn-4": "cross-env-shell && cd 4-begin && yarn && cd .. && cd 4-end && yarn && cd ..",
+    "yarn-5": "cross-env-shell && cd 5-begin && yarn && cd .. && cd 5-end && yarn && cd ..",
+    "yarn-6": "cross-env-shell && cd 6-begin && yarn && cd .. && cd 6-end && yarn && cd ..",
+    "yarn-7": "cross-env-shell && cd 7-begin && yarn && cd .. && cd 7-end && yarn && cd ..",
+    "yarn-8": "cross-env-shell && cd 8-begin && yarn && cd .. && cd 8-end && yarn && cd .."
   },
   "devDependencies": {
     "cross-env": "5.2.0"

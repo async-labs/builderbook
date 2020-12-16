@@ -13,7 +13,6 @@ class MyDocument extends Document {
       >
         <Head>
           <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta name="google" content="notranslate" />
           <meta name="theme-color" content="#1976D2" />
 
@@ -120,10 +119,10 @@ MyDocument.getInitialProps = async (ctx) => {
     ...initialProps,
     // Styles fragment is rendered after the app and page rendering finish.
     styles: (
-      <React.Fragment>
+      <>
         {initialProps.styles}
         {sheets.getStyleElement()}
-      </React.Fragment>
+      </>
     ),
   };
 };

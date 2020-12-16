@@ -43,10 +43,7 @@ async function insertTemplates() {
   for (const t of templates) { // eslint-disable-line
     const et = await EmailTemplate.findOne({ name: t.name }); // eslint-disable-line
 
-    const message = t.message
-      .replace(/\n/g, '')
-      .replace(/[ ]+/g, ' ')
-      .trim();
+    const message = t.message.replace(/\n/g, '').replace(/[ ]+/g, ' ').trim();
 
     if (!et) {
       EmailTemplate.create({ ...t, message });
