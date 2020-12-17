@@ -10,12 +10,26 @@ We've used this `builderbook` project to build:
 ## Live app:
 - https://builderbook.org/books/builder-book/introduction.
 
-## How can you use this project?
-- As learning material for React/Material-UI/Next/Express/Mongoose/MongoDB stack
-- As learning material for Google/Github/AWS SES/Mailchimp/Stripe APIs
-- As starting point for your own project.
-- As a production-ready web app to publish and sell content on your own website (we sell two books at builderbook.org).
-- You tell us
+## What can I learn from this project?
+
+You will learn how to structure your project and build many intetnal and external API infrastructures.
+
+On the browser, the main technologies you will learn are: Next.js, React.js, Material-UI.
+On the server, the main technologies you will learn are: Next.js, Node.js, Express.js, Mongoose.js, MongoDB database.
+
+In addition to the above technologies, you can learn how to integrate your web application with the following external API services:
+- Google OAuth API
+- Github API
+- Stripe API
+- AWS SES API
+- Mailchimp API
+
+Plus, you can learn many concepts such as `session` and `cookie`, headers, HTTP request-response, Express middleware, `Promise`, `async/await`, and more. You have to know these concepts to be a confident web developer, no matter what language you use.
+
+The main use cases for this project, besides learning, are:
+- To write and host free documentation with Github being a source of truth for content.
+- To sell online content, such as books.
+- To extend it (see our second book, SaaS Boilerplate Book) to start software business.
 
 ## Contents
 - [Showcase](#showcase)
@@ -40,6 +54,7 @@ Check out projects built with the help of this open source app. Feel free to add
 - [Async](https://async-await.com/): asynchronous communication and project management tool for small teams of software engineers.
 - [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee) : Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
 - https://michaelstromer.nyc by [Michael Stromer](https://github.com/Maelstroms38): Books and articles by Michael Stromer.
+- Email us to be added here!
 
 ## Run locally
 - Clone the project and run `yarn` to add packages.
