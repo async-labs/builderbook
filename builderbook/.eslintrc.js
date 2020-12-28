@@ -20,6 +20,7 @@ module.exports = {
     'camelcase': 'off',
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
     'no-mixed-operators': 'off',
+    'prefer-arrow-callback': 'error',
     'prefer-destructuring': [
       'error',
       {
