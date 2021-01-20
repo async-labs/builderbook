@@ -4,7 +4,6 @@
   "git.enableSmartCommit": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-  "eslint.enable": true,
   "eslint.alwaysShowStatus": true,
   "eslint.validate": [
     "javascript",

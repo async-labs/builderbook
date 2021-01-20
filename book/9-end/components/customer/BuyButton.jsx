@@ -42,7 +42,7 @@ const defaultProps = {
   redirectToCheckout: false,
 };
 
-class BuyButton extends React.PureComponent {
+class BuyButton extends React.Component {
   componentDidMount() {
     if (this.props.redirectToCheckout) {
       this.handleCheckoutClick();
