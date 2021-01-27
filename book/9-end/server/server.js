@@ -54,10 +54,6 @@ app.prepare().then(async () => {
     handle(req, res);
   });
 
-  server.get('/static/*', (req, res) => {
-    handle(req, res);
-  });
-
   const MongoStore = mongoSessionStore(session);
   const sess = {
     name: process.env.SESSION_NAME,
