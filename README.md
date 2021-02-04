@@ -12,7 +12,7 @@ We've used this `builderbook` project to build:
 
 ## What can I learn from this project?
 
-You will learn how to structure your project and build many intetnal and external API infrastructures.
+You will learn how to structure your project and build many internal and external API infrastructures.
 
 On the browser, the main technologies you will learn are: Next.js, React.js, Material-UI.
 On the server, the main technologies you will learn are: Next.js, Node.js, Express.js, Mongoose.js, MongoDB database.
