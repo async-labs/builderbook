@@ -1,6 +1,6 @@
 ## Builder Book
 
-Open source web app to self-publish and sell books or other online content (`builderbook` directory of this repository). If you are book's reader, you will work `book` directory.
+Open source web app to self-publish and sell books or other online content (`builderbook` directory of this repository). If you are a reader of our book, you will work in the `book` directory.
 
 We've used this `builderbook` project to build:
 - [Builder Book](https://builderbook.org) - learn how to build full-stack web apps from scratch
@@ -49,12 +49,12 @@ The main use cases for this project, besides learning, are:
 - [Project structure](#project-structure)
 
 ## Showcase
-Check out projects built with the help of this open source app. Feel free to add your own project by creating a pull request.
+Check out projects built with the help of this open source app.
 - [SaaS boilerplate app](https://github.com/async-labs/saas-by-async): Open source web app that saves you weeks of work when building your own SaaS product. 
 - [Async](https://async-await.com/): asynchronous communication and project management tool for small teams of software engineers.
 - [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee) : Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
 - https://michaelstromer.nyc by [Michael Stromer](https://github.com/Maelstroms38): Books and articles by Michael Stromer.
-- Email us to be added here!
+- Email us or submit a pull request to be added here!
 
 ## Run locally
 - Clone the project and run `yarn` to add packages.
@@ -265,7 +265,7 @@ We also specified styles for all content inside a `<body>` element:
 
 ## Deploy to Heroku
 
-In this section we will learn how to deploy our app to [Heroku cloud](https://www.heroku.com/home). We will deploy our React-Next-Express app to lightweight Heroku container called [dyno](https://www.heroku.com/dynos).
+In this section, we will learn how to deploy our app to [Heroku cloud](https://www.heroku.com/home). We will deploy our React-Next-Express app to lightweight Heroku container called [dyno](https://www.heroku.com/dynos).
 
 Instructions are for app located at `/book/8-end`.
 Adjust route if you are deploying app from the root of this public repo.
