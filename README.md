@@ -59,7 +59,7 @@ Check out projects built with the help of this open source app. Feel free to add
 ## Run locally
 - Clone the project and run `yarn` to add packages.
 - Before you start the app, create a `.env` file at the app's root. This file must have values for some env variables specified below.
-  - To get `MONGO_URL_TEST`, we recommend a [free MongoDB at MongoDB Atlas](https://docs.mongodb.com/manual/tutorial/atlas-free-tier-setup/) (to be updated soon with MongoDB Atlas, see [issue](https://github.com/builderbook/builderbook/issues/138)).
+  - To get `MONGO_URL_TEST`, we recommend a [free MongoDB at MongoDB Atlas](https://docs.mongodb.com/manual/tutorial/atlas-free-tier-setup/) (to be updated soon with MongoDB Atlas, see [issue](https://github.com/async-labs/builderbook/issues/138)).
   - Get `GOOGLE_CLIENTID` and `GOOGLE_CLIENTSECRET` by following [official OAuth tutorial](https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin).
 
     Important: For Google OAuth app, callback URL is: http://localhost:8000/oauth2callback <br/>
@@ -178,7 +178,7 @@ For example, in our `book` page, we wrote this single inline style:
   ...
 </p>
 ```
-[See usage](https://github.com/builderbook/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/book.js#L48)
+[See usage](https://github.com/async-labs/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/book.js#L48)
 
 
 ### Reusable style for multiple elements within single page or component
@@ -197,7 +197,7 @@ const styleExcerpt = {
 </p>
 
 ```
-[See usage](https://github.com/builderbook/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/tutorials.js#L14)
+[See usage](https://github.com/async-labs/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/tutorials.js#L14)
 
 
 ### Reusable/importable style for multiple pages or components
@@ -214,7 +214,7 @@ module.exports = {
   styleH1,
 };
 ```
-[See usage](https://github.com/builderbook/builderbook/blob/04c6cf78bee42455d48ef3466d868f2196381a57/components/SharedStyles.js#L48)
+[See usage](https://github.com/async-labs/builderbook/blob/04c6cf78bee42455d48ef3466d868f2196381a57/components/SharedStyles.js#L48)
 
 We then imported `styleH1` into our `book` page, as well as our `index` page, and applied the style to a `<h1>` element:
 ```
@@ -226,7 +226,7 @@ import {
   ...
 </h1>
 ```
-[See usage](https://github.com/builderbook/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/book.js#L13)
+[See usage](https://github.com/async-labs/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/book.js#L13)
 
 
 ### Global style for all pages in application
@@ -244,7 +244,7 @@ Create your style in `pages/_document.js`. For example, we specified a style for
   `}
 </style>
 ```
-[See usage](https://github.com/builderbook/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/_document.js#L51)
+[See usage](https://github.com/async-labs/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/_document.js#L51)
 
 We also specified styles for all content inside a `<body>` element:
 ```
@@ -260,7 +260,7 @@ We also specified styles for all content inside a `<body>` element:
 >
 </body>
 ```
-[See usage](https://github.com/builderbook/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/_document.js#L96)
+[See usage](https://github.com/async-labs/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/_document.js#L96)
 
 
 ## Deploy to Heroku
@@ -298,18 +298,18 @@ Let's go step by step.
     ![image](https://user-images.githubusercontent.com/10218864/54558544-417c9700-497b-11e9-8885-6fdfde21c747.png)
 
 3. As you can see from the above screenshot, you have two options. You can deploy the app directly from your local machine using Heroku CLI or directly from GitHub.
-    In this tutorial, we will deploy a `builderbook/builderbook/book/8-end` app from our public [builderbook/builderbook](https://github.com/builderbook/builderbook) repo hosted on GitHub. Deploying from a private repo will be a similar process.
+    In this tutorial, we will deploy a `async-labs/builderbook/book/8-end` app from our public [async-labs/builderbook](https://github.com/async-labs/builderbook) repo hosted on GitHub. Deploying from a private repo will be a similar process.
     
-    Deploying from GitHub has a few advantages. Heroku uses git to track changes in a codebase. It's possible to deploy app from the local machine using Heroku CLI, however you have to create a [Git repo](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository) for `builderbook/builderbook/book/8-end` with `package.json` file at the root level. A first advantage is that we can deploy from a non-root folder using GitHub instead of Heroku CLI.
+    Deploying from GitHub has a few advantages. Heroku uses git to track changes in a codebase. It's possible to deploy app from the local machine using Heroku CLI, however you have to create a [Git repo](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository) for `async-labs/builderbook/book/8-end` with `package.json` file at the root level. A first advantage is that we can deploy from a non-root folder using GitHub instead of Heroku CLI.
     
     A second advantage is automation, later on you can create a branch that automatically deploy every new commit to Heroku. For example, we have a [deploy branch](https://github.com/async-labs/saas/tree/deploy) for our demo for [SaaS boilerplate](https://github.com/async-labs/saas/). When we commit to `master` branch - there is no new deployment, when we commit to `deploy` branch - new change is automatically deployed to Heroku app.
 
     Let's set up deploying from GitHub. On `Deploy` tab of your Heroku app at Heroku dashboard, click <b>Connect to GitHub</b>, then search for your repo, then click <b>Connect</b> next to the name of the proper repo:
     ![image](https://user-images.githubusercontent.com/10218864/54560210-09775300-497f-11e9-9027-2e3850ec7ff1.png)
 
-    If successful, you will see green text `Connected` and be offered to select a branch and deploy app automatically or manually. Automatic deployment will deploy every new commit, manual deployment requires you to manually click on <b>Deploy Branch</b> button. For simplicity, we will deploy manually from `master` branch of our `builderbook/builderbook` repo.
+    If successful, you will see green text `Connected` and be offered to select a branch and deploy app automatically or manually. Automatic deployment will deploy every new commit, manual deployment requires you to manually click on <b>Deploy Branch</b> button. For simplicity, we will deploy manually from `master` branch of our `async-labs/builderbook` repo.
 
-    Before we perform a manual deployment via GitHub, we need Heroku to run some additional code while app is being deploying. Firstly, we need to tell Heroku that `8-end` app in the `builderbook/builderbook` repo is not at the root level, it's actually nested at `/book/8-end`. Secondly, Heroku needs to know that our app is Node.js app so Heroku finds `package.json` file, properly installs dependencies and runs proper scripts (such as `build` and `start` scripts from `package.json`). To achieve this, we need to add so called `buildpacks` to our Heroku app. Click `Settings` tab, scroll to `Buildpacks` section and click purple <b>Add buildpack</b> button:
+    Before we perform a manual deployment via GitHub, we need Heroku to run some additional code while app is being deploying. Firstly, we need to tell Heroku that `8-end` app in the `async-labs/builderbook` repo is not at the root level, it's actually nested at `/book/8-end`. Secondly, Heroku needs to know that our app is Node.js app so Heroku finds `package.json` file, properly installs dependencies and runs proper scripts (such as `build` and `start` scripts from `package.json`). To achieve this, we need to add so called `buildpacks` to our Heroku app. Click `Settings` tab, scroll to `Buildpacks` section and click purple <b>Add buildpack</b> button:
     ![image](https://user-images.githubusercontent.com/10218864/54561192-50fede80-4981-11e9-976a-c3d7c88527ec.png)
 
     Add two buildpacks, first is `https://github.com/timanovsky/subdir-heroku-buildpack` and second is `heroku/nodejs`:
@@ -409,7 +409,7 @@ Book-detail page for Admin user:
 - Stripe
 - MailChimp
 
-Check out [package.json](https://github.com/builderbook/builderbook/builderbook/blob/master/package.json).
+Check out [package.json](https://github.com/async-labs/builderbook/builderbook/blob/master/package.json).
 
 ## Docker
 - Install Docker and Docker Compose
@@ -420,7 +420,7 @@ Check out [package.json](https://github.com/builderbook/builderbook/builderbook/
 ## Contributing
 We welcome suggestions and bug reports via issues and and pull requests.
 
-By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/builderbook/builderbook/blob/master/CODE-OF-CONDUCT.md).
+By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/async-labs/builderbook/blob/master/CODE-OF-CONDUCT.md).
 
 Want to support this project? Sign up at [async](https://async-await.com) and/or buy our [books](https://builderbook.org), which teach you how to build web apps from scratch. Also check out our open source [SaaS boilerplate](https://github.com/async-labs/saas).
 
@@ -433,7 +433,7 @@ Want to support this project? Sign up at [async](https://async-await.com) and/or
 You can contact us at team@builderbook.org
 
 ## License
-All code in this repository is provided under the [MIT License](https://github.com/builderbook/builderbook/blob/master/LICENSE.md).
+All code in this repository is provided under the [MIT License](https://github.com/async-labs/builderbook/blob/master/LICENSE.md).
 
 
 ## Project structure

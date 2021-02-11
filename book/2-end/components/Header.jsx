@@ -11,7 +11,7 @@ import { styleToolbar } from './SharedStyles';
 const optionsMenu = [
   {
     text: 'Got question?',
-    href: 'https://github.com/builderbook/builderbook/issues',
+    href: 'https://github.com/async-labs/builderbook/issues',
   },
   {
     text: 'Log out',

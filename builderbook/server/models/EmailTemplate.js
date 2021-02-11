@@ -51,7 +51,7 @@ async function insertTemplates() {
         <p>
           If you have any questions while reading the book,
           please fill out an issue on
-          <a href="https://github.com/builderbook/builderbook/issues" target="blank">Github</a>.
+          <a href="https://github.com/async-labs/builderbook/issues" target="blank">Github</a>.
         </p>
 
         Kelly & Timur, Team Builder Book
