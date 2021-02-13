@@ -4,6 +4,8 @@
   "git.enableSmartCommit": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "eslint.enable": true,
+  "eslint.format.enable": true,
   "eslint.alwaysShowStatus": true,
   "eslint.validate": [
     "javascript",
@@ -84,5 +86,9 @@
       "directory": "./book/1-end/",
       "changeProcessCWD": true
     },
+    {
+      "directory": "./book/1-begin/",
+      "changeProcessCWD": true
+    }
   ],
 }
