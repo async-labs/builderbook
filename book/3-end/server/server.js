@@ -5,6 +5,7 @@ const next = require('next');
 const mongoose = require('mongoose');
 
 const setupGoogle = require('./google');
+const User = require('./models/User');
 
 require('dotenv').config();
 
@@ -51,7 +52,8 @@ app.prepare().then(() => {
 
   // server.get('/', async (req, res) => {
   //   const user = await User.findOne({ slug: 'team-builder-book' });
-  //   app.render(req, res, '/', { user });
+  //   req.user = user;
+  //   app.render(req, res, '/');
   // });
 
   setupGoogle({ server, ROOT_URL });
