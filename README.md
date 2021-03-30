@@ -8,7 +8,7 @@ We've used this `builderbook` project to build:
 - [Async](https://async-await.com) - team communication tool for software developers
 
 ## Live app:
-- https://builderbook.org/books/builder-book/introduction.
+https://builderbook.org/books/builder-book/introduction.
 
 ## What can I learn from this project?
 
@@ -288,13 +288,13 @@ Let's go step by step.
   As example, my output that confirms successful installation, looks like:
   <pre>heroku/7.22.7 linux-x64 node-v11.10.1</pre>
 
-2. [Sign up](https://signup.heroku.com/) for Heroku, go to your Heroku dashboard and click purple <b>New</b> button on the right:
+2. [Sign up](https://signup.heroku.com/) for Heroku, go to your Heroku dashboard and click purple <b>New</b> button on the right:<br><br>
   ![image](https://user-images.githubusercontent.com/10218864/54558094-12b1f100-497a-11e9-94dd-d36399052931.png)
 
-    On the next screen, give a name to your app and select a region. Click purple <b>Create app</b> button at the bottom:
+    On the next screen, give a name to your app and select a region. Click purple <b>Create app</b> button at the bottom:<br><br>
     ![image](https://user-images.githubusercontent.com/10218864/54558276-8eac3900-497a-11e9-9026-25aa5047af87.png)
 
-    You will be redirected to `Deploy` tab of your newly created Heroku app:
+    You will be redirected to `Deploy` tab of your newly created Heroku app:<br><br>
     ![image](https://user-images.githubusercontent.com/10218864/54558544-417c9700-497b-11e9-8885-6fdfde21c747.png)
 
 3. As you can see from the above screenshot, you have two options. You can deploy the app directly from your local machine using Heroku CLI or directly from GitHub.
@@ -304,18 +304,18 @@ Let's go step by step.
     
     A second advantage is automation, later on you can create a branch that automatically deploy every new commit to Heroku. For example, we have a [deploy branch](https://github.com/async-labs/saas/tree/deploy) for our demo for [SaaS boilerplate](https://github.com/async-labs/saas/). When we commit to `master` branch - there is no new deployment, when we commit to `deploy` branch - new change is automatically deployed to Heroku app.
 
-    Let's set up deploying from GitHub. On `Deploy` tab of your Heroku app at Heroku dashboard, click <b>Connect to GitHub</b>, then search for your repo, then click <b>Connect</b> next to the name of the proper repo:
+    Let's set up deploying from GitHub. On `Deploy` tab of your Heroku app at Heroku dashboard, click <b>Connect to GitHub</b>, then search for your repo, then click <b>Connect</b> next to the name of the proper repo:<br><br>
     ![image](https://user-images.githubusercontent.com/10218864/54560210-09775300-497f-11e9-9027-2e3850ec7ff1.png)
 
     If successful, you will see green text `Connected` and be offered to select a branch and deploy app automatically or manually. Automatic deployment will deploy every new commit, manual deployment requires you to manually click on <b>Deploy Branch</b> button. For simplicity, we will deploy manually from `master` branch of our `async-labs/builderbook` repo.
 
-    Before we perform a manual deployment via GitHub, we need Heroku to run some additional code while app is being deploying. Firstly, we need to tell Heroku that `8-end` app in the `async-labs/builderbook` repo is not at the root level, it's actually nested at `/book/8-end`. Secondly, Heroku needs to know that our app is Node.js app so Heroku finds `package.json` file, properly installs dependencies and runs proper scripts (such as `build` and `start` scripts from `package.json`). To achieve this, we need to add so called `buildpacks` to our Heroku app. Click `Settings` tab, scroll to `Buildpacks` section and click purple <b>Add buildpack</b> button:
+    Before we perform a manual deployment via GitHub, we need Heroku to run some additional code while app is being deploying. Firstly, we need to tell Heroku that `8-end` app in the `async-labs/builderbook` repo is not at the root level, it's actually nested at `/book/8-end`. Secondly, Heroku needs to know that our app is Node.js app so Heroku finds `package.json` file, properly installs dependencies and runs proper scripts (such as `build` and `start` scripts from `package.json`). To achieve this, we need to add so called `buildpacks` to our Heroku app. Click `Settings` tab, scroll to `Buildpacks` section and click purple <b>Add buildpack</b> button:<br><br>
     ![image](https://user-images.githubusercontent.com/10218864/54561192-50fede80-4981-11e9-976a-c3d7c88527ec.png)
 
-    Add two buildpacks, first is `https://github.com/timanovsky/subdir-heroku-buildpack` and second is `heroku/nodejs`:
+    Add two buildpacks, first is `https://github.com/timanovsky/subdir-heroku-buildpack` and second is `heroku/nodejs`:<br><br>
     ![image](https://user-images.githubusercontent.com/10218864/54561577-30835400-4982-11e9-997f-4711d999808e.png)
 
-    Next, scroll up while on `Settings` tab and click purple <b>Reveal Config Vars</b> button, create a new environmental variable `PROJECT_PATH` with value `book/8-end`:
+    Next, scroll up while on `Settings` tab and click purple <b>Reveal Config Vars</b> button, create a new environmental variable `PROJECT_PATH` with value `book/8-end`:<br><br>
     ![image](https://user-images.githubusercontent.com/10218864/54561775-a5568e00-4982-11e9-9561-2e5827873779.png)
 
     The above variable will be used by the first buildpack `subdir-heroku-buildpack` to deploy app from repo's subdirectory.
@@ -324,7 +324,7 @@ Let's go step by step.
 
 5. While on `Settings` tab, scroll to `Domains and certificates` section and note your app's URL. My app's URL is: https://builderbook-8-end.herokuapp.com
     Let's deploy, go to `Deploy` tab, scroll to `Manual deploy` section and click <b>Deploy branch</b> button.
-    After deployment process is complete , navigate to your app's URL:
+    After deployment process is complete , navigate to your app's URL:<br><br>
     ![image](https://user-images.githubusercontent.com/10218864/54564053-10569380-4988-11e9-87dd-f81a28dd6406.png)
 
 6. Server logs are not available on Heroku dashboard. To see logs, you have to use Heroku CLI.
@@ -346,19 +346,19 @@ Let's go step by step.
     You can output certain number of lines (N) for retrieved logs by adding `--num N` to the `heroku logs` command.
     You can print only app's logs by adding `--source app` or system's logs by adding `--source heroku`.  
 
-7. Time to add a custom domain. The Heroku app that we created is deployed on `free dyno`. Free dyno plan does not let you to add a custom domain to your app. To add custom domain, go to `Resources` tab and click purple <b>Change Dyno Type</b> button:
+7. Time to add a custom domain. The Heroku app that we created is deployed on `free dyno`. Free dyno plan does not let you to add a custom domain to your app. To add custom domain, go to `Resources` tab and click purple <b>Change Dyno Type</b> button:<br><br>
     ![image](https://user-images.githubusercontent.com/10218864/54622849-983faa80-4a27-11e9-957f-54fe5aa742ca.png)
 
     Select a `Hobby` plan and click <b>Save</b> button.
 
-    Navigate to `Settings` tab and scroll to the `Domains and certificates` and click purple <b>Add domain</b> button:
+    Navigate to `Settings` tab and scroll to the `Domains and certificates` and click purple <b>Add domain</b> button:<br><br>
     ![image](https://user-images.githubusercontent.com/10218864/54623152-36cc0b80-4a28-11e9-974b-8a14fb56a86a.png)
 
     Type your custom domain name, I added `heroku.builderbook.org` as a custom domain, click <b>Save changes</b> button.
 
     Heroku will display you a value for CNAME record that you have to create for your custom domain. For me, custom domain is `heroku.builderbook.org and I manage DNS records at Now by Zeit.
     
-    After you create a CNAME, ACM status on Heroku's dashboard will change to `Ok`:
+    After you create a CNAME, ACM status on Heroku's dashboard will change to `Ok`:<br><br>
     ![image](https://user-images.githubusercontent.com/10218864/54624195-2452d180-4a2a-11e9-999d-a6a771cde73c.png)
 
 It's important that you remember to manually add your custom domain to the settings of your Google OAuth app (Chapter 3) and GitHub OAuth app (Chapter 6). If you forget to do it, you will see errors when you try to log in to your app or when you try to connect GitHub to your app.
@@ -379,16 +379,16 @@ Splitting servers will get you:
 
 
 ## Screenshots
-Chapter excerpt with Buy Button for Public/Guest visitor:
+Chapter excerpt with Buy Button for Public/Guest visitor:<br><br>
 ![builderbook-public-readchapter](https://user-images.githubusercontent.com/26158226/38517453-e84a7566-3bee-11e8-82cd-14b4dfbe6a78.png)
 
-Chapter content and Table of Contents for book Customer:
+Chapter content and Table of Contents for book Customer:<br><br>
 ![builderbook-customer-readchapter](https://user-images.githubusercontent.com/26158226/38518394-9ee97306-3bf1-11e8-8df2-8c05fb75249a.png)
 
-Add-book/Edit-book page for Admin user:
+Add-book/Edit-book page for Admin user:<br><br>
 ![builderbook-admin-editbook](https://user-images.githubusercontent.com/26158226/38517449-e5faaa38-3bee-11e8-9c02-740096dc860e.png)
 
-Book-detail page for Admin user:
+Book-detail page for Admin user:<br><br>
 ![builderbook-admin-bookdetails](https://user-images.githubusercontent.com/26158226/38517450-e7005bd0-3bee-11e8-9916-81f32d3d1827.png)
 
 
