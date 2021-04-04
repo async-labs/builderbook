@@ -79,7 +79,6 @@ class EditBook extends React.Component {
               type="text"
               label="Book's title"
               style={styleTextField}
-              required
             />
           </div>
           <br />
@@ -97,7 +96,6 @@ class EditBook extends React.Component {
             className="textFieldInput"
             style={styleTextField}
             step="1"
-            required
           />
           <br />
           <br />

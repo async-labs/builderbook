@@ -1,6 +1,6 @@
 const { Octokit } = require('@octokit/rest');
 const fetch = require('node-fetch');
-const { oauthLoginUrl } = require('@octokit/oauth-authorization-url');
+const { oauthAuthorizationUrl } = require('@octokit/oauth-authorization-url');
 const _ = require('lodash');
 
 const User = require('./models/User');
@@ -37,7 +37,7 @@ function setupGithub({ server, ROOT_URL }) {
       return;
     }
 
-    const { url, state } = oauthLoginUrl({
+    const { url, state } = oauthAuthorizationUrl({
       clientId: CLIENT_ID,
       redirectUrl: `${ROOT_URL}/auth/github/callback`,
       scopes: ['repo', 'user:email'],
