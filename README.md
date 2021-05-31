@@ -1,6 +1,10 @@
 ## Builder Book
 
-Open source web app to self-publish and sell books or other online content (`builderbook` directory of this repository). If you are a reader of our book, you will work in the `book` directory.
+Open source web app to self-publish and sell books or other online content. 
+
+If you want to learn how to build this project from scratch, check out our book: https://builderbook.org. 
+
+The open source project is located in the `builderbook` folder. If you purchased our book, codebases for each of the book's chapters are located in the `book` folder.
 
 We've used this `builderbook` project to build:
 - [Builder Book](https://builderbook.org) - learn how to build full-stack web apps from scratch
