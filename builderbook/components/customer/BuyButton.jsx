@@ -10,7 +10,6 @@ import notify from '../../lib/notify';
 
 const styleBuyButton = {
   margin: '10px 20px 0px 0px',
-  font: '14px Roboto',
 };
 
 const dev = process.env.NODE_ENV !== 'production';

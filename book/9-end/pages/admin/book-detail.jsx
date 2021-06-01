@@ -72,11 +72,18 @@ class BookDetail extends React.Component {
           Repo on Github
         </a>
         <p />
-        <Button variant="contained" onClick={this.handleSyncContent()}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => this.handleSyncContent()}
+          style={{ marginRight: '20px' }}
+        >
           Sync with Github
         </Button>
         <Link href={`/admin/edit-book?slug=${book.slug}`} as={`/admin/edit-book/${book.slug}`}>
-          <Button variant="contained">Edit book</Button>
+          <Button variant="contained" color="primary">
+            Edit book
+          </Button>
         </Link>
         <ul>
           {chapters.map((ch) => (

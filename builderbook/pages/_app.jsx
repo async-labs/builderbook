@@ -47,12 +47,19 @@ class MyApp extends App {
 
     // console.log(pageProps);
 
+    const isServer = typeof window === 'undefined';
+
     return (
       <ThemeProvider theme={theme}>
         {/* ThemeProvider makes the theme available down the React tree thanks to React context. */}
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <link rel="stylesheet" href={isServer ? '/fonts/server.css' : '/fonts/cdn.css'} />
+          <link
+            rel="stylesheet"
+            href="https://storage.googleapis.com/async-await/nprogress-light.min.css"
+          />
         </Head>
         <CssBaseline />
         {pageProps.chapter ? null : <Header {...pageProps} />}

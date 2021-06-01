@@ -35,28 +35,16 @@ class MyDocument extends Document {
             rel="shortcut icon"
             href="https://storage.googleapis.com/builderbook/favicon32.png"
           />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400:latin"
-          />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-          <link
-            rel="stylesheet"
-            href="https://storage.googleapis.com/builderbook/nprogress.min.css"
-          />
+
           <link rel="stylesheet" href="https://storage.googleapis.com/builderbook/vs.min.css" />
 
           <style>
             {`
-              a, a:focus {
+              a {
                 font-weight: 400;
-                color: #1565C0;
+                color: #58a6ff;
                 text-decoration: none;
-                outline: none
-              }
-              a:hover, button:hover {
-                opacity: 0.75;
-                cursor: pointer
+                outline: none;
               }
               blockquote {
                 padding: 0 1em;
@@ -95,17 +83,7 @@ class MyDocument extends Document {
             }}
           />
         </Head>
-        <body
-          style={{
-            font: '16px Roboto',
-            color: '#222',
-            margin: '0px auto',
-            fontWeight: '300',
-            lineHeight: '1.5em',
-            backgroundColor: '#F7F9FC',
-            minHeight: '100%',
-          }}
-        >
+        <body>
           <Main />
           <NextScript />
         </body>

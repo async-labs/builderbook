@@ -36,7 +36,6 @@ function markdownToHtml(content) {
             href="#${escapedText}"
             style="color: #222;"
           > 
-            <i class="material-icons" style="vertical-align: middle; opacity: 0.5; cursor: pointer;">link</i>
           </a>
           <span class="section-anchor" name="${escapedText}">
             ${text}
@@ -51,7 +50,6 @@ function markdownToHtml(content) {
             href="#${escapedText}"
             style="color: #222;"
           >
-            <i class="material-icons" style="vertical-align: middle; opacity: 0.5; cursor: pointer;">link</i>
           </a>
           ${text}
         </h${level}>`;

@@ -8,8 +8,6 @@ import Avatar from '@material-ui/core/Avatar';
 
 import MenuWithAvatar from './MenuWithAvatar';
 
-import { styleToolbar, styleRaisedButton } from './SharedStyles';
-
 const optionsMenuCustomer = [
   {
     text: 'My books',
@@ -59,9 +57,10 @@ function Header({ user, hideHeader, redirectUrl }) {
         display: 'block',
         top: hideHeader ? '-64px' : '0px',
         transition: 'top 0.5s ease-in',
+        backgroundColor: '#24292e',
       }}
     >
-      <Toolbar style={styleToolbar}>
+      <Toolbar>
         <Grid container direction="row" justify="space-around" alignItems="center">
           <Grid item sm={8} xs={7} style={{ textAlign: 'left' }}>
             {!user ? (
@@ -78,7 +77,7 @@ function Header({ user, hideHeader, redirectUrl }) {
             {user && user.isAdmin && !user.isGithubConnected ? (
               <Hidden smDown>
                 <a href="/auth/github">
-                  <Button variant="contained" color="primary" style={styleRaisedButton}>
+                  <Button variant="contained" color="primary">
                     Connect Github
                   </Button>
                 </a>

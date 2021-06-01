@@ -7,6 +7,8 @@ import throttle from 'lodash/throttle';
 
 import Link from 'next/link';
 
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+
 import Header from '../../components/Header';
 import BuyButton from '../../components/customer/BuyButton';
 
@@ -290,7 +292,7 @@ class ReadChapter extends React.Component {
         }}
       >
         <p style={{ padding: '0px 40px', fontSize: '17px', fontWeight: '400' }}>{book.name}</p>
-        <ol start="0" style={{ padding: '0 25', fontSize: '14px', fontWeight: '300' }}>
+        <ol start="0" style={{ padding: '0 25', fontSize: '14px' }}>
           {chapters.map((ch, i) => (
             <li
               key={ch._id}
@@ -330,6 +332,8 @@ class ReadChapter extends React.Component {
       left = isMobile ? '100%' : '400px';
     }
 
+    // console.log(process.env.PRODUCTION_URL_APP);
+
     return (
       <div style={{ overflowScrolling: 'touch', WebkitOverflowScrolling: 'touch' }}>
         <Head>
@@ -359,6 +363,7 @@ class ReadChapter extends React.Component {
             left,
             overflowY: 'auto',
             overflowX: 'hidden',
+            fontFamily: 'Roboto, sans-serif',
           }}
           id="main-content"
         >
@@ -373,15 +378,11 @@ class ReadChapter extends React.Component {
             left: '15px',
           }}
         >
-          <i //eslint-disable-line
-            className="material-icons"
+          <FormatListBulletedIcon
             style={styleIcon}
             onClick={this.toggleChapterList}
             onKeyPress={this.toggleChapterList}
-            role="button"
-          >
-            format_list_bulleted
-          </i>
+          />
         </div>
       </div>
     );

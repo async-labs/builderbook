@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
 import withAuth from '../../lib/withAuth';
-import { styleLoginButton } from '../../components/SharedStyles';
 
 const propTypes = {
   router: PropTypes.shape({
@@ -29,7 +28,7 @@ function Login({ router }) {
       <br />
       <Button
         variant="contained"
-        style={styleLoginButton}
+        color="secondary"
         href={`/auth/google?redirectUrl=${redirectUrl}`}
       >
         <img

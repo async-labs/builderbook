@@ -23,7 +23,9 @@ const Index = ({ books }) => (
     <div>
       <h2>Books</h2>
       <Link href="/admin/add-book">
-        <Button variant="contained">Add book</Button>
+        <Button variant="contained" color="primary">
+          Add book
+        </Button>
       </Link>
       <p />
       <ul>
