@@ -33,15 +33,11 @@ class MyDocument extends Document {
 
           <style>
             {`
-              a, a:focus {
+              a {
                 font-weight: 400;
-                color: #1565C0;
+                color: #58a6ff;
                 text-decoration: none;
-                outline: none
-              }
-              a:hover, button:hover {
-                opacity: 0.75;
-                cursor: pointer
+                outline: none;
               }
               blockquote {
                 padding: 0 1em;
@@ -62,17 +58,7 @@ class MyDocument extends Document {
             `}
           </style>
         </Head>
-        <body
-          style={{
-            font: '16px Muli',
-            color: '#222',
-            margin: '0px auto',
-            fontWeight: '300',
-            lineHeight: '1.5em',
-            backgroundColor: '#F7F9FC',
-            minHeight: '100%',
-          }}
-        >
+        <body>
           <Main />
           <NextScript />
         </body>

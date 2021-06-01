@@ -250,22 +250,6 @@ Create your style in `pages/_document.js`. For example, we specified a style for
 ```
 [See usage](https://github.com/async-labs/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/_document.js#L51)
 
-We also specified styles for all content inside a `<body>` element:
-```
-<body
-  style={{
-    font: '16px Muli',
-    color: '#222',
-    margin: '0px auto',
-    fontWeight: '400',
-    lineHeight: '1.5em',
-    backgroundColor: '#F7F9FC',
-  }}
->
-</body>
-```
-[See usage](https://github.com/async-labs/builderbook/blob/49116676e0894fcf00c33d208a284359b30f12bb/pages/_document.js#L96)
-
 
 ## Deploy to Heroku
 
