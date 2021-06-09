@@ -84,5 +84,9 @@
       "directory": "./book/1-end/",
       "changeProcessCWD": true
     },
+    {
+      "directory": "./book/1-begin/",
+      "changeProcessCWD": true
+    },
   ],
 }
