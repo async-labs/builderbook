@@ -22,7 +22,7 @@ https://builderbook.org/books/builder-book/introduction.
 Check out projects built with the help of this open source app. Feel free to add your own project by creating a pull request.
 
 - [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee): Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
-- https://michaelstromer.nyc by [Michael Stromer](https://github.com/Maelstroms38): Books and articles by Michael Stromer.
+- [michaelstromer.nyc](https://michaelstromer.nyc) by [Michael Stromer](https://github.com/Maelstroms38): Books and articles by Michael Stromer.
 - [SaaS boilerplate app](https://github.com/async-labs/saas-by-async): Open source web app that saves you weeks of work when building your own SaaS product. 
 - [Async](https://async-await.com/): Asynchronous communication and project management tool.
 
