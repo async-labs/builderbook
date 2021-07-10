@@ -11,8 +11,39 @@ We've used this `builderbook` project to build:
 - [SaaS Boilerplate](https://github.com/async-labs/saas) - open source web app to build your own SaaS product
 - [Async](https://async-await.com) - team communication tool for software developers
 
+
 ## Live app:
+
 https://builderbook.org/books/builder-book/introduction.
+
+
+## Showcase
+
+Check out projects built with the help of this open source app. Feel free to add your own project by creating a pull request.
+
+- [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee): Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
+- https://michaelstromer.nyc by [Michael Stromer](https://github.com/Maelstroms38): Books and articles by Michael Stromer.
+- [SaaS boilerplate app](https://github.com/async-labs/saas-by-async): Open source web app that saves you weeks of work when building your own SaaS product. 
+- [Async](https://async-await.com/): Asynchronous communication and project management tool.
+
+
+## Contents
+- [What can I learn from this project?](#what-can-i-learn-from-this-project)
+- [Run locally](#run-locally)
+- [Add a new book](#add-a-new-book)
+- [Add your own styles](#add-your-own-styles)
+- [Deploy to Heroku](#deploy-to-heroku)
+- [Scaling](#scaling)
+- [Screenshots](#screenshots)
+- [Built with](#built-with)
+  - [Core stack](#core-stack)
+  - [Third party APIs](#third-party-apis)
+- [Docker](#docker)
+- [Contributing](#contributing)
+- [Team](#team)
+- [License](#license)
+- [Project structure](#project-structure)
+
 
 ## What can I learn from this project?
 
@@ -35,30 +66,6 @@ The main use cases for this project, besides learning, are:
 - To sell online content, such as books.
 - To extend it (see our second book, SaaS Boilerplate Book) to start software business.
 
-## Contents
-- [Showcase](#showcase)
-- [Run locally](#run-locally)
-- [Add a new book](#add-a-new-book)
-- [Add your own styles](#add-your-own-styles)
-- [Deploy to Heroku](#deploy-to-heroku)
-- [Scaling](#scaling)
-- [Screenshots](#screenshots)
-- [Built with](#built-with)
-  - [Core stack](#core-stack)
-  - [Third party APIs](#third-party-apis)
-- [Docker](#docker)
-- [Contributing](#contributing)
-- [Team](#team)
-- [License](#license)
-- [Project structure](#project-structure)
-
-## Showcase
-Check out projects built with the help of this open source app.
-- [SaaS boilerplate app](https://github.com/async-labs/saas-by-async): Open source web app that saves you weeks of work when building your own SaaS product. 
-- [Async](https://async-await.com/): asynchronous communication and project management tool for small teams of software engineers.
-- [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee) : Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
-- https://michaelstromer.nyc by [Michael Stromer](https://github.com/Maelstroms38): Books and articles by Michael Stromer.
-- Email us or submit a pull request to be added here!
 
 ## Run locally
 - Clone the project and run `yarn` to add packages.
