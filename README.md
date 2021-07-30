@@ -28,18 +28,20 @@ Check out projects built with the help of this open source app. Feel free to add
 
 
 ## Contents
+
 - [What can I learn from this project?](#what-can-i-learn-from-this-project)
 - [Run locally](#run-locally)
 - [Add a new book](#add-a-new-book)
 - [Add your own styles](#add-your-own-styles)
 - [Deploy to Heroku](#deploy-to-heroku)
 - [Scaling](#scaling)
+- [Docker](#docker)
 - [Screenshots](#screenshots)
 - [Built with](#built-with)
   - [Core stack](#core-stack)
   - [Third party APIs](#third-party-apis)
-- [Docker](#docker)
 - [Contributing](#contributing)
+- [Sponsors](#sponsors)
 - [Team](#team)
 - [License](#license)
 - [Project structure](#project-structure)
@@ -68,6 +70,7 @@ The main use cases for this project, besides learning, are:
 
 
 ## Run locally
+
 - Clone the project and run `yarn` to add packages.
 - Before you start the app, create a `.env` file at the app's root. This file must have values for some env variables specified below.
   - To get `MONGO_URL_TEST`, we recommend a [free MongoDB at MongoDB Atlas](https://docs.mongodb.com/manual/tutorial/atlas-free-tier-setup/) (to be updated soon with MongoDB Atlas, see [issue](https://github.com/async-labs/builderbook/issues/138)).
@@ -145,6 +148,7 @@ The main use cases for this project, besides learning, are:
 
 
 ## Add a new book
+
 - Create a new Github repo (public or private).
 - In that repo, create an `introduction.md` file and write some content.
 - At the top of your `introduction.md` file, add metadata in the format shown below. See [this file](https://github.com/builderbook/demo-book/blob/master/introduction.md) as an example.
@@ -172,6 +176,7 @@ To make the content of a `.md` file _private_ (meaning a person must purchase th
 
 
 ## Add your own styles
+
 To change the color scheme of this app, modify the `primary` and `secondary` theme colors inside `lib/context.js`. Select any colors from Material UI's official [color palette](https://material-ui-next.com/style/color/#color).
 
 Recommended ways to add your own styles to this app:
@@ -182,6 +187,7 @@ Recommended ways to add your own styles to this app:
 
 
 ### Inline style for a single element
+
 USE CASE: apply a style to _one element_ on a single page/component <br>
 For example, in our `book` page, we wrote this single inline style:
 ```
@@ -193,6 +199,7 @@ For example, in our `book` page, we wrote this single inline style:
 
 
 ### Reusable style for multiple elements within single page or component
+
 USE CASE: apply the same style to _multiple elements_ on a single page/component.<br>
 For example, in our `tutorials` page, we created `styleExcerpt` and applied it to a `<p>` element within the page:
 
@@ -212,6 +219,7 @@ const styleExcerpt = {
 
 
 ### Reusable/importable style for multiple pages or components
+
 USE CASE: apply the same style to elements on _multiple pages/components_.<br>
 For example, we created `styleH1` inside `components/SharedStyles.js` and exported the style at the bottom of the file:
 ```
@@ -241,6 +249,7 @@ import {
 
 
 ### Global style for all pages in application
+
 USE CASE: apply the same style to elements on _all pages_ of your app.<br>
 Create your style in `pages/_document.js`. For example, we specified a style for all hyperlinks that use the `<a>` element:
 ```
@@ -351,12 +360,13 @@ Let's go step by step.
 
     Type your custom domain name, I added `heroku.builderbook.org` as a custom domain, click <b>Save changes</b> button.
 
-    Heroku will display you a value for CNAME record that you have to create for your custom domain. For me, custom domain is `heroku.builderbook.org and I manage DNS records at Now by Zeit.
+    Heroku will display you a value for CNAME record that you have to create for your custom domain. For me, custom domain is `heroku.builderbook.org` and I manage DNS records at Now by Zeit.
     
     After you create a CNAME, ACM status on Heroku's dashboard will change to `Ok`:<br><br>
     ![image](https://user-images.githubusercontent.com/10218864/54624195-2452d180-4a2a-11e9-999d-a6a771cde73c.png)
 
 It's important that you remember to manually add your custom domain to the settings of your Google OAuth app (Chapter 3) and GitHub OAuth app (Chapter 6). If you forget to do it, you will see errors when you try to log in to your app or when you try to connect GitHub to your app.
+
 
 ## Scaling
 
@@ -373,7 +383,16 @@ Splitting servers will get you:
 - faster deployment and more flexible scaling of individual apps.
 
 
+## Docker
+
+- Install Docker and Docker Compose
+- Modify `docker-compose-dev.yml` file
+- If using Ubuntu, follow these steps: https://stackoverflow.com/questions/38775954/sudo-docker-compose-command-not-found
+- Start app with `docker-compose -f docker-compose-dev.yml up`
+
+
 ## Screenshots
+
 Chapter excerpt with Buy Button for Public/Guest visitor:<br><br>
 ![builderbook-public-readchapter](https://user-images.githubusercontent.com/26158226/38517453-e84a7566-3bee-11e8-82cd-14b4dfbe6a78.png)
 
@@ -390,6 +409,7 @@ Book-detail page for Admin user:<br><br>
 ## Built with
 
 #### Core stack
+
 - [React](https://github.com/facebook/react)
 - [Material-UI](https://github.com/mui-org/material-ui)
 - [Next](https://github.com/zeit/next.js)
@@ -398,6 +418,7 @@ Book-detail page for Admin user:<br><br>
 - [MongoDB](https://github.com/mongodb/mongo)
 
 #### Third party APIs
+
 - Google OAuth
 - Github
 - AWS SES
@@ -406,13 +427,9 @@ Book-detail page for Admin user:<br><br>
 
 Check out [package.json](https://github.com/async-labs/builderbook/builderbook/blob/master/package.json).
 
-## Docker
-- Install Docker and Docker Compose
-- Modify `docker-compose-dev.yml` file
-- If using Ubuntu, follow these steps: https://stackoverflow.com/questions/38775954/sudo-docker-compose-command-not-found
-- Start app with `docker-compose -f docker-compose-dev.yml up`
 
 ## Contributing
+
 We welcome suggestions and bug reports via issues and and pull requests.
 
 By participating in this project, you are expected to uphold Builder Book's [Code of Conduct](https://github.com/async-labs/builderbook/blob/master/CODE-OF-CONDUCT.md).
@@ -420,14 +437,22 @@ By participating in this project, you are expected to uphold Builder Book's [Cod
 Want to support this project? Sign up at [async](https://async-await.com) and/or buy our [books](https://builderbook.org), which teach you how to build web apps from scratch. Also check out our open source [SaaS boilerplate](https://github.com/async-labs/saas).
 
 
+## Sponsors
+
+- [1Password](https://1password.com/)
+
+
 ## Team
+
 - [Kelly Burke](https://github.com/klyburke)
 - [Delgermurun Purevkhuu](https://github.com/delgermurun)
 - [Timur Zhiyentayev](https://github.com/tima101)
 
 You can contact us at team@builderbook.org
 
+
 ## License
+
 All code in this repository is provided under the [MIT License](https://github.com/async-labs/builderbook/blob/master/LICENSE.md).
 
 
