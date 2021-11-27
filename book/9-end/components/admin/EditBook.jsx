@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Input from '@material-ui/core/Input';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Input from '@mui/material/Input';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 import { getGithubReposApiMethod } from '../../lib/api/admin';
 import { styleTextField } from '../SharedStyles';
@@ -105,6 +105,7 @@ class EditBook extends React.Component {
               value={this.state.book.githubRepo || ''}
               input={<Input />}
               onChange={(event) => {
+                event.stopPropagation();
                 this.setState({
                   // eslint-disable-next-line
                   book: { ...this.state.book, githubRepo: event.target.value },

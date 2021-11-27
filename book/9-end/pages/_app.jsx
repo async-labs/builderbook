@@ -1,5 +1,7 @@
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/styles';
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
 import App from 'next/app';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -17,8 +19,8 @@ Router.events.on('routeChangeStart', () => {
 });
 
 Router.events.on('routeChangeComplete', (url) => {
-  if (window && process.env.GA_MEASUREMENT_ID) {
-    window.gtag('config', process.env.GA_MEASUREMENT_ID, {
+  if (window && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID) {
+    window.gtag('config', process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID, {
       page_path: url,
     });
   }
@@ -34,14 +36,6 @@ const propTypes = {
 };
 
 class MyApp extends App {
-  componentDidMount() {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
-  }
-
   render() {
     const { Component, pageProps } = this.props;
 
@@ -50,22 +44,28 @@ class MyApp extends App {
     const isServer = typeof window === 'undefined';
 
     return (
-      <ThemeProvider theme={theme}>
-        {/* ThemeProvider makes the theme available down the React tree thanks to React context. */}
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <link rel="stylesheet" href={isServer ? '/fonts/server.css' : '/fonts/cdn.css'} />
-          <link
-            rel="stylesheet"
-            href="https://storage.googleapis.com/async-await/nprogress-dark.min.css"
-          />
-        </Head>
-        <CssBaseline />
-        {pageProps.chapter ? null : <Header {...pageProps} />}
-        <Component {...pageProps} />
-        <Notifier />
-      </ThemeProvider>
+      <CacheProvider
+        value={createCache({
+          key: 'css',
+        })}
+      >
+        <ThemeProvider theme={theme}>
+          {/* ThemeProvider makes the theme available down the React tree thanks to React context. */}
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <Head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <link rel="stylesheet" href={isServer ? '/fonts/server.css' : '/fonts/cdn.css'} />
+            <link
+              rel="stylesheet"
+              href="https://storage.googleapis.com/async-await/nprogress-light-spinner.css"
+            />
+          </Head>
+          <CssBaseline />
+          {pageProps.chapter ? null : <Header {...pageProps} />}
+          <Component {...pageProps} />
+          <Notifier />
+        </ThemeProvider>
+      </CacheProvider>
     );
   }
 }

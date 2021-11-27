@@ -4,6 +4,7 @@ module.exports = {
   env: {
     browser: true,
     jest: true,
+    es6: true,
   },
   plugins: ['react', 'jsx-a11y', 'import', 'prettier'],
   rules: {

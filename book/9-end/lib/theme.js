@@ -1,10 +1,10 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: { main: '#238636' },
     secondary: { main: '#b62324' },
-    type: 'light',
+    mode: 'light',
     background: { default: '#fff' },
     text: {
       primary: '#222',

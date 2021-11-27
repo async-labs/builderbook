@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NProgress from 'nprogress';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import { loadStripe } from '@stripe/stripe-js';
 
 import { fetchCheckoutSessionApiMethod } from '../../lib/api/customer';
@@ -13,11 +13,13 @@ const styleBuyButton = {
 };
 
 const dev = process.env.NODE_ENV !== 'production';
-const port = process.env.PORT || 8000;
+const port = process.env.NEXT_PUBLIC_PORT || 8000;
 const ROOT_URL = `http://localhost:${port}`;
 
 const stripePromise = loadStripe(
-  dev ? process.env.STRIPE_TEST_PUBLISHABLEKEY : process.env.STRIPE_LIVE_PUBLISHABLEKEY,
+  dev
+    ? process.env.NEXT_PUBLIC_STRIPE_TEST_PUBLISHABLEKEY
+    : process.env.NEXT_PUBLIC_STRIPE_LIVE_PUBLISHABLEKEY,
 );
 
 const propTypes = {

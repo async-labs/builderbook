@@ -7,7 +7,7 @@ import throttle from 'lodash/throttle';
 
 import Link from 'next/link';
 
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 import Header from '../../components/Header';
 import BuyButton from '../../components/customer/BuyButton';
@@ -70,7 +70,7 @@ class ReadChapter extends React.Component {
     };
   }
 
-  static async getInitialProps(ctx) {
+  static async getServerSideProps(ctx) {
     const { bookSlug, chapterSlug, buy, checkout_canceled, error } = ctx.query;
     const { req } = ctx;
 

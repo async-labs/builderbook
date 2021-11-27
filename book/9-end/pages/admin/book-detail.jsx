@@ -3,7 +3,7 @@ import NProgress from 'nprogress';
 import PropTypes from 'prop-types';
 import Error from 'next/error';
 import Link from 'next/link';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
 import { getBookDetailApiMethod, syncBookContentApiMethod } from '../../lib/api/admin';
 import withAuth from '../../lib/withAuth';
