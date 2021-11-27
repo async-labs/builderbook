@@ -67,10 +67,11 @@ class ReadChapter extends React.Component {
       htmlContent,
       hideHeader: false,
       isMobile: false,
+      activeSection: null,
     };
   }
 
-  static async getServerSideProps(ctx) {
+  static async getInitialProps(ctx) {
     const { bookSlug, chapterSlug, buy, checkout_canceled, error } = ctx.query;
     const { req } = ctx;
 
