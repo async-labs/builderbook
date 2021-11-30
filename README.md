@@ -92,8 +92,8 @@ The main use cases for this project, besides learning, are:
   SESSION_SECRET=
 
   # Used in lib/getRootUrl.js
-  URL_APP=
-  PRODUCTION_URL_APP=
+  NEXT_PUBLIC_URL_APP=
+  NEXT_PUBLIC_PRODUCTION_URL_APP="https://heroku.builderbook.org"
 
   # Used in server/google.js
   GOOGLE_CLIENTID=
@@ -117,8 +117,8 @@ The main use cases for this project, besides learning, are:
   GITHUB_LIVE_SECRETKEY=
 
   # Used in server/stripe.js
-  STRIPE_TEST_PUBLISHABLEKEY=
-  STRIPE_LIVE_PUBLISHABLEKEY=
+  NEXT_PUBLIC_STRIPE_TEST_PUBLISHABLEKEY=
+  NEXT_PUBLIC_STRIPE_LIVE_PUBLISHABLEKEY=
   STRIPE_TEST_SECRETKEY=
   STRIPE_LIVE_SECRETKEY=
   STRIPE_TEST_DEMO_BOOK_PRICE_ID=
@@ -133,15 +133,17 @@ The main use cases for this project, besides learning, are:
   MAILCHIMP_SIGNEDUP_LIST_ID=
 
   # Used in pages/_document.js and pages/_app.js
-  GA_MEASUREMENT_ID=
-  COOKIE_DOMAIN=
+  NEXT_PUBLIC_GA_MEASUREMENT_ID=
+  COOKIE_DOMAIN=".builderbook.org"
 
   ```
 
+  Add your value (domain that you own) for `COOKIE_DOMAIN` and `NEXT_PUBLIC_PRODUCTION_URL_APP`.
+
 - Start the app with `yarn dev`.
-  - To get `GA_MEASUREMENT_ID`, set up Google Analytics and follow [these instructions](https://support.google.com/analytics/answer/1008080?hl=en) to find your tracking ID.
+  - To get `NEXT_PUBLIC_GA_MEASUREMENT_ID`, set up Google Analytics and follow [these instructions](https://support.google.com/analytics/answer/1008080?hl=en) to find your tracking ID.
   - To get Stripe-related API keys, set up or log into your Stripe account and find your key [here](https://dashboard.stripe.com/account/apikeys).
-- Env keys `GA_MEASUREMENT_ID` and `STRIPE_TEST_PUBLISHABLEKEY`/`STRIPE_LIVE_PUBLISHABLEKEY` are universally available (client and server). Env keys inside `.env` file are used in server code only. To make env vars universally available, add them to `next.config.js` file.
+- Env keys `NEXT_PUBLIC_GA_MEASUREMENT_ID` and `NEXT_PUBLIC_STRIPE_TEST_PUBLISHABLEKEY`/`NEXT_PUBLIC_STRIPE_LIVE_PUBLISHABLEKEY` are universally available (client and server). Env keys inside `.env` file are used in server code only unless they have `NEXT_PUBLIC_` prepended to their name. In that case, they are universally available.
 - To make user a book's owner, set `"isAdmin": true` on corresponding MongoDB document in your database (default value is `false` for any new user).
 
 **Important: if you don't add values for environmental variables to `.env` file, corresponding functionality will not work. For example, login with Google account, purchasing book, getting repo information via GitHub API and other third-party API infrastructures.**

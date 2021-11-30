@@ -46,6 +46,7 @@ app.prepare().then(async () => {
 
   server.use(helmet({ contentSecurityPolicy: false }));
   server.use(compression());
+
   server.use(express.json());
 
   // give all Nextjs's request to Nextjs server

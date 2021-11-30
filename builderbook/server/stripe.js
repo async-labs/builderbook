@@ -11,7 +11,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const API_KEY = dev ? process.env.STRIPE_TEST_SECRETKEY : process.env.STRIPE_LIVE_SECRETKEY;
 const ROOT_URL = getRootUrl();
 
-const stripeInstance = new Stripe(API_KEY, { apiVersion: '2020-03-02' });
+const stripeInstance = new Stripe(API_KEY, { apiVersion: '2020-08-27' });
 
 function getBookPriceId(bookSlug) {
   let priceId;

@@ -7,7 +7,7 @@ import throttle from 'lodash/throttle';
 
 import Link from 'next/link';
 
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 import Header from '../../components/Header';
 import BuyButton from '../../components/customer/BuyButton';
@@ -67,6 +67,7 @@ class ReadChapter extends React.Component {
       htmlContent,
       hideHeader: false,
       isMobile: false,
+      activeSection: null,
     };
   }
 
@@ -332,8 +333,6 @@ class ReadChapter extends React.Component {
       left = isMobile ? '100%' : '400px';
     }
 
-    // console.log(process.env.PRODUCTION_URL_APP);
-
     return (
       <div style={{ overflowScrolling: 'touch', WebkitOverflowScrolling: 'touch' }}>
         <Head>
@@ -355,6 +354,7 @@ class ReadChapter extends React.Component {
           style={{
             textAlign: 'left',
             padding: '0px 10px 20px 30px',
+
             position: 'fixed',
             right: 0,
             bottom: 0,
