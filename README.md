@@ -9,8 +9,8 @@ The open source project is located in the `builderbook` folder. If you purchased
 We've used this `builderbook` project to build:
 - [Builder Book](https://builderbook.org) - learn how to build full-stack web apps from scratch
 - [SaaS Boilerplate](https://github.com/async-labs/saas) - open source web app to build your own SaaS product
-- [Async](https://async-await.com) - team communication tool for software developers
-
+- [Async](https://async-await.com) - Urgent vs non-urgent team communication tool for small teams
+- [Async Labs](https://async-labs.com) - many custom dev projects
 
 ## Live app:
 
@@ -23,8 +23,9 @@ Check out projects built with the help of this open source app. Feel free to add
 
 - [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee): Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
 - [michaelstromer.nyc](https://michaelstromer.nyc) by [Michael Stromer](https://github.com/Maelstroms38): Books and articles by Michael Stromer.
-- [SaaS boilerplate app](https://github.com/async-labs/saas-by-async): Open source web app that saves you weeks of work when building your own SaaS product. 
-- [Async](https://async-await.com/): Asynchronous communication and project management tool.
+- [SaaS Boilerplate](https://github.com/async-labs/saas)
+- [Async](https://async-await.com)
+- [Async Labs](https://async-labs.com)
 
 
 ## Contents
@@ -449,7 +450,6 @@ Want to support this project? Sign up at [async](https://async-await.com) and/or
 ## Team
 
 - [Kelly Burke](https://github.com/klyburke)
-- [Delgermurun Purevkhuu](https://github.com/delgermurun)
 - [Timur Zhiyentayev](https://github.com/tima101)
 
 You can contact us at team@builderbook.org
@@ -471,9 +471,6 @@ All code in this repository is provided under the [MIT License](https://github.c
 │   ├── settings.json
 ├── book
 ├── builderbook
-│   ├── .ebextensions
-│   │   ├── environment.config
-│   │   ├── git.config
 │   ├── .elasticbeanstalk
 │   │   ├── config.yml
 │   ├── components
