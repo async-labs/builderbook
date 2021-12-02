@@ -72,6 +72,7 @@ class ReadChapter extends React.Component {
   }
 
   static async getInitialProps(ctx) {
+    // console.log('ReadChapter.getInitialProps');
     const { bookSlug, chapterSlug, buy, checkout_canceled, error } = ctx.query;
     const { req } = ctx;
 
@@ -106,6 +107,7 @@ class ReadChapter extends React.Component {
   }
 
   componentDidMount() {
+    // console.log('ReadChapter.componentDidMount');
     document.getElementById('main-content').addEventListener('scroll', this.onScroll);
 
     const isMobile = window.innerWidth < 768;
@@ -124,7 +126,9 @@ class ReadChapter extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    // console.log('before condition ReadChapter.componentDidUpdate');
     if (prevProps.chapter && prevProps.chapter._id !== this.props.chapter._id) {
+      // console.log('inside condition ReadChapter.componentDidUpdate');
       document.getElementById('chapter-content').scrollIntoView();
       let htmlContent = '';
       if (prevProps.chapter && (prevProps.chapter.isPurchased || prevProps.chapter.isFree)) {
@@ -139,6 +143,7 @@ class ReadChapter extends React.Component {
   }
 
   componentWillUnmount() {
+    // console.log('ReadChapter.componentWillUnmount');
     document.getElementById('main-content').removeEventListener('scroll', this.onScroll);
   }
 

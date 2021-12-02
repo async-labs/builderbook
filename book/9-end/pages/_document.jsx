@@ -45,6 +45,7 @@ class MyDocument extends Document {
   };
 
   render() {
+    // console.log('MyDocument.render');
     return (
       <Html lang="en" style={{ height: '100%' }}>
         <Head>
