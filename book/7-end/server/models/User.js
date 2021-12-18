@@ -77,6 +77,7 @@ class UserClass {
     }
 
     const slug = await generateSlug(this, displayName);
+    const userCount = await this.find().countDocuments();
 
     const newUser = await this.create({
       createdAt: new Date(),
@@ -86,6 +87,7 @@ class UserClass {
       displayName,
       avatarUrl,
       slug,
+      isAdmin: userCount === 0,
     });
 
     try {
