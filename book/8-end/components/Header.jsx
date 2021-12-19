@@ -19,6 +19,7 @@ const optionsMenuCustomer = [
   {
     text: 'Log out',
     href: '/logout',
+    anchor: true,
   },
 ];
 
@@ -26,10 +27,12 @@ const optionsMenuAdmin = [
   {
     text: 'Admin',
     href: '/admin',
+    as: '/admin',
   },
   {
     text: 'Log out',
     href: '/logout',
+    anchor: true,
   },
 ];
 

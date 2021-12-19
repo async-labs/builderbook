@@ -67,13 +67,13 @@ app.prepare().then(async () => {
     cookie: {
       httpOnly: true,
       maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
+      domain: dev ? 'localhost' : process.env.COOKIE_DOMAIN,
     },
   };
 
   if (!dev) {
     server.set('trust proxy', 1); // sets req.hostname, req.ip
     sess.cookie.secure = true; // sets cookie over HTTPS only
-    sess.cookie.domain = process.env.COOKIE_DOMAIN; // sets domain for production env
   }
 
   server.use(session(sess));
