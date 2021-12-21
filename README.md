@@ -56,11 +56,11 @@ On the browser, the main technologies you will learn are: Next.js, React.js, Mat
 On the server, the main technologies you will learn are: Next.js, Node.js, Express.js, Mongoose.js, MongoDB database.
 
 In addition to the above technologies, you can learn how to integrate your web application with the following external API services:
-- Google OAuth API
-- Github API
-- Stripe API
-- AWS SES API
-- Mailchimp API
+- [Google OAuth API](https://developers.google.com/identity/protocols/oauth2)
+- [Github API](https://docs.github.com/en/rest/guides/basics-of-authentication)
+- [Stripe API](https://stripe.com/docs/keys)
+- [AWS SES API](https://docs.aws.amazon.com/STS/latest/APIReference/API_GetAccessKeyInfo.html)
+- [Mailchimp API](https://mailchimp.com/developer/marketing/api/root/)
 
 Plus, you can learn many concepts such as `session` and `cookie`, headers, HTTP request-response, Express middleware, `Promise`, `async/await`, and more. You have to know these concepts to be a confident web developer, no matter what language you use.
 
