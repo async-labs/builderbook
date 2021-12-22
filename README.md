@@ -12,9 +12,17 @@ We've used this `builderbook` project to build:
 - [Async](https://async-await.com) - Urgent vs non-urgent team communication tool for small teams
 - [Async Labs](https://async-labs.com) - many custom dev projects
 
+
 ## Live app:
 
 https://builderbook.org/books/builder-book/introduction.
+
+
+## Sponsors
+
+[![aws-activate-logo](https://user-images.githubusercontent.com/26158226/138565715-4311ddda-fb77-452a-8755-d53eb18f8645.png)](https://aws.amazon.com/activate/)
+
+[![1password-logo](https://user-images.githubusercontent.com/26158226/138565841-ad435374-7330-477a-b6f3-2542109c3217.png)](https://1password.com/)
 
 
 ## Showcase
@@ -42,7 +50,6 @@ Check out projects built with the help of this open source app. Feel free to add
   - [Core stack](#core-stack)
   - [Third party APIs](#third-party-apis)
 - [Contributing](#contributing)
-- [Sponsors](#sponsors)
 - [Team](#team)
 - [License](#license)
 - [Project structure](#project-structure)
@@ -440,13 +447,6 @@ By participating in this project, you are expected to uphold Builder Book's [Cod
 Want to support this project? Sign up at [async](https://async-await.com) and/or buy our [books](https://builderbook.org), which teach you how to build web apps from scratch. Also check out our open source [SaaS boilerplate](https://github.com/async-labs/saas).
 
 
-## Sponsors
-
-[![aws-activate-logo](https://user-images.githubusercontent.com/26158226/138565715-4311ddda-fb77-452a-8755-d53eb18f8645.png)](https://aws.amazon.com/activate/)
-
-[![1password-logo](https://user-images.githubusercontent.com/26158226/138565841-ad435374-7330-477a-b6f3-2542109c3217.png)](https://1password.com/)
-
-
 ## Team
 
 - [Kelly Burke](https://github.com/klyburke)
@@ -454,7 +454,7 @@ Want to support this project? Sign up at [async](https://async-await.com) and/or
 
 You can contact us at team@builderbook.org
 
-If you are interested in hiring our team to help build your SaaS web application, please fill out our form at [Async Labs](https://async-labs.com/).
+If you are interested in working with us, check out [Async Labs](https://async-labs.com/).
 
 
 ## License
