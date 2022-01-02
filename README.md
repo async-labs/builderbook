@@ -90,9 +90,9 @@ The main use cases for this project, besides learning, are:
   - Specify your own secret key for Express session `SESSION_SECRET`: https://github.com/expressjs/session#secret
 
 
-- To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values for all variables in your `.env` file as mentioned in .env.example
+- To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), create a `.env` file and add values for all variables as shown in [`.env.example`](https://github.com/async-labs/builderbook/blob/master/builderbook/.env.example).
 
-- Important: do not publish your actual values for environmentable variables in .env.example; this file is public and only meant to show you how your .env should look.
+- Important: do not publish your actual values for environmentable variables in `.env.example`; this file is public and only meant to show you how your `.env` should look.
 
 - Add your value (domain that you own) for `COOKIE_DOMAIN` and `NEXT_PUBLIC_PRODUCTION_URL_APP`.
 
