@@ -90,63 +90,11 @@ The main use cases for this project, besides learning, are:
   - Specify your own secret key for Express session `SESSION_SECRET`: https://github.com/expressjs/session#secret
 
 
-- To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), add values for all of the following env variables in your `.env` file:
+- To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), create a `.env` file and add values for all variables as shown in [`.env.example`](https://github.com/async-labs/builderbook/blob/master/builderbook/.env.example).
 
-  `.env` :
-  ```
-  # Used in server/server.js
-  MONGO_URL=
-  MONGO_URL_TEST=
-  SESSION_SECRET=
+- Important: do not publish your actual values for environmentable variables in `.env.example`; this file is public and only meant to show you how your `.env` should look.
 
-  # Used in lib/getRootUrl.js
-  NEXT_PUBLIC_URL_APP=
-  NEXT_PUBLIC_PRODUCTION_URL_APP="https://heroku.builderbook.org"
-
-  # Used in server/google.js
-  GOOGLE_CLIENTID=
-  GOOGLE_CLIENTSECRET=
-
-  # Used in server/aws.js
-  AWS_ACCESSKEYID=
-  AWS_SECRETACCESSKEY=
-  AWS_REGION=
-
-  # Used in server/models/User.js
-  EMAIL_ADDRESS_FROM=
-  
-  ----------
-  # All environmental variables above this line are required for successful sign up
-  
-  # Used in server/github.js
-  GITHUB_TEST_CLIENTID=
-  GITHUB_LIVE_CLIENTID=
-  GITHUB_TEST_SECRETKEY=
-  GITHUB_LIVE_SECRETKEY=
-
-  # Used in server/stripe.js
-  NEXT_PUBLIC_STRIPE_TEST_PUBLISHABLEKEY=
-  NEXT_PUBLIC_STRIPE_LIVE_PUBLISHABLEKEY=
-  STRIPE_TEST_SECRETKEY=
-  STRIPE_LIVE_SECRETKEY=
-  STRIPE_TEST_DEMO_BOOK_PRICE_ID=
-  STRIPE_LIVE_DEMO_BOOK_PRICE_ID=
-  STRIPE_TEST_SECOND_BOOK_PRICE_ID=
-  STRIPE_LIVE_SECOND_BOOK_PRICE_ID=
-
-  # Used in server/mailchimp.js
-  MAILCHIMP_API_KEY=
-  MAILCHIMP_REGION=
-  MAILCHIMP_PURCHASED_LIST_ID=
-  MAILCHIMP_SIGNEDUP_LIST_ID=
-
-  # Used in pages/_document.js and pages/_app.js
-  NEXT_PUBLIC_GA_MEASUREMENT_ID=
-  COOKIE_DOMAIN=".builderbook.org"
-
-  ```
-
-  Add your value (domain that you own) for `COOKIE_DOMAIN` and `NEXT_PUBLIC_PRODUCTION_URL_APP`.
+- Add your value (domain that you own) for `COOKIE_DOMAIN` and `NEXT_PUBLIC_PRODUCTION_URL_APP`.
 
 - Start the app with `yarn dev`.
   - To get `NEXT_PUBLIC_GA_MEASUREMENT_ID`, set up Google Analytics and follow [these instructions](https://support.google.com/analytics/answer/1008080?hl=en) to find your tracking ID.
