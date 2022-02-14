@@ -29,10 +29,11 @@ https://builderbook.org/books/builder-book/introduction.
 
 Check out projects built with the help of this open source app. Feel free to add your own project by creating a pull request.
 
+- [workinbiotech.com](https://workinbiotech.com): Work in biotech, job board for small and young biotech companies
+- [Async](https://async-await.com): urgent and non-urgent communication for remote teams
 - [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee): Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
 - [michaelstromer.nyc](https://michaelstromer.nyc) by [Michael Stromer](https://github.com/Maelstroms38): Books and articles by Michael Stromer.
 - [SaaS Boilerplate](https://github.com/async-labs/saas)
-- [Async](https://async-await.com)
 - [Async Labs](https://async-labs.com)
 
 
