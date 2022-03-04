@@ -1,9 +1,6 @@
 ![image](https://user-images.githubusercontent.com/26158226/155850630-137ae3be-aa29-487b-a422-e8fb4db634dc.png)
 
-Support Ukraine:<br>
-[Link 1](https://bank.gov.ua/en/news/all/natsionalniy-bank-vidkriv-spetsrahunok-dlya-zboru-koshtiv-na-potrebi-armiyi)<br>
-[Link 2](https://ukraine.ua/news/support-the-armed-forces-of-ukraine/)
-
+Support Ukraine: [link](https://bank.gov.ua/en/news/all/natsionalniy-bank-vidkriv-spetsrahunok-dlya-zboru-koshtiv-na-potrebi-armiyi)<br>
 
 ## Builder Book
 
@@ -98,9 +95,63 @@ The main use cases for this project, besides learning, are:
   - Specify your own secret key for Express session `SESSION_SECRET`: https://github.com/expressjs/session#secret
 
 
-- To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), create a `.env` file and add values for all variables as shown in [`.env.example`](https://github.com/async-labs/builderbook/blob/master/builderbook/.env.example).
+- To use all features and third-party integrations (such as Stripe, Google OAuth, Mailchimp), create a `.env` file and add values for all variables as shown below. These variables are also listed in [`.env.example`](https://github.com/async-labs/builderbook/blob/master/builderbook/.env.example), which you can use as a template to create your own `.env` file.
 
-- Important: do not publish your actual values for environmentable variables in `.env.example`; this file is public and only meant to show you how your `.env` should look.
+ `.env` :
+  ```
+  # Used in server/server.js
+  MONGO_URL=
+  MONGO_URL_TEST=
+  SESSION_SECRET=
+  
+  # Used in lib/getRootUrl.js
+  NEXT_PUBLIC_URL_APP=
+  NEXT_PUBLIC_PRODUCTION_URL_APP="https://heroku.builderbook.org"
+  
+  # Used in server/google.js
+  GOOGLE_CLIENTID=
+  GOOGLE_CLIENTSECRET=
+  
+  # Used in server/aws.js
+  AWS_ACCESSKEYID=
+  AWS_SECRETACCESSKEY=
+  AWS_REGION=
+  
+  # Used in server/models/User.js
+  EMAIL_ADDRESS_FROM=
+  
+  ----------
+  # All environmental variables above this line are required for successful sign up
+  
+  # Used in server/github.js
+  GITHUB_TEST_CLIENTID=
+  GITHUB_LIVE_CLIENTID=
+  GITHUB_TEST_SECRETKEY=
+  GITHUB_LIVE_SECRETKEY=
+  
+  # Used in server/stripe.js
+  NEXT_PUBLIC_STRIPE_TEST_PUBLISHABLEKEY=
+  NEXT_PUBLIC_STRIPE_LIVE_PUBLISHABLEKEY=
+  STRIPE_TEST_SECRETKEY=
+  STRIPE_LIVE_SECRETKEY=
+  STRIPE_TEST_DEMO_BOOK_PRICE_ID=
+  STRIPE_LIVE_DEMO_BOOK_PRICE_ID=
+  STRIPE_TEST_SECOND_BOOK_PRICE_ID=
+  STRIPE_LIVE_SECOND_BOOK_PRICE_ID=
+  
+  # Used in server/mailchimp.js
+  MAILCHIMP_API_KEY=
+  MAILCHIMP_REGION=
+  MAILCHIMP_PURCHASED_LIST_ID=
+  MAILCHIMP_SIGNEDUP_LIST_ID=
+  
+  # Used in pages/_document.js and pages/_app.js
+  NEXT_PUBLIC_GA_MEASUREMENT_ID=
+  COOKIE_DOMAIN=".builderbook.org"
+  
+  ```
+
+- IMPORTANT: do not publish your actual values for environmentable variables in `.env.example`; this file is public and only meant to show you how your `.env` file should look.
 
 - Add your value (domain that you own) for `COOKIE_DOMAIN` and `NEXT_PUBLIC_PRODUCTION_URL_APP`.
 
