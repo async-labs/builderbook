@@ -7,8 +7,8 @@ import EditBook from '../../components/admin/EditBook';
 import { addBookApiMethod, syncBookContentApiMethod } from '../../lib/api/admin';
 import notify from '../../lib/notify';
 
-class AddBook extends React.Component {
-  addBookOnSave = async (data) => {
+function AddBook() {
+  const addBookOnSave = async (data) => {
     NProgress.start();
 
     try {
@@ -30,13 +30,11 @@ class AddBook extends React.Component {
     }
   };
 
-  render() {
-    return (
-      <div style={{ padding: '10px 45px' }}>
-        <EditBook onSave={this.addBookOnSave} />
-      </div>
-    );
-  }
+  return (
+    <div style={{ padding: '10px 45px' }}>
+      <EditBook onSave={addBookOnSave} />
+    </div>
+  );
 }
 
 export default withAuth(AddBook, { adminRequired: true });

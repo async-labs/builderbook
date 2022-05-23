@@ -17,8 +17,8 @@ router.use((req, res, next) => {
 
 router.get('/books', async (req, res) => {
   try {
-    const books = await Book.list();
-    res.json(books);
+    const booksFromServer = await Book.list();
+    res.json(booksFromServer);
   } catch (err) {
     res.json({ error: err.message || err.toString() });
   }
@@ -45,8 +45,8 @@ router.post('/books/edit', async (req, res) => {
 
 router.get('/books/detail/:slug', async (req, res) => {
   try {
-    const book = await Book.getBySlug({ slug: req.params.slug });
-    res.json(book);
+    const bookFromServer = await Book.getBySlug({ slug: req.params.slug });
+    res.json(bookFromServer);
   } catch (err) {
     res.json({ error: err.message || err.toString() });
   }

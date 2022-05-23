@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
 import PropTypes from 'prop-types';
 import Error from 'next/error';
 import Head from 'next/head';
@@ -22,134 +23,48 @@ const styleIcon = {
   cursor: 'pointer',
 };
 
-const propTypes = {
-  chapter: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    isPurchased: PropTypes.bool,
-    isFree: PropTypes.bool.isRequired,
-    htmlContent: PropTypes.string,
-    htmlExcerpt: PropTypes.string,
-  }),
-  user: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-  }),
-  router: PropTypes.shape({
-    asPath: PropTypes.string.isRequired,
-  }).isRequired,
-  redirectToCheckout: PropTypes.bool.isRequired,
-  checkoutCanceled: PropTypes.bool,
-  error: PropTypes.string,
-};
+function ReadChapterFunctional({
+  chapter,
+  user,
+  router,
+  redirectToCheckout,
+  checkoutCanceled,
+  error,
+}) {
+  const [showTOC, setShowTOC] = useState(false);
+  const [hideHeader, setHideHeader] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [chapterInsideState, setChapterInsideState] = useState(chapter);
+  const [htmlContent, setHtmlContent] = useState(
+    chapter && (chapter.isPurchased || chapter.isFree) ? chapter.htmlContent : chapter.htmlExcerpt,
+  );
+  const [activeSection, setActiveSection] = useState(null);
 
-const defaultProps = {
-  chapter: null,
-  user: null,
-  checkoutCanceled: false,
-  error: '',
-};
-
-class ReadChapter extends React.Component {
-  constructor(props, ...args) {
-    super(props, ...args);
-
-    const { chapter } = props;
-
-    let htmlContent = '';
-    if (chapter && (chapter.isPurchased || chapter.isFree)) {
-      htmlContent = chapter.htmlContent;
-    } else {
-      htmlContent = chapter.htmlExcerpt;
-    }
-
-    this.state = {
-      showTOC: false,
-      chapter,
-      htmlContent,
-      hideHeader: false,
-      isMobile: false,
-      activeSection: null,
-    };
-  }
-
-  static async getInitialProps(ctx) {
-    const { bookSlug, chapterSlug, buy, checkout_canceled, error } = ctx.query;
-    const { req } = ctx;
-
-    const headers = {};
-    if (req && req.headers && req.headers.cookie) {
-      headers.cookie = req.headers.cookie;
-    }
-
-    const chapter = await getChapterDetailApiMethod({ bookSlug, chapterSlug }, { headers });
-    // console.log(`buy:${query.bookSlug}, ${buy}, ${!!buy}`);
-    const redirectToCheckout = !!buy;
-
-    return { chapter, redirectToCheckout, checkoutCanceled: !!checkout_canceled, error };
-  }
-
-  static getDerivedStateFromProps(props) {
-    const { chapter } = props;
-
+  useEffect(() => {
     if (chapter) {
-      let htmlContent;
-
-      if (chapter.isPurchased || chapter.isFree) {
-        htmlContent = chapter.htmlContent;
-      } else {
-        htmlContent = chapter.htmlExcerpt;
-      }
-
-      return { chapter, htmlContent };
+      setChapterInsideState(chapter);
+      setHtmlContent(
+        chapter.isPurchased || chapter.isFree ? chapter.htmlContent : chapter.htmlExcerpt,
+      );
     }
+  }, [chapter]);
 
-    return null;
+  function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
   }
 
-  componentDidMount() {
-    document.getElementById('main-content').addEventListener('scroll', this.onScroll);
+  const prevChapter = usePrevious(chapter);
+  const prevIsMobile = usePrevious(isMobile);
 
-    const isMobile = window.innerWidth < 768;
+  const mounted = useRef();
 
-    if (this.state.isMobile !== isMobile) {
-      this.setState({ isMobile }); // eslint-disable-line
-    }
-
-    if (this.props.checkoutCanceled) {
-      notify('Checkout canceled');
-    }
-
-    if (this.props.error) {
-      notify(this.props.error);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.chapter && prevProps.chapter._id !== this.props.chapter._id) {
-      document.getElementById('chapter-content').scrollIntoView();
-      let htmlContent = '';
-      if (prevProps.chapter && (prevProps.chapter.isPurchased || prevProps.chapter.isFree)) {
-        htmlContent = prevProps.chapter.htmlContent;
-      } else {
-        htmlContent = prevProps.chapter.htmlExcerpt;
-      }
-
-      // eslint-disable-next-line
-      this.setState({ chapter: prevProps.chapter, htmlContent });
-    }
-  }
-
-  componentWillUnmount() {
-    document.getElementById('main-content').removeEventListener('scroll', this.onScroll);
-  }
-
-  onScroll = throttle(() => {
-    this.onScrollActiveSection();
-    this.onScrollHideHeader();
-  }, 500);
-
-  onScrollActiveSection = () => {
+  const onScrollActiveSection = () => {
     const sectionElms = document.querySelectorAll('span.section-anchor');
-    let activeSection;
+    let activeSectionCurrent;
 
     let aboveSection;
     for (let i = 0; i < sectionElms.length; i += 1) {
@@ -158,7 +73,7 @@ class ReadChapter extends React.Component {
       const anchorBottom = b.bottom;
 
       if (anchorBottom >= 0 && anchorBottom <= window.innerHeight) {
-        activeSection = {
+        activeSectionCurrent = {
           hash: s.attributes.getNamedItem('name').value,
         };
 
@@ -167,13 +82,13 @@ class ReadChapter extends React.Component {
 
       if (anchorBottom > window.innerHeight && i > 0) {
         if (aboveSection.bottom <= 0) {
-          activeSection = {
+          activeSectionCurrent = {
             hash: sectionElms[i - 1].attributes.getNamedItem('name').value,
           };
           break;
         }
       } else if (i + 1 === sectionElms.length) {
-        activeSection = {
+        activeSectionCurrent = {
           hash: s.attributes.getNamedItem('name').value,
         };
       }
@@ -181,36 +96,72 @@ class ReadChapter extends React.Component {
       aboveSection = b;
     }
 
-    if (this.state.activeSection !== activeSection) {
-      this.setState({ activeSection });
+    if (activeSection !== activeSectionCurrent) {
+      setActiveSection(activeSectionCurrent);
     }
   };
 
-  onScrollHideHeader = () => {
+  const onScrollHideHeader = () => {
     const distanceFromTop = document.getElementById('main-content').scrollTop;
-    const hideHeader = distanceFromTop > 500;
+    const hideHeaderCurrent = distanceFromTop > 500;
 
-    if (this.state.hideHeader !== hideHeader) {
-      this.setState({ hideHeader });
+    if (hideHeader !== hideHeaderCurrent) {
+      setHideHeader(hideHeaderCurrent);
     }
   };
 
-  toggleChapterList = () => {
-    // this.setState({ showTOC: !this.state.showTOC });
-    this.setState((prevState) => ({ showTOC: !prevState.showTOC }));
+  const onScroll = throttle(() => {
+    onScrollActiveSection();
+    onScrollHideHeader();
+  }, 500);
+
+  useEffect(() => {
+    if (!mounted.current) {
+      document.getElementById('main-content').addEventListener('scroll', onScroll);
+
+      const isMobileCurrent = window.innerWidth < 768;
+
+      if (prevIsMobile !== isMobileCurrent) {
+        setIsMobile(isMobileCurrent);
+      }
+
+      if (checkoutCanceled) {
+        notify('Checkout canceled');
+      }
+
+      if (error) {
+        notify(error);
+      }
+
+      mounted.current = true;
+    } else {
+      document.getElementById('chapter-content').scrollIntoView();
+      let htmlContentCurrent = '';
+      if (prevChapter && (prevChapter.isPurchased || prevChapter.isFree)) {
+        htmlContentCurrent = prevChapter.htmlContent;
+      } else {
+        htmlContentCurrent = prevChapter.htmlExcerpt;
+      }
+
+      setChapterInsideState(chapter);
+      setHtmlContent(htmlContentCurrent);
+    }
+
+    return () => {
+      document.getElementById('main-content').removeEventListener('scroll', onScroll);
+    };
+  }, [chapter]);
+
+  const toggleChapterList = () => {
+    setShowTOC((prevState) => ({ showTOC: !prevState.showTOC }));
   };
 
-  closeTocWhenMobile = () => {
-    // this.setState({ showTOC: !this.state.isMobile });
-    this.setState((prevState) => ({ showTOC: !prevState.isMobile }));
+  const closeTocWhenMobile = () => {
+    setShowTOC((prevState) => ({ showTOC: !prevState.isMobile }));
   };
 
-  renderMainContent() {
-    const { user, redirectToCheckout } = this.props;
-
-    const { chapter, htmlContent, showTOC, isMobile } = this.state;
-
-    const { book } = chapter;
+  const renderMainContent = () => {
+    const { book } = chapterInsideState;
 
     let padding = '20px 20%';
     if (!isMobile && showTOC) {
@@ -222,27 +173,25 @@ class ReadChapter extends React.Component {
     return (
       <div style={{ padding }} id="chapter-content">
         <h2 style={{ fontWeight: '400', lineHeight: '1.5em' }}>
-          {chapter.order > 1 ? `Chapter ${chapter.order - 1}: ` : null}
-          {chapter.title}
+          {chapterInsideState.order > 1 ? `Chapter ${chapterInsideState.order - 1}: ` : null}
+          {chapterInsideState.title}
         </h2>
-        {!chapter.isPurchased && !chapter.isFree ? (
+        {!chapterInsideState.isPurchased && !chapterInsideState.isFree ? (
           <BuyButton user={user} book={book} redirectToCheckout={redirectToCheckout} />
         ) : null}
         <div
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
-        {!chapter.isPurchased && !chapter.isFree ? (
+        {!chapterInsideState.isPurchased && !chapterInsideState.isFree ? (
           <BuyButton user={user} book={book} redirectToCheckout={redirectToCheckout} />
         ) : null}
       </div>
     );
-  }
+  };
 
-  renderSections() {
-    const { chapter } = this.state;
-    const { sections } = chapter;
-    const { activeSection } = this.state;
+  const renderSections = () => {
+    const { sections } = chapterInsideState;
 
     if (!sections || !sections.length === 0) {
       return null;
@@ -257,7 +206,7 @@ class ReadChapter extends React.Component {
                 color: activeSection && activeSection.hash === s.escapedText ? '#1565C0' : '#222',
               }}
               href={`#${s.escapedText}`}
-              onClick={this.closeTocWhenMobile}
+              onClick={closeTocWhenMobile}
             >
               {s.text}
             </a>
@@ -265,16 +214,14 @@ class ReadChapter extends React.Component {
         ))}
       </ul>
     );
-  }
+  };
 
-  renderSidebar() {
-    const { showTOC, chapter, isMobile, hideHeader } = this.state;
-
+  const renderSidebar = () => {
     if (!showTOC) {
       return null;
     }
 
-    const { book } = chapter;
+    const { book } = chapterInsideState;
     const { chapters } = book;
 
     return (
@@ -305,93 +252,128 @@ class ReadChapter extends React.Component {
                 href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
               >
                 <a // eslint-disable-line
-                  style={{ color: chapter._id === ch._id ? '#1565C0' : '#222' }}
-                  onClick={this.closeTocWhenMobile}
+                  style={{ color: chapterInsideState._id === ch._id ? '#1565C0' : '#222' }}
+                  onClick={closeTocWhenMobile}
                 >
                   {ch.title}
                 </a>
               </Link>
-              {chapter._id === ch._id ? this.renderSections() : null}
+              {chapterInsideState._id === ch._id ? renderSections() : null}
             </li>
           ))}
         </ol>
       </div>
     );
+  };
+
+  if (!chapterInsideState) {
+    return <Error statusCode={404} />;
   }
 
-  render() {
-    const { user, router } = this.props;
+  let left = '20px';
+  if (showTOC) {
+    left = isMobile ? '100%' : '400px';
+  }
 
-    const { chapter, showTOC, hideHeader, isMobile } = this.state;
+  return (
+    <div style={{ overflowScrolling: 'touch', WebkitOverflowScrolling: 'touch' }}>
+      <Head>
+        <title>
+          {chapterInsideState.title === 'Introduction'
+            ? 'Introduction'
+            : `Chapter ${chapterInsideState.order - 1}. ${chapterInsideState.title}`}
+        </title>
+        {chapterInsideState.seoDescription ? (
+          <meta name="description" content={chapterInsideState.seoDescription} />
+        ) : null}
+      </Head>
 
-    if (!chapter) {
-      return <Error statusCode={404} />;
-    }
+      <Header user={user} hideHeader={hideHeader} redirectUrl={router.asPath} />
 
-    let left = '20px';
-    if (showTOC) {
-      left = isMobile ? '100%' : '400px';
-    }
+      {renderSidebar()}
 
-    return (
-      <div style={{ overflowScrolling: 'touch', WebkitOverflowScrolling: 'touch' }}>
-        <Head>
-          <title>
-            {chapter.title === 'Introduction'
-              ? 'Introduction'
-              : `Chapter ${chapter.order - 1}. ${chapter.title}`}
-          </title>
-          {chapter.seoDescription ? (
-            <meta name="description" content={chapter.seoDescription} />
-          ) : null}
-        </Head>
+      <div
+        style={{
+          textAlign: 'left',
+          padding: '0px 10px 20px 30px',
 
-        <Header user={user} hideHeader={hideHeader} redirectUrl={router.asPath} />
-
-        {this.renderSidebar()}
-
-        <div
-          style={{
-            textAlign: 'left',
-            padding: '0px 10px 20px 30px',
-
-            position: 'fixed',
-            right: 0,
-            bottom: 0,
-            top: hideHeader ? 0 : '64px',
-            transition: 'top 0.5s ease-in',
-            left,
-            overflowY: 'auto',
-            overflowX: 'hidden',
-            fontFamily: 'Roboto, sans-serif',
-          }}
-          id="main-content"
-        >
-          {this.renderMainContent()}
-        </div>
-
-        <div
-          style={{
-            position: 'fixed',
-            top: hideHeader ? '20px' : '80px',
-            transition: 'top 0.5s ease-in',
-            left: '15px',
-          }}
-        >
-          <FormatListBulletedIcon
-            style={styleIcon}
-            onClick={this.toggleChapterList}
-            onKeyPress={this.toggleChapterList}
-          />
-        </div>
+          position: 'fixed',
+          right: 0,
+          bottom: 0,
+          top: hideHeader ? 0 : '64px',
+          transition: 'top 0.5s ease-in',
+          left,
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          fontFamily: 'Roboto, sans-serif',
+        }}
+        id="main-content"
+      >
+        {renderMainContent()}
       </div>
-    );
-  }
+
+      <div
+        style={{
+          position: 'fixed',
+          top: hideHeader ? '20px' : '80px',
+          transition: 'top 0.5s ease-in',
+          left: '15px',
+        }}
+      >
+        <FormatListBulletedIcon
+          style={styleIcon}
+          onClick={toggleChapterList}
+          onKeyPress={toggleChapterList}
+        />
+      </div>
+    </div>
+  );
 }
 
-ReadChapter.propTypes = propTypes;
-ReadChapter.defaultProps = defaultProps;
+const propTypes = {
+  chapter: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    isPurchased: PropTypes.bool,
+    isFree: PropTypes.bool.isRequired,
+    htmlContent: PropTypes.string,
+    htmlExcerpt: PropTypes.string,
+  }),
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+  }),
+  router: PropTypes.shape({
+    asPath: PropTypes.string.isRequired,
+  }).isRequired,
+  redirectToCheckout: PropTypes.bool.isRequired,
+  checkoutCanceled: PropTypes.bool,
+  error: PropTypes.string,
+};
 
-export default withAuth(withRouter(ReadChapter), {
+const defaultProps = {
+  chapter: null,
+  user: null,
+  checkoutCanceled: false,
+  error: '',
+};
+
+ReadChapterFunctional.propTypes = propTypes;
+ReadChapterFunctional.defaultProps = defaultProps;
+
+ReadChapterFunctional.getInitialProps = async (ctx) => {
+  const { bookSlug, chapterSlug, buy, checkout_canceled, error } = ctx.query;
+  const { req } = ctx;
+
+  const headers = {};
+  if (req && req.headers && req.headers.cookie) {
+    headers.cookie = req.headers.cookie;
+  }
+
+  const chapter = await getChapterDetailApiMethod({ bookSlug, chapterSlug }, { headers });
+  const redirectToCheckout = !!buy;
+
+  return { chapter, redirectToCheckout, checkoutCanceled: !!checkout_canceled, error };
+};
+
+export default withAuth(withRouter(ReadChapterFunctional), {
   loginRequired: false,
 });

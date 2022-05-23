@@ -4,11 +4,6 @@ function routesWithSlug({ server, app }) {
     app.render(req, res, '/public/read-chapter', { bookSlug, chapterSlug, ...(req.query || {}) });
   });
 
-  server.get('/books-f/:bookSlug/:chapterSlug', (req, res) => {
-    const { bookSlug, chapterSlug } = req.params;
-    app.render(req, res, '/public/read-chapter-f', { bookSlug, chapterSlug, ...(req.query || {}) });
-  });
-
   server.get('/admin/book-detail/:slug', (req, res) => {
     const { slug } = req.params;
     app.render(req, res, '/admin/book-detail', { slug });

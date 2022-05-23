@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import NProgress from 'nprogress';
 
 import Button from '@mui/material/Button';
 
@@ -52,35 +53,31 @@ const defaultProps2 = {
   errorMessage: null,
 };
 
-class IndexWithData extends React.Component {
-  static getInitialProps({ query }) {
-    return { errorMessage: query.error };
-  }
+function IndexWithData({ errorMessage }) {
+  const [books, setBooks] = useState([]);
 
-  constructor(props) {
-    super(props);
+  useEffect(() => {
+    if (errorMessage) {
+      notify(errorMessage);
+    }
 
-    this.state = {
-      books: [],
+    const getBooks = async () => {
+      NProgress.start();
+
+      try {
+        const { booksFromServer } = await getBookListApiMethod();
+        setBooks(booksFromServer);
+      } catch (err) {
+        notify(err);
+      } finally {
+        NProgress.done();
+      }
     };
-  }
 
-  async componentDidMount() {
-    if (this.props.errorMessage) {
-      notify(this.props.errorMessage);
-    }
+    getBooks();
+  }, []);
 
-    try {
-      const { books } = await getBookListApiMethod();
-      this.setState({ books }); // eslint-disable-line
-    } catch (err) {
-      notify(err);
-    }
-  }
-
-  render() {
-    return <Index {...this.state} />;
-  }
+  return <Index books={books} />;
 }
 
 IndexWithData.propTypes = propTypes2;

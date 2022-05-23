@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NProgress from 'nprogress';
 import PropTypes from 'prop-types';
 import Error from 'next/error';
@@ -13,35 +13,29 @@ const propTypes = {
   slug: PropTypes.string.isRequired,
 };
 
-class BookDetail extends React.Component {
-  static getInitialProps({ query }) {
-    return { slug: query.slug };
-  }
+function BookDetail({ slug }) {
+  const [book, setBook] = useState(null);
+  const [error, setError] = useState(null);
 
-  constructor(props) {
-    super(props);
+  useEffect(() => {
+    const getBookDetail = async () => {
+      NProgress.start();
 
-    this.state = {
-      book: null,
-      error: null,
+      try {
+        const bookFromServer = await getBookDetailApiMethod({ slug });
+        setBook(bookFromServer);
+      } catch (err) {
+        setError(err.message || err.toString());
+      } finally {
+        NProgress.done();
+      }
     };
-  }
 
-  async componentDidMount() {
-    NProgress.start();
-    try {
-      const { slug } = this.props;
-      const book = await getBookDetailApiMethod({ slug });
-      this.setState({ book }); // eslint-disable-line
-      NProgress.done();
-    } catch (err) {
-      this.setState({ error: err.message || err.toString() }); // eslint-disable-line
-      NProgress.done();
-    }
-  }
+    getBookDetail();
+  }, []);
 
-  async handleSyncContent() {
-    const bookId = this.state.book._id;
+  const handleSyncContent = async () => {
+    const bookId = book._id;
 
     try {
       await syncBookContentApiMethod({ bookId });
@@ -49,58 +43,58 @@ class BookDetail extends React.Component {
     } catch (err) {
       notify(err);
     }
+  };
+
+  if (error) {
+    notify(error);
+    return <Error statusCode={500} />;
   }
 
-  render() {
-    const { book, error } = this.state;
+  if (!book) {
+    return null;
+  }
 
-    if (error) {
-      notify(error);
-      return <Error statusCode={500} />;
-    }
+  const { chapters = [] } = book;
 
-    if (!book) {
-      return null;
-    }
-
-    const { chapters = [] } = book;
-
-    return (
-      <div style={{ padding: '10px 45px' }}>
-        <h2>{book.name}</h2>
-        <a href={`https://github.com/${book.githubRepo}`} target="_blank" rel="noopener noreferrer">
-          Repo on Github
-        </a>
-        <p />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => this.handleSyncContent()}
-          style={{ marginRight: '20px' }}
-        >
-          Sync with Github
+  return (
+    <div style={{ padding: '10px 45px' }}>
+      <h2>{book.name}</h2>
+      <a href={`https://github.com/${book.githubRepo}`} target="_blank" rel="noopener noreferrer">
+        Repo on Github
+      </a>
+      <p />
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSyncContent}
+        style={{ marginRight: '20px' }}
+      >
+        Sync with Github
+      </Button>
+      <Link href={`/admin/edit-book?slug=${book.slug}`} as={`/admin/edit-book/${book.slug}`}>
+        <Button variant="contained" color="primary">
+          Edit book
         </Button>
-        <Link href={`/admin/edit-book?slug=${book.slug}`} as={`/admin/edit-book/${book.slug}`}>
-          <Button variant="contained" color="primary">
-            Edit book
-          </Button>
-        </Link>
-        <ul>
-          {chapters.map((ch) => (
-            <li key={ch._id}>
-              <Link
-                as={`/books/${book.slug}/${ch.slug}`}
-                href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
-              >
-                <a>{ch.title}</a>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+      </Link>
+      <ul>
+        {chapters.map((ch) => (
+          <li key={ch._id}>
+            <Link
+              as={`/books/${book.slug}/${ch.slug}`}
+              href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
+            >
+              <a>{ch.title}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
+
+BookDetail.getInitialProps = async ({ query }) => {
+  return { slug: query.slug };
+};
 
 BookDetail.propTypes = propTypes;
 

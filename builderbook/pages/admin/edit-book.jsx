@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import PropTypes from 'prop-types';
@@ -13,66 +13,59 @@ const propTypes = {
   slug: PropTypes.string.isRequired,
 };
 
-class EditBookPage extends React.Component {
-  constructor(props) {
-    super(props);
+function EditBookPage({ slug }) {
+  const [book, setBook] = useState(null);
 
-    this.state = {
-      book: null,
+  useEffect(() => {
+    const getBook = async () => {
+      NProgress.start();
+
+      try {
+        const bookFromServer = await getBookDetailApiMethod({ slug });
+        setBook(bookFromServer);
+      } catch (err) {
+        notify(err.message || err.toString());
+      } finally {
+        NProgress.done();
+      }
     };
-  }
 
-  static getInitialProps({ query }) {
-    return { slug: query.slug };
-  }
+    getBook();
+  }, []);
 
-  async componentDidMount() {
-    NProgress.start();
-
-    try {
-      const { slug } = this.props;
-      const book = await getBookDetailApiMethod({ slug });
-      this.setState({ book }); // eslint-disable-line
-      NProgress.done();
-    } catch (err) {
-      notify(err.message || err.toString());
-      NProgress.done();
-    }
-  }
-
-  editBookOnSave = async (data) => {
-    const { book } = this.state;
+  const editBookOnSave = async (data) => {
     NProgress.start();
 
     try {
       const editedBook = await editBookApiMethod({ ...data, id: book._id });
       notify('Saved');
-      NProgress.done();
+
       Router.push(
         `/admin/book-detail?slug=${editedBook.slug}`,
         `/admin/book-detail/${editedBook.slug}`,
       );
     } catch (err) {
       notify(err);
+    } finally {
       NProgress.done();
     }
   };
 
-  render() {
-    const { book } = this.state;
-
-    if (!book) {
-      // return <Error statusCode={500} />;
-      return null;
-    }
-
-    return (
-      <div>
-        <EditBook onSave={this.editBookOnSave} book={book} />
-      </div>
-    );
+  if (!book) {
+    // return <Error statusCode={500} />;
+    return null;
   }
+
+  return (
+    <div>
+      <EditBook onSave={editBookOnSave} book={book} />
+    </div>
+  );
 }
+
+EditBookPage.getInitialProps = async ({ query }) => {
+  return { slug: query.slug };
+};
 
 EditBookPage.propTypes = propTypes;
 
