@@ -43,7 +43,7 @@ const mongoSchema = new Schema({
 class BookClass {
   static async list({ offset = 0, limit = 10 } = {}) {
     const books = await this.find({}).sort({ createdAt: -1 }).skip(offset).limit(limit);
-    return { books };
+    return books;
   }
 
   static async getBySlug({ slug }) {
@@ -54,9 +54,9 @@ class BookClass {
 
     const book = bookDoc.toObject();
 
-    book.chapters = (
-      await Chapter.find({ bookId: book._id }, 'title slug').sort({ order: 1 })
-    ).map((chapter) => chapter.toObject());
+    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug').sort({ order: 1 })).map(
+      (chapter) => chapter.toObject(),
+    );
 
     return book;
   }
@@ -196,7 +196,7 @@ class BookClass {
     const purchasedBooks = await this.find({ _id: { $in: purchasedBookIds } }).sort({
       createdAt: -1,
     });
-    return { purchasedBooks };
+    return purchasedBooks;
   }
 }
 

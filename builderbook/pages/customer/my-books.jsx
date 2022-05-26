@@ -29,16 +29,18 @@ function MyBooks({ purchasedBooks }) {
           <div>
             <h3>Your books</h3>
             <ul>
-              {purchasedBooks.map((book) => (
-                <li key={book._id}>
-                  <Link
-                    as={`/books/${book.slug}/introduction`}
-                    href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=introduction`}
-                  >
-                    <a>{book.name}</a>
-                  </Link>
-                </li>
-              ))}
+              {purchasedBooks &&
+                purchasedBooks.length > 0 &&
+                purchasedBooks.map((book) => (
+                  <li key={book._id}>
+                    <Link
+                      as={`/books/${book.slug}/introduction`}
+                      href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=introduction`}
+                    >
+                      <a>{book.name}</a>
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </div>
         ) : (
@@ -63,7 +65,7 @@ MyBooks.getInitialProps = async ({ req, res }) => {
     headers.cookie = req.headers.cookie;
   }
 
-  const { purchasedBooks } = await getMyBookListApiMethod({ headers });
+  const purchasedBooks = await getMyBookListApiMethod({ headers });
   return { purchasedBooks };
 };
 

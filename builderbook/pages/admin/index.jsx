@@ -30,13 +30,15 @@ const Index = ({ books }) => (
       </Link>
       <p />
       <ul>
-        {books.map((b) => (
-          <li key={b._id}>
-            <Link as={`/admin/book-detail/${b.slug}`} href={`/admin/book-detail?slug=${b.slug}`}>
-              <a>{b.name}</a>
-            </Link>
-          </li>
-        ))}
+        {books &&
+          books.length > 0 &&
+          books.map((b) => (
+            <li key={b._id}>
+              <Link as={`/admin/book-detail/${b.slug}`} href={`/admin/book-detail?slug=${b.slug}`}>
+                <a>{b.name}</a>
+              </Link>
+            </li>
+          ))}
       </ul>
       <br />
     </div>
@@ -65,7 +67,8 @@ function IndexWithData({ errorMessage }) {
       NProgress.start();
 
       try {
-        const { booksFromServer } = await getBookListApiMethod();
+        const booksFromServer = await getBookListApiMethod();
+        // console.log('client', booksFromServer);
         setBooks(booksFromServer);
       } catch (err) {
         notify(err);

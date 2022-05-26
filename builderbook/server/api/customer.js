@@ -50,7 +50,7 @@ router.get('/my-books', async (req, res) => {
   try {
     const { purchasedBookIds = [] } = req.user;
 
-    const { purchasedBooks } = await Book.getPurchasedBooks({ purchasedBookIds });
+    const purchasedBooks = await Book.getPurchasedBooks({ purchasedBookIds });
 
     res.json({ purchasedBooks });
   } catch (err) {
