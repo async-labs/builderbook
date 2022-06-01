@@ -15,6 +15,7 @@ function MyDocument() {
 
         <link rel="shortcut icon" href="https://storage.googleapis.com/builderbook/favicon32.png" />
 
+        <link rel="stylesheet" href="/fonts/server.css" />
         <link rel="stylesheet" href="https://storage.googleapis.com/builderbook/vs.min.css" />
 
         <style>

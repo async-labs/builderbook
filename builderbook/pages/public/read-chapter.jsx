@@ -40,15 +40,6 @@ function ReadChapterFunctional({
   );
   const [activeSection, setActiveSection] = useState(null);
 
-  useEffect(() => {
-    if (chapter) {
-      setChapterInsideState(chapter);
-      setHtmlContent(
-        chapter.isPurchased || chapter.isFree ? chapter.htmlContent : chapter.htmlExcerpt,
-      );
-    }
-  }, [chapter]);
-
   function usePrevious(value) {
     const ref = useRef();
     useEffect(() => {
@@ -105,9 +96,14 @@ function ReadChapterFunctional({
     const distanceFromTop = document.getElementById('main-content').scrollTop;
     const hideHeaderCurrent = distanceFromTop > 500;
 
-    if (hideHeader !== hideHeaderCurrent) {
-      setHideHeader(hideHeaderCurrent);
-    }
+    // console.log('setHideHeader1', distanceFromTop, hideHeaderCurrent);
+
+    // if (hideHeader !== hideHeaderCurrent) {
+    //   console.log('setHideHeader2', hideHeader, hideHeaderCurrent);
+    //   setHideHeader(hideHeaderCurrent);
+    // }
+
+    setHideHeader(hideHeaderCurrent);
   };
 
   const onScroll = throttle(() => {
@@ -138,9 +134,9 @@ function ReadChapterFunctional({
       document.getElementById('chapter-content').scrollIntoView();
       let htmlContentCurrent = '';
       if (prevChapter && (prevChapter.isPurchased || prevChapter.isFree)) {
-        htmlContentCurrent = prevChapter.htmlContent;
+        htmlContentCurrent = chapter.htmlContent;
       } else {
-        htmlContentCurrent = prevChapter.htmlExcerpt;
+        htmlContentCurrent = chapter.htmlExcerpt;
       }
 
       setChapterInsideState(chapter);
@@ -148,9 +144,17 @@ function ReadChapterFunctional({
     }
 
     return () => {
-      document.getElementById('main-content').removeEventListener('scroll', onScroll);
+      if (document.getElementById('main-content')) {
+        document.getElementById('main-content').removeEventListener('scroll', onScroll);
+      }
     };
-  }, [chapter]);
+  }, [chapter._id]);
+
+  // useEffect(() => {
+  //   return () => {
+  //     document.getElementById('main-content').removeEventListener('scroll', onScroll);
+  //   };
+  // }, []);
 
   const toggleChapterList = () => {
     setShowTOC((prevState) => ({ showTOC: !prevState.showTOC }));

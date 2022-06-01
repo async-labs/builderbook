@@ -38,12 +38,18 @@ export default function withAuth(
         return;
       }
 
-      if (adminRequired && (!user || !user.isAdmin)) {
+      // test
+      if (adminRequired && user && !user.isAdmin) {
         Router.push('/customer/my-books', '/my-books');
+        return;
       }
 
       if (logoutRequired && user) {
-        Router.push('/');
+        if (!adminRequired) {
+          Router.push('/customer/my-books', '/my-books');
+        } else {
+          Router.push('/admin');
+        }
       }
     }
 
@@ -54,7 +60,7 @@ export default function withAuth(
         return null;
       }
 
-      if (adminRequired && (!user || !user.isAdmin)) {
+      if (adminRequired && user && !user.isAdmin) {
         return null;
       }
 

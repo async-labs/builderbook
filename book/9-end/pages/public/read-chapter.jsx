@@ -131,14 +131,15 @@ class ReadChapter extends React.Component {
       // console.log('inside condition ReadChapter.componentDidUpdate');
       document.getElementById('chapter-content').scrollIntoView();
       let htmlContent = '';
+
       if (prevProps.chapter && (prevProps.chapter.isPurchased || prevProps.chapter.isFree)) {
-        htmlContent = prevProps.chapter.htmlContent;
+        htmlContent = this.props.chapter.htmlContent;
       } else {
-        htmlContent = prevProps.chapter.htmlExcerpt;
+        htmlContent = this.props.chapter.htmlExcerpt;
       }
 
       // eslint-disable-next-line
-      this.setState({ chapter: prevProps.chapter, htmlContent });
+      this.setState({ chapter: this.props.chapter, htmlContent });
     }
   }
 
