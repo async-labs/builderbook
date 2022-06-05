@@ -11,7 +11,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'IBM Plex Mono, monospace',
+    fontFamily: ['IBM Plex Mono', 'monospace'].join(','),
     button: {
       textTransform: 'none',
     },

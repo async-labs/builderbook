@@ -50,6 +50,7 @@ function MyApp({ Component, pageProps }) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <link rel="stylesheet" href={isServer ? '/fonts/server.css' : '/fonts/cdn.css'} />
           <link
             rel="stylesheet"
             href="https://storage.googleapis.com/async-await/nprogress-light-spinner.css"
