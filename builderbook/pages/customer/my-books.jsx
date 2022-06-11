@@ -56,7 +56,6 @@ function MyBooks({ purchasedBooks }) {
 
 MyBooks.getInitialProps = async ({ req, res }) => {
   if (req && !req.user) {
-    console.log('aaa', req.user);
     res.redirect('/login');
     return { purchasedBooks: [] };
   }
@@ -68,7 +67,6 @@ MyBooks.getInitialProps = async ({ req, res }) => {
 
   const { purchasedBooks } = await getMyBookListApiMethod({ headers });
 
-  console.log('bbb', purchasedBooks);
   return { purchasedBooks };
 };
 
