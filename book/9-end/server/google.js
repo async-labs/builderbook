@@ -84,7 +84,7 @@ function setupGoogle({ server, ROOT_URL }) {
 
       if (req.user && req.user.isAdmin) {
         res.redirect('/admin');
-      } else if (req.session.finalUrl) {
+      } else if (req.user && req.session.finalUrl) {
         res.redirect(`${ROOT_URL}${req.session.finalUrl}`);
       } else {
         res.redirect('/my-books');
@@ -92,9 +92,13 @@ function setupGoogle({ server, ROOT_URL }) {
     },
   );
 
-  server.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/login');
+  server.get('/logout', (req, res, next) => {
+    req.logout((err) => {
+      if (err) {
+        next(err);
+      }
+      res.redirect('/login');
+    });
   });
 }
 
