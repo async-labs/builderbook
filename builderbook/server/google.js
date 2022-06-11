@@ -62,7 +62,7 @@ function setupGoogle({ server, ROOT_URL }) {
       prompt: 'select_account',
     };
     // eslint-disable-next-line
-      console.log(`req.query.redirectUrl:${req.query.redirectUrl}`);
+      // console.log(`req.query.redirectUrl:${req.query.redirectUrl}`);
 
     if (req.query && req.query.redirectUrl && req.query.redirectUrl.startsWith('/')) {
       req.session.finalUrl = req.query.redirectUrl;
@@ -80,11 +80,11 @@ function setupGoogle({ server, ROOT_URL }) {
     }),
     (req, res) => {
       // eslint-disable-next-line
-      console.log(`req.session.finalUrl:${req.session.finalUrl}`);
+      // console.log(`req.session.finalUrl:${req.session.finalUrl}`);
 
       if (req.user && req.user.isAdmin) {
         res.redirect('/admin');
-      } else if (req.session.finalUrl) {
+      } else if (req.user && req.session.finalUrl) {
         res.redirect(`${ROOT_URL}${req.session.finalUrl}`);
       } else {
         res.redirect('/my-books');

@@ -19,7 +19,7 @@ router.get('/books', async (req, res) => {
   try {
     const booksFromServer = await Book.list();
 
-    console.log('server', booksFromServer);
+    // console.log('server', booksFromServer);
     res.json(booksFromServer);
   } catch (err) {
     res.json({ error: err.message || err.toString() });
