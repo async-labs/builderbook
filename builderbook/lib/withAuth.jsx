@@ -43,7 +43,12 @@ export default function withAuth(
       }
 
       if (logoutRequired && user) {
-        Router.push('/public/login', '/login');
+        if (!user.isAdmin) {
+          Router.push('/customer/my-books', '/my-books');
+          return;
+        }
+
+        Router.push('/admin');
       }
     }
 
