@@ -47,8 +47,6 @@ class ReadChapter extends React.Component {
     const { bookSlug, chapterSlug } = ctx.query;
     const { req } = ctx;
 
-    console.log(`page`, bookSlug, chapterSlug);
-
     const headers = {};
     if (req && req.headers && req.headers.cookie) {
       headers.cookie = req.headers.cookie;

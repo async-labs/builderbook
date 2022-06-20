@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Toolbar from '@material-ui/core/Toolbar';
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
+import Toolbar from '@mui/material/Toolbar';
+import Grid from '@mui/material/Grid';
+import Hidden from '@mui/material/Hidden';
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
 
 import MenuWithAvatar from './MenuWithAvatar';
 
@@ -65,7 +65,7 @@ function Header({ user, hideHeader, redirectUrl }) {
       }}
     >
       <Toolbar style={styleToolbar}>
-        <Grid container direction="row" justify="space-around" alignItems="center">
+        <Grid container direction="row" justifyContent="space-around" alignItems="center">
           <Grid item sm={8} xs={7} style={{ textAlign: 'left' }}>
             {!user ? (
               <Link href="/">
@@ -79,7 +79,7 @@ function Header({ user, hideHeader, redirectUrl }) {
           </Grid>
           <Grid item sm={2} xs={2} style={{ textAlign: 'right' }}>
             {user && user.isAdmin && !user.isGithubConnected ? (
-              <Hidden smDown>
+              <Hidden mdDown>
                 <a href="/auth/github">
                   <Button variant="contained" color="primary" style={styleRaisedButton}>
                     Connect Github

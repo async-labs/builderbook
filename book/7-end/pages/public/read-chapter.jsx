@@ -53,6 +53,21 @@ class ReadChapter extends React.Component {
     };
   }
 
+  static getDerivedStateFromProps(props) {
+    const { chapter } = props;
+
+    if (chapter) {
+      let htmlContent = '';
+      if (chapter) {
+        htmlContent = chapter.htmlContent;
+      }
+
+      return { chapter, htmlContent };
+    }
+
+    return null;
+  }
+
   componentDidMount() {
     document.getElementById('main-content').addEventListener('scroll', this.onScroll);
 
@@ -181,6 +196,7 @@ class ReadChapter extends React.Component {
     const { chapter } = this.state;
     const { sections } = chapter;
     const { activeSection } = this.state;
+    console.log(activeSection);
 
     if (!sections || !sections.length === 0) {
       return null;
@@ -272,7 +288,7 @@ class ReadChapter extends React.Component {
     }
 
     return (
-      <div>
+      <div style={{ overflowScrolling: 'touch', WebkitOverflowScrolling: 'touch' }}>
         <Head>
           <title>
             {chapter.title === 'Introduction'

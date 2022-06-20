@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import Toolbar from '@material-ui/core/Toolbar';
-import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
+import Toolbar from '@mui/material/Toolbar';
+import Grid from '@mui/material/Grid';
+import Avatar from '@mui/material/Avatar';
 
 import MenuWithAvatar from './MenuWithAvatar';
 
@@ -35,7 +35,7 @@ function Header({ user }) {
   return (
     <div>
       <Toolbar style={styleToolbar}>
-        <Grid container direction="row" justify="space-around" alignItems="center">
+        <Grid container direction="row" justifyContent="space-around" alignItems="center">
           <Grid item sm={11} xs={9} style={{ textAlign: 'left' }}>
             {user ? null : (
               <Link href="/">

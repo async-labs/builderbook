@@ -1,14 +1,14 @@
 import Link from 'next/link';
 
-import Toolbar from '@material-ui/core/Toolbar';
-import Grid from '@material-ui/core/Grid';
+import Toolbar from '@mui/material/Toolbar';
+import Grid from '@mui/material/Grid';
 
 import { styleToolbar } from './SharedStyles';
 
 const Header = () => (
   <div>
     <Toolbar style={styleToolbar}>
-      <Grid container direction="row" justify="space-around" align="center">
+      <Grid container direction="row" justifyContent="space-around" align="center">
         <Grid item xs={12} style={{ textAlign: 'right' }}>
           <Link href="/login">
             <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>

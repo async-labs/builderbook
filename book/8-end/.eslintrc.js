@@ -14,10 +14,10 @@ module.exports = {
         trailingComma: 'all',
         arrowParens: 'always',
         printWidth: 100,
-        semi: true
+        semi: true,
       },
     ],
-    'camelcase': 'off',
+    camelcase: 'off',
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
     'no-mixed-operators': 'off',
     'prefer-arrow-callback': 'error',

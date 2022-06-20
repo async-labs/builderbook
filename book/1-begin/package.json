@@ -5,27 +5,19 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint '**/*.jsx'"
+    "start": "next start"
   },
   "dependencies": {
-    "@material-ui/core": "^4.11.4",
-    "@material-ui/styles": "^4.11.4",
-    "next": "^9.1.2",
-    "prop-types": "15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "@emotion/cache": "^11.7.1",
+    "@emotion/react": "^11.9.0",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.3",
+    "@mui/material": "^5.8.3",
+    "next": "^12.1.6",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
-  "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.2.1"
-  }
+  "devDependencies": {}
 }

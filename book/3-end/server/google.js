@@ -26,10 +26,9 @@ function setupGoogle({ server, ROOT_URL }) {
       verified(null, user);
     } catch (err) {
       verified(err);
-      console.log(err);
+      console.log(err); // eslint-disable-line
     }
   };
-
   passport.use(
     new Strategy(
       {
@@ -72,9 +71,13 @@ function setupGoogle({ server, ROOT_URL }) {
     },
   );
 
-  server.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/login');
+  server.get('/logout', (req, res, next) => {
+    req.logout((err) => {
+      if (err) {
+        next(err);
+      }
+      res.redirect('/login');
+    });
   });
 }
 

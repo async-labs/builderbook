@@ -86,8 +86,6 @@ class BuyButton extends React.Component {
   render() {
     const { book, user } = this.props;
 
-    // console.log(redirectToCheckout);
-
     if (!book) {
       return null;
     }
