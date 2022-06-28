@@ -1,11 +1,18 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
+import PropTypes from 'prop-types';
 
 import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
 
-function MyDocument() {
+const propTypes = {
+  styles: PropTypes.arrayOf(
+    PropTypes.string || PropTypes.number || PropTypes.ReactElementLike || React.ReactFragment,
+  ).isRequired,
+};
+
+function MyDocument({ styles }) {
   return (
     <Html lang="en" style={{ height: '100%' }}>
       <Head>
@@ -62,6 +69,8 @@ function MyDocument() {
             `,
           }}
         />
+        {/* Inject styles first to match with the prepend: true configuration. */}
+        {styles}
       </Head>
       <body>
         <Main />
@@ -92,12 +101,12 @@ MyDocument.getInitialProps = async (ctx) => {
   const initialProps = await Document.getInitialProps(ctx);
   // This is important. It prevents emotion to render invalid HTML.
   // See https://github.com/mui-org/material-ui/issues/26561#issuecomment-855286153
-  const emotionStyles = extractCriticalToChunks(initialProps.html);
-  const emotionStyleTags = emotionStyles.styles.map((style) => (
+  const chunks = extractCriticalToChunks(initialProps.html);
+
+  const emotionStyleTags = chunks.styles.map((style) => (
     <style
       data-emotion={`${style.key} ${style.ids.join(' ')}`}
       key={style.key}
-      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: style.css }}
     />
   ));
@@ -108,5 +117,7 @@ MyDocument.getInitialProps = async (ctx) => {
     styles: [...React.Children.toArray(initialProps.styles), ...emotionStyleTags],
   };
 };
+
+MyDocument.propTypes = propTypes;
 
 export default MyDocument;
