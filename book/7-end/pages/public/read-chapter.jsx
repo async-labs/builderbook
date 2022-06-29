@@ -53,21 +53,6 @@ class ReadChapter extends React.Component {
     };
   }
 
-  static getDerivedStateFromProps(props) {
-    const { chapter } = props;
-
-    if (chapter) {
-      let htmlContent = '';
-      if (chapter) {
-        htmlContent = chapter.htmlContent;
-      }
-
-      return { chapter, htmlContent };
-    }
-
-    return null;
-  }
-
   componentDidMount() {
     document.getElementById('main-content').addEventListener('scroll', this.onScroll);
 
@@ -82,7 +67,7 @@ class ReadChapter extends React.Component {
     if (prevProps.chapter && prevProps.chapter._id !== this.props.chapter._id) {
       document.getElementById('chapter-content').scrollIntoView();
 
-      const { htmlContent } = prevProps.chapter;
+      const { htmlContent } = this.props.chapter;
 
       // eslint-disable-next-line
       this.setState({ chapter: this.props.chapter, htmlContent });

@@ -84,24 +84,6 @@ class ReadChapter extends React.Component {
     return { chapter, redirectToCheckout, checkoutCanceled: !!checkout_canceled, error };
   }
 
-  static getDerivedStateFromProps(props) {
-    const { chapter } = props;
-
-    if (chapter) {
-      let htmlContent;
-
-      if (chapter.isPurchased || chapter.isFree) {
-        htmlContent = chapter.htmlContent;
-      } else {
-        htmlContent = chapter.htmlExcerpt;
-      }
-
-      return { chapter, htmlContent };
-    }
-
-    return null;
-  }
-
   componentDidMount() {
     document.getElementById('main-content').addEventListener('scroll', this.onScroll);
 
