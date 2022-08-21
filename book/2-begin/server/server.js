@@ -3,12 +3,15 @@
 const express = require('express');
 const next = require('next');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const User = require('./models/User');
 
 require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
 const MONGO_URL = process.env.MONGO_URL_TEST;
 
+// Done to suppress depreciation warnings from mongoose
 const options = {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -26,14 +29,28 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
+  const sess = {
+    name: process.env.SESSION_NAME,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 14 * 24 * 60 * 60 * 1000,
+      domain: 'localhost',
+    },
+  };
+
+  server.use(session(sess));
 
   // the below statement when uncommented will send a response without our page
   //   server.get('/', (req, res) => {
   //     res.send('My asdf server');
   //   });
 
-  server.get('/', (req, res) => {
-    const user = { email: 'team@builderbook.org' };
+  server.get('/', async (req, res) => {
+    // const user = { email: 'team@builderbook.org' };
+    const user = await User.findOne({ slug: 'team-builder-book' });
     app.render(req, res, '/', { user });
   });
 
