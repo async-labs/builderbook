@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint '**/*.jsx'"
+
   },
   "dependencies": {
     "@emotion/cache": "^11.7.1",
@@ -17,7 +19,20 @@
     "next": "^12.1.6",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "yarn": "^1.22.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.2.1"
+  }
 }
