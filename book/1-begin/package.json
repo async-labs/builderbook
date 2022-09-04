@@ -3,15 +3,17 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "dev": "next",
+    "lint": "eslint '**/*.jsx'"
   },
   "dependencies": {
     "@emotion/cache": "^11.7.1",
     "@emotion/react": "^11.9.0",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.8.1",
+    "@material-ui/styles": "^4.11.5",
     "@mui/icons-material": "^5.8.3",
     "@mui/material": "^5.8.3",
     "next": "^12.1.6",
@@ -19,5 +21,17 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.2.1"
+  }
 }

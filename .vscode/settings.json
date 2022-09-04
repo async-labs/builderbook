@@ -89,4 +89,7 @@
       "changeProcessCWD": true
     },
   ],
+  "editor.tokenColorCustomizations": {
+  
+  },
 }
