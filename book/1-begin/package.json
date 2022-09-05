@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint '**/*.jsx'"
-
+    
   },
   "dependencies": {
     "@emotion/cache": "^11.7.1",
