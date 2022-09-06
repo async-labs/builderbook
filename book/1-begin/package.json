@@ -13,12 +13,12 @@
     "@emotion/react": "^11.9.0",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.8.1",
+    "@material-ui/styles": "^4.11.5",
     "@mui/icons-material": "^5.8.3",
     "@mui/material": "^5.8.3",
     "next": "^12.1.6",
     "prop-types": "^15.7.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^17.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
