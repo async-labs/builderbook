@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next",
+    "dev-express": "nodemon server/server.js --watch server",
     "build": "next build",
     "start": "next start",
     "lint": "eslint '**/*.js' '**/*.jsx'"
