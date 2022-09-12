@@ -15,6 +15,7 @@ module.exports = {
         arrowParens: 'always',
         printWidth: 100,
         semi: true,
+        endOfLine: 'auto',
       },
     ],
     camelcase: 'off',
@@ -51,5 +52,6 @@ module.exports = {
         extensions: ['.jsx'],
       },
     ],
+    'no-console': 'off',
   },
 };
