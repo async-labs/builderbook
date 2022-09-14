@@ -9,6 +9,7 @@ const theme = createTheme({
     text: {
       primary: '#222',
       secondary: '#000',
+      thirdary: '#111'
     },
   },
 });
