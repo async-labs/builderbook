@@ -1,4 +1,3 @@
-/* eslint-disable react/no-danger */
 import React from 'react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import PropTypes from 'prop-types';
@@ -14,11 +13,8 @@ const propTypes = {
 
 class MyDocument extends Document {
   static getInitialProps = async (ctx) => {
-    // Render app and page and get the context of the page with collected side effects.
     const originalRenderPage = ctx.renderPage;
 
-    // You can consider sharing the same emotion cache between all the SSR requests to speed up performance.
-    // However, be aware that it can have global side effects.
     const cache = createCache({
       key: 'css',
       prepend: true,
@@ -27,27 +23,22 @@ class MyDocument extends Document {
 
     ctx.renderPage = () =>
       originalRenderPage({
-        // eslint-disable-next-line react/display-name
         enhanceApp: (App) => (props) => <App emotionCache={cache} {...props} />,
       });
 
     const initialProps = await Document.getInitialProps(ctx);
-    // This is important. It prevents emotion to render invalid HTML.
-    // See https://github.com/mui-org/material-ui/issues/26561#issuecomment-855286153
     const chunks = extractCriticalToChunks(initialProps.html);
 
     const emotionStyleTags = chunks.styles.map((style) => (
       <style
         data-emotion={`${style.key} ${style.ids.join(' ')}`}
         key={style.key}
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: style.css }}
       />
     ));
 
     return {
       ...initialProps,
-      // Styles fragment is rendered after the app and page rendering finish.
       styles: [...React.Children.toArray(initialProps.styles), ...emotionStyleTags],
     };
   };
@@ -75,7 +66,10 @@ class MyDocument extends Document {
             href="https://storage.googleapis.com/builderbook/nprogress.min.css"
           />
           <link rel="stylesheet" href="https://storage.googleapis.com/builderbook/vs.min.css" />
-
+          <link
+            rel="stylesheet"
+            href="https://storage.googleapis.com/builderbook/nprogress.min.css"
+          />
           <style>
             {`
               a {
