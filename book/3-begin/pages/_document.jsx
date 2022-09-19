@@ -76,6 +76,10 @@ class MyDocument extends Document {
           />
           <link rel="stylesheet" href="https://storage.googleapis.com/builderbook/vs.min.css" />
 
+          <link
+            rel="stylesheet"
+            href="https://storage.googleapis.com/builderbook/nprogress.min.css"
+          />
           <style>
             {`
               a {

@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "dev": "next",
-    "dev-express": "nodemon server/server.js --watch server",
+    "dev": "nodemon server/server.js --watch server",
     "build": "next build",
     "start": "next start",
     "lint": "eslint '**/*.js' '**/*.jsx'"
@@ -14,6 +13,7 @@
     "@emotion/react": "^11.9.0",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.8.1",
+    "@material-ui/core": "^5.0.0-beta.5",
     "@mui/icons-material": "^5.8.3",
     "@mui/material": "^5.8.3",
     "connect-mongo": "^3.2.0",

@@ -1,12 +1,10 @@
 const express = require('express');
-const next = require('next');
-
-const mongoose = require('mongoose');
-
 const session = require('express-session');
 const mongoSessionStore = require('connect-mongo');
+const next = require('next');
+const mongoose = require('mongoose');
 
-const User = require('./models/User');
+const setupGoogle = require('./google');
 
 require('dotenv').config();
 
@@ -34,7 +32,6 @@ app.prepare().then(() => {
 
   // confuring MongoDB session store
   const MongoStore = mongoSessionStore(session);
-
   const sess = {
     name: process.env.SESSION_NAME,
     secret: process.env.SESSION_SECRET,
@@ -53,12 +50,7 @@ app.prepare().then(() => {
 
   server.use(session(sess));
 
-  // this is test code, it will be removed by the end of Chapter 3
-  server.get('/', async (req, res) => {
-    req.session.foo = 'bar';
-    const user = await User.findOne({ slug: 'team-builder-book' });
-    app.render(req, res, '/', { user });
-  });
+  setupGoogle({ server, ROOT_URL });
 
   server.get('*', (req, res) => handle(req, res));
 
