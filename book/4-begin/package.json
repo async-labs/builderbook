@@ -6,8 +6,13 @@
     "dev": "nodemon server/server.js --watch server",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint '**/*.js' '**/*.jsx'"
+    "lint": "eslint '**/*.js' '**/*.jsx'",
+    "test": "jest --coverage"
   },
+  "jest": {
+    "coverageDirectory": "./.coverage"
+  },
+
   "dependencies": {
     "@emotion/cache": "^11.7.1",
     "@emotion/react": "^11.9.0",
