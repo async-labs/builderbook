@@ -13,13 +13,14 @@ The open source project is located in the `builderbook` folder. If you purchased
 We've used this `builderbook` project to build:
 - [Builder Book](https://builderbook.org) - learn how to build full-stack web apps from scratch
 - [SaaS Boilerplate](https://github.com/async-labs/saas) - open source web app to build your own SaaS product
-- [Async](https://async-await.com) - Urgent vs non-urgent team communication tool for small teams
+- [Work in biotech](https://workinbiotech.com) - job board for small and young biotech companies
+- [Async](https://async-await.com) - open source urgent vs non-urgent team communication tool for small teams
 - [Async Labs](https://async-labs.com) - many custom dev projects
 
 
 ## Live app:
 
-https://builderbook.org/books/builder-book/introduction.
+https://builderbook.org/books/builder-book/introduction
 
 
 ## Sponsors
@@ -33,12 +34,12 @@ https://builderbook.org/books/builder-book/introduction.
 
 Check out projects built with the help of this open source app. Feel free to add your own project by creating a pull request.
 
-- [workinbiotech.com](https://workinbiotech.com): Work in biotech, job board for small and young biotech companies
-- [Async](https://async-await.com): urgent and non-urgent communication for remote teams
 - [Retaino](https://retaino.com) by [Earl Lee](https://github.com/earllee): Save, annotate, review, and share great web content. Receive smart email digests to retain key information.
 - [michaelstromer.nyc](https://michaelstromer.nyc) by [Michael Stromer](https://github.com/Maelstroms38): Books and articles by Michael Stromer.
-- [SaaS Boilerplate](https://github.com/async-labs/saas)
-- [Async Labs](https://async-labs.com)
+- [SaaS Boilerplate](https://github.com/async-labs/saas): Open source web app to build your own SaaS product.
+- [Work in biotech](https://workinbiotech.com): Job board for small and young biotech companies
+- [Async](https://async-await.com): Open source web app for team communication, separate urgent vs. non-urgent conversations.
+- [Async Labs](https://async-labs.com): We build custom SaaS web applications.
 
 
 ## Contents
@@ -391,7 +392,7 @@ You may want to consider splitting single Next/Express server into two servers:
 - Next server for serving pages, server-side caching, sitemap and robots
 - Express server for internal and external APIs
 
-Here is an example of web application with split servers:
+Here is an example of a web application with split servers:
 https://github.com/async-labs/saas
 
 Splitting servers will get you:
