@@ -13,6 +13,8 @@ import { theme } from '../lib/theme';
 
 import Header from '../components/Header';
 
+import Notifier from '../components/Notifier';
+
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
@@ -47,6 +49,7 @@ class MyApp extends App {
           <CssBaseline />
           <Header {...pageProps} />
           <Component {...pageProps} />
+          <Notifier />
         </ThemeProvider>
       </CacheProvider>
     );
