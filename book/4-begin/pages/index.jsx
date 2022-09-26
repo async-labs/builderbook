@@ -29,7 +29,7 @@ class Index extends React.Component {
         </Head>
         <p>List of purchased books</p>
         <p>Email:&nbsp;{user.email}</p>
-        <Button variant="contained" onClick={() => notify('success message')}>
+        <Button variant="contained" onClick={() => notify('success message.')}>
           Click me to test notify and Notifier
         </Button>
       </div>
