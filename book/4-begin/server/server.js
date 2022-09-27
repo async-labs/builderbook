@@ -5,6 +5,7 @@ const next = require('next');
 const mongoose = require('mongoose');
 
 const setupGoogle = require('./google');
+const { insertTemplates } = require('./models/EmailTemplate');
 
 require('dotenv').config();
 
@@ -25,7 +26,7 @@ const ROOT_URL = `http://localhost:${port}`;
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
+app.prepare().then(async () => {
   const server = express();
 
   const MongoStore = mongoSessionStore(session);
@@ -47,6 +48,8 @@ app.prepare().then(() => {
 
   server.use(session(sess));
 
+  await insertTemplates();
+
   setupGoogle({ server, ROOT_URL });
 
   server.get('*', (req, res) => handle(req, res));
@@ -54,6 +57,6 @@ app.prepare().then(() => {
   // starting express server
   server.listen(port, (err) => {
     if (err) throw err;
-    console.log(`> Ready on ${ROOT_URL}`); // eslint-disable-line no-console
+    console.log(`> Ready on ${ROOT_URL}`);
   });
 });

@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 
 import MenuWithAvatar from './MenuWithAvatar';
+
 import { styleToolbar } from './SharedStyles';
 
 const optionsMenu = [
