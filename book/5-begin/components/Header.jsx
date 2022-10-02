@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 
 import MenuWithAvatar from './MenuWithAvatar';
+
 import { styleToolbar } from './SharedStyles';
 
 const optionsMenu = [
@@ -58,7 +59,7 @@ function Header({ user }) {
                 ) : null}
               </div>
             ) : (
-              <Link href="/login">
+              <Link href="/public/login" as="/login">
                 <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
               </Link>
             )}
