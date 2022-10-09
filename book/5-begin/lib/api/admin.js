@@ -6,3 +6,5 @@ export const getBookListApiMethod = () =>
   sendRequest(`${BASE_PATH}/books`, {
     method: 'GET',
   });
+
+// other API methods

@@ -8,7 +8,7 @@ export default async function sendRequest(path, options = {}) {
 
   const response = await fetch(`${ROOT_URL}${path}`, {
     method: 'POST',
-    credentials: 'same-origin',
+    credentials: 'include',
     ...options,
     headers,
   });
