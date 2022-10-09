@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const setupGoogle = require('./google');
 const { insertTemplates } = require('./models/EmailTemplate');
 
+const Chapter = require('./models/Chapter');
+
 require('dotenv').config();
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -53,6 +55,10 @@ app.prepare().then(async () => {
   setupGoogle({ server, ROOT_URL });
 
   server.get('*', (req, res) => handle(req, res));
+
+  Chapter.create({ bookId: '59f3c240a1ab6e39c4b4d10d' }).catch((err) => {
+    console.log(err);
+  });
 
   server.listen(port, (err) => {
     if (err) throw err;
