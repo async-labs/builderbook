@@ -4,6 +4,19 @@ const mongoSessionStore = require('connect-mongo');
 const next = require('next');
 const mongoose = require('mongoose');
 
+const router = express.Router();
+
+router.use((req, res, next) => {
+  if (!req.user) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
+  next();
+});
+
+module.exports = router;
+
 const setupGoogle = require('./google');
 const { insertTemplates } = require('./models/EmailTemplate');
 
