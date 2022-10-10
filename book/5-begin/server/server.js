@@ -5,6 +5,7 @@ const next = require('next');
 const mongoose = require('mongoose');
 
 const setupGoogle = require('./google');
+const api = require('./api');
 const { insertTemplates } = require('./models/EmailTemplate');
 
 require('dotenv').config();
@@ -23,6 +24,11 @@ mongoose.connect(MONGO_URL, options);
 const port = process.env.PORT || 8000;
 const ROOT_URL = `http://localhost:${port}`;
 
+const URL_MAP = {
+  '/login': '/public/login',
+  '/my-books': '/customer/my-books',
+};
+
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
@@ -35,7 +41,7 @@ app.prepare().then(async () => {
     secret: process.env.SESSION_SECRET,
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
-      ttl: 14 * 24 * 60 * 60, // save session 14 days
+      ttl: 14 * 24 * 60 * 60, // expires in 14 days
     }),
     resave: false,
     saveUninitialized: false,
@@ -51,8 +57,21 @@ app.prepare().then(async () => {
   await insertTemplates();
 
   setupGoogle({ server, ROOT_URL });
+  api(server);
 
-  server.get('*', (req, res) => handle(req, res));
+  server.get('/books/:bookSlug/:chapterSlug', (req, res) => {
+    const { bookSlug, chapterSlug } = req.params;
+    app.render(req, res, '/public/read-chapter', { bookSlug, chapterSlug });
+  });
+
+  server.get('*', (req, res) => {
+    const url = URL_MAP[req.path];
+    if (url) {
+      app.render(req, res, url);
+    } else {
+      handle(req, res);
+    }
+  });
 
   server.listen(port, (err) => {
     if (err) throw err;
