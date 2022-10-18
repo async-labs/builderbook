@@ -135,7 +135,7 @@ function getRepos({ user, request }) {
   const github = getAPI({ user, request });
 
   return github.repos.listForAuthenticatedUser({
-    visibility: 'private',
+    // visibility: 'private',
     per_page: 100,
     affiliation: 'owner',
   });

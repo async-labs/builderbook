@@ -7,8 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 
 import MenuWithAvatar from './MenuWithAvatar';
-
-import { styleToolbar } from './SharedStyles';
+import { styleToolbar, styleRaisedButton } from './SharedStyles';
 
 const optionsMenuCustomer = [
   {
@@ -43,15 +42,25 @@ const propTypes = {
     isAdmin: PropTypes.bool,
     isGithubConnected: PropTypes.bool,
   }),
+  hideHeader: PropTypes.bool,
 };
 
 const defaultProps = {
   user: null,
+  hideHeader: false,
 };
 
-function Header({ user }) {
+function Header({ user, hideHeader }) {
   return (
-    <div>
+    <div
+      style={{
+        overflow: 'hidden',
+        position: 'relative',
+        display: 'block',
+        top: hideHeader ? '-64px' : '0px',
+        transition: 'top 0.5s ease-in',
+      }}
+    >
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justifyContent="space-around" alignItems="center">
           <Grid item sm={9} xs={8} style={{ textAlign: 'left' }}>
@@ -69,7 +78,7 @@ function Header({ user }) {
             {user && user.isAdmin && !user.isGithubConnected ? (
               <Hidden mdDown>
                 <a href="/auth/github">
-                  <Button variant="contained" color="primary">
+                  <Button variant="contained" color="primary" style={styleRaisedButton}>
                     Connect Github
                   </Button>
                 </a>
