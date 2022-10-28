@@ -3,12 +3,11 @@ import Link from 'next/link';
 import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
 import Hidden from '@mui/material/Hidden';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
 
 import MenuWithAvatar from './MenuWithAvatar';
-
-import { styleToolbar } from './SharedStyles';
+import { styleToolbar, styleRaisedButton } from './SharedStyles';
 
 const optionsMenuCustomer = [
   {
@@ -43,18 +42,28 @@ const propTypes = {
     isAdmin: PropTypes.bool,
     isGithubConnected: PropTypes.bool,
   }),
+  hideHeader: PropTypes.bool,
 };
 
 const defaultProps = {
   user: null,
+  hideHeader: false,
 };
 
-function Header({ user }) {
+function Header({ user, hideHeader }) {
   return (
-    <div>
+    <div
+      style={{
+        overflow: 'hidden',
+        position: 'relative',
+        display: 'block',
+        top: hideHeader ? '-64px' : '0px',
+        transition: 'top 0.5s ease-in',
+      }}
+    >
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justifyContent="space-around" alignItems="center">
-          <Grid item sm={9} xs={8} style={{ textAlign: 'left' }}>
+          <Grid item sm={8} xs={7} style={{ textAlign: 'left' }}>
             {!user ? (
               <Link href="/">
                 <Avatar
@@ -69,14 +78,14 @@ function Header({ user }) {
             {user && user.isAdmin && !user.isGithubConnected ? (
               <Hidden mdDown>
                 <a href="/auth/github">
-                  <Button variant="contained" color="primary">
+                  <Button variant="contained" color="primary" style={styleRaisedButton}>
                     Connect Github
                   </Button>
                 </a>
               </Hidden>
             ) : null}
           </Grid>
-          <Grid item sm={1} xs={2} style={{ textAlign: 'right' }}>
+          <Grid item sm={2} xs={3} style={{ textAlign: 'right' }}>
             {user ? (
               <div style={{ whiteSpace: ' nowrap' }}>
                 {!user.isAdmin ? (
