@@ -44,14 +44,16 @@ const propTypes = {
     isGithubConnected: PropTypes.bool,
   }),
   hideHeader: PropTypes.bool,
+  redirectUrl: PropTypes.string,
 };
 
 const defaultProps = {
   user: null,
   hideHeader: false,
+  redirectUrl: '',
 };
 
-function Header({ user, hideHeader }) {
+function Header({ user, hideHeader, redirectUrl }) {
   return (
     <div
       style={{
@@ -105,7 +107,16 @@ function Header({ user, hideHeader }) {
                 ) : null}
               </div>
             ) : (
-              <Link href="/public/login" as="/login">
+              <Link
+                href={{
+                  pathname: '/public/login',
+                  query: { redirectUrl },
+                }}
+                as={{
+                  pathname: '/login',
+                  query: { redirectUrl },
+                }}
+              >
                 <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
               </Link>
             )}

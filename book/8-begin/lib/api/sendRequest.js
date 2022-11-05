@@ -1,7 +1,7 @@
 import 'isomorphic-unfetch';
 
 const port = process.env.PORT || 8000;
-const ROOT_URL = process.env.ROOT_URL || `http://localhost:${port}`;
+const ROOT_URL = `http://localhost:${port}`;
 
 export default async function sendRequest(path, options = {}) {
   const headers = { ...(options.headers || {}), 'Content-type': 'application/json; charset=UTF-8' };

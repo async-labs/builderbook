@@ -2,9 +2,13 @@
 
 const mongoose = require('mongoose');
 const frontmatter = require('front-matter');
+
 const generateSlug = require('../utils/slugify');
-// const Chapter = require('./Chapter');
+const User = require('./User');
+const Purchase = require('./Purchase');
+
 const { getCommits, getRepoDetail } = require('../github');
+const { addToMailchimp } = require('../mailchimp');
 
 const { Schema } = mongoose;
 
@@ -48,9 +52,9 @@ class BookClass {
 
     const book = bookDoc.toObject();
 
-    book.chapters = (
-      await Chapter.find({ bookId: book._id }, 'title slug').sort({ order: 1 })
-    ).map((chapter) => chapter.toObject());
+    book.chapters = (await Chapter.find({ bookId: book._id }, 'title slug').sort({ order: 1 })).map(
+      (chapter) => chapter.toObject(),
+    );
 
     return book;
   }
@@ -152,6 +156,45 @@ class BookClass {
     );
 
     return book.updateOne({ githubLastCommitSha: lastCommitSha });
+  }
+
+  static async buy({ book, user, stripeCharge }) {
+    if (!book) {
+      throw new Error('Book not found');
+    }
+
+    if (!user) {
+      throw new Error('User required');
+    }
+
+    const isPurchased =
+      (await Purchase.find({ userId: user._id, bookId: book._id }).countDocuments()) > 0;
+    if (isPurchased) {
+      throw new Error('You already bought this book.');
+    }
+
+    User.findByIdAndUpdate(user._id, { $addToSet: { purchasedBookIds: book._id } }).exec();
+
+    try {
+      await addToMailchimp({ email: user.email, listName: 'purchased' });
+    } catch (error) {
+      console.error('Buy book error:', error);
+    }
+
+    return Purchase.create({
+      userId: user._id,
+      bookId: book._id,
+      amount: book.price * 100,
+      createdAt: new Date(),
+      stripeCharge,
+    });
+  }
+
+  static async getPurchasedBooks({ purchasedBookIds }) {
+    const purchasedBooks = await this.find({ _id: { $in: purchasedBookIds } }).sort({
+      createdAt: -1,
+    });
+    return { purchasedBooks };
   }
 }
 
