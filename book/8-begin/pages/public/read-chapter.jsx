@@ -2,14 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Error from 'next/error';
 import Head from 'next/head';
+import { withRouter } from 'next/router';
 import throttle from 'lodash/throttle';
 
 import Link from 'next/link';
 
 import Header from '../../components/Header';
+import BuyButton from '../../components/customer/BuyButton';
 
 import { getChapterDetailApiMethod } from '../../lib/api/public';
 import withAuth from '../../lib/withAuth';
+import notify from '../../lib/notify';
 
 const styleIcon = {
   opacity: '0.75',
@@ -20,17 +23,27 @@ const styleIcon = {
 const propTypes = {
   chapter: PropTypes.shape({
     _id: PropTypes.string.isRequired,
+    isPurchased: PropTypes.bool,
+    isFree: PropTypes.bool.isRequired,
     htmlContent: PropTypes.string,
     htmlExcerpt: PropTypes.string,
   }),
   user: PropTypes.shape({
     _id: PropTypes.string.isRequired,
   }),
+  router: PropTypes.shape({
+    asPath: PropTypes.string.isRequired,
+  }).isRequired,
+  redirectToCheckout: PropTypes.bool.isRequired,
+  checkoutCanceled: PropTypes.bool,
+  error: PropTypes.string,
 };
 
 const defaultProps = {
   chapter: null,
   user: null,
+  checkoutCanceled: false,
+  error: '',
 };
 
 class ReadChapter extends React.Component {
@@ -40,8 +53,10 @@ class ReadChapter extends React.Component {
     const { chapter } = props;
 
     let htmlContent = '';
-    if (chapter) {
+    if (chapter && (chapter.isPurchased || chapter.isFree)) {
       htmlContent = chapter.htmlContent;
+    } else {
+      htmlContent = chapter.htmlExcerpt;
     }
 
     this.state = {
@@ -53,6 +68,22 @@ class ReadChapter extends React.Component {
     };
   }
 
+  static async getInitialProps(ctx) {
+    const { bookSlug, chapterSlug, buy, checkout_canceled, error } = ctx.query;
+    const { req } = ctx;
+
+    const headers = {};
+    if (req && req.headers && req.headers.cookie) {
+      headers.cookie = req.headers.cookie;
+    }
+
+    const chapter = await getChapterDetailApiMethod({ bookSlug, chapterSlug }, { headers });
+
+    const redirectToCheckout = !!buy;
+
+    return { chapter, redirectToCheckout, checkoutCanceled: !!checkout_canceled, error };
+  }
+
   componentDidMount() {
     document.getElementById('main-content').addEventListener('scroll', this.onScroll);
 
@@ -61,13 +92,25 @@ class ReadChapter extends React.Component {
     if (this.state.isMobile !== isMobile) {
       this.setState({ isMobile }); // eslint-disable-line
     }
+
+    if (this.props.checkoutCanceled) {
+      notify('Checkout canceled.');
+    }
+
+    if (this.props.error) {
+      notify(this.props.error);
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.chapter && prevProps.chapter._id !== this.props.chapter._id) {
       document.getElementById('chapter-content').scrollIntoView();
-
-      const { htmlContent } = this.props.chapter;
+      let htmlContent = '';
+      if (prevProps.chapter && (prevProps.chapter.isPurchased || prevProps.chapter.isFree)) {
+        htmlContent = this.props.chapter.htmlContent;
+      } else {
+        htmlContent = this.props.chapter.htmlExcerpt;
+      }
 
       // eslint-disable-next-line
       this.setState({ chapter: this.props.chapter, htmlContent });
@@ -131,30 +174,22 @@ class ReadChapter extends React.Component {
     }
   };
 
-  static async getInitialProps(ctx) {
-    const { bookSlug, chapterSlug } = ctx.query;
-    const { req } = ctx;
-
-    const headers = {};
-    if (req && req.headers && req.headers.cookie) {
-      headers.cookie = req.headers.cookie;
-    }
-
-    const chapter = await getChapterDetailApiMethod({ bookSlug, chapterSlug }, { headers });
-
-    return { chapter };
-  }
-
   toggleChapterList = () => {
+    // this.setState({ showTOC: !this.state.showTOC });
     this.setState((prevState) => ({ showTOC: !prevState.showTOC }));
   };
 
   closeTocWhenMobile = () => {
+    // this.setState({ showTOC: !this.state.isMobile });
     this.setState((prevState) => ({ showTOC: !prevState.isMobile }));
   };
 
   renderMainContent() {
+    const { user, redirectToCheckout } = this.props;
+
     const { chapter, htmlContent, showTOC, isMobile } = this.state;
+
+    const { book } = chapter;
 
     let padding = '20px 20%';
     if (!isMobile && showTOC) {
@@ -169,10 +204,16 @@ class ReadChapter extends React.Component {
           {chapter.order > 1 ? `Chapter ${chapter.order - 1}: ` : null}
           {chapter.title}
         </h2>
+        {!chapter.isPurchased && !chapter.isFree ? (
+          <BuyButton user={user} book={book} redirectToCheckout={redirectToCheckout} />
+        ) : null}
         <div
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
+        {!chapter.isPurchased && !chapter.isFree ? (
+          <BuyButton user={user} book={book} redirectToCheckout={redirectToCheckout} />
+        ) : null}
       </div>
     );
   }
@@ -258,7 +299,7 @@ class ReadChapter extends React.Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, router } = this.props;
 
     const { chapter, showTOC, hideHeader, isMobile } = this.state;
 
@@ -284,7 +325,7 @@ class ReadChapter extends React.Component {
           ) : null}
         </Head>
 
-        <Header user={user} hideHeader={hideHeader} />
+        <Header user={user} hideHeader={hideHeader} redirectUrl={router.asPath} />
 
         {this.renderSidebar()}
 
@@ -332,4 +373,6 @@ class ReadChapter extends React.Component {
 ReadChapter.propTypes = propTypes;
 ReadChapter.defaultProps = defaultProps;
 
-export default withAuth(ReadChapter, { loginRequired: false });
+export default withAuth(withRouter(ReadChapter), {
+  loginRequired: false,
+});
