@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const mongoSessionStore = require('connect-mongo');
+
 const next = require('next');
 const mongoose = require('mongoose');
 const compression = require('compression');
@@ -22,13 +23,18 @@ require('dotenv').config();
 const dev = process.env.NODE_ENV !== 'production';
 const MONGO_URL = dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL;
 
-const options = {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-  useUnifiedTopology: true,
-};
-mongoose.connect(MONGO_URL, options);
+(async () => {
+  try {
+    mongoose.set('strictQuery', false);
+    await mongoose.connect(MONGO_URL);
+    logger.info('connected to db');
+
+    // async tasks, for ex, inserting email templates to db
+    // logger.info('finished async tasks');
+  } catch (err) {
+    logger.error(`error: ${err}`);
+  }
+})();
 
 const port = process.env.PORT || 8000;
 const ROOT_URL = getRootUrl();
@@ -44,7 +50,7 @@ const handle = app.getRequestHandler();
 app.prepare().then(async () => {
   const server = express();
 
-  server.use(helmet({ contentSecurityPolicy: false }));
+  server.use(helmet({ contentSecurityPolicy: false, crossOriginEmbedderPolicy: false }));
   server.use(compression());
 
   server.use(express.json());
@@ -54,13 +60,12 @@ app.prepare().then(async () => {
     handle(req, res);
   });
 
-  const MongoStore = mongoSessionStore(session);
-  const sess = {
+  const sessionOptions = {
     name: process.env.SESSION_NAME,
     secret: process.env.SESSION_SECRET,
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
-      ttl: 14 * 24 * 60 * 60, // expires in 14 days
+    store: mongoSessionStore.create({
+      mongoUrl: MONGO_URL,
+      ttl: 14 * 24 * 60 * 60, // save session 14 days
     }),
     resave: false,
     saveUninitialized: false,
@@ -73,10 +78,11 @@ app.prepare().then(async () => {
 
   if (!dev) {
     server.set('trust proxy', 1); // sets req.hostname, req.ip
-    sess.cookie.secure = true; // sets cookie over HTTPS only
+    sessionOptions.cookie.secure = true; // sets cookie over HTTPS only
   }
 
-  server.use(session(sess));
+  const sessionMiddleware = session(sessionOptions);
+  server.use(sessionMiddleware);
 
   // await insertTemplates();
 

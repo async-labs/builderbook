@@ -37,7 +37,7 @@ function MyBooks({ purchasedBooks }) {
                       as={`/books/${book.slug}/introduction`}
                       href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=introduction`}
                     >
-                      <a>{book.name}</a>
+                      {book.name}
                     </Link>
                   </li>
                 ))}
