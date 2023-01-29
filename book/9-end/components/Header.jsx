@@ -115,8 +115,9 @@ function Header({ user, hideHeader, redirectUrl }) {
                   pathname: '/login',
                   query: { redirectUrl },
                 }}
+                style={{ margin: '0px 20px 0px auto' }}
               >
-                <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
+                Log in
               </Link>
             )}
           </Grid>

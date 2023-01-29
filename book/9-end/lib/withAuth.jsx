@@ -68,11 +68,7 @@ export default function withAuth(
         return null;
       }
 
-      return (
-        <>
-          <BaseComponent {...this.props} />
-        </>
-      );
+      return <BaseComponent {...this.props} />;
     }
   }
 

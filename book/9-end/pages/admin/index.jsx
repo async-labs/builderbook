@@ -18,29 +18,36 @@ const propTypes = {
   ).isRequired,
 };
 
-const Index = ({ books }) => (
-  <div style={{ padding: '10px 45px' }}>
-    <div>
-      <h2>Books</h2>
-      <Link href="/admin/add-book">
-        <Button variant="contained" color="primary">
-          Add book
-        </Button>
-      </Link>
-      <p />
-      <ul>
-        {books.map((b) => (
-          <li key={b._id}>
-            <Link as={`/admin/book-detail/${b.slug}`} href={`/admin/book-detail?slug=${b.slug}`}>
-              <a>{b.name}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <br />
+function Index({ books }) {
+  return (
+    <div style={{ padding: '10px 45px' }}>
+      <div>
+        <h2>Books</h2>
+        <Link href="/admin/add-book">
+          <Button variant="contained" color="primary">
+            Add book
+          </Button>
+        </Link>
+        <p />
+        <ul>
+          {books &&
+            books.length > 0 &&
+            books.map((b) => (
+              <li key={b._id}>
+                <Link
+                  as={`/admin/book-detail/${b.slug}`}
+                  href={`/admin/book-detail?slug=${b.slug}`}
+                >
+                  {b.name}
+                </Link>
+              </li>
+            ))}
+        </ul>
+        <br />
+      </div>
     </div>
-  </div>
-);
+  );
+}
 
 Index.propTypes = propTypes;
 

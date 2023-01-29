@@ -83,7 +83,7 @@ function BookDetail({ slug }) {
               as={`/books/${book.slug}/${ch.slug}`}
               href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
             >
-              <a>{ch.title}</a>
+              {ch.title}
             </Link>
           </li>
         ))}

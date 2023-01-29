@@ -240,13 +240,10 @@ function ReadChapterFunctional({
               <Link
                 as={`/books/${book.slug}/${ch.slug}`}
                 href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
+                style={{ color: chapterInsideState._id === ch._id ? '#1565C0' : '#222' }}
+                onClick={closeTocWhenMobile}
               >
-                <a // eslint-disable-line
-                  style={{ color: chapterInsideState._id === ch._id ? '#1565C0' : '#222' }}
-                  onClick={closeTocWhenMobile}
-                >
-                  {ch.title}
-                </a>
+                {ch.title}
               </Link>
               {chapterInsideState._id === ch._id ? renderSections() : null}
             </li>
@@ -363,6 +360,34 @@ ReadChapterFunctional.getInitialProps = async (ctx) => {
 
   return { chapter, redirectToCheckout, checkoutCanceled: !!checkout_canceled, error };
 };
+
+// export async function getServerSideProps(context) {
+//   const { bookSlug, chapterSlug, buy, checkout_canceled, error } = context.query;
+//   const { req } = context;
+
+//   const headers = {};
+//   if (req && req.headers && req.headers.cookie) {
+//     headers.cookie = req.headers.cookie;
+//   }
+
+//   try {
+//     const chapter = await getChapterDetailApiMethod({ bookSlug, chapterSlug }, { headers });
+//     const redirectToCheckout = !!buy;
+
+//     return {
+//       props: {
+//         chapter,
+//         redirectToCheckout,
+//         checkoutCanceled: !!checkout_canceled,
+//         error: !error ? null : error,
+//       },
+//     };
+//   } catch (err) {
+//     return { props: {} };
+//   }
+// }
+
+// see our explanation for not using getServerSideProps at this time: https://github.com/async-labs/builderbook/issues/514
 
 export default withAuth(withRouter(ReadChapterFunctional), {
   loginRequired: false,

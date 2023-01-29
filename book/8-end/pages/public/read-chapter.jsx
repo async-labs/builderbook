@@ -373,6 +373,34 @@ class ReadChapter extends React.Component {
 ReadChapter.propTypes = propTypes;
 ReadChapter.defaultProps = defaultProps;
 
+// export async function getServerSideProps(context) {
+//   const { bookSlug, chapterSlug, buy, checkout_canceled, error } = context.query;
+//   const { req } = context;
+
+//   const headers = {};
+//   if (req && req.headers && req.headers.cookie) {
+//     headers.cookie = req.headers.cookie;
+//   }
+
+//   try {
+//     const chapter = await getChapterDetailApiMethod({ bookSlug, chapterSlug }, { headers });
+//     const redirectToCheckout = !!buy;
+
+//     return {
+//       props: {
+//         chapter,
+//         redirectToCheckout,
+//         checkoutCanceled: !!checkout_canceled,
+//         error: !error ? null : error,
+//       },
+//     };
+//   } catch (err) {
+//     return { props: {} };
+//   }
+// }
+
+// see our explanation for not using getServerSideProps at this time: https://github.com/async-labs/builderbook/issues/514
+
 export default withAuth(withRouter(ReadChapter), {
   loginRequired: false,
 });

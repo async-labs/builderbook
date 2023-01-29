@@ -240,13 +240,10 @@ function ReadChapterFunctional({
               <Link
                 as={`/books/${book.slug}/${ch.slug}`}
                 href={`/public/read-chapter?bookSlug=${book.slug}&chapterSlug=${ch.slug}`}
+                style={{ color: chapterInsideState._id === ch._id ? '#1565C0' : '#222' }}
+                onClick={closeTocWhenMobile}
               >
-                <a // eslint-disable-line
-                  style={{ color: chapterInsideState._id === ch._id ? '#1565C0' : '#222' }}
-                  onClick={closeTocWhenMobile}
-                >
-                  {ch.title}
-                </a>
+                {ch.title}
               </Link>
               {chapterInsideState._id === ch._id ? renderSections() : null}
             </li>
