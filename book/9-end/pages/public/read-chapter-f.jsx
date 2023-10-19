@@ -23,14 +23,14 @@ const styleIcon = {
   cursor: 'pointer',
 };
 
-function ReadChapterFunctional({
+const ReadChapterFunctional = ({
   chapter,
   user,
   router,
   redirectToCheckout,
   checkoutCanceled,
   error,
-}) {
+}) => {
   const [showTOC, setShowTOC] = useState(false);
   const [hideHeader, setHideHeader] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -315,7 +315,7 @@ function ReadChapterFunctional({
       </div>
     </div>
   );
-}
+};
 
 const propTypes = {
   chapter: PropTypes.shape({
