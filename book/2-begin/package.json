@@ -9,6 +9,7 @@
     "lint": "eslint '**/*.js' '**/*.jsx'"
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.22.15",
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/server": "^11.11.0",
@@ -27,7 +28,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
-    "babel-eslint": "^10.1.0",
     "eslint": "^8.51.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.0.0",
