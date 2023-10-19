@@ -6,7 +6,6 @@ import Hidden from '@mui/material/Hidden';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 
-
 import MenuWithAvatar from './MenuWithAvatar';
 
 const optionsMenuCustomer = [
