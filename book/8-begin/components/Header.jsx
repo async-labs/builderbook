@@ -51,7 +51,7 @@ const defaultProps = {
   hideHeader: false,
 };
 
-function Header({ user, hideHeader }) {
+const Header = ({ user, hideHeader }) => {
   return (
     <div
       style={{
@@ -114,7 +114,7 @@ function Header({ user, hideHeader }) {
       </Toolbar>
     </div>
   );
-}
+};
 
 Header.propTypes = propTypes;
 Header.defaultProps = defaultProps;
