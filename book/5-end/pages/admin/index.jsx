@@ -30,7 +30,7 @@ const Index = ({ books }) => (
         {books.map((b) => (
           <li key={b._id}>
             <Link as={`/admin/book-detail/${b.slug}`} href={`/admin/book-detail?slug=${b.slug}`}>
-              <a>{b.name}</a>
+              {b.name}
             </Link>
           </li>
         ))}
