@@ -43,6 +43,7 @@ app.prepare().then(() => {
 
   const sessionMiddleware = session(sessionOptions);
   server.use(sessionMiddleware);
+
   // this is test code, it will be removed by the end of Chapter 3
   server.get('/', async (req, res) => {
     req.session.foo = 'bar';
