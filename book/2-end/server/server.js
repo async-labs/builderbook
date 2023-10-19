@@ -13,13 +13,7 @@ require('dotenv').config();
 const dev = process.env.NODE_ENV !== 'production';
 const MONGO_URL = process.env.MONGO_URL_TEST;
 
-const options = {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-  useUnifiedTopology: true,
-};
-mongoose.connect(MONGO_URL, options);
+mongoose.connect(MONGO_URL);
 
 // mongoose
 //   .connect(MONGO_URL, options)
@@ -36,14 +30,11 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
-  // configuring MongoDB session store
-  const MongoStore = mongoSessionStore(session);
-
-  const sess = {
+  const sessionOptions = {
     name: process.env.SESSION_NAME,
     secret: process.env.SESSION_SECRET,
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
+    store: mongoSessionStore.create({
+      mongoUrl: MONGO_URL,
       ttl: 14 * 24 * 60 * 60, // save session 14 days
     }),
     resave: false,
@@ -51,11 +42,17 @@ app.prepare().then(() => {
     cookie: {
       httpOnly: true,
       maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
-      domain: 'localhost',
+      domain: dev ? 'localhost' : process.env.COOKIE_DOMAIN,
     },
   };
 
-  server.use(session(sess));
+  if (!dev) {
+    server.set('trust proxy', 1); // sets req.hostname, req.ip
+    sessionOptions.cookie.secure = true; // sets cookie over HTTPS only
+  }
+
+  const sessionMiddleware = session(sessionOptions);
+  server.use(sessionMiddleware);
 
   // server.get('/', (req, res) => {
   //   const user = { email: 'team@builderbook.org' };
@@ -65,7 +62,9 @@ app.prepare().then(() => {
   // this is testing code, remove later
   server.get('/', async (req, res) => {
     req.session.foo = 'bar';
+
     const user = await User.findOne({ slug: 'team-builder-book' });
+
     app.render(req, res, '/', { user });
   });
 
