@@ -19,7 +19,7 @@ const propTypes = {
   ).isRequired,
 };
 
-function Index({ books }) {
+const Index = ({ books }) => {
   return (
     <div style={{ padding: '10px 45px' }}>
       <div>
@@ -48,7 +48,7 @@ function Index({ books }) {
       </div>
     </div>
   );
-}
+};
 
 Index.propTypes = propTypes;
 
@@ -60,7 +60,7 @@ const defaultProps2 = {
   errorMessage: null,
 };
 
-function IndexWithData({ errorMessage }) {
+const IndexWithData = ({ errorMessage }) => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ function IndexWithData({ errorMessage }) {
   }, []);
 
   return <Index books={books} />;
-}
+};
 
 IndexWithData.propTypes = propTypes2;
 IndexWithData.defaultProps = defaultProps2;
