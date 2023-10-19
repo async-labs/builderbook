@@ -46,11 +46,13 @@ function setupGoogle({ server, ROOT_URL }) {
   });
 
   passport.deserializeUser((id, done) => {
-    User.findById(id, User.publicFields(), (err, user) => {
-      done(err, user);
-      // eslint-disable-next-line no-console
-      // console.log('deserializeUser', id);
-    });
+    User.findById(id, User.publicFields())
+      .then(user => {
+        done(null, user);
+      })
+      .catch(error => {
+        done(error, null);
+      });
   });
 
   server.use(passport.initialize());
