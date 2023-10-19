@@ -95,8 +95,8 @@ function Header({ user }) {
                 ) : null}
               </div>
             ) : (
-              <Link href="/public/login" as="/login">
-                <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
+              <Link href="/public/login" as="/login" style={{ margin: '0px 20px 0px auto' }}>
+                Log in
               </Link>
             )}
           </Grid>
