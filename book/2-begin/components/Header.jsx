@@ -10,8 +10,8 @@ const Header = () => (
     <Toolbar style={styleToolbar}>
       <Grid container direction="row" justifyContent="space-around" align="center">
         <Grid item xs={12} style={{ textAlign: 'right' }}>
-          <Link href="/login">
-            <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
+          <Link href="/login" style={{ margin: '0px 20px 0px auto' }}>
+            Log in
           </Link>
         </Grid>
       </Grid>
