@@ -31,7 +31,7 @@ const defaultProps = {
   user: null,
 };
 
-function Header({ user }) {
+const Header = ({ user }) => {
   return (
     <div>
       <Toolbar style={styleToolbar}>
@@ -68,7 +68,7 @@ function Header({ user }) {
       </Toolbar>
     </div>
   );
-}
+};
 
 Header.propTypes = propTypes;
 Header.defaultProps = defaultProps;
