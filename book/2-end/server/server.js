@@ -42,14 +42,9 @@ app.prepare().then(() => {
     cookie: {
       httpOnly: true,
       maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
-      domain: dev ? 'localhost' : process.env.COOKIE_DOMAIN,
+      domain: 'localhost',
     },
   };
-
-  if (!dev) {
-    server.set('trust proxy', 1); // sets req.hostname, req.ip
-    sessionOptions.cookie.secure = true; // sets cookie over HTTPS only
-  }
 
   const sessionMiddleware = session(sessionOptions);
   server.use(sessionMiddleware);
