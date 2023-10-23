@@ -15,11 +15,6 @@ const MONGO_URL = process.env.MONGO_URL_TEST;
 
 mongoose.connect(MONGO_URL);
 
-// mongoose
-//   .connect(MONGO_URL, options)
-//   .then(() => console.log('Connected')) // eslint-disable-line no-console
-//   .catch((err) => console.log('Caught', err.stack)); // eslint-disable-line no-console
-
 const port = process.env.PORT || 8000;
 const ROOT_URL = `http://localhost:${port}`;
 
@@ -49,16 +44,11 @@ app.prepare().then(() => {
   const sessionMiddleware = session(sessionOptions);
   server.use(sessionMiddleware);
 
-  // server.get('/', (req, res) => {
-  //   const user = { email: 'team@builderbook.org' };
-  //   app.render(req, res, '/', { user });
-  // });
-
   // this is testing code, remove later
   server.get('/', async (req, res) => {
     req.session.foo = 'bar';
 
-    const user = await User.findOne({ slug: 'team-builder-book' });
+    const user = JSON.stringify(await User.findOne({ slug: 'team-builder-book' }));
 
     app.render(req, res, '/', { user });
   });
