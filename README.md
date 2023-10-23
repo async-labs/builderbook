@@ -13,7 +13,8 @@ The open source project is located in the `builderbook` folder. If you purchased
 We've used this `builderbook` project to build:
 - [Builder Book](https://builderbook.org) - learn how to build full-stack web apps from scratch
 - [SaaS Boilerplate](https://github.com/async-labs/saas) - open source web app to build your own SaaS product
-- [Work in biotech](https://workinbiotech.com) - job board for small and young biotech companies
+- [Work in biotech](https://workinbiotech.com) - job board for biotech startup companies
+- [AI-cruiter](https://workinbiotech.com/ai-cruiter) - browser extension is built for recruiters managing a high volume of job applicants. AI-cruiter uses LLMs - like ChatGPT and PaLM 2 - to generate succinct and relevant summaries of your job applicants' resumes
 - [Async](https://async-await.com) - open source urgent vs non-urgent team communication tool for small teams
 - [Async Labs](https://async-labs.com) - many custom dev projects
 
