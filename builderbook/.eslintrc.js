@@ -4,9 +4,9 @@ module.exports = {
     requireConfigFile: false,
     babelOptions: {
       parserOpts: {
-        plugins: ["jsx"]
-      }
-    }
+        plugins: ['jsx'],
+      },
+    },
   },
   extends: ['airbnb', 'plugin:prettier/recommended'],
   env: {

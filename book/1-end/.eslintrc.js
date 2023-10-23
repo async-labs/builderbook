@@ -4,9 +4,9 @@ module.exports = {
     requireConfigFile: false,
     babelOptions: {
       parserOpts: {
-        plugins: ["jsx"]
-      }
-    }
+        plugins: ['jsx'],
+      },
+    },
   },
   extends: ['airbnb', 'plugin:prettier/recommended'],
   env: {
@@ -59,11 +59,11 @@ module.exports = {
         extensions: ['.jsx'],
       },
     ],
-    "react/function-component-definition": [
+    'react/function-component-definition': [
       2,
       {
-        namedComponents: "arrow-function",
-        unnamedComponents: "arrow-function",
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
       },
     ],
   },
