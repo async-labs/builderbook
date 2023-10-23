@@ -58,8 +58,8 @@ const Header = ({ user }) => {
                 ) : null}
               </div>
             ) : (
-              <Link href="/login">
-                <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
+              <Link href="/login" style={{ margin: '0px 20px 0px auto' }}>
+                Log in
               </Link>
             )}
           </Grid>
