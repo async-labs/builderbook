@@ -18,7 +18,7 @@ const defaultProps = {
   purchasedBooks: [],
 };
 
-function MyBooks({ purchasedBooks }) {
+const MyBooks = ({ purchasedBooks }) => {
   return (
     <div>
       <Head>
@@ -52,7 +52,7 @@ function MyBooks({ purchasedBooks }) {
       </div>
     </div>
   );
-}
+};
 
 MyBooks.getInitialProps = async ({ req, res }) => {
   if (req && !req.user) {

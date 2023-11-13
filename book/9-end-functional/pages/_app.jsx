@@ -36,7 +36,7 @@ const propTypes = {
   pageProps: PropTypes.object.isRequired, // eslint-disable-line
 };
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
   const isServer = typeof window === 'undefined';
 
   return (
@@ -63,7 +63,7 @@ function MyApp({ Component, pageProps }) {
       </ThemeProvider>
     </CacheProvider>
   );
-}
+};
 
 MyApp.propTypes = propTypes;
 

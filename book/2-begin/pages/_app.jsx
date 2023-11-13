@@ -23,11 +23,7 @@ class MyApp extends App {
     // console.log(pageProps);
 
     return (
-      <CacheProvider
-        value={createCache({
-          key: 'css',
-        })}
-      >
+      <CacheProvider value={createCache({ key: 'css' })}>
         <ThemeProvider theme={theme}>
           {/* ThemeProvider makes the theme available down the React tree thanks to React context. */}
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

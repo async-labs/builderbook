@@ -13,7 +13,7 @@ const propTypes = {
   }).isRequired,
 };
 
-function Login({ router }) {
+const Login = ({ router }) => {
   const redirectUrl = (router && router.query && router.query.redirectUrl) || '';
 
   return (
@@ -40,7 +40,7 @@ function Login({ router }) {
       </Button>
     </div>
   );
-}
+};
 
 Login.propTypes = propTypes;
 

@@ -48,7 +48,7 @@ const defaultProps = {
   user: null,
 };
 
-function Header({ user }) {
+const Header = ({ user }) => {
   return (
     <div>
       <Toolbar style={styleToolbar}>
@@ -94,8 +94,8 @@ function Header({ user }) {
                 ) : null}
               </div>
             ) : (
-              <Link href="/public/login" as="/login">
-                <a style={{ margin: '0px 20px 0px auto' }}>Log in</a>
+              <Link href="/public/login" as="/login" style={{ margin: '0px 20px 0px auto' }}>
+                Log in
               </Link>
             )}
           </Grid>
@@ -103,7 +103,7 @@ function Header({ user }) {
       </Toolbar>
     </div>
   );
-}
+};
 
 Header.propTypes = propTypes;
 Header.defaultProps = defaultProps;

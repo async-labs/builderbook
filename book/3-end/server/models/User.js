@@ -4,10 +4,6 @@ const generateSlug = require('../utils/slugify');
 
 const { Schema } = mongoose;
 
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
-mongoose.set('useNewUrlParser', true);
-
 const mongoSchema = new Schema({
   googleId: {
     type: String,

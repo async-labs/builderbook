@@ -13,7 +13,7 @@ const propTypes = {
   slug: PropTypes.string.isRequired,
 };
 
-function EditBookPage({ slug }) {
+const EditBookPage = ({ slug }) => {
   const [book, setBook] = useState(null);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ function EditBookPage({ slug }) {
       <EditBook onSave={editBookOnSave} book={book} />
     </div>
   );
-}
+};
 
 EditBookPage.getInitialProps = async ({ query }) => {
   return { slug: query.slug };

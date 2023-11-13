@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 
 const mongoose = require('mongoose');
-const marked = require('marked');
+const { marked }= require('marked');
 const he = require('he');
 const hljs = require('highlight.js');
 // const Book = require('./Book');

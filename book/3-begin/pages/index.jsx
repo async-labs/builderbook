@@ -27,7 +27,7 @@ const Index = ({ user }) => (
   </div>
 );
 
-Index.getInitialProps = async (ctx) => ({ user: ctx.query.user });
+Index.getInitialProps = async (ctx) => ({ user: JSON.parse(ctx.query.user) });
 
 Index.propTypes = propTypes;
 Index.defaultProps = defaultProps;
