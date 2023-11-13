@@ -12,7 +12,7 @@ const propTypes = {
   ).isRequired,
 };
 
-function MyDocument({ styles }) {
+const MyDocument = ({ styles }) => {
   return (
     <Html lang="en" style={{ height: '100%' }}>
       <Head>
@@ -78,7 +78,7 @@ function MyDocument({ styles }) {
       </body>
     </Html>
   );
-}
+};
 
 MyDocument.getInitialProps = async (ctx) => {
   // Render app and page and get the context of the page with collected side effects.

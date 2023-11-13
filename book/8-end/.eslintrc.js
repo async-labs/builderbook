@@ -1,5 +1,13 @@
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    requireConfigFile: false,
+    babelOptions: {
+      parserOpts: {
+        plugins: ['jsx'],
+      },
+    },
+  },
   extends: ['airbnb', 'plugin:prettier/recommended'],
   env: {
     browser: true,
@@ -52,5 +60,13 @@ module.exports = {
       },
     ],
     'no-console': 'off',
+    'class-methods-use-this': 'off',
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
   },
 };

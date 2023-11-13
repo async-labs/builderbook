@@ -13,7 +13,7 @@ const propTypes = {
   slug: PropTypes.string.isRequired,
 };
 
-function BookDetail({ slug }) {
+const BookDetail = ({ slug }) => {
   const [book, setBook] = useState(null);
   const [error, setError] = useState(null);
 
@@ -90,7 +90,7 @@ function BookDetail({ slug }) {
       </ul>
     </div>
   );
-}
+};
 
 BookDetail.getInitialProps = async ({ query }) => {
   return { slug: query.slug };

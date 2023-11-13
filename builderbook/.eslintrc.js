@@ -1,5 +1,13 @@
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    requireConfigFile: false,
+    babelOptions: {
+      parserOpts: {
+        plugins: ['jsx'],
+      },
+    },
+  },
   extends: ['airbnb', 'plugin:prettier/recommended'],
   env: {
     browser: true,
@@ -51,5 +59,6 @@ module.exports = {
         extensions: ['.jsx'],
       },
     ],
+    'no-console': 'off',
   },
 };

@@ -8,16 +8,16 @@
     "start": "next start"
   },
   "dependencies": {
-    "@emotion/cache": "^11.7.1",
-    "@emotion/react": "^11.9.0",
-    "@emotion/server": "^11.4.0",
-    "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.8.3",
-    "@mui/material": "^5.8.3",
-    "next": "^12.1.6",
-    "prop-types": "^15.7.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/server": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.14",
+    "@mui/material": "^5.14.14",
+    "next": "^13.5.6",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {}
 }

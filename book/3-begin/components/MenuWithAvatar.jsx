@@ -52,22 +52,22 @@ class MenuWithAvatar extends React.Component {
         >
           {options.map((option) => (
             <div id="wrappingLink" key={option.text}>
-            {option.anchor ? (
-              <MenuItem
-                onClick={(event) => {
-                  event.preventDefault();
-                  window.location.href = option.href;
-                  this.handleClose();
-                }}
-              >
-                {option.text}
-              </MenuItem>
-            ) : (
-              <Link href={option.href} as={option.as || option.href}>
-                <MenuItem>{option.text}</MenuItem>
-              </Link>
-            )}
-          </div>
+              {option.anchor ? (
+                <MenuItem
+                  onClick={(event) => {
+                    event.preventDefault();
+                    window.location.href = option.href;
+                    this.handleClose();
+                  }}
+                >
+                  {option.text}
+                </MenuItem>
+              ) : (
+                <Link href={option.href} as={option.as || option.href}>
+                  <MenuItem>{option.text}</MenuItem>
+                </Link>
+              )}
+            </div>
           ))}
         </Menu>
       </div>

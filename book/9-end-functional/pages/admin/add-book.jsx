@@ -7,7 +7,7 @@ import EditBook from '../../components/admin/EditBook';
 import { addBookApiMethod, syncBookContentApiMethod } from '../../lib/api/admin';
 import notify from '../../lib/notify';
 
-function AddBook() {
+const AddBook = () => {
   const addBookOnSave = async (data) => {
     NProgress.start();
 
@@ -35,6 +35,6 @@ function AddBook() {
       <EditBook onSave={addBookOnSave} />
     </div>
   );
-}
+};
 
 export default withAuth(AddBook, { adminRequired: true });

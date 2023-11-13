@@ -51,7 +51,7 @@ const defaultProps = {
   redirectUrl: '',
 };
 
-function Header({ user, hideHeader, redirectUrl }) {
+const Header = ({ user, hideHeader, redirectUrl }) => {
   return (
     <div
       style={{
@@ -125,7 +125,7 @@ function Header({ user, hideHeader, redirectUrl }) {
       </Toolbar>
     </div>
   );
-}
+};
 
 Header.propTypes = propTypes;
 Header.defaultProps = defaultProps;

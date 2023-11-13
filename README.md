@@ -13,7 +13,8 @@ The open source project is located in the `builderbook` folder. If you purchased
 We've used this `builderbook` project to build:
 - [Builder Book](https://builderbook.org) - learn how to build full-stack web apps from scratch
 - [SaaS Boilerplate](https://github.com/async-labs/saas) - open source web app to build your own SaaS product
-- [Work in biotech](https://workinbiotech.com) - job board for small and young biotech companies
+- [Work in biotech](https://workinbiotech.com) - job board for biotech startup companies
+- [AI-cruiter](https://workinbiotech.com/ai-cruiter) - browser extension is built for recruiters managing a high volume of job applicants. AI-cruiter uses LLMs - like ChatGPT and PaLM 2 - to generate succinct and relevant summaries of your job applicants' resumes
 - [Async](https://async-await.com) - open source urgent vs non-urgent team communication tool for small teams
 - [Async Labs](https://async-labs.com) - many custom dev projects
 
@@ -81,6 +82,66 @@ The main use cases for this project, besides learning, are:
 - To write and host free documentation with Github being a source of truth for content.
 - To sell online content, such as books.
 - To extend it (see our second book, SaaS Boilerplate Book) to start software business.
+
+## Creating a Google OAuth Client
+
+This guide will walk you through the steps to create a Google OAuth client for your application.
+
+#### Prerequisites
+
+Before you begin, make sure you have the following:
+
+- A Google account
+- Access to the [Google Cloud Console](https://console.cloud.google.com/)
+
+1. **Sign in to Google Cloud Console:**
+
+- Go to the [Google Cloud Console](https://console.cloud.google.com/).
+- Sign in with your Google account or create one if you don't have it.
+
+2. **Create a New Project:**
+
+- Click on the project dropdown in the top navigation bar.
+- Click on "New Project."
+- Give your project a name and click "Create."
+
+3. **Enable the Google+ API (if required):**
+
+- If you plan to use Google+ Sign-In for authentication, enable the "Google+ API" for your project.
+- In the Cloud Console, go to the API & Services > Library.
+- Search for "Google+ API" and enable it.
+
+4. **Create OAuth Client ID:**
+
+- In the Cloud Console, navigate to the API & Services > Credentials page.
+- Click on "Create Credentials" and then select "OAuth client ID."
+- Select the application type, typically "Web application" for a website or web application.
+- Fill out the necessary information, such as the name of the OAuth client and authorized redirect URIs (where Google should redirect the user after authentication). You can use `http://localhost` as a redirect URI for development.
+- Click "Create" to generate your OAuth client credentials. It will provide you with a client ID and client secret.
+
+
+## Creating a GitHub Client ID and Client Secret
+
+To create a GitHub Client ID and Client Secret, follow these steps:
+
+1. **Sign in to your GitHub Account:**
+   If you don't have a GitHub account, [create one](https://github.com/join).
+
+2. **Go to Developer Settings:**
+   Click on your profile picture in the top right corner of GitHub and select "Settings." In the left sidebar, under "Developer settings," click on "OAuth Apps."
+
+3. **Create a New OAuth App:**
+   Click on the "Register a new application" button.
+
+4. **Fill in the Application Details:**
+   You'll be prompted to fill in details about your application:
+   - **Application Name:** The name of your application.
+   - **Homepage URL:** The URL to your application's website.
+   - **Application Description:** A brief description of your application.
+   - **Authorization callback URL:** This is the URL to which GitHub will redirect users after they authorize your application. For testing purposes, you can use `http://localhost` if you're developing locally.
+
+5. **Generate Your Client ID and Client Secret:**
+   After you've filled in the details, click the "Register application" button. GitHub will generate a Client ID and Client Secret for your application.
 
 
 ## Run locally

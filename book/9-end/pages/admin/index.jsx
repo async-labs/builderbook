@@ -18,7 +18,7 @@ const propTypes = {
   ).isRequired,
 };
 
-function Index({ books }) {
+const Index = ({ books }) => {
   return (
     <div style={{ padding: '10px 45px' }}>
       <div>
@@ -47,7 +47,7 @@ function Index({ books }) {
       </div>
     </div>
   );
-}
+};
 
 Index.propTypes = propTypes;
 
