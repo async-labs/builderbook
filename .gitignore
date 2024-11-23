@@ -4,13 +4,11 @@ tmp/
 npm-debug.log
 .DS_Store
 
-
 .build/*
 .next
 node_modules/
 .coverage
 .env
-.next
 
 book/8-exp
 tutorials/working
