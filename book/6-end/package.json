@@ -34,7 +34,7 @@
     "marked": "^15.0.7",
     "mongoose": "^8.12.1",
     "next": "^15.2.3",
-    "node-fetch": "3.3.2",
+    "node-fetch": "2",
     "nprogress": "^0.2.0",
     "passport": "^0.7.0",
     "passport-google-oauth": "^2.0.0",
