@@ -23,7 +23,7 @@ function markdownToHtml(content) {
     alt="Builder Book"
   >`;
 
-  renderer.heading = (text, level) => {
+  renderer.heading = ({ text }, level) => {
     const escapedText = text
       .trim()
       .toLowerCase()
@@ -77,7 +77,7 @@ function getSections(content) {
   const renderer = new marked.Renderer();
 
   const sections = [];
-  renderer.heading = (text, level) => {
+  renderer.heading = ({ text }, level) => {
     if (level !== 2) {
       return;
     }
