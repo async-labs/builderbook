@@ -12,12 +12,12 @@ const { Schema } = mongoose;
 function markdownToHtml(content) {
   const renderer = new marked.Renderer();
 
-  renderer.link = (href, title, text) => {
+  renderer.link = ({ href, title, text }) => {
     const t = title ? ` title="${title}"` : '';
     return `<a target="_blank" href="${href}" rel="noopener noreferrer"${t}>${text}</a>`;
   };
 
-  renderer.image = (href) => `<img
+  renderer.image = ({ href }) => `<img
     src="${href}"
     style="border: 1px solid #ddd;"
     width="100%"
